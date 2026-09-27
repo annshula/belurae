@@ -23,6 +23,8 @@ export type VariantRecord = {
   options: Record<string, string>;
   image: string | null;
   pricesByMarket: Record<string, MarketPrice>;
+  /** Shopify metafield `belurae.pack_description` — editable in Admin without a redeploy. */
+  description: string | null;
 };
 
 export type ImageRecord = {
@@ -46,6 +48,12 @@ export type VideoRecord = {
 
 export type MediaRecord = ImageRecord | VideoRecord;
 
+/** A `product_spec` metaobject: a labelled fact row. */
+export type SpecRecord = { label: string; value: string; description: string | null };
+
+/** A `feature_highlight` metaobject: a labelled point, optionally with an image. */
+export type FeatureHighlightRecord = { label: string; body: string; image: string | null };
+
 export type ProductRecord = {
   id: string;
   handle: string;
@@ -59,6 +67,14 @@ export type ProductRecord = {
   availableForSale: boolean;
   variants: VariantRecord[];
   media: MediaRecord[];
+  /** From the `custom.specs` metaobject list, in Shopify's own order. */
+  specs: SpecRecord[];
+  /** From the `custom.feature_highlights` metaobject list, in Shopify's own order. */
+  featureHighlights: FeatureHighlightRecord[];
+  /** From the `custom.perks` metafield (plain text list), in Shopify's own order. */
+  perks: string[];
+  /** From the `custom.sale_ends_at` metafield — an ISO timestamp, or null if unset or already past. */
+  saleEndsAt: string | null;
 };
 
 export type CatalogDocument = {

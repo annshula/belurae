@@ -4,8 +4,7 @@
  */
 
 export type NavLink = { label: string; href: string; description?: string };
-export type NavPromo = { eyebrow: string; title: string; href: string; cta: string };
-export type NavGroup = { label: string; href?: string; links: NavLink[]; promo?: NavPromo };
+export type NavGroup = { label: string; href?: string; links: NavLink[] };
 
 export const primaryNav: NavGroup[] = [
   {
@@ -24,7 +23,6 @@ export const primaryNav: NavGroup[] = [
       { label: "Ingredients", href: "/ingredients", description: "What's inside, in plain words" },
       { label: "Our standards", href: "/pages/standards", description: "Claims, reviews and pricing rules" },
     ],
-    promo: { eyebrow: "Care, clearly", title: "No borrowed reviews. No invented “was” prices.", href: "/pages/standards", cta: "Read our standards" },
   },
   {
     label: "Learn",
@@ -36,7 +34,6 @@ export const primaryNav: NavGroup[] = [
       { label: "Choosing a method", href: "/guides/choosing-a-hair-removal-method", description: "Mousse, razor or wax?" },
       { label: "FAQs", href: "/pages/faq", description: "Straight answers" },
     ],
-    promo: { eyebrow: "Start here", title: "New to hair removal mousse? Read this first.", href: "/guides/how-to-use-hair-removal-mousse", cta: "Open the guide" },
   },
   { label: "About", href: "/pages/about", links: [] },
 ];

@@ -45,7 +45,7 @@ export function CartDrawer() {
       >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between px-6 pt-5 pb-3">
-            <h2 id="bag-title" className="font-serif text-heading-2" tabIndex={-1}>
+            <h2 id="bag-title" className="font-serif text-heading-3" tabIndex={-1}>
               Your bag {count > 0 && <span className="text-ink-soft">({count})</span>}
             </h2>
             <button

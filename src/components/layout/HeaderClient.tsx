@@ -38,22 +38,13 @@ export function AnnouncementBar() {
   );
 }
 
-export type MegaCard = {
+export type MegaCategory = {
   label: string;
   href: string;
-  description: string;
+  count: number;
   image: string | null;
-  tone: "well" | "well-sage" | "well-clay";
 };
-export type MegaFeatured = {
-  name: string;
-  href: string;
-  format: string;
-  price: string;
-  image: string | null;
-  imageAlt: string;
-};
-export type MegaData = { cards: MegaCard[]; featured: MegaFeatured | null };
+export type MegaData = { categories: MegaCategory[]; browseAllHref: string };
 
 /** Refined disclosure caret: a thin chevron that turns as the panel opens. */
 function Caret({ open }: { open: boolean }) {
@@ -147,7 +138,7 @@ export function DesktopNav({
   };
 
   return (
-    <nav ref={navRef} aria-label="Main" className="hidden lg:block">
+    <nav ref={navRef} aria-label="Main" className="hidden font-headline lg:block">
       <ul className="flex items-center gap-0.5">
         {groups.map((group, i) =>
           group.links.length === 0 ? (
@@ -194,12 +185,12 @@ export function DesktopNav({
                 onPointerLeave={hoverClose}
                 className={cn(
                   "absolute top-full z-40 pt-3",
-                  i === 0 ? "left-0" : "inset-x-0",
+                  i === 0 ? "left-0" : "left-1/2 -translate-x-1/2",
                 )}
               >
                 <div className="surface-float mega-in inline-block overflow-hidden rounded-[24px] p-3">
                   {i === 0 ? (
-                    <ShopPanel group={group} mega={mega} />
+                    <ShopPanel mega={mega} />
                   ) : (
                     <EditorialPanel group={group} />
                   )}
@@ -213,128 +204,77 @@ export function DesktopNav({
   );
 }
 
-/** Compact Shop dropdown: a slim link list plus one small featured thumbnail. */
-function ShopPanel({ group, mega }: { group: NavGroup; mega: MegaData }) {
+/**
+ * Compact Shop dropdown: an eyebrow label, a 2-column grid of category
+ * thumbnails with live product counts, and a "Browse all shop" footer link
+ * below a hairline — matching a standard compact shop-by-category menu.
+ */
+function ShopPanel({ mega }: { mega: MegaData }) {
+  const twoCol = mega.categories.length > 1;
   return (
-    <div className="grid w-[22rem] grid-cols-1 gap-1 p-2">
-      {mega.cards.map((card) => (
+    <div className={cn(twoCol ? "w-88" : "w-64", "p-4 font-headline")}>
+      <p className="eyebrow px-1">Shop by category</p>
+      <ul className={cn("mt-3 grid gap-x-4 gap-y-1", twoCol ? "grid-cols-2" : "grid-cols-1")}>
+        {mega.categories.map((cat) => (
+          <li key={cat.href}>
+            <Link
+              href={cat.href}
+              className="group/link flex items-center gap-3 rounded-xl p-1.5 transition-colors hover:bg-cream"
+            >
+              <span className="well relative block size-11 shrink-0 overflow-hidden rounded-tag">
+                {cat.image && (
+                  <Image
+                    src={cat.image}
+                    alt=""
+                    fill
+                    sizes="44px"
+                    className="object-contain p-1.5 mix-blend-multiply"
+                  />
+                )}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-body-sm font-medium">
+                  {cat.label}
+                </span>
+                <span className="block text-[0.78rem] text-ink-soft">
+                  {cat.count} {cat.count === 1 ? "piece" : "pieces"}
+                </span>
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-3 border-t border-sand pt-3">
         <Link
-          key={card.href}
-          href={card.href}
-          className="group/link flex items-center gap-3 rounded-[14px] px-3 py-2.5 transition-colors hover:bg-cream"
+          href={mega.browseAllHref}
+          className="group/link flex items-center justify-center gap-2 rounded-xl py-2 text-body-sm font-medium transition-colors hover:bg-cream"
         >
-          <span
-            className={cn(
-              card.tone,
-              "relative block size-11 shrink-0 overflow-hidden rounded-[10px]",
-            )}
-          >
-            {card.image && (
-              <Image
-                src={card.image}
-                alt=""
-                fill
-                sizes="44px"
-                className="object-contain p-1.5 mix-blend-multiply"
-              />
-            )}
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="block font-serif text-[1.1rem] leading-tight">
-              {card.label}
-            </span>
-            <span className="block truncate text-body-sm text-ink-soft">
-              {card.description}
-            </span>
-          </span>
-          <SlideArrow className="shrink-0 text-ink-soft" />
+          Browse all shop
+          <Icon
+            name="arrow-right"
+            className="size-3.5 transition-transform duration-300 group-hover/link:translate-x-1"
+          />
         </Link>
-      ))}
-      {group.links.length > 0 && mega.cards.length === 0 && (
-        <ul className="flex flex-col gap-1">
-          {group.links.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className="block rounded-xl px-3 py-2 hover:bg-cream"
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-      {mega.featured && (
-        <Link
-          href={mega.featured.href}
-          className="group/link mt-1 flex items-center gap-3 rounded-[14px] bg-sage-50 px-3 py-2.5 transition-colors hover:bg-sage-100"
-        >
-          <span className="relative block size-11 shrink-0 overflow-hidden rounded-[10px] bg-porcelain">
-            {mega.featured.image && (
-              <Image
-                src={mega.featured.image}
-                alt={mega.featured.imageAlt}
-                fill
-                sizes="44px"
-                className="object-contain p-1 mix-blend-multiply"
-              />
-            )}
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="block truncate font-serif text-[1.1rem] leading-tight">
-              {mega.featured.name}
-            </span>
-            <span className="block text-body-sm text-ink-soft">
-              From {mega.featured.price}
-            </span>
-          </span>
-          <SlideArrow className="shrink-0 text-sage-700" />
-        </Link>
-      )}
+      </div>
     </div>
   );
 }
 
 function EditorialPanel({ group }: { group: NavGroup }) {
   return (
-    <div className="grid grid-cols-[1.5fr_1fr] gap-3">
-      <ul className="grid grid-cols-2 gap-1 p-2">
-        {group.links.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className="group/link flex items-start justify-between gap-4 rounded-[16px] px-4 py-4 transition-colors hover:bg-cream"
-            >
-              <span>
-                <span className="block font-serif text-[1.45rem] leading-tight">
-                  {link.label}
-                </span>
-                {link.description && (
-                  <span className="mt-1 block text-body-sm text-ink-soft">
-                    {link.description}
-                  </span>
-                )}
-              </span>
-              <SlideArrow className="mt-1.5 text-ink-soft" />
-            </Link>
-          </li>
-        ))}
-      </ul>
-      {group.promo && (
-        <Link
-          href={group.promo.href}
-          className="group/link well-clay flex flex-col rounded-[18px] p-7"
-        >
-          <span className="eyebrow eyebrow-dot">{group.promo.eyebrow}</span>
-          <span className="mt-auto pt-10 font-serif text-[2rem] leading-[1.05]">
-            {group.promo.title}
-          </span>
-          <span className="mt-6 inline-flex items-center gap-2 text-[0.78rem] font-semibold tracking-[0.12em] uppercase">
-            {group.promo.cta} <SlideArrow />
-          </span>
-        </Link>
-      )}
-    </div>
+    <ul className="w-64 p-2 font-headline">
+      {group.links.map((link) => (
+        <li key={link.href}>
+          <Link
+            href={link.href}
+            className="group/link flex items-center justify-between gap-4 rounded-xl px-4 py-3 text-body-sm font-medium transition-colors hover:bg-cream"
+          >
+            {link.label}
+            <SlideArrow className="text-ink-soft" />
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -398,7 +338,7 @@ export function MobileMenu({ groups }: { groups: NavGroup[] }) {
       >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between px-5 pt-4 pb-2">
-            <span className="font-serif text-heading-3 tracking-[0.3em]">
+            <span className="font-logo text-heading-3 tracking-[0.3em]">
               BELURAE
             </span>
             <button
@@ -437,7 +377,7 @@ export function MobileMenu({ groups }: { groups: NavGroup[] }) {
                       />
                     </span>
                   </summary>
-                  <ul className="pb-4">
+                  <ul className="pb-4 font-headline">
                     {group.links.map((link) => (
                       <li key={link.href}>
                         <Link
@@ -452,7 +392,7 @@ export function MobileMenu({ groups }: { groups: NavGroup[] }) {
                 </details>
               ),
             )}
-            <div className="mt-auto flex flex-col gap-1 rounded-2xl bg-cream p-3 text-body-sm">
+            <div className="mt-auto flex flex-col gap-1 rounded-2xl bg-cream p-3 text-body-sm font-headline">
               <Link
                 href="/account"
                 prefetch={false}

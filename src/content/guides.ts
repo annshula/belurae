@@ -93,7 +93,7 @@ export const guides: Guide[] = [
       { q: "How long should hair removal mousse stay on?", a: "As long as the pack says and no longer. For our mousse that's 5–10 minutes." },
       { q: "Should I shave before using a hair removal mousse?", a: "No. Shaving just before can leave skin more reactive. Give the area a few days after shaving or waxing." },
     ],
-    products: ["hair-removal-mousse"],
+    products: ["bikini-pain-free-hair-removal-spray"],
     related: ["how-to-patch-test", "hair-removal-aftercare", "choosing-a-hair-removal-method"],
   },
   {
@@ -138,7 +138,7 @@ export const guides: Guide[] = [
         ],
       },
     ],
-    products: ["hair-removal-mousse"],
+    products: ["bikini-pain-free-hair-removal-spray"],
     related: ["how-to-use-hair-removal-mousse", "hair-removal-aftercare"],
   },
   {
@@ -181,7 +181,7 @@ export const guides: Guide[] = [
         ],
       },
     ],
-    products: ["hair-removal-mousse"],
+    products: ["bikini-pain-free-hair-removal-spray"],
     related: ["how-to-use-hair-removal-mousse", "how-to-patch-test"],
   },
   {
@@ -228,7 +228,7 @@ export const guides: Guide[] = [
         ],
       },
     ],
-    products: ["hair-removal-mousse"],
+    products: ["bikini-pain-free-hair-removal-spray"],
     related: ["how-to-use-hair-removal-mousse", "how-to-patch-test"],
   },
 ];

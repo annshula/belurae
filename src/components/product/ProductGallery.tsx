@@ -83,7 +83,7 @@ export function ProductGallery({ media, productName }: { media: ViewMedia[]; pro
       <div className="group/stage relative">
         <ul
           ref={stageRef}
-          className="snap-row auto-cols-[100%] overflow-y-hidden rounded-media"
+          className="snap-row auto-cols-[100%] overflow-y-hidden rounded-media lg:max-h-[calc(100svh-var(--header-h)-var(--announce-h)-9rem)]"
           aria-live="polite"
         >
           {media.map((item, i) => (
@@ -95,7 +95,7 @@ export function ProductGallery({ media, productName }: { media: ViewMedia[]; pro
               className="relative"
             >
               {item.type === "image" ? (
-                <div className="well relative aspect-square overflow-hidden">
+                <div className="well relative aspect-square overflow-hidden lg:aspect-auto lg:h-[calc(100svh-var(--header-h)-var(--announce-h)-9rem)]">
                   <Image
                     src={item.url}
                     alt={item.alt}
@@ -108,7 +108,10 @@ export function ProductGallery({ media, productName }: { media: ViewMedia[]; pro
                   />
                 </div>
               ) : (
-                <VideoTile video={item} className="aspect-square overflow-hidden bg-ink" />
+                <VideoTile
+                  video={item}
+                  className="aspect-square overflow-hidden bg-ink lg:aspect-auto lg:h-[calc(100svh-var(--header-h)-var(--announce-h)-9rem)]"
+                />
               )}
             </li>
           ))}

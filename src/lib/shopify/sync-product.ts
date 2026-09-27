@@ -47,6 +47,7 @@ type AdminVariantNode = {
   availableForSale: boolean;
   selectedOptions: { name: string; value: string }[];
   image: { url: string } | null;
+  packDescription: { value: string } | null;
 };
 
 type VideoSourceNode = {
@@ -70,6 +71,16 @@ type MediaNode =
     }
   | { __typename: string };
 
+type MetaobjectFieldNode = {
+  key: string;
+  value: string | null;
+  reference: { image?: { url: string } } | null;
+};
+
+type MetaobjectRefsField = {
+  references: { nodes: { fields: MetaobjectFieldNode[] }[] } | null;
+} | null;
+
 type ProductData = {
   productByHandle: {
     id: string;
@@ -83,6 +94,10 @@ type ProductData = {
     variants: { nodes: AdminVariantNode[] };
     media: { nodes: MediaNode[] };
     seo: { title: string | null; description: string | null } | null;
+    specs: MetaobjectRefsField;
+    featureHighlights: MetaobjectRefsField;
+    perks: { value: string } | null;
+    saleEndsAt: { value: string } | null;
   } | null;
 };
 
@@ -115,6 +130,7 @@ query ProductByHandle($handle: String!) {
         id title sku barcode price compareAtPrice availableForSale
         selectedOptions { name value }
         image { url }
+        packDescription: metafield(namespace: "belurae", key: "pack_description") { value }
       }
     }
     media(first: 50) {
@@ -128,6 +144,34 @@ query ProductByHandle($handle: String!) {
         }
       }
     }
+    specs: metafield(namespace: "custom", key: "specs") {
+      references(first: 20) {
+        nodes {
+          ... on Metaobject {
+            fields {
+              key
+              value
+              reference { ... on MediaImage { image { url } } }
+            }
+          }
+        }
+      }
+    }
+    featureHighlights: metafield(namespace: "custom", key: "feature_highlights") {
+      references(first: 20) {
+        nodes {
+          ... on Metaobject {
+            fields {
+              key
+              value
+              reference { ... on MediaImage { image { url } } }
+            }
+          }
+        }
+      }
+    }
+    perks: metafield(namespace: "custom", key: "perks") { value }
+    saleEndsAt: metafield(namespace: "custom", key: "sale_ends_at") { value }
   }
 }`;
 
@@ -191,6 +235,7 @@ function normalizeVariants(nodes: AdminVariantNode[]): Omit<VariantRecord, "pric
         availableForSale: v.availableForSale,
         options: Object.fromEntries(v.selectedOptions.map((o) => [o.name, o.value])),
         image: v.image?.url ?? null,
+        description: v.packDescription?.value?.trim() || null,
       };
     });
 }
@@ -233,6 +278,60 @@ function normalizeMedia(
     }
   }
   return items;
+}
+
+/** Rows still describing the retired "Style" option (Spray / Spray & Serum / Spray & Cream) — no longer a real purchase choice, so never shown. */
+const STALE_STYLE_PATTERN = /\bstyle(s)?\b|spray\s*&\s*(serum|cream)/i;
+
+function fieldValue(fields: MetaobjectFieldNode[], key: string): string {
+  return fields.find((f) => f.key === key)?.value?.trim() || "";
+}
+function fieldImage(fields: MetaobjectFieldNode[], key: string): string | null {
+  return fields.find((f) => f.key === key)?.reference?.image?.url ?? null;
+}
+
+function normalizeSpecs(field: MetaobjectRefsField): ProductRecord["specs"] {
+  const nodes = field?.references?.nodes ?? [];
+  return nodes
+    .map((n) => ({
+      label: fieldValue(n.fields, "label"),
+      value: fieldValue(n.fields, "value"),
+      description: fieldValue(n.fields, "description") || null,
+    }))
+    .filter((s) => s.label && s.value && !STALE_STYLE_PATTERN.test(`${s.label} ${s.value}`));
+}
+
+function normalizeFeatureHighlights(field: MetaobjectRefsField): ProductRecord["featureHighlights"] {
+  const nodes = field?.references?.nodes ?? [];
+  return nodes
+    .map((n) => ({
+      label: fieldValue(n.fields, "label"),
+      body: fieldValue(n.fields, "body"),
+      image: fieldImage(n.fields, "image"),
+    }))
+    .filter((h) => h.label && h.body && !STALE_STYLE_PATTERN.test(`${h.label} ${h.body}`));
+}
+
+function normalizePerks(field: { value: string } | null): string[] {
+  if (!field?.value) return [];
+  try {
+    const list = JSON.parse(field.value) as unknown;
+    if (!Array.isArray(list)) return [];
+    return list
+      .filter((p): p is string => typeof p === "string" && p.trim().length > 0)
+      .filter((p) => !STALE_STYLE_PATTERN.test(p));
+  } catch {
+    return [];
+  }
+}
+
+/** Only kept when it's a valid timestamp that hasn't passed yet — never shows an expired countdown. */
+function normalizeSaleEndsAt(field: { value: string } | null): string | null {
+  const raw = field?.value?.trim();
+  if (!raw) return null;
+  const time = Date.parse(raw);
+  if (Number.isNaN(time) || time <= Date.now()) return null;
+  return new Date(time).toISOString();
 }
 
 async function fetchProduct(
@@ -285,6 +384,10 @@ async function fetchProduct(
     availableForSale: variants.some((v) => v.availableForSale),
     variants: variants.map((v) => ({ ...v, pricesByMarket: pricesByVariant.get(v.id) ?? {} })),
     media: normalizeMedia(product.media.nodes, variants),
+    specs: normalizeSpecs(product.specs),
+    featureHighlights: normalizeFeatureHighlights(product.featureHighlights),
+    perks: normalizePerks(product.perks),
+    saleEndsAt: normalizeSaleEndsAt(product.saleEndsAt),
   };
 }
 

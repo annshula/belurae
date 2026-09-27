@@ -8,47 +8,44 @@ import {
   type MegaData,
 } from "@/components/layout/HeaderClient";
 import { Icon } from "@/components/ui/Icon";
+import { collections } from "@/content/collections";
 import { primaryNav } from "@/content/navigation";
 import { getProducts, storeCurrency } from "@/lib/catalog";
 import { buildProductView } from "@/lib/commerce/product-view";
-import { formatMoney } from "@/lib/money";
 import { site } from "@/lib/site";
 
 export { AnnouncementBar } from "@/components/layout/HeaderClient";
 
-/** Shop mega-menu content, built from the live catalog (images are real product media). */
+/**
+ * Shop menu content: every real category (from content/collections.ts,
+ * excluding the "all" catch-all) with its live product count and a
+ * representative image from the live catalog.
+ */
 async function getMegaData(): Promise<MegaData> {
   const [products, currency] = await Promise.all([getProducts(), storeCurrency()]);
-  const first = products[0];
-  if (!first) return { cards: [], featured: null };
-  const view = buildProductView(first.record, first.content, currency);
-  const alt = view.gallery.find((m) => m.type === "image" && m.variantId && m.url !== view.cardImage?.url);
-  return {
-    cards: [
-      {
-        label: "Hair Removal",
-        href: "/collections/hair-removal",
-        description: "No blade, no strips",
-        image: view.cardImage?.url ?? null,
-        tone: "well-clay",
-      },
-      {
-        label: "Shop all",
-        href: "/collections/all",
-        description: "The full Belurae edit",
-        image: alt && alt.type === "image" ? alt.url : (view.cardImage?.url ?? null),
-        tone: "well",
-      },
-    ],
-    featured: {
-      name: first.content.name,
-      href: view.href,
-      format: first.content.format,
-      price: formatMoney(view.fromPrice, currency),
-      image: view.cardImage?.url ?? null,
-      imageAlt: view.cardImage?.alt ?? first.content.name,
-    },
-  };
+  const views = products.map((p) => ({ p, view: buildProductView(p.record, p.content, currency) }));
+
+  const categories = collections
+    .filter((c) => c.categories !== "*")
+    .map((c) => {
+      const inCategory = views.filter(({ p }) =>
+        (c.categories as string[]).includes(p.content.category.slug),
+      );
+      return {
+        label: c.title,
+        // A single-product category opens that product directly; only a
+        // category with a real listing worth browsing goes to a collection.
+        href:
+          inCategory.length === 1
+            ? inCategory[0]!.view.href
+            : `/collections/${c.slug}`,
+        count: inCategory.length,
+        image: inCategory[0]?.view.cardImage?.url ?? null,
+      };
+    })
+    .filter((c) => c.count > 0);
+
+  return { categories, browseAllHref: "/collections/all" };
 }
 
 /**
@@ -73,7 +70,7 @@ export async function Header() {
 
         <Link
           href="/"
-          className="justify-self-center pl-[0.3em] font-serif text-[1.85rem] leading-none tracking-[0.3em]"
+          className="justify-self-center pl-[0.3em] font-logo text-[1.85rem] leading-none tracking-[0.3em]"
           aria-label={`${site.name} — home`}
         >
           BELURAE

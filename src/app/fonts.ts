@@ -1,32 +1,87 @@
-import localFont from "next/font/local";
+import { Figtree, Fraunces, Instrument_Serif, Jost, Manrope, Poppins } from "next/font/google";
 
 /**
- * Self-hosted type (WOFF2, latin subset) — no third-party font requests.
- * next/font generates size-adjusted fallbacks, so the swap causes no CLS.
+ * A deliberate multi-role type system, not one font pair reused everywhere —
+ * next/font/google self-hosts all of these at build time (no runtime request
+ * to Google, no separate download step to maintain).
  *
- *  - Instrument Serif: high-contrast editorial display face (fashion-magazine
- *    feel) with a true italic. Used for headings, prices, numerals.
- *  - Jost: geometric sans in the Futura tradition — the classic voice of
- *    cosmetics packaging — variable 300–600 for UI and body copy.
+ *  - Fraunces (display serif): warm, soft-serif display face built for large
+ *    optical sizes (its `opsz` axis runs 9–144), with a gentle "SOFT" axis
+ *    dialled in for rounded, less severe letterforms — reads as premium and
+ *    warm rather than fashion-magazine sharp. Reserved for editorial headings
+ *    and large numerals: the PDP/section titles, prices.
+ *  - Manrope (body): a clean, slightly warm geometric grotesk, sized for
+ *    reading — paragraphs, descriptions, FAQ answers.
+ *  - Jost (interface): a refined geometric grotesk (Futura-inspired) reserved
+ *    for UI chrome — nav links, buttons, form labels, eyebrows, badges — so
+ *    the "controls" of the site read as quiet, considered interface rather
+ *    than editorial prose or SaaS-technical chrome.
+ *  - Instrument Serif (logotype): a single-weight, high-contrast display
+ *    serif reserved for the BELURAE wordmark only — the brand mark gets its
+ *    own distinct voice, separate from the Fraunces headings around it.
+ *  - Poppins (numerals): a geometric sans reserved for prices and other
+ *    standalone figures (PDP price, pack-card prices, cart totals) — a
+ *    distinct, evenly-spaced numeral shape rather than reusing a text font.
+ *  - Figtree (product title): a warm, rounded grotesk reserved for the PDP
+ *    h1 — long, SEO-heavy Shopify titles need a plain, highly legible face at
+ *    small-to-medium sizes rather than a display serif or the UI font.
  *
- * Only the UI sans is preloaded; the display face is small (~25 KB) and loads
- * alongside, but the LCP element (hero image) never waits on it.
+ * Only Manrope (body, used the most) is preloaded; the rest load alongside
+ * it, and the LCP element (hero image) never waits on any of them.
  */
-export const jost = localFont({
-  src: [{ path: "./fonts/jost.woff2", weight: "300 700", style: "normal" }],
+export const sans = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--ff-sans",
   display: "swap",
   preload: true,
-  fallback: ["ui-sans-serif", "system-ui", "Segoe UI", "Arial"],
+  fallback: ["ui-sans-serif", "system-ui", "Segoe UI", "Helvetica Neue"],
 });
 
-export const instrumentSerif = localFont({
-  src: [
-    { path: "./fonts/instrument-serif.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/instrument-serif-italic.woff2", weight: "400", style: "italic" },
-  ],
+export const serif = Fraunces({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: "variable",
+  axes: ["SOFT", "opsz"],
   variable: "--ff-serif",
   display: "swap",
   preload: true,
-  fallback: ["Didot", "Georgia", "serif"],
+  fallback: ["Georgia", "serif"],
+});
+
+export const ui = Jost({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--ff-ui",
+  display: "swap",
+  preload: false,
+  fallback: ["ui-sans-serif", "system-ui", "Segoe UI", "Helvetica Neue"],
+});
+
+export const logo = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: "normal",
+  variable: "--ff-logo",
+  display: "swap",
+  preload: false,
+  fallback: ["Georgia", "serif"],
+});
+
+export const numeral = Poppins({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--ff-numeral",
+  display: "swap",
+  preload: false,
+  fallback: ["ui-sans-serif", "system-ui", "Segoe UI", "Helvetica Neue"],
+});
+
+export const title = Figtree({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--ff-title",
+  display: "swap",
+  preload: false,
+  fallback: ["ui-sans-serif", "system-ui", "Segoe UI", "Helvetica Neue"],
 });

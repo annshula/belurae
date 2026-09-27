@@ -12,7 +12,7 @@ export function Footer() {
       <div className="overflow-hidden rounded-media bg-sage-900 text-sage-100">
         <div className="container-page grid gap-14 pt-16 pb-12 lg:grid-cols-[1.1fr_1.6fr] lg:gap-24 lg:pt-24">
           <div>
-            <p className="font-serif text-[1.75rem] tracking-[0.32em] text-ivory">BELURAE</p>
+            <p className="font-logo text-[1.75rem] tracking-[0.32em] text-ivory">BELURAE</p>
             <p className="mt-8 font-serif text-heading-1 font-light text-ivory">
               Beauty, <em>made simpler.</em>
             </p>

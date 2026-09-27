@@ -15,7 +15,7 @@ export function productSchema(view: ProductView, content: ProductContent, review
   return {
     "@type": "Product",
     "@id": `${url}#product`,
-    name: content.name,
+    name: view.name,
     description: content.benefitLine,
     url,
     image: images,

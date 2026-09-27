@@ -1,4 +1,9 @@
-import type { ImageRecord, MediaRecord, ProductRecord, VideoRecord } from "@/lib/catalog/types";
+import type {
+  FeatureHighlightRecord,
+  ImageRecord,
+  ProductRecord,
+  SpecRecord,
+} from "@/lib/catalog/types";
 import type { ProductContent } from "@/content/products";
 
 /**
@@ -26,6 +31,10 @@ export type ViewVariant = {
   id: string;
   options: Record<string, string>;
   price: number;
+  /** Shopify's own compare-at price for this variant, when it's genuinely higher than price. */
+  compareAtPrice: number | null;
+  /** Percent off compareAtPrice, when compareAtPrice exists. */
+  compareAtPercent: number | null;
   availableForSale: boolean;
   sku: string | null;
   image: string | null;
@@ -40,7 +49,7 @@ export type ViewVariant = {
 export type ViewOption = {
   name: string;
   label: string;
-  values: { value: string; label: string; description?: string }[];
+  values: { value: string; label: string }[];
 };
 
 export type ProductView = {
@@ -60,6 +69,14 @@ export type ProductView = {
   cardImage: ViewImage | null;
   cardImageAlt: ViewImage | null;
   packOptionName: string | null;
+  /** Shopify `custom.specs` metaobjects — the merchant's own spec sheet. */
+  specs: SpecRecord[];
+  /** Shopify `custom.feature_highlights` metaobjects — used for the alternating image section. */
+  featureHighlights: FeatureHighlightRecord[];
+  /** Shopify `custom.perks` metafield — short bullet claims shown under the product name. */
+  perks: string[];
+  /** Shopify `custom.sale_ends_at` metafield — set by the merchant, already filtered to future dates only. */
+  saleEndsAt: string | null;
 };
 
 const fallbackSize = 1200;
@@ -73,35 +90,21 @@ function toImage(m: ImageRecord, alt: string): ViewImage {
   };
 }
 
-function mediaKey(m: MediaRecord): string {
-  return m.type === "image" ? m.url : `${m.poster} ${m.sources.map((s) => s.src).join(" ")}`;
-}
-
-function curateGallery(record: ProductRecord, content: ProductContent): ViewMedia[] {
-  const out: ViewMedia[] = [];
-  for (const entry of content.gallery) {
-    const m = record.media.find((item) => mediaKey(item).includes(entry.match));
-    if (!m) continue;
+/** Every media item Shopify has for this product, in Shopify's own order — nothing hand-curated or hidden. */
+function curateGallery(record: ProductRecord): ViewMedia[] {
+  return record.media.map((m) => {
     if (m.type === "image") {
-      out.push({ type: "image", ...toImage(m, entry.alt), variantId: m.variantId });
-    } else {
-      const v = m as VideoRecord;
-      out.push({
-        type: "video",
-        poster: v.poster,
-        width: v.width ?? 720,
-        height: v.height ?? 1280,
-        alt: entry.alt,
-        sources: v.sources,
-      });
+      return { type: "image", ...toImage(m, m.alt ?? record.title), variantId: m.variantId };
     }
-  }
-  // Nothing matched (e.g. media re-uploaded): fall back to the first image so the page is never bare.
-  if (out.length === 0) {
-    const first = record.media.find((m): m is ImageRecord => m.type === "image");
-    if (first) out.push({ type: "image", ...toImage(first, first.alt ?? content.name), variantId: first.variantId });
-  }
-  return out;
+    return {
+      type: "video",
+      poster: m.poster,
+      width: m.width ?? 720,
+      height: m.height ?? 1280,
+      alt: m.alt ?? record.title,
+      sources: m.sources,
+    };
+  });
 }
 
 export function buildProductView(
@@ -128,10 +131,16 @@ export function buildProductView(
         : undefined;
     const raw = single ? single.price * units - v.price : 0;
     const savings = raw > 0.009 ? Math.round(raw * 100) / 100 : null;
+    const compareAtPercent =
+      v.compareAtPrice != null && v.compareAtPrice > v.price
+        ? Math.round((1 - v.price / v.compareAtPrice) * 100)
+        : null;
     return {
       id: v.id,
       options: v.options,
       price: v.price,
+      compareAtPrice: v.compareAtPrice,
+      compareAtPercent,
       availableForSale: v.availableForSale,
       sku: v.sku,
       image: v.image,
@@ -150,7 +159,6 @@ export function buildProductView(
       values: o.values.map((value) => ({
         value,
         label: labelFor(o.name, value),
-        description: o.name === "Style" ? content.setDescriptions?.[value] : undefined,
       })),
     }));
 
@@ -161,14 +169,14 @@ export function buildProductView(
   const singles = variants.filter((v) => v.units === 1);
   const fromPrice = Math.min(...(singles.length ? singles : variants).map((v) => v.price));
 
-  const gallery = curateGallery(record, content);
+  const gallery = curateGallery(record);
   const images = gallery.filter((m): m is Extract<ViewMedia, { type: "image" }> => m.type === "image");
 
   return {
     handle: record.handle,
     slug: content.slug,
     href: `/products/${content.slug}`,
-    name: content.name,
+    name: record.title,
     format: content.format,
     benefitLine: content.benefitLine,
     currency,
@@ -181,5 +189,9 @@ export function buildProductView(
     cardImage: images[0] ?? null,
     cardImageAlt: images[1] ?? null,
     packOptionName: packName,
+    specs: record.specs,
+    featureHighlights: record.featureHighlights,
+    perks: record.perks,
+    saleEndsAt: record.saleEndsAt,
   };
 }

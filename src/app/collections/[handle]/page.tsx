@@ -84,7 +84,7 @@ export default async function CollectionPage({ params }: Props) {
 
       <div className="container-page pt-8 md:pt-10">
         {items.length > 0 ? (
-          <ul className="grid gap-x-5 gap-y-14 pb-14 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid grid-cols-2 gap-x-4 gap-y-8 pb-14 sm:grid-cols-3 lg:grid-cols-4">
             {items.map((p, i) => (
               <li key={p.handle}>
                 <ProductCard product={p} priority={i === 0} />

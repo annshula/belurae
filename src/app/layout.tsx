@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import "./globals.css";
-import { instrumentSerif, jost } from "./fonts";
+import { logo, numeral, sans, serif, title, ui } from "./fonts";
 import { Analytics } from "@/components/analytics/Analytics";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
@@ -15,7 +15,10 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: `${site.name} — ${site.tagline.replace(/\.$/, "")}`, template: `%s · ${site.name}` },
+  title: {
+    default: `${site.name} — ${site.tagline.replace(/\.$/, "")}`,
+    template: `%s · ${site.name}`,
+  },
   description: site.description,
   applicationName: site.name,
   openGraph: {
@@ -36,15 +39,22 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const bagCatalog = await getBagCatalog();
 
   return (
-    <html lang="en" className={`${jost.variable} ${instrumentSerif.variable}`}>
+    <html
+      lang="en"
+      className={`${sans.variable} ${serif.variable} ${ui.variable} ${logo.variable} ${numeral.variable} ${title.variable}`}
+    >
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-paper focus:px-4 focus:py-3 focus:shadow-drift"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-60 focus:bg-paper focus:px-4 focus:py-3 focus:shadow-drift"
         >
           Skip to content
         </a>

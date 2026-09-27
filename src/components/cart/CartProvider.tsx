@@ -32,6 +32,8 @@ export type BagVariant = {
   image: string | null;
   href: string;
   available: boolean;
+  /** True when the product's variants are pack sizes (buying more means picking a bigger pack, not a stepper). */
+  hasPackOption: boolean;
 };
 
 export type BagCatalog = { currency: string; variants: Record<string, BagVariant> };

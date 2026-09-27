@@ -13,12 +13,13 @@ export async function getBagCatalog(): Promise<BagCatalog> {
     const fallbackImage = view.cardImage?.url ?? null;
     for (const v of view.variants) {
       variants[v.id] = {
-        productName: content.name,
+        productName: view.name,
         variantLabel: v.label,
         price: v.price,
         image: v.image ?? fallbackImage,
         href: `${view.href}?variant=${v.id.split("/").pop()}`,
         available: v.availableForSale,
+        hasPackOption: view.packOptionName !== null,
       };
     }
   }

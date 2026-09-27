@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Faq } from "@/components/content/Faq";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/content/PageHero";
+import { SectionHeading } from "@/components/content/SectionHeading";
 import { contentPageBySlug, contentPages, policyPages } from "@/content/pages";
 import { products } from "@/content/products";
 import { getPolicy } from "@/lib/shopify/policies";
@@ -113,6 +114,7 @@ export default async function Page({ params }: Props) {
 
   const page = contentPageBySlug(slug);
   if (page) {
+    const mousse = products[0];
     return (
       <>
         <JsonLd
@@ -131,6 +133,32 @@ export default async function Page({ params }: Props) {
         <PageShell eyebrow={page.eyebrow} title={page.title} intro={page.intro} crumbLabel={page.title}>
           <div className="prose-belurae">{page.body}</div>
         </PageShell>
+
+        {slug === "about" && mousse && (
+          <section className="px-2 pb-20 sm:px-3" aria-labelledby="story">
+            <div className="section-y rounded-media bg-cream">
+              <div className="container-page grid gap-10 lg:grid-cols-2 lg:gap-20">
+                <SectionHeading eyebrow="The idea" title={mousse.story.heading} id="story" />
+                <div className="space-y-5 text-body-lg text-ink-soft lg:pt-10">
+                  {mousse.story.body.map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
+              </div>
+              <div className="container-page mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {mousse.highlights.map((h, i) => (
+                  <div key={h.title} className="flex min-h-56 flex-col rounded-media bg-porcelain p-7 shadow-soft lg:p-8">
+                    <span className="font-serif text-heading-2 text-clay-300 tabular-nums" aria-hidden="true">
+                      0{i + 1}
+                    </span>
+                    <h3 className="mt-auto pt-8 font-serif text-heading-2">{h.title}</h3>
+                    <p className="mt-3 text-body-sm text-ink-soft">{h.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </>
     );
   }
