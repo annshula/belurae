@@ -7,6 +7,7 @@ import { Analytics } from "@/components/analytics/Analytics";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { Footer } from "@/components/layout/Footer";
+import { LocalizationProvider } from "@/components/localization/LocalizationProvider";
 import { AnnouncementBar, Header } from "@/components/layout/Header";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getBagCatalog } from "@/lib/commerce/bag";
@@ -58,15 +59,17 @@ export default async function RootLayout({
         >
           Skip to content
         </a>
-        <CartProvider catalog={bagCatalog}>
-          <AnnouncementBar />
-          <Header />
-          <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
-            {children}
-          </main>
-          <Footer />
-          <CartDrawer />
-        </CartProvider>
+        <LocalizationProvider>
+          <CartProvider catalog={bagCatalog}>
+            <AnnouncementBar />
+            <Header />
+            <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
+              {children}
+            </main>
+            <Footer />
+            <CartDrawer />
+          </CartProvider>
+        </LocalizationProvider>
         <Analytics />
         <JsonLd data={graph(organizationSchema(), websiteSchema())} />
       </body>

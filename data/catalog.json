@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-09-27T10:49:26.009Z",
+  "syncedAt": "2026-09-27T11:29:06.642Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -22,7 +22,7 @@
       "vendor": "Trackify",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-09-27T10:49:22Z",
+      "updatedAt": "2026-09-27T11:27:20Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -50,7 +50,7 @@
           "options": {
             "Quantity": "1PC"
           },
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cb532d83-a143-4d81-ab23-15d34150eabb.jpg?v=1790421362",
+          "image": null,
           "description": null,
           "pricesByMarket": {
             "CA": {
@@ -63,16 +63,6 @@
               "compareAtAmount": 88,
               "currencyCode": "AUD"
             },
-            "IN": {
-              "amount": 4879.87,
-              "compareAtAmount": 5856.04,
-              "currencyCode": "INR"
-            },
-            "ZA": {
-              "amount": 832,
-              "compareAtAmount": 998,
-              "currencyCode": "ZAR"
-            },
             "GB": {
               "amount": 39,
               "compareAtAmount": 47,
@@ -82,6 +72,16 @@
               "amount": 49.99,
               "compareAtAmount": 59.99,
               "currencyCode": "USD"
+            },
+            "IN": {
+              "amount": 4879.87,
+              "compareAtAmount": 5856.04,
+              "currencyCode": "INR"
+            },
+            "ZA": {
+              "amount": 832,
+              "compareAtAmount": 998,
+              "currencyCode": "ZAR"
             }
           }
         },
@@ -96,7 +96,7 @@
           "options": {
             "Quantity": "2PCS"
           },
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cb532d83-a143-4d81-ab23-15d34150eabb.jpg?v=1790421362",
+          "image": null,
           "description": null,
           "pricesByMarket": {
             "CA": {
@@ -109,16 +109,6 @@
               "compareAtAmount": 131,
               "currencyCode": "AUD"
             },
-            "IN": {
-              "amount": 5856.04,
-              "compareAtAmount": 8784.54,
-              "currencyCode": "INR"
-            },
-            "ZA": {
-              "amount": 998,
-              "compareAtAmount": 1497,
-              "currencyCode": "ZAR"
-            },
             "GB": {
               "amount": 47,
               "compareAtAmount": 70,
@@ -128,6 +118,16 @@
               "amount": 59.99,
               "compareAtAmount": 89.99,
               "currencyCode": "USD"
+            },
+            "IN": {
+              "amount": 5856.04,
+              "compareAtAmount": 8784.54,
+              "currencyCode": "INR"
+            },
+            "ZA": {
+              "amount": 998,
+              "compareAtAmount": 1497,
+              "currencyCode": "ZAR"
             }
           }
         },
@@ -142,7 +142,7 @@
           "options": {
             "Quantity": "3PCS"
           },
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cb532d83-a143-4d81-ab23-15d34150eabb.jpg?v=1790421362",
+          "image": null,
           "description": null,
           "pricesByMarket": {
             "CA": {
@@ -155,16 +155,6 @@
               "compareAtAmount": 176,
               "currencyCode": "AUD"
             },
-            "IN": {
-              "amount": 6832.2,
-              "compareAtAmount": 11810.66,
-              "currencyCode": "INR"
-            },
-            "ZA": {
-              "amount": 1165,
-              "compareAtAmount": 2013,
-              "currencyCode": "ZAR"
-            },
             "GB": {
               "amount": 54,
               "compareAtAmount": 94,
@@ -174,6 +164,16 @@
               "amount": 69.99,
               "compareAtAmount": 120.99,
               "currencyCode": "USD"
+            },
+            "IN": {
+              "amount": 6832.2,
+              "compareAtAmount": 11810.66,
+              "currencyCode": "INR"
+            },
+            "ZA": {
+              "amount": 1165,
+              "compareAtAmount": 2013,
+              "currencyCode": "ZAR"
             }
           }
         }
@@ -181,11 +181,11 @@
       "media": [
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cb532d83-a143-4d81-ab23-15d34150eabb.jpg?v=1790421362",
-          "width": 1500,
-          "height": 1500,
-          "alt": "PHOFAY Cloud Sense hair removal mousse with aloe and ginseng",
-          "variantId": "gid://shopify/ProductVariant/67582703829219"
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Img1.png?v=1790508379",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
         },
         {
           "type": "video",
@@ -237,34 +237,10 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sf39c26c52ded46f7914c00cb05024a7af.avif?v=1790426727",
-          "width": 2048,
-          "height": 2048,
-          "alt": "Product packaging with herbal extracts on a purple background",
-          "variantId": null
-        },
-        {
-          "type": "image",
           "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/10bdfcb3-dd92-4ffe-b02b-f3339991ee62.jpg?v=1790421362",
           "width": 1500,
           "height": 1500,
           "alt": "Couple with smooth, hair-free skin",
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/adc3e136-2068-44bd-872e-635b293be876.jpg?v=1790422409",
-          "width": 548,
-          "height": 800,
-          "alt": "PHOFAY certificate card: FDA, CPNP, SCPN, MSDS",
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5c6a8008-1a3a-420f-985f-1523d35e536f.jpg?v=1790421362",
-          "width": 2048,
-          "height": 2048,
-          "alt": "Herbal extracts: ginseng, portulaca oleracea, aloe leaf water, glycerin",
           "variantId": null
         },
         {
@@ -277,10 +253,34 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/eabdec77-54a8-493e-8053-f6a258e34e38.jpg?v=1790422411",
-          "width": 1600,
-          "height": 800,
-          "alt": "Six benefits: hydrates 24hrs, sensitive skin, stubborn hair, ingrown hair, smoothness, fewer chemicals",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_2.png?v=1790508380",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_3.png?v=1790508380",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ChatGPT_Image_Sep_27_2026_04_56_24_PM.png?v=1790508401",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_5.png?v=1790508381",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
           "variantId": null
         },
         {
@@ -293,34 +293,10 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ecfeda2c-07aa-43b6-a4a7-17eb74191e91.jpg?v=1790421362",
-          "width": 2720,
-          "height": 2720,
-          "alt": "Before and after hair removal on armpit, leg, back, arm and chest",
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/e6943bdf-6094-4e93-aa74-b3c4017259ae.jpg?v=1790422411",
-          "width": 1600,
-          "height": 800,
-          "alt": "Diagram of the mousse softening hair at the root",
-          "variantId": null
-        },
-        {
-          "type": "image",
           "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/7331394c-d1f2-439e-8ec7-91f6d25a898c.jpg?v=1790421362",
           "width": 1500,
           "height": 1500,
           "alt": "Cloud Sense compared with other hair removal creams",
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/0f29a5a7-8678-4b3b-88a4-88f83971311b.jpg?v=1790422411",
-          "width": 1600,
-          "height": 800,
-          "alt": "How to use the hair removal mousse in four steps",
           "variantId": null
         },
         {
@@ -333,18 +309,34 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cac920f9-4b70-404b-8f48-2f28a0d05f61.jpg?v=1790422411",
-          "width": 1600,
-          "height": 800,
-          "alt": "Friends with Cloud Sense gift bags",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_7_64ee64af-d00b-49e0-a05e-fb48c3c8dace.png?v=1790508380",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
           "variantId": null
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/d18c159e-c89c-4767-abce-80c0c49ffde9.jpg?v=1790421362",
-          "width": 3060,
-          "height": 4080,
-          "alt": "Cloud Sense mousse can next to its box",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_4_30fbfd03-d318-4f73-bee7-be4220e3f92a.png?v=1790508380",
+          "width": 1672,
+          "height": 941,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_6_006e6318-e3ac-45c3-9c70-4a7eef2e5362.png?v=1790508380",
+          "width": 1774,
+          "height": 887,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cac920f9-4b70-404b-8f48-2f28a0d05f61.jpg?v=1790422411",
+          "width": 1600,
+          "height": 800,
+          "alt": "Friends with Cloud Sense gift bags",
           "variantId": null
         }
       ],
@@ -413,7 +405,11 @@
         "Removes short, stubborn hair",
         "Minimizes ingrown hair",
         "Long lasting smoothness",
-        "35% less chemical ingredients"
+        "35% less chemical ingredients",
+        "Hypoallergenic formula",
+        "Light citrus scent (Orange Spring Cologne)",
+        "Aloe leaf water, glycerin & hyaluronic acid",
+        "Suitable for men and women"
       ],
       "saleEndsAt": "2026-09-27T19:22:48.000Z"
     }

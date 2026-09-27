@@ -37,7 +37,7 @@ const readCatalog = unstable_cache(
     }
     return seedDoc;
   },
-  ["belurae-catalog-v10"],
+  ["belurae-catalog-v11"],
   { tags: [CACHE_TAGS.catalog], revalidate: 3600 },
 );
 

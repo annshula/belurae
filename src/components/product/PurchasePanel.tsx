@@ -3,12 +3,56 @@
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 
 import { useCart } from "@/components/cart/CartProvider";
+import { useLocalization } from "@/components/localization/LocalizationProvider";
 import { SaleCountdown } from "@/components/product/SaleCountdown";
 import { Icon } from "@/components/ui/Icon";
 import { trackSelectVariant, trackViewItem } from "@/lib/analytics";
 import type { ProductView, ViewVariant } from "@/lib/commerce/product-view";
 import { formatMoney } from "@/lib/money";
 import { cn } from "@/lib/utils";
+
+/**
+ * A variant's price/compareAt/savings/perUnit, in the visitor's live Shopify
+ * currency when one has been fetched, otherwise the catalog's base-currency
+ * numbers unchanged. Mirrors the arithmetic in lib/commerce/product-view.ts,
+ * just against whichever amount is actually being shown.
+ */
+type LocalizedVariant = ViewVariant & { currency: string };
+
+function localize(
+  v: ViewVariant,
+  baseCurrency: string,
+  localizedPriceFor: (id: string) => { amount: string; currencyCode: string; compareAtAmount: string | null } | null,
+  singleUnitPrice: number | null,
+): LocalizedVariant {
+  const live = localizedPriceFor(v.id);
+  if (!live) return { ...v, currency: baseCurrency };
+
+  const price = Number.parseFloat(live.amount);
+  if (!Number.isFinite(price)) return { ...v, currency: baseCurrency };
+
+  const compareAtRaw = live.compareAtAmount != null ? Number.parseFloat(live.compareAtAmount) : null;
+  const compareAtPrice = compareAtRaw != null && Number.isFinite(compareAtRaw) && compareAtRaw > price ? compareAtRaw : null;
+  const compareAtPercent = compareAtPrice ? Math.round((1 - price / compareAtPrice) * 100) : null;
+  const perUnit = Math.round((price / v.units) * 100) / 100;
+  const savings =
+    singleUnitPrice != null && v.units > 1
+      ? (() => {
+          const raw = singleUnitPrice * v.units - price;
+          return raw > 0.009 ? Math.round(raw * 100) / 100 : null;
+        })()
+      : null;
+
+  return {
+    ...v,
+    price,
+    compareAtPrice,
+    compareAtPercent,
+    perUnit,
+    savings,
+    currency: live.currencyCode,
+  };
+}
 
 /**
  * The PDP's buying controls — the only client island in the purchase column.
@@ -49,12 +93,14 @@ function PackFieldset({
   view,
   onChoose,
   optionAvailable,
+  localizedVariantFor,
 }: {
   option: ProductView["options"][number];
   selection: Record<string, string>;
   view: ProductView;
   onChoose: (name: string, value: string) => void;
   optionAvailable: (name: string, value: string) => boolean;
+  localizedVariantFor: (v: ViewVariant) => LocalizedVariant;
 }) {
   const name = option.name;
   const middleIndex =
@@ -69,14 +115,10 @@ function PackFieldset({
       <div className="flex flex-col gap-3">
         {option.values.map((value, i) => {
           const available = optionAvailable(name, value.value);
-          const exists = Boolean(
-            findVariant(view, { ...selection, [name]: value.value }),
-          );
+          const rawCombo = findVariant(view, { ...selection, [name]: value.value });
+          const exists = Boolean(rawCombo);
           const checked = selection[name] === value.value;
-          const combo = findVariant(view, {
-            ...selection,
-            [name]: value.value,
-          });
+          const combo = rawCombo ? localizedVariantFor(rawCombo) : undefined;
           const recommended = i === middleIndex && exists;
           const bestValue =
             i === lastIndex && i !== middleIndex && exists;
@@ -127,24 +169,19 @@ function PackFieldset({
                     {value.label}
                   </span>
                   {recommended && (
-                    <span className="inline-flex items-center rounded-tag bg-sage-600 px-2 py-0.5 font-headline text-[0.62rem] leading-none font-semibold tracking-wider text-ivory uppercase">
+                    <span className="inline-flex items-center rounded-tag bg-sage-600 px-2.5 py-1 font-headline text-[0.72rem] leading-none font-semibold tracking-wide text-ivory uppercase">
                       Most popular
                     </span>
                   )}
                   {bestValue && (
-                    <span className="inline-flex items-center rounded-tag bg-clay-600 px-2 py-0.5 font-headline text-[0.62rem] leading-none font-semibold tracking-wider text-ivory uppercase">
+                    <span className="inline-flex items-center rounded-tag bg-clay-600 px-2.5 py-1 font-headline text-[0.72rem] leading-none font-semibold tracking-wide text-ivory uppercase">
                       Best value
-                    </span>
-                  )}
-                  {combo && combo.compareAtPercent && (
-                    <span className="rounded-tag bg-clay-50 px-2 py-0.5 font-numeral text-[0.66rem] font-semibold tracking-[0.02em] text-clay-600 tabular-nums">
-                      −{combo.compareAtPercent}%
                     </span>
                   )}
                 </span>
                 {combo && combo.units > 1 && (
                   <span className="mt-0.5 block font-numeral text-[0.75rem] text-ink-soft tabular-nums">
-                    {formatMoney(combo.perUnit, view.currency)} / set
+                    {formatMoney(combo.perUnit, combo.currency)} / set
                   </span>
                 )}
                 {!exists && (
@@ -167,19 +204,28 @@ function PackFieldset({
 
               {combo && (
                 <span className="flex shrink-0 flex-col items-end">
-                  {combo.compareAtPrice && (
-                    <span className="font-numeral text-[0.68rem] text-ink-soft tabular-nums line-through">
-                      {formatMoney(combo.compareAtPrice, view.currency)}
+                  <span className="flex items-baseline gap-1.5">
+                    {combo.compareAtPrice && (
+                      <span className="font-numeral text-[0.7rem] text-ink-soft tabular-nums line-through">
+                        {formatMoney(combo.compareAtPrice, combo.currency)}
+                      </span>
+                    )}
+                    <span className="font-numeral text-heading-3 font-semibold tabular-nums">
+                      {formatMoney(combo.price, combo.currency)}
                     </span>
-                  )}
-                  <span className="font-numeral text-heading-3 font-semibold tabular-nums">
-                    {formatMoney(combo.price, view.currency)}
                   </span>
-                  {combo.savings && (
-                    <span className="font-numeral text-[0.72rem] font-medium text-clay-600 tabular-nums">
-                      Save {formatMoney(combo.savings, view.currency)}
-                    </span>
-                  )}
+                  {(() => {
+                    const saved =
+                      combo.savings ??
+                      (combo.units === 1 && combo.compareAtPrice ? combo.compareAtPrice - combo.price : null);
+                    return (
+                      saved != null && (
+                        <span className="font-numeral text-[0.72rem] font-medium text-clay-600 tabular-nums">
+                          Save {formatMoney(saved, combo.currency)}
+                        </span>
+                      )
+                    );
+                  })()}
                 </span>
               )}
             </label>
@@ -192,6 +238,7 @@ function PackFieldset({
 
 export function PurchasePanel({ view }: { view: ProductView }) {
   const { add, open } = useCart();
+  const { localizedPriceFor, requestPrices } = useLocalization();
   const initial =
     view.variants.find((v) => v.id === view.defaultVariantId) ??
     view.variants[0]!;
@@ -205,6 +252,25 @@ export function PurchasePanel({ view }: { view: ProductView }) {
 
   const variant = findVariant(view, selection);
   const canBuy = Boolean(variant?.availableForSale);
+
+  const singleUnitVariant = view.variants.find((v) => v.units === 1);
+  const localizedVariantFor = useMemo(
+    () => (v: ViewVariant) => {
+      const singleLocal = singleUnitVariant ? localizedPriceFor(singleUnitVariant.id) : null;
+      const singleUnitPrice = singleLocal
+        ? Number.parseFloat(singleLocal.amount)
+        : (singleUnitVariant?.price ?? null);
+      return localize(v, view.currency, localizedPriceFor, singleUnitPrice);
+    },
+    [localizedPriceFor, singleUnitVariant, view.currency],
+  );
+  const localizedVariant = localizedVariantFor(variant ?? initial);
+
+  // Every variant's price is needed up front — the pack cards show all of
+  // them, not just the selected one.
+  useEffect(() => {
+    requestPrices(view.variants.map((v) => v.id));
+  }, [requestPrices, view.variants]);
 
   // Restore a shared ?variant= link.
   useEffect(() => {
@@ -281,41 +347,33 @@ export function PurchasePanel({ view }: { view: ProductView }) {
 
   const priceLine = useMemo(() => {
     if (!variant) return null;
+    const v = localizedVariantFor(variant);
     return (
       <div className="flex flex-col gap-2">
-        <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-          {variant.compareAtPrice && (
-            <p className="font-numeral text-body-sm text-ink-soft tabular-nums line-through">
-              {formatMoney(variant.compareAtPrice, view.currency)}
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+            {v.compareAtPrice && (
+              <p className="font-numeral text-body-lg text-ink-soft tabular-nums line-through">
+                {formatMoney(v.compareAtPrice, v.currency)}
+              </p>
+            )}
+            <p
+              className="font-numeral text-heading-2 font-semibold tabular-nums"
+              aria-live="polite"
+            >
+              {formatMoney(v.price, v.currency)}
             </p>
-          )}
-          <p
-            className="font-numeral text-heading-3 font-semibold tabular-nums"
-            aria-live="polite"
-          >
-            {formatMoney(variant.price, view.currency)}
-          </p>
-          {variant.compareAtPercent && (
-            <p className="rounded-tag bg-clay-600 px-2.5 py-1 font-numeral text-[0.8rem] font-bold tracking-wide text-ivory tabular-nums">
-              −{variant.compareAtPercent}% OFF
-            </p>
-          )}
-          {variant.units > 1 && (
-            <p className="font-numeral text-body-sm text-ink-soft tabular-nums">
-              {formatMoney(variant.perUnit, view.currency)} per set
-            </p>
-          )}
+            {v.compareAtPercent && (
+              <p className="inline-flex items-center rounded-tag bg-clay-600 px-2.5 py-1 font-numeral text-[0.8rem] leading-none font-bold tracking-wide text-ivory tabular-nums">
+                −{v.compareAtPercent}% OFF
+              </p>
+            )}
+          </div>
+          {view.saleEndsAt && <SaleCountdown endsAt={view.saleEndsAt} />}
         </div>
-        {variant.savings && (
-          <p className="font-numeral text-body-sm text-clay-600 tabular-nums">
-            You save {formatMoney(variant.savings, view.currency)} vs. {variant.units}{" "}
-            single {variant.units === 1 ? "set" : "sets"}
-          </p>
-        )}
-        {view.saleEndsAt && <SaleCountdown endsAt={view.saleEndsAt} />}
       </div>
     );
-  }, [variant, view.currency, view.saleEndsAt]);
+  }, [variant, localizedVariantFor, view.saleEndsAt]);
 
   return (
     <div>
@@ -332,6 +390,7 @@ export function PurchasePanel({ view }: { view: ProductView }) {
                 view={view}
                 onChoose={choose}
                 optionAvailable={optionAvailable}
+                localizedVariantFor={localizedVariantFor}
               />
             );
           }
@@ -413,8 +472,8 @@ export function PurchasePanel({ view }: { view: ProductView }) {
             "Add to bag"
           )}
         </button>
-        <p className="mt-3 flex items-center justify-center gap-2 text-body-sm text-ink-soft">
-          <Icon name="shield" className="size-4 shrink-0" />
+        <p className="mt-3 flex items-center justify-center gap-1.5 font-sans text-[0.8rem] font-medium text-ink-soft">
+          <Icon name="shield" className="size-3.5 shrink-0" />
           Secure payment by Shopify
         </p>
       </div>
@@ -434,7 +493,7 @@ export function PurchasePanel({ view }: { view: ProductView }) {
               {variant?.label ?? view.name}
             </p>
             <p className="font-numeral text-body-sm font-medium text-ink-soft tabular-nums">
-              {variant ? formatMoney(variant.price, view.currency) : ""}
+              {variant ? formatMoney(localizedVariant.price, localizedVariant.currency) : ""}
             </p>
           </div>
           <button

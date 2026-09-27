@@ -9,21 +9,37 @@ import type { ViewVideo } from "@/lib/commerce/product-view";
 /**
  * Click-to-play video: only the poster loads until the visitor asks for the
  * video (preload="none"), so video never competes with LCP. Native controls.
+ *
+ * The frame letterboxes instead of cropping (`object-contain`): the shots are
+ * vertical (9:16) and the gallery stage is not, so covering the frame would cut
+ * the top and bottom off the picture.
  */
-export function VideoTile({ video, className }: { video: ViewVideo; className?: string }) {
+export function VideoTile({
+  video,
+  className,
+}: {
+  video: ViewVideo;
+  className?: string;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const tracked = useRef(false);
 
   const smallest = video.sources[0];
-  const hd = video.sources.find((s) => (s.width ?? 0) >= 720) ?? video.sources[video.sources.length - 1];
+  const hd =
+    video.sources.find((s) => (s.width ?? 0) >= 720) ??
+    video.sources[video.sources.length - 1];
 
   return (
     <div className={className} style={{ position: "relative" }}>
       <video
         ref={ref}
-        className="absolute inset-0 size-full bg-ink object-cover"
-        poster={video.poster ? `${video.poster}${video.poster.includes("?") ? "&" : "?"}width=900` : undefined}
+        className="absolute inset-0 size-full bg-ink object-contain"
+        poster={
+          video.poster
+            ? `${video.poster}${video.poster.includes("?") ? "&" : "?"}width=900`
+            : undefined
+        }
         preload="none"
         playsInline
         controls={playing}
@@ -35,7 +51,9 @@ export function VideoTile({ video, className }: { video: ViewVideo; className?: 
           }
         }}
       >
-        {hd && <source src={hd.src} type={hd.type} media="(min-width: 768px)" />}
+        {hd && (
+          <source src={hd.src} type={hd.type} media="(min-width: 768px)" />
+        )}
         {smallest && <source src={smallest.src} type={smallest.type} />}
       </video>
       {!playing && (

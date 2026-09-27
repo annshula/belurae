@@ -50,6 +50,11 @@
   --color-clay-300: #c9968a; /* decorative only */
   --color-clay-600: #93584a; /* text-safe, 5.2:1 */
 
+  /* Rating stars — the one warm yellow in the system, reserved for review
+     scores (never buttons, never decoration). */
+  --color-gold-100: #f7e7c2; /* empty star */
+  --color-gold-500: #e2a51f; /* filled star */
+
   --color-success: #2f6246;
   --color-warning: #8a5a10;
   --color-error: #a2382b;
@@ -136,6 +141,9 @@
   --section-y: 5rem;
   --header-h: 72px;
   --announce-h: 34px;
+  /* PDP gallery: the sticky stage column is this tall from lg up, so the
+     thumbnail rail beside it matches it and the column can be centred. */
+  --gallery-h: calc(100svh - var(--header-h) - var(--announce-h) - 9rem);
   color-scheme: light;
 }
 
@@ -161,6 +169,14 @@
     text-rendering: optimizeLegibility;
     scroll-padding-top: calc(var(--header-h) + 1.5rem);
     scroll-padding-bottom: 6rem;
+  }
+  /* In-page jumps (the PDP rating line → #reviews, the patch-test note →
+     #safety) glide instead of teleporting. The reduced-motion reset below
+     turns this back off. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
   body {
     background: var(--color-ivory);

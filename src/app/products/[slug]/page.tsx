@@ -12,7 +12,9 @@ import { PurchasePanel } from "@/components/product/PurchasePanel";
 import { ReviewsSection } from "@/components/product/ReviewsSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Icon } from "@/components/ui/Icon";
+import { Stars } from "@/components/ui/Stars";
 import { guides } from "@/content/guides";
+import { demoReviewsFor } from "@/data/reviews";
 import {
   products as productContent,
   productContentByLegacySlug,
@@ -77,11 +79,22 @@ export default async function ProductPage({ params }: Props) {
   }
 
   const { content, record } = product;
-  const [currency, reviews] = await Promise.all([
+  const [currency, verifiedReviews] = await Promise.all([
     storeCurrency(),
     getProductReviews(record.handle),
   ]);
   const view = buildProductView(record, content, currency);
+
+  /*
+   * Two review sources, deliberately kept apart:
+   *  - `verifiedReviews` — Judge.me, verified buyers only. The only source
+   *    allowed anywhere near structured data.
+   *  - `ratingLine` — what the page shows. Falls back to the placeholder set in
+   *    data/reviews.ts (see its doc comment) while Judge.me has nothing, which
+   *    is why the schema above is given `verifiedReviews` and never this.
+   */
+  const ratingLine =
+    verifiedReviews?.summary ?? demoReviewsFor(record.handle)?.summary ?? null;
 
   const crumbs = [
     { label: "Home", href: "/" },
@@ -99,7 +112,7 @@ export default async function ProductPage({ params }: Props) {
     <>
       <JsonLd
         data={graph(
-          productSchema(view, content, reviews?.summary ?? null),
+          productSchema(view, content, verifiedReviews?.summary ?? null),
           breadcrumbSchema(
             crumbs.map((c, i) =>
               i === crumbs.length - 1 ? { label: c.label, href: view.href } : c,
@@ -115,34 +128,30 @@ export default async function ProductPage({ params }: Props) {
           <ProductGallery media={view.gallery} productName={view.name} />
 
           <div className="lg:pt-4">
-            {reviews?.summary && reviews.summary.count > 0 && (
-              <div className="flex items-center gap-2 text-body-sm">
-                <span className="flex text-clay-500" aria-hidden="true">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <Icon
-                      key={i}
-                      name="star"
-                      className={cn(
-                        "size-4",
-                        i < Math.round(reviews.summary.average)
-                          ? "fill-current"
-                          : "text-sand",
-                      )}
-                    />
-                  ))}
-                </span>
+            {ratingLine && ratingLine.count > 0 && (
+              /* The rating replaces the old category eyebrow: it is the number
+                 shoppers look for first, so it gets its own white chip, and it
+                 jumps to the reviews below. */
+              <a
+                href="#reviews"
+                className="group inline-flex items-center gap-2 rounded-pill bg-paper py-2 pr-3.5 pl-3 font-ui text-body-sm shadow-soft transition-shadow duration-300 hover:shadow-float"
+                aria-label={`Rated ${ratingLine.average.toFixed(1)} out of 5 from ${ratingLine.count.toLocaleString("en-US")} reviews — jump to the reviews`}
+              >
+                <Stars value={ratingLine.average} />
                 <span className="font-numeral font-semibold tabular-nums">
-                  {reviews.summary.average}
+                  {ratingLine.average.toFixed(1)}
                 </span>
                 <span className="text-ink-soft">
-                  ({reviews.summary.count} review
-                  {reviews.summary.count === 1 ? "" : "s"})
+                  {ratingLine.count.toLocaleString("en-US")} reviews
                 </span>
-              </div>
+                <Icon
+                  name="chevron-down"
+                  className="size-3.5 text-ink-faint transition-transform duration-300 group-hover:translate-y-0.5"
+                />
+              </a>
             )}
 
-            <p className="eyebrow eyebrow-dot mt-3">{content.category.name}</p>
-            <h1 className="mt-4 font-title text-heading-2 font-medium">
+            <h1 className="mt-4 font-title text-heading-1 font-medium">
               {view.name}
             </h1>
             {/* <p className="mt-2 text-body-lg text-ink-soft">{content.benefitLine}</p> */}
@@ -531,7 +540,7 @@ export default async function ProductPage({ params }: Props) {
           >
             Reviews
           </h2>
-          <ReviewsSection data={reviews} />
+          <ReviewsSection data={verifiedReviews} handle={view.handle} />
         </div>
       </section>
 
