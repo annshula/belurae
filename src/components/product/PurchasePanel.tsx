@@ -152,7 +152,7 @@ function PackFieldset({
               data-checked={checked}
               data-disabled={!exists}
               className={cn(
-                "group relative flex cursor-pointer flex-row items-center gap-4 rounded-card border-2 border-transparent bg-porcelain px-5 py-4 shadow-soft transition-all duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-600",
+                "group relative flex cursor-pointer flex-col gap-2.5 rounded-card border-2 border-transparent bg-porcelain px-4 py-3.5 shadow-soft transition-all duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-600 sm:flex-row sm:items-center sm:gap-4 sm:px-5 sm:py-4",
                 checked
                   ? "border-sage-600 bg-sage-100 shadow-none"
                   : "hover:border-sand hover:shadow-float",
@@ -173,21 +173,44 @@ function PackFieldset({
                 }
               />
 
-              {/* Radio dot */}
-              <span
-                aria-hidden="true"
-                className={cn(
-                  "grid size-5 shrink-0 place-items-center rounded-full border-2 transition-colors duration-200",
-                  checked
-                    ? "border-sage-600 bg-sage-600"
-                    : "border-sand bg-ivory",
+              {/* Top row on mobile: dot + label on the left, price on the right — the natural place an eye looks first. Desktop keeps everything in one row. */}
+              <span className="flex items-center justify-between gap-3 sm:contents">
+                <span className="flex min-w-0 items-center gap-3 sm:contents">
+                  {/* Radio dot */}
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "grid size-5 shrink-0 place-items-center rounded-full border-2 transition-colors duration-200",
+                      checked
+                        ? "border-sage-600 bg-sage-600"
+                        : "border-sand bg-ivory",
+                    )}
+                  >
+                    {checked && (
+                      <span className="size-1.5 rounded-full bg-ivory" />
+                    )}
+                  </span>
+                  <span className="text-body-sm font-semibold sm:hidden">
+                    {value.label}
+                  </span>
+                </span>
+
+                {combo && (
+                  <span className="flex shrink-0 items-baseline gap-1.5 sm:hidden">
+                    {combo.compareAtPrice && (
+                      <span className="font-numeral text-[0.7rem] text-ink-soft tabular-nums line-through">
+                        {formatMoney(combo.compareAtPrice, combo.currency)}
+                      </span>
+                    )}
+                    <span className="font-numeral text-body-lg font-semibold tabular-nums">
+                      {formatMoney(combo.price, combo.currency)}
+                    </span>
+                  </span>
                 )}
-              >
-                {checked && <span className="size-1.5 rounded-full bg-ivory" />}
               </span>
 
-              <span className="min-w-0 flex-1">
-                <span className="flex flex-wrap items-center gap-2">
+              <span className="min-w-0 sm:flex-1">
+                <span className="hidden flex-wrap items-center gap-2 sm:flex">
                   <span className="text-body-sm font-semibold">
                     {value.label}
                   </span>
@@ -202,15 +225,37 @@ function PackFieldset({
                     </span>
                   )}
                 </span>
+                {(recommended || bestValue) && (
+                  <span className="flex flex-wrap items-center gap-1.5 sm:hidden">
+                    {recommended && (
+                      <span className="inline-flex items-center rounded-tag bg-sage-600 px-2 py-0.5 font-headline text-[0.66rem] leading-none font-semibold tracking-wide text-ivory uppercase">
+                        Most popular
+                      </span>
+                    )}
+                    {bestValue && (
+                      <span className="inline-flex items-center rounded-tag bg-clay-600 px-2 py-0.5 font-headline text-[0.66rem] leading-none font-semibold tracking-wide text-ivory uppercase">
+                        Best value
+                      </span>
+                    )}
+                  </span>
+                )}
                 {combo && combo.units > 1 && (
-                  <span className="mt-0.5 block font-numeral text-[0.75rem] text-ink-soft tabular-nums">
+                  <span className="mt-1 block font-numeral text-[0.75rem] text-ink-soft tabular-nums sm:mt-0.5">
                     {formatMoney(combo.perUnit, combo.currency)} / set
+                    {saving != null && (
+                      <span className="text-clay-600"> · Save {formatMoney(saving, combo.currency)}</span>
+                    )}
+                  </span>
+                )}
+                {combo && combo.units === 1 && saving != null && (
+                  <span className="mt-1 block font-numeral text-[0.75rem] font-medium text-clay-600 tabular-nums sm:mt-0.5">
+                    Save {formatMoney(saving, combo.currency)}
                   </span>
                 )}
                 {!exists && (
                   <span
                     id={`${name}-${value.value}-na`}
-                    className="mt-0.5 block text-[0.75rem] text-ink-soft"
+                    className="mt-1 block text-[0.75rem] text-ink-soft sm:mt-0.5"
                   >
                     Not available in this set
                   </span>
@@ -218,7 +263,7 @@ function PackFieldset({
                 {exists && !available && (
                   <span
                     id={`${name}-${value.value}-na`}
-                    className="mt-0.5 block text-[0.75rem] text-ink-soft"
+                    className="mt-1 block text-[0.75rem] text-ink-soft sm:mt-0.5"
                   >
                     Sold out
                   </span>
@@ -226,7 +271,7 @@ function PackFieldset({
               </span>
 
               {combo && (
-                <span className="flex shrink-0 flex-col items-end">
+                <span className="hidden shrink-0 flex-col items-end sm:flex">
                   <span className="flex items-baseline gap-1.5">
                     {combo.compareAtPrice && (
                       <span className="font-numeral text-[0.7rem] text-ink-soft tabular-nums line-through">
