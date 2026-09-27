@@ -97,6 +97,16 @@ export function Analytics() {
 
   const load = ANY && ready && consent === "granted";
 
+  // Session replay is the heaviest script on the page and none of it matters
+  // before the visitor can interact, so it's dynamically imported (code-split
+  // out of the main bundle) and only started once every other gate (consent,
+  // idle, id present) has already passed — same gating as every other
+  // provider above, just via the SDK instead of a raw <Script> tag.
+  useEffect(() => {
+    if (!load || !CLARITY_ID) return;
+    void import("@microsoft/clarity").then(({ default: Clarity }) => Clarity.init(CLARITY_ID));
+  }, [load]);
+
   return (
     <>
       {load && GTM_ID && (
@@ -122,12 +132,6 @@ export function Analytics() {
           {`!function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=d.createElement("script");o.type="text/javascript",o.async=!0,o.src=r+"?sdkid="+e+"&lib="+t;var a=d.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};ttq.load('${TIKTOK_ID}');ttq.page();}(window,document,'ttq');`}
         </Script>
       )}
-      {load && CLARITY_ID && (
-        <Script id="clarity" strategy="lazyOnload">
-          {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${CLARITY_ID}");`}
-        </Script>
-      )}
-
       {ANY && needsBanner && (
         <section
           aria-labelledby="consent-title"
