@@ -44,6 +44,11 @@ export type ResolvedLine = BagLine & BagVariant & { lineTotal: number };
 const STORAGE_KEY = "belurae.bag.v1";
 const MAX_QTY = 10;
 
+function readCookie(name: string): string | null {
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]!) : null;
+}
+
 type CartContextValue = {
   lines: ResolvedLine[];
   count: number;
@@ -165,10 +170,20 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
   const checkout = useCallback(async (): Promise<{ ok: true } | { ok: false; error: string }> => {
     if (lines.length === 0) return { ok: false, error: "Your bag is empty." };
     try {
+      // Meta's click-id / browser-id cookies, when the Pixel has loaded and
+      // set them — carried through Shopify as cart attributes so the
+      // orders/paid webhook's server-side Purchase event can include them.
+      // Without these, that event has no fbc/fbp at all (there is no
+      // browser-side Purchase pixel to fall back on; see route.ts).
+      const fbc = readCookie("_fbc");
+      const fbp = readCookie("_fbp");
       const res = await fetch("/api/cart/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lines: lines.map(({ variantId, quantity }) => ({ variantId, quantity })) }),
+        body: JSON.stringify({
+          lines: lines.map(({ variantId, quantity }) => ({ variantId, quantity })),
+          ...(fbc || fbp ? { meta: { fbc, fbp } } : {}),
+        }),
       });
       const data = (await res.json().catch(() => ({}))) as { checkoutUrl?: string; error?: string };
       if (!res.ok || !data.checkoutUrl) {

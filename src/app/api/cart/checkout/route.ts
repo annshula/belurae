@@ -68,10 +68,25 @@ export async function POST(request: NextRequest) {
   const country = request.headers.get("x-vercel-ip-country");
   const countryCode = country && /^[A-Z]{2}$/.test(country) ? country : null;
 
+  // Meta's click-id / browser-id cookies, forwarded by the client from its own
+  // document.cookie (see CartProvider.checkout) — carried as cart attributes
+  // so the orders/paid webhook can read them back for the server-side
+  // Purchase event. Bounded length: these are short opaque tokens, never
+  // free text, so anything longer than Meta's own format is dropped rather
+  // than trusted into a Shopify attribute value.
+  const meta = (body as { meta?: unknown })?.meta as { fbc?: unknown; fbp?: unknown } | undefined;
+  const attributes: { key: string; value: string }[] = [];
+  if (typeof meta?.fbc === "string" && meta.fbc.length > 0 && meta.fbc.length <= 200) {
+    attributes.push({ key: "_fbc", value: meta.fbc });
+  }
+  if (typeof meta?.fbp === "string" && meta.fbp.length > 0 && meta.fbp.length <= 200) {
+    attributes.push({ key: "_fbp", value: meta.fbp });
+  }
+
   try {
     const cart = await createCart(
       [...merged].map(([merchandiseId, quantity]) => ({ merchandiseId, quantity })),
-      { countryCode },
+      { countryCode, attributes: attributes.length > 0 ? attributes : undefined },
     );
     const url = new URL(cart.checkoutUrl);
     if (url.protocol !== "https:") throw new Error("Unexpected checkout URL");

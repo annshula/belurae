@@ -33,7 +33,7 @@ export function CartDrawer() {
       </p>
       <dialog
         ref={ref}
-        className="sheet fixed inset-y-2 right-2 left-auto h-[calc(100dvh-1rem)] w-[calc(100%-1rem)] rounded-[24px] shadow-drift sm:w-[460px]"
+        className="sheet fixed inset-y-2 right-2 left-auto h-[calc(100dvh-1rem)] w-[calc(100%-1rem)] rounded-3xl shadow-drift sm:w-115"
         aria-labelledby="bag-title"
         onClose={() => {
           close();
@@ -45,8 +45,13 @@ export function CartDrawer() {
       >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between px-6 pt-5 pb-3">
-            <h2 id="bag-title" className="font-serif text-heading-3" tabIndex={-1}>
-              Your bag {count > 0 && <span className="text-ink-soft">({count})</span>}
+            <h2
+              id="bag-title"
+              className="font-serif text-heading-3"
+              tabIndex={-1}
+            >
+              Your bag{" "}
+              {count > 0 && <span className="text-ink-soft">({count})</span>}
             </h2>
             <button
               type="button"

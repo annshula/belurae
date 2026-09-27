@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 
 import { belongsToBelurae } from "@/lib/catalog/ownership";
+import { site } from "@/lib/site";
 import {
   describeCaller,
   isDuplicateWebhook,
@@ -54,9 +55,17 @@ type ShopifyOrder = {
   line_items?: ShopifyLineItem[];
   email?: string | null;
   phone?: string | null;
-  customer?: { email?: string | null; phone?: string | null } | null;
+  customer?: { id?: number | null; email?: string | null; phone?: string | null } | null;
   billing_address?: ShopifyAddress | null;
+  /** Cart attributes carried through to the order — includes _fbc/_fbp when the checkout route set them. */
+  note_attributes?: { name?: string; value?: string }[];
 };
+
+/** Reads a cart attribute Shopify carried onto the order (see api/cart/checkout/route.ts). */
+function noteAttribute(order: ShopifyOrder, key: string): string | undefined {
+  const value = order.note_attributes?.find((a) => a.name === key)?.value;
+  return value && value.length > 0 ? value : undefined;
+}
 
 /** Meta/TikTok require PII lowercased + trimmed, then SHA-256 hex — never sent raw. */
 function sha256(value: string): string {
@@ -86,6 +95,7 @@ function customerMatchData(order: ShopifyOrder) {
     st: hashField(address?.province_code),
     zp: hashField(address?.zip),
     country: hashField(address?.country_code),
+    externalId: hashField(order.customer?.id != null ? String(order.customer.id) : undefined),
   };
 }
 
@@ -143,6 +153,12 @@ async function sendMetaPurchase(
   // strongest signals in Event Match Quality — stronger than IP/UA combined —
   // and each takes an array of hashed values per Meta's spec.
   const match = customerMatchData(order);
+  // fbc/fbp are unhashed per Meta's spec (they're already opaque tokens, not
+  // PII) — carried from the browser's own _fbc/_fbp cookies as cart
+  // attributes at checkout (see api/cart/checkout/route.ts), since this
+  // event has no browser-side Purchase pixel to inherit them from.
+  const fbc = noteAttribute(order, "_fbc");
+  const fbp = noteAttribute(order, "_fbp");
   const userData = {
     client_ip_address: ip ?? undefined,
     client_user_agent: userAgent ?? undefined,
@@ -154,6 +170,9 @@ async function sendMetaPurchase(
     st: match.st ? [match.st] : undefined,
     zp: match.zp ? [match.zp] : undefined,
     country: match.country ? [match.country] : undefined,
+    external_id: match.externalId ? [match.externalId] : undefined,
+    fbc,
+    fbp,
   };
 
   try {
@@ -171,12 +190,18 @@ async function sendMetaPurchase(
               event_time: Math.floor(Date.now() / 1000),
               event_id: `purchase-${order.id}`,
               action_source: "website",
+              event_source_url: site.url,
               user_data: userData,
               custom_data: {
                 currency: order.currency ?? "USD",
                 value,
                 content_ids: items.map((i) => String(i.variant_id ?? i.id)),
                 content_type: "product",
+                contents: items.map((i) => ({
+                  id: String(i.variant_id ?? i.id),
+                  quantity: i.quantity ?? 1,
+                  item_price: Number(i.price ?? 0),
+                })),
                 num_items: items.reduce((n, i) => n + (i.quantity ?? 1), 0),
                 order_id: String(order.id),
               },

@@ -63,10 +63,10 @@ export function VideoTile({
             setPlaying(true);
             void ref.current?.play();
           }}
-          className="group absolute inset-0 grid place-items-center bg-gradient-to-t from-ink/35 via-transparent to-transparent"
+          className="group absolute inset-0 grid place-items-center bg-linear-to-t from-ink/35 via-transparent to-transparent"
           aria-label={`Play video: ${video.alt}`}
         >
-          <span className="glass grid size-[4.5rem] place-items-center rounded-full text-ink transition-transform duration-300 group-hover:scale-105">
+          <span className="glass grid size-18 place-items-center rounded-full text-ink transition-transform duration-300 group-hover:scale-105">
             <Icon name="play" className="size-6 translate-x-0.5" />
           </span>
         </button>
