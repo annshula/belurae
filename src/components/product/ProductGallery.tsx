@@ -8,25 +8,29 @@ import { Icon } from "@/components/ui/Icon";
 import type { ViewMedia } from "@/lib/commerce/product-view";
 import { cn } from "@/lib/utils";
 
-/** Horizontal travel before a gesture counts as a swipe rather than a tap. */
-const SWIPE_THRESHOLD = 48;
+/** Horizontal travel before a touch gesture counts as a swipe rather than a tap. */
+const SWIPE_THRESHOLD = 40;
 
 /**
  * PDP gallery — sticky stage with the thumbnails beside it from lg up (a
  * vertical rail on the stage's left) and beneath it on phones (a horizontal
  * rail, as before).
  *
- *  - Swiping moves exactly one image per gesture — the track follows the finger
- *    and then snaps, so it never becomes a free-scrolling wheel. The arrows,
- *    ←/→ keys and the thumbnail rail jump straight to a slide. No carousel
- *    library.
+ *  - The stage is a native horizontally scroll-snapped track (scrollTo +
+ *    snap-x), not a manually computed transform — the browser's own
+ *    scroll/compositing engine drives the transition, so a slide can never
+ *    render blank mid-animation the way a hand-rolled translate3d can.
+ *  - Touch is tracked ourselves only to stop a fast flick from carrying
+ *    momentum through more than one slide (native snap only guarantees
+ *    landing *on* a snap point, not the *next* one); the arrows, ←/→ keys and
+ *    the thumbnail rail scroll straight to a slide.
  *  - From lg up the column is `--gallery-h` tall and sticks to the middle of
  *    the viewport, so it stays level with the purchase panel as you scroll.
  *  - The first slide is server-rendered with `priority`, so the LCP image
- *    never waits for JS.
+ *    never waits for JS; every other slide shows a spinner over its reserved
+ *    space until it has actually painted a frame.
  *  - Choosing a set in the purchase panel (`bl:variant` event) brings that
  *    set's photo to the stage.
- *  - Every slide reserves its aspect ratio: zero layout shift.
  */
 export function ProductGallery({
   media,
@@ -35,67 +39,76 @@ export function ProductGallery({
   media: ViewMedia[];
   productName: string;
 }) {
+  const trackRef = useRef<HTMLUListElement>(null);
   const thumbsRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
-  /** Live finger offset in px — the track follows it, then snaps. */
-  const [dragX, setDragX] = useState(0);
-  const startRef = useRef<{ x: number; y: number } | null>(null);
-  const draggingRef = useRef(false);
-  const lastDxRef = useRef(0);
   const count = media.length;
 
+  /** Which slide indices have actually painted a frame — everything else shows a spinner over its reserved space. */
+  const [loaded, setLoaded] = useState<Set<number>>(() => new Set());
+  const markLoaded = useCallback(
+    (i: number) => setLoaded((prev) => (prev.has(i) ? prev : new Set(prev).add(i))),
+    [],
+  );
+
   const goTo = useCallback(
-    (index: number) => setActive(Math.max(0, Math.min(count - 1, index))),
+    (index: number, smooth = true) => {
+      const track = trackRef.current;
+      if (!track) return;
+      const i = Math.max(0, Math.min(count - 1, index));
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      track.scrollTo({ left: i * track.clientWidth, behavior: smooth && !reduce ? "smooth" : "auto" });
+      setActive(i);
+    },
     [count],
   );
 
+  // Track the visible slide as the user scrolls/swipes the track directly
+  // (trackpad, mouse wheel, or a swipe that native snap already resolved).
+  const onScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const index = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+    if (index !== active) setActive(index);
+  };
+
   /*
-   * Swiping moves exactly one image per gesture — never a free-scrolling
-   * "wheel" the visitor has to catch. The track follows the finger (clamped to
-   * one slide so it cannot run ahead), then lands on the neighbour when the
-   * gesture passes SWIPE_THRESHOLD and springs back when it does not.
-   * Mouse pointers are ignored: desktop uses the arrows, the keyboard and the
-   * thumbnail rail.
+   * Native scroll-snap only guarantees landing *on* a snap point, not the
+   * *next* one — a fast flick can carry momentum through more than one
+   * slide. Tracking touch ourselves and always stepping by exactly one slide
+   * keeps a swipe to one image per gesture, like a native app carousel.
    */
-  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType === "mouse" || count < 2) return;
-    startRef.current = { x: e.clientX, y: e.clientY };
-    draggingRef.current = false;
-    lastDxRef.current = 0;
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const dragging = useRef(false);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    if (!touch || count < 2) return;
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+    dragging.current = false;
   };
 
-  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    const start = startRef.current;
-    if (!start) return;
-    const dx = e.clientX - start.x;
-    const dy = e.clientY - start.y;
-    if (!draggingRef.current) {
-      if (Math.abs(dx) < 10) return;
-      // Vertical intent belongs to the page, not the gallery.
-      if (Math.abs(dy) > Math.abs(dx)) {
-        startRef.current = null;
-        return;
-      }
-      draggingRef.current = true;
+  const onTouchMove = (e: React.TouchEvent) => {
+    const start = touchStart.current;
+    const touch = e.touches[0];
+    if (!start || !touch) return;
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    if (!dragging.current && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+      dragging.current = true;
     }
-    const width = e.currentTarget.clientWidth || 1;
-    let offset = Math.max(-width, Math.min(width, dx));
-    const pastStart = active === 0 && offset > 0;
-    const pastEnd = active === count - 1 && offset < 0;
-    if (pastStart || pastEnd) offset *= 0.35; // resist at the ends
-    lastDxRef.current = offset;
-    setDragX(offset);
+    if (dragging.current) e.preventDefault();
   };
 
-  const endSwipe = () => {
-    const wasDragging = draggingRef.current;
-    startRef.current = null;
-    draggingRef.current = false;
-    const dx = lastDxRef.current;
-    setDragX(0);
-    if (wasDragging && Math.abs(dx) >= SWIPE_THRESHOLD) {
-      goTo(active + (dx < 0 ? 1 : -1));
-    }
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStart.current;
+    const touch = e.changedTouches[0];
+    touchStart.current = null;
+    if (!start || !touch || !dragging.current) return;
+    dragging.current = false;
+    const dx = touch.clientX - start.x;
+    if (dx <= -SWIPE_THRESHOLD) goTo(active + 1);
+    else if (dx >= SWIPE_THRESHOLD) goTo(active - 1);
   };
 
   // Keep the active thumbnail in view — scroll the rail only, never the page.
@@ -158,23 +171,14 @@ export function ProductGallery({
           keeping the stage first for keyboard and screen-reader order — lands
           to its left. */}
       <div className="flex flex-col gap-3 lg:flex-row-reverse lg:gap-4">
-        <div
-          className="group/stage relative min-w-0 flex-1 touch-pan-y"
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={endSwipe}
-          onPointerCancel={endSwipe}
-        >
+        <div className="group/stage relative min-w-0 flex-1">
           <ul
-            className={cn(
-              "flex overflow-hidden rounded-media",
-              // No transition while the finger is down (the track must track it
-              // exactly); back on for the snap, which is what animates.
-              dragX === 0 && "transition-transform duration-500 ease-out-soft",
-            )}
-            style={{
-              transform: `translate3d(calc(${-active * 100}% + ${dragX}px), 0, 0)`,
-            }}
+            ref={trackRef}
+            onScroll={onScroll}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+            className="scrollbar-none flex snap-x snap-mandatory touch-pan-y overflow-x-auto overscroll-x-contain rounded-media [&::-webkit-scrollbar]:hidden"
             aria-live="polite"
           >
             {media.map((item, i) => (
@@ -183,8 +187,7 @@ export function ProductGallery({
                 aria-roledescription="slide"
                 aria-label={`${i + 1} of ${count}`}
                 aria-hidden={i !== active}
-                inert={i !== active}
-                className="w-full shrink-0"
+                className="w-full shrink-0 snap-center"
               >
                 {item.type === "image" ? (
                   <div className="well relative aspect-square overflow-hidden lg:aspect-auto lg:h-(--gallery-h)">
@@ -194,10 +197,18 @@ export function ProductGallery({
                       fill
                       priority={i === 0}
                       fetchPriority={i === 0 ? "high" : undefined}
-                      loading={i === 0 ? undefined : "lazy"}
                       sizes="(min-width: 1024px) 52vw, 100vw"
-                      className="object-contain p-6 mix-blend-multiply md:p-12"
+                      className={cn(
+                        "object-contain p-6 mix-blend-multiply transition-opacity duration-300 md:p-12",
+                        !loaded.has(i) && "opacity-0",
+                      )}
+                      onLoad={() => markLoaded(i)}
                     />
+                    {!loaded.has(i) && (
+                      <div className="absolute inset-0 grid place-items-center" aria-hidden="true">
+                        <Icon name="spinner" className="size-8 animate-spin text-ink-soft" />
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <VideoTile
