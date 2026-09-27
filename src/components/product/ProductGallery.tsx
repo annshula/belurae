@@ -1,12 +1,18 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { Slide } from "yet-another-react-lightbox";
 
 import { VideoTile } from "@/components/product/VideoTile";
 import { Icon } from "@/components/ui/Icon";
 import type { ViewMedia } from "@/lib/commerce/product-view";
 import { cn } from "@/lib/utils";
+
+const GalleryLightbox = dynamic(() => import("@/components/product/GalleryLightbox"), {
+  ssr: false,
+});
 
 /** Horizontal travel before a touch gesture counts as a swipe rather than a tap. */
 const SWIPE_THRESHOLD = 40;
@@ -42,6 +48,7 @@ export function ProductGallery({
   const trackRef = useRef<HTMLUListElement>(null);
   const thumbsRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
+  const [zoomAt, setZoomAt] = useState<number | null>(null);
   const count = media.length;
 
   /** Which slide indices have actually painted a frame — everything else shows a spinner over its reserved space. */
@@ -49,6 +56,22 @@ export function ProductGallery({
   const markLoaded = useCallback(
     (i: number) => setLoaded((prev) => (prev.has(i) ? prev : new Set(prev).add(i))),
     [],
+  );
+
+  const slides: Slide[] = useMemo(
+    () =>
+      media.map((m) =>
+        m.type === "image"
+          ? { src: m.url, alt: m.alt, width: m.width, height: m.height }
+          : {
+              type: "video" as const,
+              poster: m.poster,
+              width: m.width,
+              height: m.height,
+              sources: m.sources.map((s) => ({ src: s.src, type: s.type })),
+            },
+      ),
+    [media],
   );
 
   const goTo = useCallback(
@@ -190,7 +213,12 @@ export function ProductGallery({
                 className="w-full shrink-0 snap-center"
               >
                 {item.type === "image" ? (
-                  <div className="well relative aspect-square overflow-hidden lg:aspect-auto lg:h-(--gallery-h)">
+                  <button
+                    type="button"
+                    onClick={() => setZoomAt(i)}
+                    aria-label={`Zoom image ${i + 1}`}
+                    className="well relative block aspect-square w-full cursor-zoom-in overflow-hidden lg:aspect-auto lg:h-(--gallery-h)"
+                  >
                     <Image
                       src={item.url}
                       alt={item.alt}
@@ -209,7 +237,7 @@ export function ProductGallery({
                         <Icon name="spinner" className="size-8 animate-spin text-ink-soft" />
                       </div>
                     )}
-                  </div>
+                  </button>
                 ) : (
                   <VideoTile
                     video={item}
@@ -296,6 +324,17 @@ export function ProductGallery({
           </ul>
         )}
       </div>
+
+      {zoomAt !== null && (
+        <GalleryLightbox
+          slides={slides}
+          index={zoomAt}
+          onClose={(i) => {
+            setZoomAt(null);
+            goTo(i, false);
+          }}
+        />
+      )}
     </section>
   );
 }
