@@ -14,19 +14,7 @@ import { buildProductView } from "@/lib/commerce/product-view";
 import { formatMoney } from "@/lib/money";
 import { site } from "@/lib/site";
 
-export function AnnouncementBar() {
-  return (
-    <div className="bg-sage-900 text-sage-100">
-      <p className="container-page flex h-(--announce-h) items-center justify-center gap-4 text-center text-[0.78rem] tracking-[0.06em]">
-        <span>Tracked delivery on every order</span>
-        <span aria-hidden="true" className="hidden size-1 rounded-full bg-sage-400 sm:inline-block" />
-        <span className="hidden sm:inline">Secure checkout by Shopify</span>
-        <span aria-hidden="true" className="hidden size-1 rounded-full bg-sage-400 md:inline-block" />
-        <span className="hidden md:inline">Key ingredients listed on every product</span>
-      </p>
-    </div>
-  );
-}
+export { AnnouncementBar } from "@/components/layout/HeaderClient";
 
 /** Shop mega-menu content, built from the live catalog (images are real product media). */
 async function getMegaData(): Promise<MegaData> {
@@ -71,7 +59,7 @@ async function getMegaData(): Promise<MegaData> {
 export async function Header() {
   const mega = await getMegaData();
   return (
-    <header className="sticky top-0 z-30 px-2 pt-2 sm:px-3 sm:pt-3">
+    <header className="sticky top-0 z-30 pt-2 sm:pt-3">
       <HeaderShell>
         <div className="flex items-center">
           <div className="flex items-center lg:hidden">

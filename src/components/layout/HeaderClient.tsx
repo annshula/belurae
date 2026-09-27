@@ -17,6 +17,27 @@ import { cn } from "@/lib/utils";
  * All links are real <a> elements in the server HTML, so crawlers see them.
  */
 
+/**
+ * The site-wide announcement bar — hidden on the home page, where the hero
+ * carries the brand message instead and the transparent header sits directly
+ * on the hero panel with nothing above it.
+ */
+export function AnnouncementBar() {
+  const pathname = usePathname();
+  if (pathname === "/") return null;
+  return (
+    <div className="bg-sage-900 text-sage-100">
+      <p className="container-page flex h-(--announce-h) items-center justify-center gap-4 text-center text-[0.78rem] tracking-[0.06em]">
+        <span>Tracked delivery on every order</span>
+        <span aria-hidden="true" className="hidden size-1 rounded-full bg-sage-400 sm:inline-block" />
+        <span className="hidden sm:inline">Secure checkout by Shopify</span>
+        <span aria-hidden="true" className="hidden size-1 rounded-full bg-sage-400 md:inline-block" />
+        <span className="hidden md:inline">Key ingredients listed on every product</span>
+      </p>
+    </div>
+  );
+}
+
 export type MegaCard = {
   label: string;
   href: string;
@@ -337,8 +358,9 @@ export function HeaderShell({ children }: { children: React.ReactNode }) {
   return (
     <div
       data-over-hero={overHero || undefined}
+      style={{ paddingInline: "var(--gutter)" }}
       className={cn(
-        "relative mx-auto grid h-(--header-h) max-w-[calc(var(--page-max)+1.5rem)] grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-[18px] px-3 transition-[background-color,box-shadow,backdrop-filter] duration-500 sm:px-5",
+        "relative mx-auto grid h-(--header-h) max-w-(--page-max) grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-[18px] transition-[background-color,box-shadow,backdrop-filter] duration-500",
         overHero ? "bg-transparent shadow-none" : "bg-porcelain shadow-float",
       )}
     >
