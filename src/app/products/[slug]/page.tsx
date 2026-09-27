@@ -161,9 +161,12 @@ export default async function ProductPage({ params }: Props) {
                 {view.perks.map((perk) => (
                   <li
                     key={perk}
-                    className="flex items-center gap-2.5 text-body-sm"
+                    className="flex items-start gap-2.5 text-body-sm"
                   >
-                    <span className="grid size-5 shrink-0 place-items-center rounded-full bg-sage-600">
+                    {/* items-start, not items-center: a tick centred on the
+                        whole row drifts down whenever a perk wraps to two
+                        lines. It belongs on the first line. */}
+                    <span className="mt-px grid size-5 shrink-0 place-items-center rounded-full bg-sage-600">
                       <Icon name="check" className="size-3 text-ivory" />
                     </span>
                     {perk}
@@ -247,7 +250,7 @@ export default async function ProductPage({ params }: Props) {
             </ul>
 
             <aside
-              className="well-clay mt-3 flex gap-3 rounded-card p-5 text-body-sm"
+              className="mt-3 flex gap-3 rounded-card bg-clay-100 p-5 text-body-sm"
               aria-label="Patch test"
             >
               <Icon
@@ -366,7 +369,7 @@ export default async function ProductPage({ params }: Props) {
         className="px-2 sm:px-3"
         aria-labelledby="ingredients-title"
       >
-        <div className="well-sage rounded-media py-12 lg:py-16">
+        <div className="rounded-media bg-sage-100 py-12 lg:py-16">
           <div className="container-page grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-16">
             <div>
               <SectionHeading
@@ -429,7 +432,7 @@ export default async function ProductPage({ params }: Props) {
             intro={content.safety.note}
           />
           <div className="mt-8 grid gap-3 lg:grid-cols-3">
-            <div className="well-clay rounded-media p-6 lg:p-7">
+            <div className="rounded-media bg-clay-100 p-6 lg:p-7">
               <h3 className="font-serif text-heading-3">Patch test first</h3>
               <p className="mt-2 text-body-sm text-ink-soft">
                 {content.safety.patchTest}

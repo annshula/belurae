@@ -308,32 +308,30 @@
   box-shadow: var(--shadow-soft), var(--shadow-inset);
 }
 
-/* Image wells: a warm radial "studio light" behind packshots */
+/* Image wells: a warm radial "studio light" behind packshots. Only ever used
+   behind product imagery — gradient panels behind body copy read as washed
+   out, so content sections use flat tones (bg-cream / bg-sage-100 /
+   bg-clay-100) instead. */
 @utility well {
   background:
     radial-gradient(120% 90% at 50% 35%, #fffaf3 0%, rgb(255 250 243 / 0) 60%),
     radial-gradient(80% 60% at 50% 100%, var(--color-linen) 0%, rgb(228 216 199 / 0) 70%),
     var(--color-cream);
 }
-@utility well-sage {
-  background:
-    radial-gradient(110% 90% at 50% 30%, #f7f8f4 0%, rgb(247 248 244 / 0) 60%),
-    radial-gradient(90% 60% at 50% 100%, var(--color-sage-200) 0%, rgb(199 210 194 / 0) 70%),
-    var(--color-sage-100);
-}
-@utility well-clay {
-  background:
-    radial-gradient(110% 90% at 50% 30%, #fff8f4 0%, rgb(255 248 244 / 0) 60%),
-    radial-gradient(90% 60% at 50% 100%, var(--color-clay-200) 0%, rgb(232 203 189 / 0) 70%),
-    var(--color-clay-100);
-}
 
 @utility prose-belurae {
-  font-size: var(--text-body-lg);
+  /* Reading size is the site's body size, not the "large" lead size — the lead
+     is reserved for the summary box above the article. */
+  font-size: var(--text-body);
   line-height: 1.75;
   color: var(--color-ink);
   max-width: 68ch;
-  & > * + * {
+  /* Rhythm between blocks. The guide pages wrap each heading's blocks in a
+     <section>, so the sibling spacing has to apply at any depth — not only to
+     the direct children of the prose wrapper. */
+  & > * + *,
+  & :where(h2, h3, p, ul, ol, aside, blockquote)
+    + :where(h2, h3, p, ul, ol, aside, blockquote) {
     margin-top: 1.15em;
   }
   & h2 {
@@ -341,12 +339,17 @@
     font-size: var(--text-heading-2);
     line-height: var(--text-heading-2--line-height);
     margin-top: 2.2em;
+    /* Collapses with the sibling rule above, so the space under a heading is
+       this — comfortably more than the gap between paragraphs. */
+    margin-bottom: 1.1em;
     font-weight: 400;
   }
   & h3 {
-    font-weight: 600;
+    font-family: var(--font-serif);
+    font-weight: 400;
     font-size: var(--text-heading-3);
     margin-top: 1.8em;
+    margin-bottom: 1.2em;
   }
   & ul {
     list-style: none;

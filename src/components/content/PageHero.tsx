@@ -5,18 +5,26 @@ import { cn } from "@/lib/utils";
 
 /**
  * Shared opening panel for editorial pages: breadcrumbs, eyebrow, a light
- * display title and an intro, on a softly lit rounded well.
+ * display title and an intro, on a flat tonal panel.
  *
- * `compact` drops the well/blur background and shrinks the title — for
- * listing pages (collections) where the product grid is the focus, not the
- * intro copy.
+ * `compact` drops the panel background and shrinks the title — for listing
+ * pages (collections) where the product grid is the focus, not the intro copy.
+ *
+ * Tones are flat surfaces, not gradient "wells": those read as washed-out at
+ * panel size, and behind nothing but type they have no packshot to light.
  */
+const TONE = {
+  cream: "bg-cream",
+  sage: "bg-sage-100",
+  clay: "bg-clay-100",
+} as const;
+
 export function PageHero({
   crumbs,
   eyebrow,
   title,
   intro,
-  tone = "well",
+  tone = "cream",
   compact = false,
   children,
 }: {
@@ -24,7 +32,7 @@ export function PageHero({
   eyebrow?: string;
   title: ReactNode;
   intro?: ReactNode;
-  tone?: "well" | "well-sage" | "well-clay";
+  tone?: keyof typeof TONE;
   compact?: boolean;
   children?: ReactNode;
 }) {
@@ -47,7 +55,7 @@ export function PageHero({
 
   return (
     <section className="px-2 pt-3 sm:px-3">
-      <div className={cn(tone, "relative overflow-hidden rounded-media")}>
+      <div className={cn(TONE[tone], "relative overflow-hidden rounded-media")}>
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-32 -right-24 size-120 rounded-full bg-porcelain/70 blur-3xl"

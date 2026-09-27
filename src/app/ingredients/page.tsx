@@ -15,7 +15,7 @@ export default function IngredientsIndex() {
   return (
     <>
       <PageHero
-        tone="well-sage"
+        tone="sage"
         crumbs={[{ label: "Home", href: "/" }, { label: "Ingredients" }]}
         eyebrow="Care, clearly"
         title="Ingredients"

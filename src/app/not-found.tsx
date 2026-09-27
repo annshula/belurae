@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="px-2 pt-3 sm:px-3">
-      <div className="well rounded-media">
+      <div className="rounded-media bg-cream">
         <div className="container-page max-w-3xl py-24 text-center md:py-32 lg:text-left">
           <p className="eyebrow">404</p>
           <h1 className="mt-5 font-serif text-display font-light">

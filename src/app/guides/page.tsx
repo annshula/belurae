@@ -41,7 +41,7 @@ export default function GuidesIndex() {
         )}
       />
       <PageHero
-        tone="well-sage"
+        tone="sage"
         crumbs={[{ label: "Home", href: "/" }, { label: "Guides" }]}
         eyebrow="Learn"
         title={

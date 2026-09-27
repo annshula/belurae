@@ -420,7 +420,7 @@ function EmptyFilterState({ onReset }: { onReset: () => void }) {
  */
 function NoReviewsYet() {
   return (
-    <div className="well-sage grid gap-6 rounded-media p-8 md:grid-cols-[1fr_auto] md:items-center md:p-12">
+    <div className="grid gap-6 rounded-media bg-sage-100 p-8 md:grid-cols-[1fr_auto] md:items-center md:p-12">
       <div>
         <p className="font-serif text-heading-1 font-light">No reviews yet.</p>
         <p className="mt-4 max-w-xl text-ink-soft">

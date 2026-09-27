@@ -92,7 +92,7 @@ export default async function HomePage() {
         className="-mt-[calc(var(--header-h)+0.5rem)] sm:-mt-[calc(var(--header-h)+0.75rem)]"
         aria-labelledby="hero-title"
       >
-        <div className="well relative flex min-h-svh flex-col overflow-hidden lg:h-svh">
+        <div className="relative flex min-h-svh flex-col overflow-hidden bg-cream lg:h-svh">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -top-40 -left-32 size-136 rounded-full bg-clay-100/70 blur-3xl"
@@ -372,7 +372,7 @@ export default async function HomePage() {
 
       {/* ── Newsletter ──────────────────────────────────────────────── */}
       <section className="px-2 pb-3 sm:px-3" aria-labelledby="newsletter">
-        <div className="well-clay relative overflow-hidden rounded-media py-16 md:py-24">
+        <div className="relative overflow-hidden rounded-media bg-clay-100 py-16 md:py-24">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -top-32 -right-20 size-112 rounded-full bg-porcelain/60 blur-3xl"

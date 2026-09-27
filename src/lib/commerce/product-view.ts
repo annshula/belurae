@@ -80,11 +80,44 @@ export type ProductView = {
   specs: SpecRecord[];
   /** Shopify `custom.feature_highlights` metaobjects — used for the alternating image section. */
   featureHighlights: FeatureHighlightRecord[];
-  /** Shopify `custom.perks` metafield — short bullet claims shown under the product name. */
+  /**
+   * Shopify `custom.perks` metafield — short bullet claims shown under the
+   * product name, ordered for display (see `orderPerks`).
+   */
   perks: string[];
   /** Shopify `custom.sale_ends_at` metafield — set by the merchant, already filtered to future dates only. */
   saleEndsAt: string | null;
 };
+
+/** Fragrance wording in a perk — "light citrus scent", "Orange Spring Cologne", etc. */
+const FRAGRANCE_PERK =
+  /\b(scent|scented|unscented|fragrance|fragranced|cologne|perfume|aroma)\b/i;
+
+/** A perk that names the formula's ingredients — "Aloe leaf water, glycerin & hyaluronic acid". */
+const INGREDIENT_PERK = /\b(aloe|glycerin|glycerine|hyaluronic)\b/i;
+
+/**
+ * Perks that describe the product rather than what it does for you. They sit
+ * after the benefit claims, which is why they are the last bullets in the list.
+ */
+function isDetailPerk(perk: string): boolean {
+  return FRAGRANCE_PERK.test(perk) || INGREDIENT_PERK.test(perk);
+}
+
+/**
+ * The perks list under the product name reads best as benefits first, with the
+ * detail perks — the scent note and the ingredient list — last.
+ *
+ * Keyed on each perk's own text rather than its position, so it holds no matter
+ * what order the merchant puts the metafield in, and survives a re-sync.
+ * Relative order is preserved within both groups. If every perk is a detail
+ * perk (or none is), the list is left untouched.
+ */
+function orderPerks(perks: string[]): string[] {
+  const detail = perks.filter(isDetailPerk);
+  if (detail.length === 0 || detail.length === perks.length) return perks;
+  return [...perks.filter((perk) => !isDetailPerk(perk)), ...detail];
+}
 
 const fallbackSize = 1200;
 
@@ -210,7 +243,7 @@ export function buildProductView(
     packOptionName: packName,
     specs: record.specs,
     featureHighlights: record.featureHighlights,
-    perks: record.perks,
+    perks: orderPerks(record.perks),
     saleEndsAt: record.saleEndsAt,
   };
 }

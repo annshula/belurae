@@ -63,7 +63,7 @@ function Block({ block }: { block: GuideBlock }) {
       return (
         <aside
           role="note"
-          className="well-clay flex gap-3 rounded-card p-6 text-body"
+          className="flex gap-3 rounded-card bg-clay-100 p-6 text-body"
         >
           <Icon name="info" className="mt-0.5 size-5 shrink-0 text-clay-600" />
           <span>
@@ -128,7 +128,7 @@ export default async function GuidePage({ params }: Props) {
           <p className="eyebrow eyebrow-dot">
             {guide.topic} · {guide.readingMinutes} min read
           </p>
-          <h1 className="mt-5 font-serif text-display font-light">
+          <h1 className="mt-5 font-serif text-heading-1 font-light">
             {guide.title}
           </h1>
           <p className="mt-4 text-body-sm text-ink-soft">
@@ -148,7 +148,7 @@ export default async function GuidePage({ params }: Props) {
         <div className="min-w-0">
           <section
             aria-label="Summary"
-            className="well-sage max-w-[68ch] rounded-media p-7 text-body-lg md:p-9"
+            className="max-w-[68ch] rounded-media bg-sage-100 p-7 text-body-lg md:p-9"
           >
             <p className="eyebrow mb-2">The short answer</p>
             <p>{guide.summary}</p>
