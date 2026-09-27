@@ -206,7 +206,7 @@ export function DesktopNav({
                   i === 0 ? "left-0" : "left-1/2 -translate-x-1/2",
                 )}
               >
-                <div className="surface-float mega-in inline-block overflow-hidden rounded-[24px] p-3">
+                <div className="surface-float mega-in inline-block overflow-hidden rounded-3xl p-3">
                   {i === 0 ? (
                     <ShopPanel mega={mega} />
                   ) : (
@@ -323,8 +323,13 @@ export function HeaderShell({ children }: { children: React.ReactNode }) {
       data-over-hero={overHero || undefined}
       style={{ paddingInline: "var(--gutter)" }}
       className={cn(
-        "relative mx-auto grid h-(--header-h) max-w-(--page-max) grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-[18px] transition-[background-color,box-shadow,backdrop-filter] duration-500",
-        overHero ? "bg-transparent shadow-none" : "bg-porcelain shadow-float",
+        "relative mx-auto grid h-(--header-h) max-w-(--page-max) grid-cols-[1fr_auto_1fr] items-center gap-2 transition-[background-color,box-shadow,backdrop-filter] duration-500 sm:gap-3 lg:gap-4 lg:rounded-[18px]",
+        // Below lg the bar runs edge to edge — a floating rounded card with a
+        // drop shadow reads as a widget at phone width. Tonal porcelain on
+        // ivory plus one soft shadow is enough to separate it.
+        overHero
+          ? "bg-transparent shadow-none"
+          : "bg-porcelain shadow-soft lg:shadow-float",
       )}
     >
       {children}
@@ -340,6 +345,18 @@ export function MobileMenu({ groups }: { groups: NavGroup[] }) {
     ref.current?.close();
   }, [pathname]);
 
+  // The sheet is a phone affordance. If the viewport grows into the desktop
+  // layout while it is open, close it — otherwise a modal stays stranded on
+  // top of a page whose menu button no longer exists.
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const onChange = () => {
+      if (desktop.matches) ref.current?.close();
+    };
+    desktop.addEventListener("change", onChange);
+    return () => desktop.removeEventListener("change", onChange);
+  }, []);
+
   return (
     <>
       <button
@@ -354,14 +371,15 @@ export function MobileMenu({ groups }: { groups: NavGroup[] }) {
       <dialog
         ref={ref}
         aria-label="Menu"
-        className="sheet fixed inset-y-2 right-auto left-2 h-[calc(100dvh-1rem)] w-[min(calc(100%-1rem),400px)] rounded-3xl shadow-drift"
+        data-side="left"
+        className="sheet fixed inset-0 h-dvh w-full"
         onClick={(e) => {
           if (e.target === e.currentTarget) ref.current?.close();
         }}
       >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between px-5 pt-4 pb-2">
-            <span className="font-logo text-heading-3 tracking-[0.3em]">
+            <span className="font-logo text-[1.35rem] leading-none tracking-[0.3em]">
               BELURAE
             </span>
             <button
@@ -373,59 +391,96 @@ export function MobileMenu({ groups }: { groups: NavGroup[] }) {
               <Icon name="close" />
             </button>
           </div>
+
+          {/*
+           * Main destinations only: the four groups are the whole menu, and
+           * anything deeper (Hair Removal, the guides, Our standards) opens
+           * in place under its group. Four lines to scan instead of eleven,
+           * with the descriptions kept for the links once they're open.
+           */}
           <nav
             aria-label="Mobile"
-            className="flex flex-1 flex-col gap-2 overflow-y-auto px-3 py-3"
+            className="flex flex-1 flex-col overflow-y-auto overscroll-contain px-5 pt-4 pb-10"
           >
-            {groups.map((group) =>
-              group.links.length === 0 ? (
-                <Link
-                  key={group.label}
-                  href={group.href ?? "/"}
-                  className="flex min-h-16 items-center rounded-2xl bg-porcelain px-5 font-serif text-heading-2 shadow-soft"
-                >
-                  {group.label}
-                </Link>
-              ) : (
-                <details
-                  key={group.label}
-                  className="group rounded-2xl bg-porcelain px-5 shadow-soft"
-                >
-                  <summary className="flex min-h-16 items-center justify-between font-serif text-heading-2">
-                    {group.label}
-                    <span className="grid size-8 place-items-center rounded-lg bg-cream">
+            {/* Search lives in here on phones — the bar only has room for it
+                from sm up (see Header). */}
+            <Link
+              href="/search"
+              className="field flex items-center gap-3 text-body-sm text-ink-faint sm:hidden"
+            >
+              <Icon name="search" className="size-4" />
+              Search products
+            </Link>
+
+            <ul className="mt-5 flex flex-col">
+              {groups.map((group) => {
+                // A group with nowhere to go, or one the content marks as
+                // mobile-direct, is a plain row: Shop opens Shop all rather
+                // than making a phone tap twice to see the products.
+                const direct =
+                  group.links.length === 0 ||
+                  Boolean(group.mobileDirect && group.href);
+                return direct ? (
+                  <li key={group.label}>
+                    <Link
+                      href={group.href ?? "/"}
+                      className="group/link flex min-h-14 items-center justify-between gap-4 border-b border-sand font-serif text-heading-3"
+                    >
+                      {group.label}
                       <Icon
-                        name="plus"
-                        className="size-3.5 transition-transform duration-300 group-open:rotate-45"
+                        name="arrow-right"
+                        className="size-4 shrink-0 text-ink-soft transition-transform duration-300 group-hover/link:translate-x-1"
                       />
-                    </span>
-                  </summary>
-                  <ul className="pb-4 font-headline">
-                    {group.links.map((link) => (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          className="flex min-h-11 items-center text-ink-soft hover:text-ink"
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              ),
-            )}
-            <div className="mt-auto flex flex-col gap-1 rounded-2xl bg-cream p-3 text-body-sm font-headline">
+                    </Link>
+                  </li>
+                ) : (
+                  <li key={group.label} className="border-b border-sand">
+                    <details className="group">
+                      <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 font-serif text-heading-3">
+                        {group.label}
+                        <span className="grid size-7 shrink-0 place-items-center rounded-full bg-cream">
+                          <Icon
+                            name="plus"
+                            className="size-3 transition-transform duration-300 group-open:rotate-45"
+                          />
+                        </span>
+                      </summary>
+                      <ul className="flex flex-col pb-4">
+                        {group.links.map((link) => (
+                          <li key={link.href}>
+                            <Link
+                              href={link.href}
+                              className="flex min-h-12 flex-col justify-center gap-0.5 py-2"
+                            >
+                              <span className="text-body-sm font-medium">
+                                {link.label}
+                              </span>
+                              {link.description && (
+                                <span className="text-[0.75rem] leading-snug text-ink-soft">
+                                  {link.description}
+                                </span>
+                              )}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-1 pt-10 font-headline text-body-sm text-ink-soft">
               <Link
                 href="/account"
                 prefetch={false}
-                className="flex min-h-11 items-center gap-3 rounded-xl px-2 hover:bg-sand/60"
+                className="inline-flex min-h-11 items-center gap-2 hover:text-ink"
               >
                 <Icon name="user" className="size-4" /> Account
               </Link>
               <Link
                 href="/pages/contact"
-                className="flex min-h-11 items-center gap-3 rounded-xl px-2 hover:bg-sand/60"
+                className="inline-flex min-h-11 items-center gap-2 hover:text-ink"
               >
                 <Icon name="help" className="size-4" /> Contact us
               </Link>

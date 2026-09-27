@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 export default function CartPage() {
   return (
     <div className="container-page max-w-2xl pt-10 pb-24">
-      <h1 className="font-serif text-display font-light">Your bag</h1>
+      <h1 className="text-center font-serif text-display font-light lg:text-left">
+        Your bag
+      </h1>
       <div className="mt-8 flex min-h-80 flex-col rounded-media bg-cream p-2">
         <BagContents />
       </div>

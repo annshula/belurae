@@ -139,7 +139,9 @@
   --page-max: 1360px;
   --gutter: 1.25rem;
   --section-y: 5rem;
-  --header-h: 72px;
+  /* Phones get a shorter bar — 44px touch targets need less air at 360px
+     wide, and every sticky offset below reads from this one value. */
+  --header-h: 64px;
   --announce-h: 34px;
   /* PDP gallery: the sticky stage column is this tall from lg up, so the
      thumbnail rail beside it matches it and the column can be centred. */
@@ -151,6 +153,7 @@
   :root {
     --gutter: 2rem;
     --section-y: 8rem;
+    --header-h: 72px;
   }
 }
 
@@ -606,6 +609,12 @@ dialog.sheet {
   border: 0;
   background: var(--color-ivory);
   color: var(--color-ink);
+  /* Which edge the sheet travels in from: positive means a panel anchored on
+     the right (the bag), negative one anchored on the left (the menu). */
+  --sheet-in-from: 32px;
+}
+dialog.sheet[data-side="left"] {
+  --sheet-in-from: -32px;
 }
 dialog.sheet::backdrop {
   background: rgb(31 28 25 / 0.32);
@@ -621,7 +630,7 @@ dialog.sheet::backdrop {
 }
 @keyframes sheet-in {
   from {
-    transform: translateX(32px);
+    transform: translateX(var(--sheet-in-from, 32px));
     opacity: 0;
   }
 }

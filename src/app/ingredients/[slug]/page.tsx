@@ -34,8 +34,14 @@ export default async function IngredientPage({ params }: Props) {
   if (!ing) notFound();
 
   const url = `/ingredients/${ing.slug}`;
-  const usedIn = products.filter((p) => p.keyIngredients.some((k) => k.slug === ing.slug));
-  const crumbs = [{ label: "Home", href: "/" }, { label: "Ingredients", href: "/ingredients" }, { label: ing.name }];
+  const usedIn = products.filter((p) =>
+    p.keyIngredients.some((k) => k.slug === ing.slug),
+  );
+  const crumbs = [
+    { label: "Home", href: "/" },
+    { label: "Ingredients", href: "/ingredients" },
+    { label: ing.name },
+  ];
 
   return (
     <article>
@@ -47,17 +53,28 @@ export default async function IngredientPage({ params }: Props) {
             name: ing.name,
             description: ing.summary,
             url: absoluteUrl(url),
-            about: { "@type": "DefinedTerm", name: ing.name, alternateName: ing.inci, description: ing.summary },
-            mentions: usedIn.map((p) => ({ "@id": `${absoluteUrl(`/products/${p.slug}`)}#product` })),
+            about: {
+              "@type": "DefinedTerm",
+              name: ing.name,
+              alternateName: ing.inci,
+              description: ing.summary,
+            },
+            mentions: usedIn.map((p) => ({
+              "@id": `${absoluteUrl(`/products/${p.slug}`)}#product`,
+            })),
           },
-          breadcrumbSchema(crumbs.map((c, i) => (i === 2 ? { ...c, href: url } : c))),
+          breadcrumbSchema(
+            crumbs.map((c, i) => (i === 2 ? { ...c, href: url } : c)),
+          ),
         )}
       />
       <div className="container-page pt-6 pb-20 md:pt-10">
         <Breadcrumbs items={crumbs} />
-        <header className="mt-10 max-w-3xl">
+        <header className="mx-auto mt-10 max-w-3xl text-center lg:mx-0 lg:text-left">
           <p className="eyebrow">Ingredient · INCI: {ing.inci}</p>
-          <h1 className="mt-5 font-serif text-display font-light">{ing.name}</h1>
+          <h1 className="mt-5 font-serif text-display font-light">
+            {ing.name}
+          </h1>
           <p className="mt-6 text-body-lg">{ing.summary}</p>
         </header>
 
@@ -85,9 +102,14 @@ export default async function IngredientPage({ params }: Props) {
                 <ul className="mt-3 space-y-2">
                   {usedIn.map((p) => (
                     <li key={p.slug}>
-                      <Link href={`/products/${p.slug}#ingredients`} className="block rounded-card bg-porcelain p-5 shadow-soft transition-shadow hover:shadow-float">
+                      <Link
+                        href={`/products/${p.slug}#ingredients`}
+                        className="block rounded-card bg-porcelain p-5 shadow-soft transition-shadow hover:shadow-float"
+                      >
                         <span className="block font-medium">{p.name}</span>
-                        <span className="text-body-sm text-ink-soft">{p.format}</span>
+                        <span className="text-body-sm text-ink-soft">
+                          {p.format}
+                        </span>
                       </Link>
                     </li>
                   ))}
@@ -96,7 +118,10 @@ export default async function IngredientPage({ params }: Props) {
             )}
             <div>
               <p className="eyebrow">Also read</p>
-              <Link href="/guides/how-to-patch-test" className="link-underline mt-3 inline-block">
+              <Link
+                href="/guides/how-to-patch-test"
+                className="link-underline mt-3 inline-block"
+              >
                 How to patch test a new product
               </Link>
             </div>

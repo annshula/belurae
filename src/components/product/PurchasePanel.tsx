@@ -22,7 +22,11 @@ type LocalizedVariant = ViewVariant & { currency: string };
 function localize(
   v: ViewVariant,
   baseCurrency: string,
-  localizedPriceFor: (id: string) => { amount: string; currencyCode: string; compareAtAmount: string | null } | null,
+  localizedPriceFor: (id: string) => {
+    amount: string;
+    currencyCode: string;
+    compareAtAmount: string | null;
+  } | null,
   singleUnitPrice: number | null,
 ): LocalizedVariant {
   const live = localizedPriceFor(v.id);
@@ -31,9 +35,19 @@ function localize(
   const price = Number.parseFloat(live.amount);
   if (!Number.isFinite(price)) return { ...v, currency: baseCurrency };
 
-  const compareAtRaw = live.compareAtAmount != null ? Number.parseFloat(live.compareAtAmount) : null;
-  const compareAtPrice = compareAtRaw != null && Number.isFinite(compareAtRaw) && compareAtRaw > price ? compareAtRaw : null;
-  const compareAtPercent = compareAtPrice ? Math.round((1 - price / compareAtPrice) * 100) : null;
+  const compareAtRaw =
+    live.compareAtAmount != null
+      ? Number.parseFloat(live.compareAtAmount)
+      : null;
+  const compareAtPrice =
+    compareAtRaw != null &&
+    Number.isFinite(compareAtRaw) &&
+    compareAtRaw > price
+      ? compareAtRaw
+      : null;
+  const compareAtPercent = compareAtPrice
+    ? Math.round((1 - price / compareAtPrice) * 100)
+    : null;
   const perUnit = Math.round((price / v.units) * 100) / 100;
   const savings =
     singleUnitPrice != null && v.units > 1
@@ -80,8 +94,10 @@ function findVariant(
 
 /**
  * "Choose your pack" — one full-width row per pack size, not a 3-up grid.
- * A row is easier to compare (price, per-unit cost and savings sit on the
- * same line) and gives the middle size room for a merchandising badge.
+ * Three tiles across, not stacked rows: pack name, per-set price and saving
+ * line up between the three, so the decision is one glance rather than three
+ * blocks of prose. The selected pack's total and markdown stay in the price
+ * line under the fieldset.
  * The badge is a recommendation we're making, not a sales-data claim — it
  * sits on the middle size only because that's genuinely where the per-unit
  * price first drops meaningfully, not because of invented "X people bought
@@ -109,129 +125,126 @@ function PackFieldset({
 
   return (
     <fieldset>
-      <legend className="mb-4 text-body-sm font-semibold">
+      <legend className="mb-5 text-body-sm font-semibold">
         {option.label}
       </legend>
-      <div className="flex flex-col gap-3">
+      {/* Three tiles side by side, the way a pack chooser is usually read:
+          same pack name, same big per-set price, same saving — so the choice is
+          a comparison, not three paragraphs to read through. The selected
+          pack's total price and markdown live in the price line below. */}
+      <ul className="grid grid-cols-3 gap-2.5">
         {option.values.map((value, i) => {
           const available = optionAvailable(name, value.value);
-          const rawCombo = findVariant(view, { ...selection, [name]: value.value });
+          const rawCombo = findVariant(view, {
+            ...selection,
+            [name]: value.value,
+          });
           const exists = Boolean(rawCombo);
           const checked = selection[name] === value.value;
           const combo = rawCombo ? localizedVariantFor(rawCombo) : undefined;
           const recommended = i === middleIndex && exists;
-          const bestValue =
-            i === lastIndex && i !== middleIndex && exists;
+          const bestValue = i === lastIndex && i !== middleIndex && exists;
+
+          const saving = combo
+            ? (combo.savings ??
+              (combo.units === 1 && combo.compareAtPrice
+                ? combo.compareAtPrice - combo.price
+                : null))
+            : null;
+          const badge = recommended
+            ? "Most popular"
+            : bestValue
+              ? "Best value"
+              : null;
 
           return (
-            <label
-              key={value.value}
-              data-checked={checked}
-              data-disabled={!exists}
-              className={cn(
-                "group relative flex cursor-pointer flex-row items-center gap-4 rounded-card border-2 border-transparent bg-porcelain px-5 py-4 shadow-soft transition-all duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-600",
-                checked
-                  ? "border-sage-600 bg-sage-100 shadow-none"
-                  : "hover:border-sand hover:shadow-float",
-                !exists &&
-                  "cursor-not-allowed opacity-50 hover:border-transparent hover:shadow-soft",
+            <li key={value.value} className="relative flex">
+              {badge && (
+                <span className="absolute -top-2.5 left-1.5 z-10 rounded-tag bg-sage-600 px-2 py-0.5 font-ui text-[0.6rem] font-semibold tracking-widest text-ivory uppercase">
+                  {badge}
+                </span>
               )}
-            >
-              <input
-                type="radio"
-                name={name}
-                value={value.value}
-                checked={checked}
-                onChange={() => onChoose(name, value.value)}
-                disabled={!exists}
-                className="sr-only"
-                aria-describedby={
-                  !exists ? `${name}-${value.value}-na` : undefined
-                }
-              />
-
-              {/* Radio dot */}
-              <span
-                aria-hidden="true"
-                className={cn(
-                  "grid size-5 shrink-0 place-items-center rounded-full border-2 transition-colors duration-200",
-                  checked
-                    ? "border-sage-600 bg-sage-600"
-                    : "border-sand bg-ivory",
-                )}
+              <label
+                data-checked={checked}
+                data-disabled={!exists}
+                className="option-card flex h-full w-full cursor-pointer flex-col items-start px-3 pt-4 pb-3 text-left has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-600 sm:px-4"
               >
-                {checked && <span className="size-1.5 rounded-full bg-ivory" />}
-              </span>
+                <input
+                  type="radio"
+                  name={name}
+                  value={value.value}
+                  checked={checked}
+                  onChange={() => onChoose(name, value.value)}
+                  disabled={!exists}
+                  className="sr-only"
+                  aria-describedby={
+                    !exists ? `${name}-${value.value}-na` : undefined
+                  }
+                />
 
-              <span className="min-w-0 flex-1">
-                <span className="flex flex-wrap items-center gap-2">
-                  <span className="text-body-sm font-semibold">
+                <span className="flex w-full items-center justify-between gap-2">
+                  <span className="font-ui text-[0.9rem] leading-tight font-medium sm:text-[0.95rem]">
                     {value.label}
                   </span>
-                  {recommended && (
-                    <span className="inline-flex items-center rounded-tag bg-sage-600 px-2.5 py-1 font-headline text-[0.72rem] leading-none font-semibold tracking-wide text-ivory uppercase">
-                      Most popular
-                    </span>
-                  )}
-                  {bestValue && (
-                    <span className="inline-flex items-center rounded-tag bg-clay-600 px-2.5 py-1 font-headline text-[0.72rem] leading-none font-semibold tracking-wide text-ivory uppercase">
-                      Best value
-                    </span>
-                  )}
+                  {/* Ink tick to match the option-card ring, not the CTA's
+                      green: a chosen pack should read like any other choice. */}
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "grid size-5 shrink-0 place-items-center rounded-full border-2 transition-colors duration-200",
+                      checked ? "border-ink bg-ink" : "border-sand",
+                    )}
+                  >
+                    {checked && (
+                      <Icon
+                        name="check"
+                        className="size-3 text-ivory"
+                        strokeWidth={3}
+                      />
+                    )}
+                  </span>
                 </span>
-                {combo && combo.units > 1 && (
-                  <span className="mt-0.5 block font-numeral text-[0.75rem] text-ink-soft tabular-nums">
-                    {formatMoney(combo.perUnit, combo.currency)} / set
+
+                {combo && (
+                  <span className="mt-1.5 flex flex-wrap items-baseline gap-x-1.5">
+                    <span className="font-numeral text-body-lg font-semibold tabular-nums sm:text-heading-3">
+                      {formatMoney(combo.perUnit, combo.currency)}
+                    </span>
+                    {combo.units > 1 && (
+                      <span className="font-ui text-[0.7rem] text-ink-faint">
+                        / set
+                      </span>
+                    )}
                   </span>
                 )}
+
+                {saving != null && combo && (
+                  <span className="mt-0.5 font-numeral text-[0.7rem] font-medium text-clay-600 tabular-nums">
+                    Save {formatMoney(saving, combo.currency)}
+                  </span>
+                )}
+
                 {!exists && (
                   <span
                     id={`${name}-${value.value}-na`}
-                    className="mt-0.5 block text-[0.75rem] text-ink-soft"
+                    className="mt-1 text-[0.7rem] text-ink-faint"
                   >
-                    Not available in this set
+                    Not available
                   </span>
                 )}
                 {exists && !available && (
                   <span
                     id={`${name}-${value.value}-na`}
-                    className="mt-0.5 block text-[0.75rem] text-ink-soft"
+                    className="mt-1 text-[0.7rem] text-ink-faint"
                   >
                     Sold out
                   </span>
                 )}
-              </span>
-
-              {combo && (
-                <span className="flex shrink-0 flex-col items-end">
-                  <span className="flex items-baseline gap-1.5">
-                    {combo.compareAtPrice && (
-                      <span className="font-numeral text-[0.7rem] text-ink-soft tabular-nums line-through">
-                        {formatMoney(combo.compareAtPrice, combo.currency)}
-                      </span>
-                    )}
-                    <span className="font-numeral text-heading-3 font-semibold tabular-nums">
-                      {formatMoney(combo.price, combo.currency)}
-                    </span>
-                  </span>
-                  {(() => {
-                    const saved =
-                      combo.savings ??
-                      (combo.units === 1 && combo.compareAtPrice ? combo.compareAtPrice - combo.price : null);
-                    return (
-                      saved != null && (
-                        <span className="font-numeral text-[0.72rem] font-medium text-clay-600 tabular-nums">
-                          Save {formatMoney(saved, combo.currency)}
-                        </span>
-                      )
-                    );
-                  })()}
-                </span>
-              )}
-            </label>
+              </label>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </fieldset>
   );
 }
@@ -256,7 +269,9 @@ export function PurchasePanel({ view }: { view: ProductView }) {
   const singleUnitVariant = view.variants.find((v) => v.units === 1);
   const localizedVariantFor = useMemo(
     () => (v: ViewVariant) => {
-      const singleLocal = singleUnitVariant ? localizedPriceFor(singleUnitVariant.id) : null;
+      const singleLocal = singleUnitVariant
+        ? localizedPriceFor(singleUnitVariant.id)
+        : null;
       const singleUnitPrice = singleLocal
         ? Number.parseFloat(singleLocal.amount)
         : (singleUnitVariant?.price ?? null);
@@ -493,7 +508,9 @@ export function PurchasePanel({ view }: { view: ProductView }) {
               {variant?.label ?? view.name}
             </p>
             <p className="font-numeral text-body-sm font-medium text-ink-soft tabular-nums">
-              {variant ? formatMoney(localizedVariant.price, localizedVariant.currency) : ""}
+              {variant
+                ? formatMoney(localizedVariant.price, localizedVariant.currency)
+                : ""}
             </p>
           </div>
           <button

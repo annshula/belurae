@@ -11,9 +11,22 @@ import { formatMoney } from "@/lib/money";
  * sets differ. Capped at `max-w-sm` so a short catalogue (one or two items)
  * never stretches a card to fill a lane meant for a full grid.
  */
-export function ProductCard({ product, priority = false }: { product: ProductView; priority?: boolean }) {
-  const variesInPrice = new Set(product.variants.filter((v) => v.units === 1).map((v) => v.price)).size > 1;
-  const setCount = product.options.find((o) => o.name !== product.packOptionName)?.values.length ?? 1;
+export function ProductCard({
+  product,
+  priority = false,
+  sizes = "(min-width: 1024px) 22vw, (min-width: 640px) 40vw, 80vw",
+}: {
+  product: ProductView;
+  priority?: boolean;
+  /** Layout hint for the card image — the grid that renders the card knows how wide it ends up. */
+  sizes?: string;
+}) {
+  const variesInPrice =
+    new Set(product.variants.filter((v) => v.units === 1).map((v) => v.price))
+      .size > 1;
+  const setCount =
+    product.options.find((o) => o.name !== product.packOptionName)?.values
+      .length ?? 1;
 
   return (
     <article className="group relative mx-auto w-full max-w-sm">
@@ -24,7 +37,7 @@ export function ProductCard({ product, priority = false }: { product: ProductVie
             alt={product.cardImage.alt}
             fill
             priority={priority}
-            sizes="(min-width: 1024px) 22vw, (min-width: 640px) 40vw, 80vw"
+            sizes={sizes}
             className="media-zoom object-contain p-6 mix-blend-multiply"
           />
         )}
@@ -38,7 +51,9 @@ export function ProductCard({ product, priority = false }: { product: ProductVie
           />
         )}
         {!product.availableForSale && (
-          <span className="glass absolute top-3 left-3 rounded-tag px-2.5 py-1 font-headline text-[0.68rem] tracking-widest uppercase">Sold out</span>
+          <span className="glass absolute top-3 left-3 rounded-tag px-2.5 py-1 font-headline text-[0.68rem] tracking-widest uppercase">
+            Sold out
+          </span>
         )}
       </div>
       <div className="mt-3 flex items-start justify-between gap-3 px-0.5">

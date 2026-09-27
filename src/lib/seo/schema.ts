@@ -17,7 +17,9 @@ export function organizationSchema(): Json {
     "@id": ORG_ID,
     name: site.name,
     url: site.url,
-    logo: absoluteUrl("/icon"),
+    // The wordmark icon, not the monogram favicon: structured data wants the
+    // brand's actual logo artwork.
+    logo: absoluteUrl("/icons/icon-512.png"),
     slogan: site.tagline,
     description: site.description,
     contactPoint: {
@@ -41,7 +43,9 @@ export function websiteSchema(): Json {
   };
 }
 
-export function breadcrumbSchema(items: { label: string; href?: string }[]): Json {
+export function breadcrumbSchema(
+  items: { label: string; href?: string }[],
+): Json {
   return {
     "@type": "BreadcrumbList",
     itemListElement: items.map((item, i) => ({

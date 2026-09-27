@@ -22,9 +22,32 @@ export function SectionHeading({
   size?: "display" | "heading";
 }) {
   return (
-    <div className={cn("max-w-2xl", align === "center" && "mx-auto text-center", className)}>
-      {eyebrow && <p className={cn("eyebrow eyebrow-dot mb-5", align === "center" && "justify-center")}>{eyebrow}</p>}
-      <Tag id={id} className={cn("font-serif font-light", size === "display" ? "text-display" : "text-heading-1")}>
+    <div
+      className={cn(
+        "mx-auto max-w-2xl text-center",
+        // Centred on phones and tablets, where heading + intro stack and read
+        // as one block; back to the left-aligned column from lg up.
+        align === "left" && "lg:mx-0 lg:text-left",
+        className,
+      )}
+    >
+      {eyebrow && (
+        <p
+          className={cn(
+            "eyebrow eyebrow-dot mb-5",
+            align === "center" && "justify-center",
+          )}
+        >
+          {eyebrow}
+        </p>
+      )}
+      <Tag
+        id={id}
+        className={cn(
+          "font-serif font-light",
+          size === "display" ? "text-display" : "text-heading-1",
+        )}
+      >
         {title}
       </Tag>
       {intro && <div className="mt-6 text-body-lg text-ink-soft">{intro}</div>}

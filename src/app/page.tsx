@@ -74,18 +74,12 @@ export default async function HomePage() {
     getProducts(),
     storeCurrency(),
   ]);
-  const views = products.map((p) => buildProductView(p.record, p.content, currency));
+  const views = products.map((p) =>
+    buildProductView(p.record, p.content, currency),
+  );
   const heroProduct = products[0];
   const heroImage = views[0]?.cardImage;
   const featuredGuides = guides.slice(0, 3);
-
-  const ingredientWells = [
-    "well-sage",
-    "well-clay",
-    "well",
-    "well-sage",
-    "well-clay",
-  ];
 
   return (
     <>
@@ -109,7 +103,9 @@ export default async function HomePage() {
           />
 
           <div className="container-page relative grid flex-1 items-center gap-6 pt-[calc(var(--header-h)+1.5rem)] pb-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:pt-[calc(var(--header-h)+0.5rem)] lg:pb-8">
-            <div className="order-2 lg:order-1">
+            {/* Centred below lg, where the hero stacks (image, then this copy);
+                it goes back to a left-aligned column beside the image at lg. */}
+            <div className="order-2 text-center lg:order-1 lg:text-left">
               <p className="eyebrow eyebrow-dot">Beauty &amp; Wellness</p>
               <h1
                 id="hero-title"
@@ -119,12 +115,12 @@ export default async function HomePage() {
                 <br />
                 <em className="font-normal text-sage-700">made simpler.</em>
               </h1>
-              <p className="mt-5 max-w-md text-body-lg text-ink-soft">
+              <p className="mx-auto mt-5 max-w-md text-body-lg text-ink-soft lg:mx-0">
                 Belurae is a beauty and wellness house for simpler everyday
                 rituals — considered products, clear ingredients and honest
                 guidance, one category at a time.
               </p>
-              <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <div className="mt-7 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 lg:justify-start">
                 <Link href="/collections/all" className="btn-primary">
                   Shop the range
                   <Icon name="arrow-right" className="size-4" />
@@ -167,7 +163,7 @@ export default async function HomePage() {
           the catalogue grows past one item. */}
       <section className="section-y" aria-labelledby="shop-range">
         <div className="container-page">
-          <div className="flex flex-wrap items-end justify-between gap-8">
+          <div className="flex flex-wrap items-end justify-center gap-8 lg:justify-between">
             <SectionHeading
               eyebrow="Shop"
               title={
@@ -181,10 +177,16 @@ export default async function HomePage() {
               Shop all
             </Link>
           </div>
-          <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
+          {/* One card per row on phones — the packshot is the pitch, so it
+              gets the full width; from sm the grid tightens back up. */}
+          <ul className="mt-10 grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-y-8 lg:grid-cols-4">
             {views.map((v, i) => (
               <li key={v.handle}>
-                <ProductCard product={v} priority={i === 0} />
+                <ProductCard
+                  product={v}
+                  priority={i === 0}
+                  sizes="(min-width: 1024px) 22vw, (min-width: 640px) 40vw, 100vw"
+                />
               </li>
             ))}
           </ul>
@@ -206,23 +208,29 @@ export default async function HomePage() {
                 id="clearly"
                 intro="Every product we sell lists its key ingredients with a plain explanation of what each one is — and what we're still waiting on from the manufacturer."
               />
-              <ul className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-                {heroProduct.content.keyIngredients.map((ing, i) => (
+              <ul className="mt-14 grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-5">
+                {heroProduct.content.keyIngredients.map((ing) => (
                   <li key={ing.slug}>
+                    {/* Flat porcelain card, same surface as the guide cards
+                        below — the old alternating sage/clay gradients washed
+                        out against this section's cream band. */}
                     <Link
                       href={`/ingredients/${ing.slug}`}
-                      className={`${ingredientWells[i % ingredientWells.length]} group flex h-full min-h-72 flex-col rounded-media p-6 transition-transform duration-500 hover:-translate-y-1`}
+                      className="group flex h-full min-h-72 flex-col rounded-media bg-porcelain p-6 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-float"
                     >
-                      <span className="grid size-10 place-items-center rounded-[12px] bg-porcelain/80 text-sage-600 shadow-soft">
+                      <span className="grid size-10 place-items-center rounded-control bg-sage-100 text-sage-600">
                         <Icon name="leaf" className="size-4" />
                       </span>
-                      <span className="mt-auto pt-10 font-serif text-heading-2">
+                      {/* Fixed title offset + reserved height so every card's
+                          name and copy start on the same line; only the CTA
+                          is pinned to the bottom. */}
+                      <span className="mt-8 min-h-[2lh] font-serif text-heading-2 lg:min-h-[3lh]">
                         {ing.name}
                       </span>
                       <span className="mt-2 text-body-sm text-ink-soft">
                         {ing.role}
                       </span>
-                      <span className="mt-5 inline-flex items-center gap-2 text-[0.75rem] font-semibold tracking-[0.12em] uppercase">
+                      <span className="mt-auto inline-flex items-center gap-2 pt-6 text-[0.75rem] font-semibold tracking-[0.12em] uppercase">
                         Learn more{" "}
                         <Icon
                           name="arrow-right"
@@ -250,14 +258,19 @@ export default async function HomePage() {
             className="pointer-events-none absolute -bottom-52 left-[-10%] size-136 rounded-full bg-clay-600/20 blur-3xl"
           />
           <div className="container-page relative">
-            <p className="eyebrow eyebrow-dot text-sage-200">Why Belurae</p>
-            <h2
-              id="why"
-              className="mt-6 max-w-3xl font-serif text-display font-light"
-            >
-              Clarity is <em>the luxury.</em>
-            </h2>
-            <div className="mt-16 grid gap-3 md:grid-cols-3">
+            {/* Eyebrow + headline centre together on phones — the eyebrow is an
+                inline-flex pill, so it follows the wrapper's text alignment.
+                The pillar cards below stay left-aligned. */}
+            <div className="text-center lg:text-left">
+              <p className="eyebrow eyebrow-dot text-sage-200">Why Belurae</p>
+              <h2
+                id="why"
+                className="mx-auto mt-6 max-w-3xl font-serif text-display font-light lg:mx-0"
+              >
+                Clarity is <em>the luxury.</em>
+              </h2>
+            </div>
+            <div className="mt-16 grid auto-rows-fr gap-3 md:grid-cols-3">
               {pillars.map((p, i) => (
                 <div
                   key={p.title}
@@ -273,9 +286,11 @@ export default async function HomePage() {
                 </div>
               ))}
             </div>
-            <Link href="/pages/standards" className="btn-light mt-12">
-              Read our standards
-            </Link>
+            <div className="mt-12 text-center lg:text-left">
+              <Link href="/pages/standards" className="btn-light">
+                Read our standards
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -284,7 +299,7 @@ export default async function HomePage() {
       <section className="px-2 sm:px-3" aria-labelledby="learn">
         <div className="section-y rounded-media bg-cream">
           <div className="container-page">
-            <div className="flex flex-wrap items-end justify-between gap-8">
+            <div className="flex flex-wrap items-end justify-center gap-8 lg:justify-between">
               <SectionHeading
                 eyebrow="Learn"
                 title={
@@ -298,7 +313,7 @@ export default async function HomePage() {
                 All guides
               </Link>
             </div>
-            <ul className="mt-14 grid gap-3 md:grid-cols-3">
+            <ul className="mt-14 grid auto-rows-fr gap-3 md:grid-cols-3">
               {featuredGuides.map((g, i) => (
                 <li key={g.slug}>
                   <Link
@@ -311,16 +326,19 @@ export default async function HomePage() {
                         {g.readingMinutes} min
                       </span>
                     </span>
-                    <span className="mt-auto pt-12 font-serif text-heading-2">
+                    <span className="mt-10 min-h-[2lh] font-serif text-heading-2">
                       {g.title}
                     </span>
                     <span className="mt-3 text-body-sm text-ink-soft">
                       {g.description}
                     </span>
-                    <span
-                      className={`mt-6 h-1 w-12 rounded-full ${["bg-clay-300", "bg-sage-300", "bg-linen"][i % 3]} transition-all duration-500 group-hover:w-20`}
-                      aria-hidden="true"
-                    />
+                    {/* Wrapper carries the spacing: padding on the bar itself
+                        would be painted by its background. */}
+                    <span className="mt-auto flex pt-6" aria-hidden="true">
+                      <span
+                        className={`h-1 w-12 rounded-full ${["bg-clay-300", "bg-sage-300", "bg-linen"][i % 3]} transition-all duration-500 group-hover:w-20`}
+                      />
+                    </span>
                   </Link>
                 </li>
               ))}

@@ -61,7 +61,10 @@ function Block({ block }: { block: GuideBlock }) {
       );
     case "note":
       return (
-        <aside role="note" className="well-clay flex gap-3 rounded-card p-6 text-body">
+        <aside
+          role="note"
+          className="well-clay flex gap-3 rounded-card p-6 text-body"
+        >
           <Icon name="info" className="mt-0.5 size-5 shrink-0 text-clay-600" />
           <span>
             <strong className="font-semibold">{block.title}. </strong>
@@ -72,7 +75,11 @@ function Block({ block }: { block: GuideBlock }) {
   }
 }
 
-const toId = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+const toId = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 
 export default async function GuidePage({ params }: Props) {
   const { slug } = await params;
@@ -80,7 +87,11 @@ export default async function GuidePage({ params }: Props) {
   if (!guide) notFound();
 
   const url = `/guides/${guide.slug}`;
-  const crumbs = [{ label: "Home", href: "/" }, { label: "Guides", href: "/guides" }, { label: guide.title }];
+  const crumbs = [
+    { label: "Home", href: "/" },
+    { label: "Guides", href: "/guides" },
+    { label: guide.title },
+  ];
   const featured = guide.products.map(productContentBySlug).filter(Boolean);
   const related = guide.related.map(guideBySlug).filter(Boolean);
 
@@ -95,27 +106,39 @@ export default async function GuidePage({ params }: Props) {
             description: guide.description,
             datePublished: guide.published,
             dateModified: guide.updated,
-            author: { "@type": "Organization", name: `${site.name} Editorial`, url: site.url },
+            author: {
+              "@type": "Organization",
+              name: `${site.name} Editorial`,
+              url: site.url,
+            },
             publisher: { "@id": ORG_ID },
             mainEntityOfPage: absoluteUrl(url),
             inLanguage: "en",
           },
-          breadcrumbSchema(crumbs.map((c, i) => (i === 2 ? { ...c, href: url } : c))),
+          breadcrumbSchema(
+            crumbs.map((c, i) => (i === 2 ? { ...c, href: url } : c)),
+          ),
           ...(guide.faqs ? [faqSchema(guide.faqs)] : []),
         )}
       />
 
       <header className="container-page pt-6 md:pt-10">
         <Breadcrumbs items={crumbs} />
-        <div className="mt-10 max-w-3xl">
+        <div className="mx-auto mt-10 max-w-3xl text-center lg:mx-0 lg:text-left">
           <p className="eyebrow eyebrow-dot">
             {guide.topic} · {guide.readingMinutes} min read
           </p>
-          <h1 className="mt-5 font-serif text-display font-light">{guide.title}</h1>
+          <h1 className="mt-5 font-serif text-display font-light">
+            {guide.title}
+          </h1>
           <p className="mt-4 text-body-sm text-ink-soft">
             By the {site.name} editorial team · Updated{" "}
             <time dateTime={guide.updated}>
-              {new Date(guide.updated).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+              {new Date(guide.updated).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </time>
           </p>
         </div>
@@ -123,14 +146,20 @@ export default async function GuidePage({ params }: Props) {
 
       <div className="container-page grid gap-12 py-12 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-20 lg:py-16">
         <div className="min-w-0">
-          <section aria-label="Summary" className="well-sage max-w-[68ch] rounded-media p-7 text-body-lg md:p-9">
+          <section
+            aria-label="Summary"
+            className="well-sage max-w-[68ch] rounded-media p-7 text-body-lg md:p-9"
+          >
             <p className="eyebrow mb-2">The short answer</p>
             <p>{guide.summary}</p>
           </section>
 
           <div className="prose-belurae mt-10">
             {guide.sections.map((section) => (
-              <section key={section.heading} aria-labelledby={toId(section.heading)}>
+              <section
+                key={section.heading}
+                aria-labelledby={toId(section.heading)}
+              >
                 <h2 id={toId(section.heading)}>{section.heading}</h2>
                 {section.blocks.map((block, i) => (
                   <Block key={i} block={block} />
@@ -141,7 +170,10 @@ export default async function GuidePage({ params }: Props) {
 
           {guide.faqs && (
             <section className="mt-16 max-w-[68ch]" aria-labelledby="guide-faq">
-              <h2 id="guide-faq" className="mb-6 font-serif text-heading-2">
+              <h2
+                id="guide-faq"
+                className="mb-6 text-center font-serif text-heading-2 lg:text-left"
+              >
                 Quick questions
               </h2>
               <Faq items={guide.faqs} />
@@ -149,8 +181,9 @@ export default async function GuidePage({ params }: Props) {
           )}
 
           <p className="mt-12 max-w-[68ch] text-body-sm text-ink-soft">
-            This guide is general information, not medical advice. Always follow the directions on your product&apos;s
-            pack, and speak to a doctor or pharmacist about any skin concern.
+            This guide is general information, not medical advice. Always follow
+            the directions on your product&apos;s pack, and speak to a doctor or
+            pharmacist about any skin concern.
           </p>
         </div>
 
@@ -160,7 +193,10 @@ export default async function GuidePage({ params }: Props) {
             <ul className="mt-3 space-y-2 text-body-sm">
               {guide.sections.map((s) => (
                 <li key={s.heading}>
-                  <a href={`#${toId(s.heading)}`} className="text-ink-soft hover:text-ink hover:underline">
+                  <a
+                    href={`#${toId(s.heading)}`}
+                    className="text-ink-soft hover:text-ink hover:underline"
+                  >
                     {s.heading}
                   </a>
                 </li>
@@ -173,9 +209,14 @@ export default async function GuidePage({ params }: Props) {
               <ul className="mt-3 space-y-2">
                 {featured.map((p) => (
                   <li key={p!.slug}>
-                    <Link href={`/products/${p!.slug}`} className="block rounded-card bg-porcelain p-5 shadow-soft transition-shadow hover:shadow-float">
+                    <Link
+                      href={`/products/${p!.slug}`}
+                      className="block rounded-card bg-porcelain p-5 shadow-soft transition-shadow hover:shadow-float"
+                    >
                       <span className="block font-medium">{p!.name}</span>
-                      <span className="text-body-sm text-ink-soft">{p!.format}</span>
+                      <span className="text-body-sm text-ink-soft">
+                        {p!.format}
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -188,21 +229,29 @@ export default async function GuidePage({ params }: Props) {
       {related.length > 0 && (
         <section className="px-2 pb-3 sm:px-3" aria-labelledby="related-guides">
           <div className="section-y rounded-media bg-cream">
-          <div className="container-page">
-            <h2 id="related-guides" className="font-serif text-heading-1">
-              Keep reading
-            </h2>
-            <ul className="mt-10 grid gap-3 md:grid-cols-3">
-              {related.map((g) => (
-                <li key={g!.slug}>
-                  <Link href={`/guides/${g!.slug}`} className="group block h-full rounded-media bg-porcelain p-7 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-float lg:p-8">
-                    <p className="eyebrow">{g!.topic}</p>
-                    <h3 className="mt-3 font-serif text-heading-2 group-hover:underline">{g!.title}</h3>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div className="container-page">
+              <h2
+                id="related-guides"
+                className="text-center font-serif text-heading-1 lg:text-left"
+              >
+                Keep reading
+              </h2>
+              <ul className="mt-10 grid gap-3 md:grid-cols-3">
+                {related.map((g) => (
+                  <li key={g!.slug}>
+                    <Link
+                      href={`/guides/${g!.slug}`}
+                      className="group block h-full rounded-media bg-porcelain p-7 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-float lg:p-8"
+                    >
+                      <p className="eyebrow">{g!.topic}</p>
+                      <h3 className="mt-3 font-serif text-heading-2 group-hover:underline">
+                        {g!.title}
+                      </h3>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
       )}

@@ -62,16 +62,20 @@ async function getMegaData(): Promise<MegaData> {
 export async function Header() {
   const mega = await getMegaData();
   return (
-    <header className="sticky top-0 z-30 pt-2 sm:pt-3">
+    // Flush to the top of the viewport on phones and tablets; the floating bar
+    // (with its gap) is a desktop treatment.
+    <header className="sticky top-0 z-30 lg:pt-3">
       <HeaderShell>
         {/* self-stretch so the desktop nav can span the bar's full height —
             the dropdowns hang from the bar's bottom edge (see DesktopNav). */}
         <div className="flex h-full self-stretch items-center">
           <div className="flex items-center lg:hidden">
             <MobileMenu groups={primaryNav} />
+            {/* Phones keep search inside the menu sheet; there is room for it
+                in the bar again from sm up. lg+ uses the right-hand cluster. */}
             <Link
               href="/search"
-              className="grid size-11 place-items-center rounded-xl hover:bg-ink/5"
+              className="hidden size-11 place-items-center rounded-xl hover:bg-ink/5 sm:grid lg:hidden"
               aria-label="Search"
             >
               <Icon name="search" />
@@ -80,9 +84,11 @@ export async function Header() {
           <DesktopNav groups={primaryNav} mega={mega} />
         </div>
 
+        {/* Phone-sized wordmark: the desktop size overflows the bar on a
+            320–390px screen, where the bar also carries the menu and bag. */}
         <Link
           href="/"
-          className="justify-self-center pl-[0.3em] font-logo text-[1.85rem] leading-none tracking-[0.3em]"
+          className="justify-self-center pl-[0.2em] font-logo text-[1.35rem] leading-none tracking-[0.2em] sm:pl-[0.26em] sm:text-[1.7rem] sm:tracking-[0.26em] lg:pl-[0.3em] lg:text-[1.85rem] lg:tracking-[0.3em]"
           aria-label={`${site.name} — home`}
         >
           BELURAE

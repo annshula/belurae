@@ -8,13 +8,18 @@ import { Icon } from "@/components/ui/Icon";
 import type { ViewMedia } from "@/lib/commerce/product-view";
 import { cn } from "@/lib/utils";
 
+/** Horizontal travel before a gesture counts as a swipe rather than a tap. */
+const SWIPE_THRESHOLD = 48;
+
 /**
  * PDP gallery — sticky stage with the thumbnails beside it from lg up (a
  * vertical rail on the stage's left) and beneath it on phones (a horizontal
  * rail, as before).
  *
- *  - The stage is a native scroll-snap row: swipe on touch, arrow buttons and
- *    ←/→ keys on desktop, thumbnails jump to a slide. No carousel library.
+ *  - Swiping moves exactly one image per gesture — the track follows the finger
+ *    and then snaps, so it never becomes a free-scrolling wheel. The arrows,
+ *    ←/→ keys and the thumbnail rail jump straight to a slide. No carousel
+ *    library.
  *  - From lg up the column is `--gallery-h` tall and sticks to the middle of
  *    the viewport, so it stays level with the purchase panel as you scroll.
  *  - The first slide is server-rendered with `priority`, so the LCP image
@@ -30,43 +35,68 @@ export function ProductGallery({
   media: ViewMedia[];
   productName: string;
 }) {
-  const stageRef = useRef<HTMLUListElement>(null);
   const thumbsRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
+  /** Live finger offset in px — the track follows it, then snaps. */
+  const [dragX, setDragX] = useState(0);
+  const startRef = useRef<{ x: number; y: number } | null>(null);
+  const draggingRef = useRef(false);
+  const lastDxRef = useRef(0);
   const count = media.length;
 
   const goTo = useCallback(
-    (index: number, smooth = true) => {
-      const stage = stageRef.current;
-      if (!stage) return;
-      const i = Math.max(0, Math.min(count - 1, index));
-      stage.scrollTo({
-        left: i * stage.clientWidth,
-        behavior: smooth ? "smooth" : "auto",
-      });
-    },
+    (index: number) => setActive(Math.max(0, Math.min(count - 1, index))),
     [count],
   );
 
-  // Track the visible slide from scroll position.
-  useEffect(() => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    let frame = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() =>
-        setActive(
-          Math.round(stage.scrollLeft / Math.max(1, stage.clientWidth)),
-        ),
-      );
-    };
-    stage.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      stage.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(frame);
-    };
-  }, []);
+  /*
+   * Swiping moves exactly one image per gesture — never a free-scrolling
+   * "wheel" the visitor has to catch. The track follows the finger (clamped to
+   * one slide so it cannot run ahead), then lands on the neighbour when the
+   * gesture passes SWIPE_THRESHOLD and springs back when it does not.
+   * Mouse pointers are ignored: desktop uses the arrows, the keyboard and the
+   * thumbnail rail.
+   */
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "mouse" || count < 2) return;
+    startRef.current = { x: e.clientX, y: e.clientY };
+    draggingRef.current = false;
+    lastDxRef.current = 0;
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const start = startRef.current;
+    if (!start) return;
+    const dx = e.clientX - start.x;
+    const dy = e.clientY - start.y;
+    if (!draggingRef.current) {
+      if (Math.abs(dx) < 10) return;
+      // Vertical intent belongs to the page, not the gallery.
+      if (Math.abs(dy) > Math.abs(dx)) {
+        startRef.current = null;
+        return;
+      }
+      draggingRef.current = true;
+    }
+    const width = e.currentTarget.clientWidth || 1;
+    let offset = Math.max(-width, Math.min(width, dx));
+    const pastStart = active === 0 && offset > 0;
+    const pastEnd = active === count - 1 && offset < 0;
+    if (pastStart || pastEnd) offset *= 0.35; // resist at the ends
+    lastDxRef.current = offset;
+    setDragX(offset);
+  };
+
+  const endSwipe = () => {
+    const wasDragging = draggingRef.current;
+    startRef.current = null;
+    draggingRef.current = false;
+    const dx = lastDxRef.current;
+    setDragX(0);
+    if (wasDragging && Math.abs(dx) >= SWIPE_THRESHOLD) {
+      goTo(active + (dx < 0 ? 1 : -1));
+    }
+  };
 
   // Keep the active thumbnail in view — scroll the rail only, never the page.
   // The rail is horizontal on phones and vertical from lg up, so the axis is
@@ -128,10 +158,23 @@ export function ProductGallery({
           keeping the stage first for keyboard and screen-reader order — lands
           to its left. */}
       <div className="flex flex-col gap-3 lg:flex-row-reverse lg:gap-4">
-        <div className="group/stage relative min-w-0 flex-1">
+        <div
+          className="group/stage relative min-w-0 flex-1 touch-pan-y"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endSwipe}
+          onPointerCancel={endSwipe}
+        >
           <ul
-            ref={stageRef}
-            className="snap-row auto-cols-[100%] overflow-y-hidden rounded-media lg:max-h-(--gallery-h)"
+            className={cn(
+              "flex overflow-hidden rounded-media",
+              // No transition while the finger is down (the track must track it
+              // exactly); back on for the snap, which is what animates.
+              dragX === 0 && "transition-transform duration-500 ease-out-soft",
+            )}
+            style={{
+              transform: `translate3d(calc(${-active * 100}% + ${dragX}px), 0, 0)`,
+            }}
             aria-live="polite"
           >
             {media.map((item, i) => (
@@ -140,7 +183,8 @@ export function ProductGallery({
                 aria-roledescription="slide"
                 aria-label={`${i + 1} of ${count}`}
                 aria-hidden={i !== active}
-                className="relative"
+                inert={i !== active}
+                className="w-full shrink-0"
               >
                 {item.type === "image" ? (
                   <div className="well relative aspect-square overflow-hidden lg:aspect-auto lg:h-(--gallery-h)">

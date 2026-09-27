@@ -499,7 +499,10 @@ export default async function ProductPage({ params }: Props) {
       <section className="py-12 lg:py-16" aria-labelledby="details">
         <div className="container-page grid gap-8 lg:grid-cols-2 lg:gap-16">
           <div>
-            <h2 id="details" className="font-serif text-heading-1 font-light">
+            <h2
+              id="details"
+              className="text-center font-serif text-heading-1 font-light lg:text-left"
+            >
               Specifications
             </h2>
             <dl className="mt-5 overflow-hidden rounded-card bg-porcelain text-body-sm shadow-soft">
@@ -515,7 +518,9 @@ export default async function ProductPage({ params }: Props) {
             </dl>
           </div>
           <div>
-            <h3 className="eyebrow lg:mt-[3.6rem]">What&apos;s in the box</h3>
+            <h3 className="eyebrow flex justify-center lg:mt-[3.6rem] lg:justify-start">
+              What&apos;s in the box
+            </h3>
             <ul className="mt-5 overflow-hidden rounded-card bg-porcelain text-body-sm shadow-soft">
               {content.inTheBox.map((b) => (
                 <li
@@ -536,7 +541,7 @@ export default async function ProductPage({ params }: Props) {
         <div className="container-page">
           <h2
             id="reviews"
-            className="mb-6 font-serif text-heading-1 font-light"
+            className="mb-6 text-center font-serif text-heading-1 font-light lg:text-left"
           >
             Reviews
           </h2>
