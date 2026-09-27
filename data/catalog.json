@@ -1,0 +1,561 @@
+{
+  "version": 6,
+  "syncedAt": "2026-09-27T06:16:21.439Z",
+  "shop": {
+    "domain": "trackify-com.myshopify.com",
+    "name": "Trackify",
+    "currencyCode": "USD"
+  },
+  "markets": [
+    "AU",
+    "CA",
+    "IN",
+    "ZA",
+    "GB",
+    "US"
+  ],
+  "products": {
+    "bikini-pain-free-hair-removal-spray": {
+      "id": "gid://shopify/Product/15395256467683",
+      "handle": "bikini-pain-free-hair-removal-spray",
+      "title": "Bikini Pain-Free Hair Removal Spray for Sensitive Skin, Hypoallergenic Formula-Gentle & Fast-Acting Depilatory with Citrus Scent, Aloe & Hyaluronic Acid for Soothing Care, Suitable for Men & Women",
+      "vendor": "Trackify",
+      "productType": "Beauty & Wellness",
+      "status": "ACTIVE",
+      "updatedAt": "2026-09-27T04:58:07Z",
+      "seo": {
+        "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
+        "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
+      },
+      "options": [
+        {
+          "name": "Style",
+          "values": [
+            "Spray",
+            "Spray & Serum",
+            "Spray & Cream"
+          ]
+        },
+        {
+          "name": "Quantity",
+          "values": [
+            "1PC",
+            "2PCS",
+            "3PCS"
+          ]
+        }
+      ],
+      "availableForSale": true,
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67582703501539",
+          "title": "Spray / 1PC",
+          "sku": "CJPF253602701AZ",
+          "barcode": null,
+          "price": 39.99,
+          "compareAtPrice": 45.99,
+          "availableForSale": true,
+          "options": {
+            "Style": "Spray",
+            "Quantity": "1PC"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cb532d83-a143-4d81-ab23-15d34150eabb.jpg?v=1790421362",
+          "pricesByMarket": {
+            "CA": {
+              "amount": 57,
+              "compareAtAmount": 66,
+              "currencyCode": "CAD"
+            },
+            "ZA": {
+              "amount": 666,
+              "compareAtAmount": 765,
+              "currencyCode": "ZAR"
+            },
+            "GB": {
+              "amount": 31,
+              "compareAtAmount": 36,
+              "currencyCode": "GBP"
+            },
+            "AU": {
+              "amount": 59,
+              "compareAtAmount": 67,
+              "currencyCode": "AUD"
+            },
+            "IN": {
+              "amount": 3904.87,
+              "compareAtAmount": 4490.75,
+              "currencyCode": "INR"
+            },
+            "US": {
+              "amount": 39.99,
+              "compareAtAmount": 45.99,
+              "currencyCode": "USD"
+            }
+          }
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67582703534307",
+          "title": "Spray / 2PCS",
+          "sku": "CJPF253602702BY",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": 89.99,
+          "availableForSale": true,
+          "options": {
+            "Style": "Spray",
+            "Quantity": "2PCS"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cb532d83-a143-4d81-ab23-15d34150eabb.jpg?v=1790421362",
+          "pricesByMarket": {
+            "CA": {
+              "amount": 99,
+              "compareAtAmount": 128,
+              "currencyCode": "CAD"
+            },
+            "ZA": {
+              "amount": 1165,
+              "compareAtAmount": 1497,
+              "currencyCode": "ZAR"
+            },
+            "GB": {
+              "amount": 54,
+              "compareAtAmount": 70,
+              "currencyCode": "GBP"
+            },
+            "AU": {
+              "amount": 102,
+              "compareAtAmount": 131,
+              "currencyCode": "AUD"
+            },
+            "IN": {
+              "amount": 6834.25,
+              "compareAtAmount": 8787.18,
+              "currencyCode": "INR"
+            },
+            "US": {
+              "amount": 69.99,
+              "compareAtAmount": 89.99,
+              "currencyCode": "USD"
+            }
+          }
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67582703829219",
+          "title": "Spray / 3PCS",
+          "sku": "CJPF253602710JQ",
+          "barcode": null,
+          "price": 99.99,
+          "compareAtPrice": 140.99,
+          "availableForSale": true,
+          "options": {
+            "Style": "Spray",
+            "Quantity": "3PCS"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cb532d83-a143-4d81-ab23-15d34150eabb.jpg?v=1790421362",
+          "pricesByMarket": {
+            "CA": {
+              "amount": 142,
+              "compareAtAmount": 200,
+              "currencyCode": "CAD"
+            },
+            "ZA": {
+              "amount": 1663,
+              "compareAtAmount": 2345,
+              "currencyCode": "ZAR"
+            },
+            "GB": {
+              "amount": 77,
+              "compareAtAmount": 109,
+              "currencyCode": "GBP"
+            },
+            "AU": {
+              "amount": 146,
+              "compareAtAmount": 205,
+              "currencyCode": "AUD"
+            },
+            "IN": {
+              "amount": 9763.64,
+              "compareAtAmount": 13767.13,
+              "currencyCode": "INR"
+            },
+            "US": {
+              "amount": 99.99,
+              "compareAtAmount": 140.99,
+              "currencyCode": "USD"
+            }
+          }
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67582703468771",
+          "title": "Spray & Serum / 1PC",
+          "sku": "CJPF253602703CX",
+          "barcode": null,
+          "price": 49.99,
+          "compareAtPrice": 79.99,
+          "availableForSale": true,
+          "options": {
+            "Style": "Spray & Serum",
+            "Quantity": "1PC"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/f9bf984c-40e6-4046-860f-4c88749a89ef.jpg?v=1790421362",
+          "pricesByMarket": {
+            "CA": {
+              "amount": 71,
+              "compareAtAmount": 114,
+              "currencyCode": "CAD"
+            },
+            "ZA": {
+              "amount": 832,
+              "compareAtAmount": 1331,
+              "currencyCode": "ZAR"
+            },
+            "GB": {
+              "amount": 39,
+              "compareAtAmount": 62,
+              "currencyCode": "GBP"
+            },
+            "AU": {
+              "amount": 73,
+              "compareAtAmount": 117,
+              "currencyCode": "AUD"
+            },
+            "IN": {
+              "amount": 4881.33,
+              "compareAtAmount": 7810.71,
+              "currencyCode": "INR"
+            },
+            "US": {
+              "amount": 49.99,
+              "compareAtAmount": 79.99,
+              "currencyCode": "USD"
+            }
+          }
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67582703730915",
+          "title": "Spray & Serum / 3PCS",
+          "sku": "CJPF253602712LO",
+          "barcode": null,
+          "price": 109.99,
+          "compareAtPrice": 239.99,
+          "availableForSale": true,
+          "options": {
+            "Style": "Spray & Serum",
+            "Quantity": "3PCS"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/f9bf984c-40e6-4046-860f-4c88749a89ef.jpg?v=1790421362",
+          "pricesByMarket": {
+            "CA": {
+              "amount": 156,
+              "compareAtAmount": 340,
+              "currencyCode": "CAD"
+            },
+            "ZA": {
+              "amount": 1830,
+              "compareAtAmount": 3992,
+              "currencyCode": "ZAR"
+            },
+            "GB": {
+              "amount": 85,
+              "compareAtAmount": 185,
+              "currencyCode": "GBP"
+            },
+            "AU": {
+              "amount": 160,
+              "compareAtAmount": 349,
+              "currencyCode": "AUD"
+            },
+            "IN": {
+              "amount": 10740.1,
+              "compareAtAmount": 23434.09,
+              "currencyCode": "INR"
+            },
+            "US": {
+              "amount": 109.99,
+              "compareAtAmount": 239.99,
+              "currencyCode": "USD"
+            }
+          }
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67582703599843",
+          "title": "Spray & Cream / 1PC",
+          "sku": "CJPF253602705EV",
+          "barcode": null,
+          "price": 49.99,
+          "compareAtPrice": 79.99,
+          "availableForSale": true,
+          "options": {
+            "Style": "Spray & Cream",
+            "Quantity": "1PC"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/4bfe1451-a1e1-49cd-9ed0-fa23851a83ef.jpg?v=1790421362",
+          "pricesByMarket": {
+            "CA": {
+              "amount": 71,
+              "compareAtAmount": 114,
+              "currencyCode": "CAD"
+            },
+            "ZA": {
+              "amount": 832,
+              "compareAtAmount": 1331,
+              "currencyCode": "ZAR"
+            },
+            "GB": {
+              "amount": 39,
+              "compareAtAmount": 62,
+              "currencyCode": "GBP"
+            },
+            "AU": {
+              "amount": 73,
+              "compareAtAmount": 117,
+              "currencyCode": "AUD"
+            },
+            "IN": {
+              "amount": 4881.33,
+              "compareAtAmount": 7810.71,
+              "currencyCode": "INR"
+            },
+            "US": {
+              "amount": 49.99,
+              "compareAtAmount": 79.99,
+              "currencyCode": "USD"
+            }
+          }
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67582703632611",
+          "title": "Spray & Cream / 3PCS",
+          "sku": "CJPF253602714NM",
+          "barcode": null,
+          "price": 109.99,
+          "compareAtPrice": 239.99,
+          "availableForSale": true,
+          "options": {
+            "Style": "Spray & Cream",
+            "Quantity": "3PCS"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/4bfe1451-a1e1-49cd-9ed0-fa23851a83ef.jpg?v=1790421362",
+          "pricesByMarket": {
+            "CA": {
+              "amount": 156,
+              "compareAtAmount": 340,
+              "currencyCode": "CAD"
+            },
+            "ZA": {
+              "amount": 1830,
+              "compareAtAmount": 3992,
+              "currencyCode": "ZAR"
+            },
+            "GB": {
+              "amount": 85,
+              "compareAtAmount": 185,
+              "currencyCode": "GBP"
+            },
+            "AU": {
+              "amount": 160,
+              "compareAtAmount": 349,
+              "currencyCode": "AUD"
+            },
+            "IN": {
+              "amount": 10740.1,
+              "compareAtAmount": 23434.09,
+              "currencyCode": "INR"
+            },
+            "US": {
+              "amount": 109.99,
+              "compareAtAmount": 239.99,
+              "currencyCode": "USD"
+            }
+          }
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cb532d83-a143-4d81-ab23-15d34150eabb.jpg?v=1790421362",
+          "width": 1500,
+          "height": 1500,
+          "alt": "PHOFAY Cloud Sense hair removal mousse with aloe and ginseng",
+          "variantId": "gid://shopify/ProductVariant/67582703829219"
+        },
+        {
+          "type": "video",
+          "alt": null,
+          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/c47134fd96cb4955b0ced06939c39bf1.thumbnail.0000000000.jpg?v=1790432103",
+          "width": 720,
+          "height": 1280,
+          "sources": [
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/c47134fd96cb4955b0ced06939c39bf1/c47134fd96cb4955b0ced06939c39bf1.SD-480p-0.9Mbps-95631287.mp4",
+              "type": "video/mp4",
+              "width": 270
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/c47134fd96cb4955b0ced06939c39bf1/c47134fd96cb4955b0ced06939c39bf1.HD-720p-1.6Mbps-95631287.mp4",
+              "type": "video/mp4",
+              "width": 404
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/c47134fd96cb4955b0ced06939c39bf1/c47134fd96cb4955b0ced06939c39bf1.HD-1080p-2.5Mbps-95631287.mp4",
+              "type": "video/mp4",
+              "width": 606
+            }
+          ]
+        },
+        {
+          "type": "video",
+          "alt": null,
+          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/74ba0718398e4a489491f0fe2f56a802.thumbnail.0000000000.jpg?v=1790432057",
+          "width": 720,
+          "height": 1280,
+          "sources": [
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/74ba0718398e4a489491f0fe2f56a802/74ba0718398e4a489491f0fe2f56a802.SD-480p-0.9Mbps-95631171.mp4",
+              "type": "video/mp4",
+              "width": 270
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/74ba0718398e4a489491f0fe2f56a802/74ba0718398e4a489491f0fe2f56a802.HD-720p-1.6Mbps-95631171.mp4",
+              "type": "video/mp4",
+              "width": 404
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/74ba0718398e4a489491f0fe2f56a802/74ba0718398e4a489491f0fe2f56a802.HD-1080p-2.5Mbps-95631171.mp4",
+              "type": "video/mp4",
+              "width": 606
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sf39c26c52ded46f7914c00cb05024a7af.avif?v=1790426727",
+          "width": 2048,
+          "height": 2048,
+          "alt": "Product packaging with herbal extracts on a purple background",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/10bdfcb3-dd92-4ffe-b02b-f3339991ee62.jpg?v=1790421362",
+          "width": 1500,
+          "height": 1500,
+          "alt": "Couple with smooth, hair-free skin",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/adc3e136-2068-44bd-872e-635b293be876.jpg?v=1790422409",
+          "width": 548,
+          "height": 800,
+          "alt": "PHOFAY certificate card: FDA, CPNP, SCPN, MSDS",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5c6a8008-1a3a-420f-985f-1523d35e536f.jpg?v=1790421362",
+          "width": 2048,
+          "height": 2048,
+          "alt": "Herbal extracts: ginseng, portulaca oleracea, aloe leaf water, glycerin",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ff825bef-274d-4c64-af38-1f73c47fa0a8.jpg?v=1790421362",
+          "width": 1500,
+          "height": 1500,
+          "alt": "Four-step instructions: clean, apply, wait 5 to 10 minutes, scrape and rinse",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/eabdec77-54a8-493e-8053-f6a258e34e38.jpg?v=1790422411",
+          "width": 1600,
+          "height": 800,
+          "alt": "Six benefits: hydrates 24hrs, sensitive skin, stubborn hair, ingrown hair, smoothness, fewer chemicals",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a397bcea-f1b9-4237-88a4-8836e059abe8.jpg?v=1790422412",
+          "width": 1600,
+          "height": 800,
+          "alt": "PHOFAY lab testing overview",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/4bfe1451-a1e1-49cd-9ed0-fa23851a83ef.jpg?v=1790421362",
+          "width": 1200,
+          "height": 1200,
+          "alt": "Smooth hair removal cream tube and Cloud Sense spray mousse",
+          "variantId": "gid://shopify/ProductVariant/67582703632611"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/f9bf984c-40e6-4046-860f-4c88749a89ef.jpg?v=1790421362",
+          "width": 1200,
+          "height": 1200,
+          "alt": "Cloud Sense mousse beside the bikini line brightening serum",
+          "variantId": "gid://shopify/ProductVariant/67582703730915"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ecfeda2c-07aa-43b6-a4a7-17eb74191e91.jpg?v=1790421362",
+          "width": 2720,
+          "height": 2720,
+          "alt": "Before and after hair removal on armpit, leg, back, arm and chest",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/e6943bdf-6094-4e93-aa74-b3c4017259ae.jpg?v=1790422411",
+          "width": 1600,
+          "height": 800,
+          "alt": "Diagram of the mousse softening hair at the root",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/7331394c-d1f2-439e-8ec7-91f6d25a898c.jpg?v=1790421362",
+          "width": 1500,
+          "height": 1500,
+          "alt": "Cloud Sense compared with other hair removal creams",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/0f29a5a7-8678-4b3b-88a4-88f83971311b.jpg?v=1790422411",
+          "width": 1600,
+          "height": 800,
+          "alt": "How to use the hair removal mousse in four steps",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/8d871669-27e7-4e8f-9e8f-c7a00ec2198a.jpg?v=1790422411",
+          "width": 1600,
+          "height": 800,
+          "alt": "Customer before and after on back, chest, armpit, leg and arm",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/cac920f9-4b70-404b-8f48-2f28a0d05f61.jpg?v=1790422411",
+          "width": 1600,
+          "height": 800,
+          "alt": "Friends with Cloud Sense gift bags",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/d18c159e-c89c-4767-abce-80c0c49ffde9.jpg?v=1790421362",
+          "width": 3060,
+          "height": 4080,
+          "alt": "Cloud Sense mousse can next to its box",
+          "variantId": null
+        }
+      ]
+    }
+  }
+}
