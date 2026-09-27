@@ -29,10 +29,18 @@ export function AnnouncementBar() {
     <div className="bg-sage-900 text-sage-100">
       <p className="container-page flex h-(--announce-h) items-center justify-center gap-4 text-center text-[0.78rem] tracking-[0.06em]">
         <span>Tracked delivery on every order</span>
-        <span aria-hidden="true" className="hidden size-1 rounded-full bg-sage-400 sm:inline-block" />
+        <span
+          aria-hidden="true"
+          className="hidden size-1 rounded-full bg-sage-400 sm:inline-block"
+        />
         <span className="hidden sm:inline">Secure checkout by Shopify</span>
-        <span aria-hidden="true" className="hidden size-1 rounded-full bg-sage-400 md:inline-block" />
-        <span className="hidden md:inline">Key ingredients listed on every product</span>
+        <span
+          aria-hidden="true"
+          className="hidden size-1 rounded-full bg-sage-400 md:inline-block"
+        />
+        <span className="hidden md:inline">
+          Key ingredients listed on every product
+        </span>
       </p>
     </div>
   );
@@ -138,11 +146,18 @@ export function DesktopNav({
   };
 
   return (
-    <nav ref={navRef} aria-label="Main" className="hidden font-headline lg:block">
-      <ul className="flex items-center gap-0.5">
+    <nav
+      ref={navRef}
+      aria-label="Main"
+      className="hidden h-full font-headline lg:block"
+    >
+      {/* Full-height list: each item's bottom edge is the bar's bottom edge, so
+          a panel anchored to `top-full` on the item hangs from the bar itself
+          while staying aligned with the menu it belongs to. */}
+      <ul className="flex h-full items-stretch gap-0.5">
         {groups.map((group, i) =>
           group.links.length === 0 ? (
-            <li key={group.label}>
+            <li key={group.label} className="flex items-center">
               <Link
                 href={group.href ?? "/"}
                 className="relative flex min-h-11 items-center rounded-xl px-3.5 text-[0.95rem] tracking-[0.01em] transition-colors hover:bg-ink/5"
@@ -153,6 +168,7 @@ export function DesktopNav({
           ) : (
             <li
               key={group.label}
+              className="relative flex items-center"
               onPointerEnter={hoverOpen(i)}
               onPointerLeave={hoverClose}
             >
@@ -185,6 +201,8 @@ export function DesktopNav({
                 onPointerLeave={hoverClose}
                 className={cn(
                   "absolute top-full z-40 pt-3",
+                  // The wide Shop panel lines up with its own button's left
+                  // edge; the narrow lists sit centred under theirs.
                   i === 0 ? "left-0" : "left-1/2 -translate-x-1/2",
                 )}
               >
@@ -214,7 +232,12 @@ function ShopPanel({ mega }: { mega: MegaData }) {
   return (
     <div className={cn(twoCol ? "w-88" : "w-64", "p-4 font-headline")}>
       <p className="eyebrow px-1">Shop by category</p>
-      <ul className={cn("mt-3 grid gap-x-4 gap-y-1", twoCol ? "grid-cols-2" : "grid-cols-1")}>
+      <ul
+        className={cn(
+          "mt-3 grid gap-x-4 gap-y-1",
+          twoCol ? "grid-cols-2" : "grid-cols-1",
+        )}
+      >
         {mega.categories.map((cat) => (
           <li key={cat.href}>
             <Link

@@ -22,8 +22,14 @@ export { AnnouncementBar } from "@/components/layout/HeaderClient";
  * representative image from the live catalog.
  */
 async function getMegaData(): Promise<MegaData> {
-  const [products, currency] = await Promise.all([getProducts(), storeCurrency()]);
-  const views = products.map((p) => ({ p, view: buildProductView(p.record, p.content, currency) }));
+  const [products, currency] = await Promise.all([
+    getProducts(),
+    storeCurrency(),
+  ]);
+  const views = products.map((p) => ({
+    p,
+    view: buildProductView(p.record, p.content, currency),
+  }));
 
   const categories = collections
     .filter((c) => c.categories !== "*")
@@ -58,10 +64,16 @@ export async function Header() {
   return (
     <header className="sticky top-0 z-30 pt-2 sm:pt-3">
       <HeaderShell>
-        <div className="flex items-center">
+        {/* self-stretch so the desktop nav can span the bar's full height —
+            the dropdowns hang from the bar's bottom edge (see DesktopNav). */}
+        <div className="flex h-full self-stretch items-center">
           <div className="flex items-center lg:hidden">
             <MobileMenu groups={primaryNav} />
-            <Link href="/search" className="grid size-11 place-items-center rounded-xl hover:bg-ink/5" aria-label="Search">
+            <Link
+              href="/search"
+              className="grid size-11 place-items-center rounded-xl hover:bg-ink/5"
+              aria-label="Search"
+            >
               <Icon name="search" />
             </Link>
           </div>
@@ -77,7 +89,11 @@ export async function Header() {
         </Link>
 
         <div className="flex items-center justify-end gap-1">
-          <Link href="/search" className="hidden size-11 place-items-center rounded-xl hover:bg-ink/5 lg:grid" aria-label="Search">
+          <Link
+            href="/search"
+            className="hidden size-11 place-items-center rounded-xl hover:bg-ink/5 lg:grid"
+            aria-label="Search"
+          >
             <Icon name="search" />
           </Link>
           <Link
