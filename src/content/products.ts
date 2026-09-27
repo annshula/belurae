@@ -80,7 +80,14 @@ export const products: ProductContent[] = [
     optionLabels: {
       Quantity: {
         label: "Choose your pack",
-        values: { "1PC": "1 set", "2PCS": "2 sets", "3PCS": "3 sets" },
+        /* Tier names, not counts. "Duo"/"Trio" carry the quantity themselves,
+           and the pack rows show the per-set price and the saving beside them,
+           so nothing here has to claim anything the numbers don't show. */
+        values: {
+          "1PC": "Starter set",
+          "2PCS": "Duo set",
+          "3PCS": "Trio set",
+        },
       },
     },
     packOption: { name: "Quantity", units: { "1PC": 1, "2PCS": 2, "3PCS": 3 } },

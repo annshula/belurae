@@ -16,7 +16,12 @@ import type { ProductContent } from "@/content/products";
  * there is no evidence those were ever real selling prices (blueprint A3.4).
  */
 
-export type ViewImage = { url: string; width: number; height: number; alt: string };
+export type ViewImage = {
+  url: string;
+  width: number;
+  height: number;
+  alt: string;
+};
 export type ViewVideo = {
   type: "video";
   poster: string;
@@ -25,7 +30,9 @@ export type ViewVideo = {
   alt: string;
   sources: { src: string; type: string; width: number | null }[];
 };
-export type ViewMedia = ({ type: "image" } & ViewImage & { variantId: string | null }) | ViewVideo;
+export type ViewMedia =
+  | ({ type: "image" } & ViewImage & { variantId: string | null })
+  | ViewVideo;
 
 export type ViewVariant = {
   id: string;
@@ -42,7 +49,7 @@ export type ViewVariant = {
   /** Saving vs buying `units` single sets, when > 0. */
   savings: number | null;
   perUnit: number;
-  /** "Mousse + Cream · 3 sets" */
+  /** "Mousse + Cream · Trio set" */
   label: string;
 };
 
@@ -94,7 +101,11 @@ function toImage(m: ImageRecord, alt: string): ViewImage {
 function curateGallery(record: ProductRecord): ViewMedia[] {
   return record.media.map((m) => {
     if (m.type === "image") {
-      return { type: "image", ...toImage(m, m.alt ?? record.title), variantId: m.variantId };
+      return {
+        type: "image",
+        ...toImage(m, m.alt ?? record.title),
+        variantId: m.variantId,
+      };
     }
     return {
       type: "video",
@@ -126,7 +137,9 @@ export function buildProductView(
         ? record.variants.find(
             (o) =>
               unitsFor(o.options) === 1 &&
-              Object.entries(v.options).every(([k, val]) => k === packName || o.options[k] === val),
+              Object.entries(v.options).every(
+                ([k, val]) => k === packName || o.options[k] === val,
+              ),
           )
         : undefined;
     const raw = single ? single.price * units - v.price : 0;
@@ -147,7 +160,9 @@ export function buildProductView(
       units,
       savings,
       perUnit: Math.round((v.price / units) * 100) / 100,
-      label: record.options.map((o) => labelFor(o.name, v.options[o.name] ?? "")).join(" · "),
+      label: record.options
+        .map((o) => labelFor(o.name, v.options[o.name] ?? ""))
+        .join(" · "),
     };
   });
 
@@ -167,10 +182,14 @@ export function buildProductView(
     available.find((v) => v.units === 1) ?? available[0] ?? variants[0];
 
   const singles = variants.filter((v) => v.units === 1);
-  const fromPrice = Math.min(...(singles.length ? singles : variants).map((v) => v.price));
+  const fromPrice = Math.min(
+    ...(singles.length ? singles : variants).map((v) => v.price),
+  );
 
   const gallery = curateGallery(record);
-  const images = gallery.filter((m): m is Extract<ViewMedia, { type: "image" }> => m.type === "image");
+  const images = gallery.filter(
+    (m): m is Extract<ViewMedia, { type: "image" }> => m.type === "image",
+  );
 
   return {
     handle: record.handle,
