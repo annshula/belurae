@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import "./globals.css";
-import { sans, serif } from "./fonts";
+import { instrumentSerif, jost } from "./fonts";
 import { Analytics } from "@/components/analytics/Analytics";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
@@ -40,7 +40,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const bagCatalog = await getBagCatalog();
 
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="en" className={`${jost.variable} ${instrumentSerif.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"

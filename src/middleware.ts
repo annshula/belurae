@@ -49,7 +49,7 @@ const CSP = [
   `style-src 'self' 'unsafe-inline'`,
   `img-src ${join(
     "'self' data: blob: https://cdn.shopify.com https://judgeme.imgix.net https://*.judge.me",
-    GA && "https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com",
+    GA && "https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.google.com",
     META && "https://www.facebook.com",
     TIKTOK && "https://analytics.tiktok.com",
     CLARITY && "https://*.clarity.ms https://c.bing.com",
@@ -59,7 +59,7 @@ const CSP = [
   `connect-src ${join(
     "'self'",
     IS_DEV && "ws://localhost:* wss://localhost:*",
-    GA && "https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
+    GA && "https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.google.com",
     META && "https://www.facebook.com https://connect.facebook.net https://*.run.app https://*.on.aws",
     TIKTOK && "https://analytics.tiktok.com",
     CLARITY && "https://www.clarity.ms https://*.clarity.ms",

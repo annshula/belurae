@@ -12,7 +12,7 @@ import localFont from "next/font/local";
  * Only the UI sans is preloaded; the display face is small (~25 KB) and loads
  * alongside, but the LCP element (hero image) never waits on it.
  */
-export const sans = localFont({
+export const jost = localFont({
   src: [{ path: "./fonts/jost.woff2", weight: "300 700", style: "normal" }],
   variable: "--ff-sans",
   display: "swap",
@@ -20,7 +20,7 @@ export const sans = localFont({
   fallback: ["ui-sans-serif", "system-ui", "Segoe UI", "Arial"],
 });
 
-export const serif = localFont({
+export const instrumentSerif = localFont({
   src: [
     { path: "./fonts/instrument-serif.woff2", weight: "400", style: "normal" },
     { path: "./fonts/instrument-serif-italic.woff2", weight: "400", style: "italic" },
@@ -28,5 +28,5 @@ export const serif = localFont({
   variable: "--ff-serif",
   display: "swap",
   preload: true,
-  fallback: ["Didot", "Bodoni 72", "Georgia", "serif"],
+  fallback: ["Didot", "Georgia", "serif"],
 });

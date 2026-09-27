@@ -4,7 +4,8 @@
  */
 
 export type NavLink = { label: string; href: string; description?: string };
-export type NavGroup = { label: string; href?: string; links: NavLink[] };
+export type NavPromo = { eyebrow: string; title: string; href: string; cta: string };
+export type NavGroup = { label: string; href?: string; links: NavLink[]; promo?: NavPromo };
 
 export const primaryNav: NavGroup[] = [
   {
@@ -18,23 +19,24 @@ export const primaryNav: NavGroup[] = [
   {
     label: "Why Belurae",
     links: [
-      { label: "Our philosophy", href: "/pages/philosophy" },
-      { label: "How it works", href: "/guides/how-to-use-hair-removal-mousse" },
-      { label: "Ingredients", href: "/ingredients" },
-      { label: "Our standards", href: "/pages/standards" },
+      { label: "Our philosophy", href: "/pages/philosophy", description: "Why clarity is the luxury" },
+      { label: "How it works", href: "/guides/how-to-use-hair-removal-mousse", description: "The ritual, step by step" },
+      { label: "Ingredients", href: "/ingredients", description: "What's inside, in plain words" },
+      { label: "Our standards", href: "/pages/standards", description: "Claims, reviews and pricing rules" },
     ],
+    promo: { eyebrow: "Care, clearly", title: "No borrowed reviews. No invented “was” prices.", href: "/pages/standards", cta: "Read our standards" },
   },
   {
     label: "Learn",
     href: "/guides",
     links: [
-      { label: "How to use hair removal mousse", href: "/guides/how-to-use-hair-removal-mousse" },
-      { label: "How to patch test", href: "/guides/how-to-patch-test" },
-      { label: "Hair removal aftercare", href: "/guides/hair-removal-aftercare" },
-      { label: "Choosing a method", href: "/guides/choosing-a-hair-removal-method" },
-      { label: "All guides", href: "/guides" },
-      { label: "FAQs", href: "/pages/faq" },
+      { label: "How to use hair removal mousse", href: "/guides/how-to-use-hair-removal-mousse", description: "Six unhurried steps" },
+      { label: "How to patch test", href: "/guides/how-to-patch-test", description: "Check how your skin responds" },
+      { label: "Hair removal aftercare", href: "/guides/hair-removal-aftercare", description: "The first 24 hours" },
+      { label: "Choosing a method", href: "/guides/choosing-a-hair-removal-method", description: "Mousse, razor or wax?" },
+      { label: "FAQs", href: "/pages/faq", description: "Straight answers" },
     ],
+    promo: { eyebrow: "Start here", title: "New to hair removal mousse? Read this first.", href: "/guides/how-to-use-hair-removal-mousse", cta: "Open the guide" },
   },
   { label: "About", href: "/pages/about", links: [] },
 ];

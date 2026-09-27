@@ -4,8 +4,12 @@ import { Breadcrumbs, type Crumb } from "@/components/ui/Breadcrumbs";
 import { cn } from "@/lib/utils";
 
 /**
- * Shared opening panel for listing and editorial pages: breadcrumbs, eyebrow,
- * a light display title and an intro, on a softly lit rounded well.
+ * Shared opening panel for editorial pages: breadcrumbs, eyebrow, a light
+ * display title and an intro, on a softly lit rounded well.
+ *
+ * `compact` drops the well/blur background and shrinks the title — for
+ * listing pages (collections) where the product grid is the focus, not the
+ * intro copy.
  */
 export function PageHero({
   crumbs,
@@ -13,6 +17,7 @@ export function PageHero({
   title,
   intro,
   tone = "well",
+  compact = false,
   children,
 }: {
   crumbs: Crumb[];
@@ -20,8 +25,22 @@ export function PageHero({
   title: ReactNode;
   intro?: ReactNode;
   tone?: "well" | "well-sage" | "well-clay";
+  compact?: boolean;
   children?: ReactNode;
 }) {
+  if (compact) {
+    return (
+      <section className="container-page pt-6 md:pt-8">
+        <Breadcrumbs items={crumbs} />
+        <div className="mt-5 flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+          <h1 className="font-serif text-heading-1 font-light">{title}</h1>
+          {intro && <div className="max-w-[46ch] text-body-sm text-ink-soft">{intro}</div>}
+        </div>
+        {children}
+      </section>
+    );
+  }
+
   return (
     <section className="px-2 pt-3 sm:px-3">
       <div className={cn(tone, "relative overflow-hidden rounded-media")}>

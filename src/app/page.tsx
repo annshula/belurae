@@ -112,8 +112,13 @@ export default async function HomePage() {
       <JsonLd data={graph(faqSchema(homeFaqs))} />
 
       {/* ── Hero: one lit panel, product on a soft pedestal ─────────── */}
-      <section className="px-2 pt-3 sm:px-3" aria-labelledby="hero-title">
-        <div className="well relative overflow-hidden rounded-media">
+      {/* Pulled up under the transparent header so bar + hero read as one
+          surface; fills the viewport below the announcement bar. */}
+      <section
+        className="-mt-[calc(var(--header-h)+0.5rem)] sm:-mt-[calc(var(--header-h)+0.75rem)]"
+        aria-labelledby="hero-title"
+      >
+        <div className="well relative flex min-h-[calc(100svh-var(--announce-h))] flex-col overflow-hidden lg:h-[calc(100svh-var(--announce-h))]">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -top-40 -left-32 size-136 rounded-full bg-clay-100/70 blur-3xl"
@@ -123,22 +128,22 @@ export default async function HomePage() {
             className="pointer-events-none absolute -right-24 -bottom-48 size-144 rounded-full bg-sage-100/80 blur-3xl"
           />
 
-          <div className="container-page relative grid items-center gap-6 pt-10 pb-10 md:pt-16 lg:min-h-[calc(100svh-var(--header-h)-var(--announce-h)-2rem)] lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:py-16">
+          <div className="container-page relative grid flex-1 items-center gap-6 pt-[calc(var(--header-h)+1.5rem)] pb-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:pt-[calc(var(--header-h)+0.5rem)] lg:pb-8">
             <div className="order-2 lg:order-1">
               <p className="eyebrow eyebrow-dot">Beauty &amp; Wellness</p>
               <h1
                 id="hero-title"
-                className="mt-6 font-serif text-display-xl font-light"
+                className="mt-4 font-serif text-display-xl font-light"
               >
                 Beauty,
                 <br />
                 <em className="font-normal text-sage-700">made simpler.</em>
               </h1>
-              <p className="mt-7 max-w-md text-body-lg text-ink-soft">
+              <p className="mt-5 max-w-md text-body-lg text-ink-soft">
                 Thoughtful personal care for everyday rituals — beginning with a
                 calmer, blade-free way to remove body hair at home.
               </p>
-              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4">
                 <Link href="/collections/hair-removal" className="btn-primary">
                   Shop hair removal
                   <Icon name="arrow-right" className="size-4" />
@@ -147,7 +152,7 @@ export default async function HomePage() {
                   Discover Belurae
                 </Link>
               </div>
-              <dl className="mt-14 grid max-w-md grid-cols-3 gap-2.5">
+              <dl className="mt-8 grid max-w-md grid-cols-3 gap-2.5">
                 {[
                   ["5–10", "minutes on skin"],
                   ["0", "blades or strips"],
@@ -158,14 +163,14 @@ export default async function HomePage() {
                 ].map(([value, label]) => (
                   <div
                     key={label}
-                    className="rounded-2xl bg-porcelain/70 px-4 py-4 shadow-soft"
+                    className="rounded-2xl bg-porcelain/70 px-4 py-3 shadow-soft"
                   >
                     <dt className="sr-only">{label}</dt>
                     <dd>
-                      <span className="block font-serif text-heading-2 tabular-nums">
+                      <span className="block font-serif text-heading-3 tabular-nums">
                         {value}
                       </span>
-                      <span className="mt-1 block text-[0.78rem] leading-snug text-ink-soft">
+                      <span className="mt-0.5 block text-[0.75rem] leading-snug text-ink-soft">
                         {label}
                       </span>
                     </dd>
@@ -175,7 +180,7 @@ export default async function HomePage() {
             </div>
 
             <div className="relative order-1 lg:order-2">
-              <div className="relative mx-auto aspect-square w-full max-w-135 lg:-translate-x-10">
+              <div className="relative mx-auto aspect-square w-full max-w-[min(34rem,calc(100svh-var(--announce-h)-var(--header-h)-7rem))] lg:mr-16">
                 <div
                   aria-hidden="true"
                   className="absolute inset-x-[14%] bottom-[9%] h-[14%] rounded-[50%] bg-linen/80 blur-2xl"

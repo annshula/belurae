@@ -83,11 +83,9 @@ export default async function ProductPage({ params }: Props) {
       <div className="container-page pt-6 pb-16 md:pt-8 lg:pb-28">
         <Breadcrumbs items={crumbs} className="mb-5 md:mb-8" />
         <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
-          <div className="-mx-(--gutter) md:mx-0">
-            <ProductGallery media={view.gallery} productName={content.name} />
-          </div>
+          <ProductGallery media={view.gallery} productName={content.name} />
 
-          <div className="lg:sticky lg:top-[calc(var(--header-h)+1.5rem)] lg:self-start">
+          <div className="lg:pt-4">
             <p className="eyebrow eyebrow-dot">{content.category.name}</p>
             <h1 className="mt-4 font-serif text-display font-light">{content.name}</h1>
             <p className="mt-2 text-body-sm text-ink-soft">{content.format}</p>

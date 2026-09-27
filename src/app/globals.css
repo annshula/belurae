@@ -66,19 +66,19 @@
   --font-label: var(--ff-sans), ui-sans-serif, system-ui, sans-serif;
   --font-script: var(--ff-serif), Georgia, serif;
 
-  --text-display-xl: clamp(3.5rem, 1.8rem + 7vw, 8.25rem);
-  --text-display-xl--line-height: 0.92;
+  --text-display-xl: clamp(2.5rem, 1.5rem + 4.4vw, 5.5rem);
+  --text-display-xl--line-height: 0.98;
   --text-display-xl--letter-spacing: -0.02em;
-  --text-display: clamp(2.75rem, 1.6rem + 4.2vw, 5.5rem);
+  --text-display: clamp(2.3rem, 1.5rem + 3vw, 4.25rem);
   --text-display--line-height: 0.98;
   --text-display--letter-spacing: -0.015em;
-  --text-heading-1: clamp(2.25rem, 1.6rem + 2.4vw, 3.6rem);
+  --text-heading-1: clamp(1.95rem, 1.5rem + 1.7vw, 3rem);
   --text-heading-1--line-height: 1.02;
   --text-heading-1--letter-spacing: -0.01em;
-  --text-heading-2: clamp(1.65rem, 1.35rem + 1.2vw, 2.4rem);
+  --text-heading-2: clamp(1.45rem, 1.25rem + 0.8vw, 2rem);
   --text-heading-2--line-height: 1.08;
   --text-heading-2--letter-spacing: -0.005em;
-  --text-heading-3: 1.35rem;
+  --text-heading-3: 1.25rem;
   --text-heading-3--line-height: 1.25;
   --text-body-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.225rem);
   --text-body-lg--line-height: 1.65;
@@ -166,11 +166,7 @@
     font-feature-settings: "kern";
     font-synthesis-weight: none;
   }
-  /* The display face ships one weight: never fake-bold it */
-  .font-serif,
-  .font-display {
-    font-weight: 400 !important;
-  }
+  /* Instrument Serif ships one weight; font-synthesis-weight above prevents faux bold. */
   /* Paper grain: a 2 KB SVG noise, fixed, barely there */
   body::before {
     content: "";
@@ -558,6 +554,19 @@
 
 @view-transition {
   navigation: auto;
+}
+
+/* Mega-menu entrance */
+@media (prefers-reduced-motion: no-preference) {
+  .mega-in {
+    animation: mega-in 420ms var(--ease-out-soft);
+  }
+}
+@keyframes mega-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.99);
+  }
 }
 
 /* Hover zoom on media inside a .group */

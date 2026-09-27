@@ -75,15 +75,16 @@ export default async function CollectionPage({ params }: Props) {
         )}
       />
 
-      <PageHero crumbs={crumbs} eyebrow="Shop" title={collection.title} intro={collection.intro} />
+      <PageHero
+        compact
+        crumbs={crumbs}
+        title={collection.title}
+        intro={`${items.length} product${items.length === 1 ? "" : "s"}`}
+      />
 
-      <div className="container-page pt-10 md:pt-14">
-        <p className="pb-8 text-body-sm text-ink-soft">
-          {items.length} product{items.length === 1 ? "" : "s"}
-        </p>
-
+      <div className="container-page pt-8 md:pt-10">
         {items.length > 0 ? (
-          <ul className="grid gap-x-5 gap-y-14 pb-20 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-x-5 gap-y-14 pb-14 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((p, i) => (
               <li key={p.handle}>
                 <ProductCard product={p} priority={i === 0} />
@@ -93,6 +94,7 @@ export default async function CollectionPage({ params }: Props) {
         ) : (
           <p className="pb-16 text-ink-soft">New products are on their way. In the meantime, browse our guides.</p>
         )}
+        <p className="max-w-[62ch] pb-16 text-body-sm text-ink-soft">{collection.intro}</p>
       </div>
 
       {collection.education && (
