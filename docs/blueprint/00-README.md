@@ -41,7 +41,7 @@ Source: `https://shoptrackify.com/products/bikini-pain-free-hair-removal-cream?v
 | Irritation guidance | Rinse with cool water, stop use, see a doctor if it continues | FAQ |
 | Not for | Face | FAQ |
 | Areas shown | Back, chest, underarms, legs, arms; bikini line "follow packaging directions" | Where-it-fits |
-| Delivery | 3–8 days, tracked | Delivery block |
+| Delivery | 5–11 days, tracked | Delivery block |
 | Reviews / rating | **None** — no `aggregateRating` in schema, none rendered | JSON-LD |
 | Support | support@shoptrackify.com | FAQ |
 

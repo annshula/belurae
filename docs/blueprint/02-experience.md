@@ -267,7 +267,7 @@ LCP: **first gallery image**. Price, name, and CTA server-rendered.
 │                                         │ [ − 1 + ]  [    ADD TO BAG    ] │
 │                                         │ [  Buy now (Shop Pay)  ]        │
 │                                         │                                 │
-│                                         │ ✓ Tracked delivery, 3–8 days    │
+│                                         │ ✓ Tracked delivery, 5–11 days    │
 │                                         │ ✓ Returns: [policy summary R8]  │
 │                                         │ ✓ Secure checkout by Shopify    │
 │                                         │ ✓ Full ingredient list ↓        │
@@ -286,50 +286,50 @@ Notes:
 
 ### Below the fold — section order
 
-| # | Section | Content source | Render |
-|---|---|---|---|
-| 1 | Product story — "Smooth skin without turning your routine into a chore." | Brand copy (reviewed) | RSC |
-| 2 | Benefits (3–4 cards with photo) | Only R6-substantiated or packaging-attributed | RSC |
-| 3 | How to use (video + 6 steps: prepare, apply, wait, remove, rinse, aftercare) | R2 | RSC + client video |
-| 4 | **Care, clearly — Ingredients** (key ingredients table + full INCI `<details open>` on desktop) | R1 metafields | RSC |
-| 5 | **Safety & patch test** (where to use / not use, time limit, irritation steps, who should ask a doctor) | R2 verbatim | RSC |
-| 6 | Comparison: mousse vs razor vs wax | Factual table below | RSC |
-| 7 | What's in the box + specifications | Metafields | RSC |
-| 8 | Documentation (inspectable PDFs, labelled "Manufacturer's SDS", "CPNP notification no. …") | R5 | RSC; section absent if none |
-| 9 | Reviews | Judge.me (verified only) | RSC first page, client filters |
-| 10 | FAQ (8–12 Qs) | R2 + support logs | RSC `<details>` |
-| 11 | Complete the routine / Pairs well with | Shopify product refs metafield | RSC |
-| 12 | Related guides | Content graph | RSC |
+| #   | Section                                                                                                 | Content source                                | Render                         |
+| --- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------ |
+| 1   | Product story — "Smooth skin without turning your routine into a chore."                                | Brand copy (reviewed)                         | RSC                            |
+| 2   | Benefits (3–4 cards with photo)                                                                         | Only R6-substantiated or packaging-attributed | RSC                            |
+| 3   | How to use (video + 6 steps: prepare, apply, wait, remove, rinse, aftercare)                            | R2                                            | RSC + client video             |
+| 4   | **Care, clearly — Ingredients** (key ingredients table + full INCI `<details open>` on desktop)         | R1 metafields                                 | RSC                            |
+| 5   | **Safety & patch test** (where to use / not use, time limit, irritation steps, who should ask a doctor) | R2 verbatim                                   | RSC                            |
+| 6   | Comparison: mousse vs razor vs wax                                                                      | Factual table below                           | RSC                            |
+| 7   | What's in the box + specifications                                                                      | Metafields                                    | RSC                            |
+| 8   | Documentation (inspectable PDFs, labelled "Manufacturer's SDS", "CPNP notification no. …")              | R5                                            | RSC; section absent if none    |
+| 9   | Reviews                                                                                                 | Judge.me (verified only)                      | RSC first page, client filters |
+| 10  | FAQ (8–12 Qs)                                                                                           | R2 + support logs                             | RSC `<details>`                |
+| 11  | Complete the routine / Pairs well with                                                                  | Shopify product refs metafield                | RSC                            |
+| 12  | Related guides                                                                                          | Content graph                                 | RSC                            |
 
 ### Comparison table (factual, non-defamatory)
 
-| | Hair removal mousse | Razor | Wax |
-|---|---|---|---|
-| How it works | Chemical formula breaks hair down at the skin surface; wiped away* | Blade cuts hair at the surface | Pulls hair out from the follicle |
-| Blade involved | No | Yes | No |
-| Pulling involved | No | No | Yes |
-| Time per session | 5–10 min wait + application | A few minutes | Varies; salon or at-home |
-| Hair length needed | Per packaging (R2) | Any | Usually a minimum length |
-| Things to know | Patch test; can irritate sensitive skin; scent | Risk of nicks and razor bumps for some people | Can be uncomfortable; risk of irritation |
+|                    | Hair removal mousse                                                 | Razor                                         | Wax                                      |
+| ------------------ | ------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------- |
+| How it works       | Chemical formula breaks hair down at the skin surface; wiped away\* | Blade cuts hair at the surface                | Pulls hair out from the follicle         |
+| Blade involved     | No                                                                  | Yes                                           | No                                       |
+| Pulling involved   | No                                                                  | No                                            | Yes                                      |
+| Time per session   | 5–10 min wait + application                                         | A few minutes                                 | Varies; salon or at-home                 |
+| Hair length needed | Per packaging (R2)                                                  | Any                                           | Usually a minimum length                 |
+| Things to know     | Patch test; can irritate sensitive skin; scent                      | Risk of nicks and razor bumps for some people | Can be uncomfortable; risk of irritation |
 
 \* Mechanism wording confirmed against R1 before publishing. Regrowth-time rows are **omitted** unless the manufacturer substantiates them.
 
 ### PDP media gallery sequence
 
-| # | Asset | Status |
-|---|---|---|
-| 1 | Hero product on ivory stone (4:5) | Shoot |
-| 2 | Product in hand (scale) | Shoot |
-| 3 | Mousse texture macro | Shoot |
-| 4 | Application on leg | Shoot |
-| 5 | Demonstration video (15–30 s, captioned, poster) | Shoot / existing Shopify videos after review |
-| 6 | Ingredients flat-lay (R1 only) | Shoot |
-| 7 | Documentation thumbnail (if R5) | From documents |
-| 8 | How-to-use step graphic (typographic, not icons) | Design |
-| 9 | Before/after — authentic, labelled with area + timeframe + "customer photo" | Only from consenting customers |
-| 10 | Lifestyle bathroom shelf | Shoot |
-| 11 | What's included (can, scraper, serum/cream) | Shoot |
-| 12 | UGC (labelled) | Post-launch |
+| #   | Asset                                                                       | Status                                       |
+| --- | --------------------------------------------------------------------------- | -------------------------------------------- |
+| 1   | Hero product on ivory stone (4:5)                                           | Shoot                                        |
+| 2   | Product in hand (scale)                                                     | Shoot                                        |
+| 3   | Mousse texture macro                                                        | Shoot                                        |
+| 4   | Application on leg                                                          | Shoot                                        |
+| 5   | Demonstration video (15–30 s, captioned, poster)                            | Shoot / existing Shopify videos after review |
+| 6   | Ingredients flat-lay (R1 only)                                              | Shoot                                        |
+| 7   | Documentation thumbnail (if R5)                                             | From documents                               |
+| 8   | How-to-use step graphic (typographic, not icons)                            | Design                                       |
+| 9   | Before/after — authentic, labelled with area + timeframe + "customer photo" | Only from consenting customers               |
+| 10  | Lifestyle bathroom shelf                                                    | Shoot                                        |
+| 11  | What's included (can, scraper, serum/cream)                                 | Shoot                                        |
+| 12  | UGC (labelled)                                                              | Post-launch                                  |
 
 Supplier images currently on the page (manufacturer before/after composites) are **not** used unless the supplier grants rights and they are labelled as manufacturer images.
 
@@ -400,17 +400,17 @@ Behaviour:
 
 ## 53 / 56. CRO and trust architecture
 
-Target reaction: *"I understand this product and I trust the company"* — not *"this site is trying to convince me"*.
+Target reaction: _"I understand this product and I trust the company"_ — not _"this site is trying to convince me"_.
 
-| Customer doubt | Where it's answered | Mechanism |
-|---|---|---|
-| What exactly is this? | PDP H1 + benefit line + "What's in the box" | Specific format/size/time |
-| Will it work on my hair/area? | How to use, areas allowed/not allowed, FAQ | Packaging-sourced answers |
-| Is it safe for my skin? | Patch-test line above fold, Safety section, full INCI | Transparency, stated limits |
-| Is this company real? | About, Standards, Contact, legal entity in footer | Entity clarity (R9) |
-| What if it doesn't suit me? | Returns summary next to ATC, full policy page | Risk reduction (R8) |
-| When will it arrive? | Delivery line next to ATC, cart, shipping page | Concrete days (R7) |
-| Do others like it? | Verified reviews (when they exist) | Judge.me verified-buyer only |
+| Customer doubt                | Where it's answered                                   | Mechanism                    |
+| ----------------------------- | ----------------------------------------------------- | ---------------------------- |
+| What exactly is this?         | PDP H1 + benefit line + "What's in the box"           | Specific format/size/time    |
+| Will it work on my hair/area? | How to use, areas allowed/not allowed, FAQ            | Packaging-sourced answers    |
+| Is it safe for my skin?       | Patch-test line above fold, Safety section, full INCI | Transparency, stated limits  |
+| Is this company real?         | About, Standards, Contact, legal entity in footer     | Entity clarity (R9)          |
+| What if it doesn't suit me?   | Returns summary next to ATC, full policy page         | Risk reduction (R8)          |
+| When will it arrive?          | Delivery line next to ATC, cart, shipping page        | Concrete days (R7)           |
+| Do others like it?            | Verified reviews (when they exist)                    | Judge.me verified-buyer only |
 
 Conversion levers used: clear set/pack choice with honest savings, sticky mobile ATC, one-tap wallet checkout, relevant (not random) recommendations, fast pages. Levers **not** used: timers, fake scarcity, "X people viewing", exit popups, pre-checked add-ons, confirm-shaming.
 
@@ -418,15 +418,15 @@ Conversion levers used: clear set/pack choice with honest savings, sticky mobile
 
 All CSS transitions (opacity/transform), 180–320 ms, disabled under reduced motion.
 
-| Interaction | Behaviour |
-|---|---|
-| Add to bag | Button label → "Added ✓" for 1.5 s, drawer slides in (240 ms), count badge updates; `role="status"` announcement |
-| Variant change | Main image crossfade (200 ms); price updates in place (no layout shift) |
-| Card hover (fine pointer) | Second image crossfade 300 ms; no scale/zoom jumps |
-| Accordion | `<details>` with `::details-content` height transition where supported; instant elsewhere |
-| Drawer / sheet | Slide + backdrop fade; `@starting-style` for entry |
-| Section reveal | Optional 12 px rise + fade on first view (CSS `animation-timeline: view()` where supported, else none). Content is never hidden if JS/animation fails. |
-| Page transitions | View Transitions API (cross-document) for a subtle fade between routes where supported; no JS router animations |
+| Interaction               | Behaviour                                                                                                                                              |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Add to bag                | Button label → "Added ✓" for 1.5 s, drawer slides in (240 ms), count badge updates; `role="status"` announcement                                       |
+| Variant change            | Main image crossfade (200 ms); price updates in place (no layout shift)                                                                                |
+| Card hover (fine pointer) | Second image crossfade 300 ms; no scale/zoom jumps                                                                                                     |
+| Accordion                 | `<details>` with `::details-content` height transition where supported; instant elsewhere                                                              |
+| Drawer / sheet            | Slide + backdrop fade; `@starting-style` for entry                                                                                                     |
+| Section reveal            | Optional 12 px rise + fade on first view (CSS `animation-timeline: view()` where supported, else none). Content is never hidden if JS/animation fails. |
+| Page transitions          | View Transitions API (cross-document) for a subtle fade between routes where supported; no JS router animations                                        |
 
 ---
 
@@ -434,23 +434,23 @@ All CSS transitions (opacity/transform), 180–320 ms, disabled under reduced mo
 
 Sizes are source-export sizes; `next/image` serves responsive derivatives from the Shopify CDN or Vercel.
 
-| Section | Type | Ratio | Desktop export | Mobile export | Art direction / subject | Background | Text overlay | Loading | Alt text strategy |
-|---|---|---|---|---|---|---|---|---|---|
-| Home hero | Image poster + video loop 6–8 s | 16:9 desktop / 4:5 mobile (art-directed, 2 crops) | 2400×1350 | 1080×1350 | Hands applying mousse to a leg in morning bathroom light; product visible | Travertine/ivory tile | Desktop yes (left third, scrim); mobile no | Poster `priority` + `fetchPriority=high`; video after `load` | Describe scene: "Hand applying white hair removal mousse to a leg beside the Belurae can" |
-| Trust strip | None (text + 20 px line icon) | — | — | — | — | — | — | — | Icons `aria-hidden` |
-| Shop by need | Image | 4:5 | 1200×1500 | 720×900 | Category-specific still life | Warm neutrals | Title below, not on image | Lazy | Category content, not "category image" |
-| Product card | Image ×2 | 4:5 | 1200×1500 | 600×750 | #1 packshot, #2 in-use | Consistent cream seamless | No | Lazy (first row on collection: eager, no priority) | Product + view ("…can, front view") |
-| Hero product story | Video (click or in-view autoplay muted) + poster | 4:5 | 1440×1800 | 1080×1350 | Mousse forming on skin, slow | Neutral | No | Lazy, IntersectionObserver | Poster alt + captions file |
-| How it works | Image ×4 | 1:1 | 1000×1000 | 720×720 | One step each, same framing | Same set | Step number outside image | Lazy | Step action |
-| How-to video | Video 30–45 s | 16:9 (mobile 9:16 variant) | 1920×1080 | 1080×1920 | Full routine incl. patch test and aftercare | Bathroom | Burned-in: none; captions via WebVTT | Click-to-play, `preload="none"` | Transcript on page |
-| Ingredients | Image per ingredient | 1:1 or 4:5 | 1000×1250 | 600×750 | Single botanical on paper | Beige paper | No | Lazy | Ingredient name + form ("fresh aloe leaf cut open") |
-| Social proof / UGC | Customer image/video | 1:1 / 9:16 | as received (≥ 1080) | — | Unretouched | Any | "Customer photo" label | Lazy | Customer-provided caption or neutral description |
-| Why Belurae | Image | 3:2 | 1800×1200 | 900×600 | Calm shelf / routine | Linen | No | Lazy | Scene |
-| Bundles | Image per set | 1:1 | 1200×1200 | 720×720 | Exact set contents, same set | Seamless | No | Lazy | "Two cans of mousse with scraper" |
-| Education cards | Image | 3:2 | 1200×800 | 720×480 | Editorial topic image | Varied neutral | No | Lazy | Topic scene |
-| Collection hero | Image | 3:2 desktop / 4:5 mobile | 2000×1333 | 1080×1350 | Category mood | Neutral | No | `priority` (LCP) | Scene |
-| PDP gallery #1 | Image | 4:5 | 2000×2500 | 1080×1350 | Packshot | Ivory stone | No | `priority` | "Belurae Hair Removal Mousse, 140 ml can, front" |
-| PDP gallery #2–12 | Image/video | 4:5 | 2000×2500 | 1080×1350 | See gallery table | Mixed | No | Lazy | Specific to each |
-| OG images | Image | 1.91:1 | 1200×630 | — | Product/category + wordmark | Ivory | Title text allowed | — | — |
+| Section            | Type                                             | Ratio                                             | Desktop export       | Mobile export | Art direction / subject                                                   | Background                | Text overlay                               | Loading                                                      | Alt text strategy                                                                         |
+| ------------------ | ------------------------------------------------ | ------------------------------------------------- | -------------------- | ------------- | ------------------------------------------------------------------------- | ------------------------- | ------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Home hero          | Image poster + video loop 6–8 s                  | 16:9 desktop / 4:5 mobile (art-directed, 2 crops) | 2400×1350            | 1080×1350     | Hands applying mousse to a leg in morning bathroom light; product visible | Travertine/ivory tile     | Desktop yes (left third, scrim); mobile no | Poster `priority` + `fetchPriority=high`; video after `load` | Describe scene: "Hand applying white hair removal mousse to a leg beside the Belurae can" |
+| Trust strip        | None (text + 20 px line icon)                    | —                                                 | —                    | —             | —                                                                         | —                         | —                                          | —                                                            | Icons `aria-hidden`                                                                       |
+| Shop by need       | Image                                            | 4:5                                               | 1200×1500            | 720×900       | Category-specific still life                                              | Warm neutrals             | Title below, not on image                  | Lazy                                                         | Category content, not "category image"                                                    |
+| Product card       | Image ×2                                         | 4:5                                               | 1200×1500            | 600×750       | #1 packshot, #2 in-use                                                    | Consistent cream seamless | No                                         | Lazy (first row on collection: eager, no priority)           | Product + view ("…can, front view")                                                       |
+| Hero product story | Video (click or in-view autoplay muted) + poster | 4:5                                               | 1440×1800            | 1080×1350     | Mousse forming on skin, slow                                              | Neutral                   | No                                         | Lazy, IntersectionObserver                                   | Poster alt + captions file                                                                |
+| How it works       | Image ×4                                         | 1:1                                               | 1000×1000            | 720×720       | One step each, same framing                                               | Same set                  | Step number outside image                  | Lazy                                                         | Step action                                                                               |
+| How-to video       | Video 30–45 s                                    | 16:9 (mobile 9:16 variant)                        | 1920×1080            | 1080×1920     | Full routine incl. patch test and aftercare                               | Bathroom                  | Burned-in: none; captions via WebVTT       | Click-to-play, `preload="none"`                              | Transcript on page                                                                        |
+| Ingredients        | Image per ingredient                             | 1:1 or 4:5                                        | 1000×1250            | 600×750       | Single botanical on paper                                                 | Beige paper               | No                                         | Lazy                                                         | Ingredient name + form ("fresh aloe leaf cut open")                                       |
+| Social proof / UGC | Customer image/video                             | 1:1 / 9:16                                        | as received (≥ 1080) | —             | Unretouched                                                               | Any                       | "Customer photo" label                     | Lazy                                                         | Customer-provided caption or neutral description                                          |
+| Why Belurae        | Image                                            | 3:2                                               | 1800×1200            | 900×600       | Calm shelf / routine                                                      | Linen                     | No                                         | Lazy                                                         | Scene                                                                                     |
+| Bundles            | Image per set                                    | 1:1                                               | 1200×1200            | 720×720       | Exact set contents, same set                                              | Seamless                  | No                                         | Lazy                                                         | "Two cans of mousse with scraper"                                                         |
+| Education cards    | Image                                            | 3:2                                               | 1200×800             | 720×480       | Editorial topic image                                                     | Varied neutral            | No                                         | Lazy                                                         | Topic scene                                                                               |
+| Collection hero    | Image                                            | 3:2 desktop / 4:5 mobile                          | 2000×1333            | 1080×1350     | Category mood                                                             | Neutral                   | No                                         | `priority` (LCP)                                             | Scene                                                                                     |
+| PDP gallery #1     | Image                                            | 4:5                                               | 2000×2500            | 1080×1350     | Packshot                                                                  | Ivory stone               | No                                         | `priority`                                                   | "Belurae Hair Removal Mousse, 140 ml can, front"                                          |
+| PDP gallery #2–12  | Image/video                                      | 4:5                                               | 2000×2500            | 1080×1350     | See gallery table                                                         | Mixed                     | No                                         | Lazy                                                         | Specific to each                                                                          |
+| OG images          | Image                                            | 1.91:1                                            | 1200×630             | —             | Product/category + wordmark                                               | Ivory                     | Title text allowed                         | —                                                            | —                                                                                         |
 
 Filenames: `belurae-hair-removal-mousse-front-140ml.jpg` (descriptive, lowercase, hyphenated). Uploaded to Shopify Files so the CDN serves them.
