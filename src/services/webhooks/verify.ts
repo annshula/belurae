@@ -17,9 +17,10 @@ import { createHmac, timingSafeEqual } from "node:crypto";
  */
 export function describeCaller(headers: Headers): string {
   const topic = headers.get("x-shopify-topic") ?? "none";
+  const webhookId = headers.get("x-shopify-webhook-id") ?? "none";
   const ip = headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   const userAgent = (headers.get("user-agent") ?? "none").slice(0, 120);
-  return `topic=${topic} ip=${ip} ua="${userAgent}"`;
+  return `topic=${topic} id=${webhookId} ip=${ip} ua="${userAgent}"`;
 }
 
 export function verifyWebhookSignature(
