@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-09-27T14:57:43.635Z",
+  "syncedAt": "2026-09-29T08:48:02.272Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -18,11 +18,11 @@
     "bikini-pain-free-hair-removal-spray": {
       "id": "gid://shopify/Product/15395256467683",
       "handle": "bikini-pain-free-hair-removal-spray",
-      "title": "Bikini Pain-Free Hair Removal Spray",
+      "title": "Bikini Pain-Free Hair Removal Mousse",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-09-27T14:56:16Z",
+      "updatedAt": "2026-09-29T08:43:52Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -44,8 +44,8 @@
           "title": "1PC",
           "sku": "CJPF253602701AZ",
           "barcode": null,
-          "price": 49.99,
-          "compareAtPrice": 59.99,
+          "price": 39.99,
+          "compareAtPrice": 49.99,
           "availableForSale": true,
           "options": {
             "Quantity": "1PC"
@@ -54,34 +54,34 @@
           "description": null,
           "pricesByMarket": {
             "CA": {
-              "amount": 71,
-              "compareAtAmount": 85,
+              "amount": 57,
+              "compareAtAmount": 71,
               "currencyCode": "CAD"
             },
             "AU": {
-              "amount": 73,
-              "compareAtAmount": 88,
+              "amount": 59,
+              "compareAtAmount": 73,
               "currencyCode": "AUD"
             },
-            "IN": {
-              "amount": 4880.85,
-              "compareAtAmount": 5857.21,
-              "currencyCode": "INR"
-            },
             "ZA": {
-              "amount": 832,
-              "compareAtAmount": 998,
+              "amount": 671,
+              "compareAtAmount": 838,
               "currencyCode": "ZAR"
             },
-            "GB": {
-              "amount": 39,
-              "compareAtAmount": 47,
-              "currencyCode": "GBP"
-            },
             "US": {
-              "amount": 49.99,
-              "compareAtAmount": 59.99,
+              "amount": 39.99,
+              "compareAtAmount": 49.99,
               "currencyCode": "USD"
+            },
+            "IN": {
+              "amount": 3916.31,
+              "compareAtAmount": 4895.63,
+              "currencyCode": "INR"
+            },
+            "GB": {
+              "amount": 31,
+              "compareAtAmount": 39,
+              "currencyCode": "GBP"
             }
           }
         },
@@ -90,8 +90,8 @@
           "title": "2PCS",
           "sku": "CJPF253602702BY",
           "barcode": null,
-          "price": 59.99,
-          "compareAtPrice": 89.99,
+          "price": 49.99,
+          "compareAtPrice": 79.99,
           "availableForSale": true,
           "options": {
             "Quantity": "2PCS"
@@ -100,34 +100,34 @@
           "description": null,
           "pricesByMarket": {
             "CA": {
-              "amount": 85,
-              "compareAtAmount": 128,
+              "amount": 71,
+              "compareAtAmount": 114,
               "currencyCode": "CAD"
             },
             "AU": {
-              "amount": 88,
-              "compareAtAmount": 131,
+              "amount": 73,
+              "compareAtAmount": 117,
               "currencyCode": "AUD"
             },
-            "IN": {
-              "amount": 5857.21,
-              "compareAtAmount": 8786.3,
-              "currencyCode": "INR"
-            },
             "ZA": {
-              "amount": 998,
-              "compareAtAmount": 1497,
+              "amount": 838,
+              "compareAtAmount": 1341,
               "currencyCode": "ZAR"
             },
-            "GB": {
-              "amount": 47,
-              "compareAtAmount": 70,
-              "currencyCode": "GBP"
-            },
             "US": {
-              "amount": 59.99,
-              "compareAtAmount": 89.99,
+              "amount": 49.99,
+              "compareAtAmount": 79.99,
               "currencyCode": "USD"
+            },
+            "IN": {
+              "amount": 4895.63,
+              "compareAtAmount": 7833.59,
+              "currencyCode": "INR"
+            },
+            "GB": {
+              "amount": 39,
+              "compareAtAmount": 62,
+              "currencyCode": "GBP"
             }
           }
         },
@@ -136,8 +136,8 @@
           "title": "3PCS",
           "sku": "CJPF253602710JQ",
           "barcode": null,
-          "price": 69.99,
-          "compareAtPrice": 120.99,
+          "price": 59.99,
+          "compareAtPrice": 111.99,
           "availableForSale": true,
           "options": {
             "Quantity": "3PCS"
@@ -146,34 +146,34 @@
           "description": null,
           "pricesByMarket": {
             "CA": {
-              "amount": 99,
-              "compareAtAmount": 172,
+              "amount": 86,
+              "compareAtAmount": 159,
               "currencyCode": "CAD"
             },
             "AU": {
-              "amount": 102,
-              "compareAtAmount": 176,
+              "amount": 88,
+              "compareAtAmount": 164,
               "currencyCode": "AUD"
             },
-            "IN": {
-              "amount": 6833.57,
-              "compareAtAmount": 11813.03,
-              "currencyCode": "INR"
-            },
             "ZA": {
-              "amount": 1165,
-              "compareAtAmount": 2013,
+              "amount": 1006,
+              "compareAtAmount": 1877,
               "currencyCode": "ZAR"
             },
-            "GB": {
-              "amount": 54,
-              "compareAtAmount": 94,
-              "currencyCode": "GBP"
-            },
             "US": {
-              "amount": 69.99,
-              "compareAtAmount": 120.99,
+              "amount": 59.99,
+              "compareAtAmount": 111.99,
               "currencyCode": "USD"
+            },
+            "IN": {
+              "amount": 5874.95,
+              "compareAtAmount": 10967.42,
+              "currencyCode": "INR"
+            },
+            "GB": {
+              "amount": 47,
+              "compareAtAmount": 87,
+              "currencyCode": "GBP"
             }
           }
         }
@@ -411,7 +411,7 @@
         "Aloe leaf water, glycerin & hyaluronic acid",
         "Suitable for men and women"
       ],
-      "saleEndsAt": "2026-09-27T19:22:48.000Z"
+      "saleEndsAt": null
     }
   }
 }
