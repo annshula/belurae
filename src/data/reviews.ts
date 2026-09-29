@@ -35,8 +35,7 @@ import {
 
 /** Product handles, as they appear in data/catalog.json. */
 const MOUSSE_HANDLE = "bikini-pain-free-hair-removal-spray";
-const TONER_HANDLE =
-  "hydrating-smoothing-toner-even-skin-tone-brightening-skin-refines-skin-texture-fast-absorbing-non-greasy-refreshing-facial-toner";
+const TONER_HANDLE = "egf-tox-toner";
 
 /** Date of the newest review, fixed so both renderers agree. Bump when refreshing. */
 const ANCHOR = Date.UTC(2026, 8, 25, 12, 0, 0);

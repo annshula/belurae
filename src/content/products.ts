@@ -353,10 +353,11 @@ export const products: ProductContent[] = [
     ],
   },
   {
-    handle:
+    handle: "egf-tox-toner",
+    slug: "egf-tox-toner",
+    legacySlugs: [
       "hydrating-smoothing-toner-even-skin-tone-brightening-skin-refines-skin-texture-fast-absorbing-non-greasy-refreshing-facial-toner",
-    slug: "hydrating-smoothing-toner-even-skin-tone-brightening-skin-refines-skin-texture-fast-absorbing-non-greasy-refreshing-facial-toner",
-    legacySlugs: [],
+    ],
     name: "Belurae EGF Tox Toner",
     format: "Facial toner · 100 ml",
     category: { slug: "skincare", name: "Skincare" },

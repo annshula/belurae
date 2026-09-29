@@ -28,7 +28,17 @@ const readCatalog = unstable_cache(
   async (): Promise<CatalogDocument> => {
     try {
       const live = await readJsonFile<CatalogDocument>(CATALOG_PATH);
-      if (live?.products && Object.keys(live.products).length > 0) return live;
+      if (live?.products && Object.keys(live.products).length > 0) {
+        /* A product renamed or added in Shopify can be missing from the live
+           document until the next sync. Fall back to the committed seed for
+           those handles, so a listed product never vanishes in the gap. */
+        const products = { ...live.products };
+        for (const { handle } of productContent) {
+          const fallback = seedDoc.products[handle];
+          if (!products[handle] && fallback) products[handle] = fallback;
+        }
+        return { ...live, products };
+      }
     } catch (error) {
       console.error(
         "[catalog] live read failed, serving the build-time seed:",
@@ -37,7 +47,7 @@ const readCatalog = unstable_cache(
     }
     return seedDoc;
   },
-  ["belurae-catalog-v11"],
+  ["belurae-catalog-v12"],
   { tags: [CACHE_TAGS.catalog], revalidate: 3600 },
 );
 
