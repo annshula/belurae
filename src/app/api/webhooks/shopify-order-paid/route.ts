@@ -64,11 +64,13 @@ type ShopifyOrder = {
 const AD_IDENTITY_ATTRIBUTE_KEYS = {
   fbp: "_fbp",
   fbc: "_fbc",
+  externalId: "_external_id",
 } as const;
 
-/** Reads back the fbp/fbc the checkout route put on the cart — this webhook
- *  has no cookies of its own, so note_attributes is the only way these values
- *  survive from the shopper's browser to this server-to-server call. */
+/** Reads back the fbp/fbc/external_id the checkout route put on the cart —
+ *  this webhook has no cookies of its own, so note_attributes is the only
+ *  way these values survive from the shopper's browser to this
+ *  server-to-server call. */
 function adIdentityFromOrder(order: ShopifyOrder) {
   const byName = new Map(
     (order.note_attributes ?? []).map((a) => [a.name, a.value]),
@@ -76,6 +78,7 @@ function adIdentityFromOrder(order: ShopifyOrder) {
   return {
     fbp: byName.get(AD_IDENTITY_ATTRIBUTE_KEYS.fbp) || undefined,
     fbc: byName.get(AD_IDENTITY_ATTRIBUTE_KEYS.fbc) || undefined,
+    externalId: byName.get(AD_IDENTITY_ATTRIBUTE_KEYS.externalId) || undefined,
   };
 }
 
@@ -153,10 +156,12 @@ async function sendMetaPurchase(
   // strongest signals in Event Match Quality — stronger than IP/UA/fbp/fbc
   // combined — and each takes an array of hashed values per Meta's spec.
   const match = customerMatchData(order);
-  // fbp/fbc: read back from the cart's note_attributes (see
+  // fbp/fbc/external_id: read back from the cart's note_attributes (see
   // adIdentityFromOrder above) — the only way this server-to-server call can
   // see the browser's own identifiers, since the shopper pays on Shopify's
   // domain and never returns to a page here with cookies to read.
+  // external_id isn't hashed: it's a random per-browser UUID with no
+  // personal meaning (see lib/ad-identity.ts), not PII like em/ph.
   const adIdentity = adIdentityFromOrder(order);
   const userData = {
     client_ip_address: ip ?? undefined,
@@ -171,6 +176,7 @@ async function sendMetaPurchase(
     country: match.country ? [match.country] : undefined,
     fbp: adIdentity.fbp,
     fbc: adIdentity.fbc,
+    external_id: adIdentity.externalId ? [adIdentity.externalId] : undefined,
   };
 
   try {

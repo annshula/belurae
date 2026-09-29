@@ -17,6 +17,7 @@ import {
   type AnalyticsItem,
 } from "@/lib/analytics";
 import { useLocalization } from "@/components/localization/LocalizationProvider";
+import { getExternalId } from "@/lib/ad-identity";
 
 /**
  * The bag (same model as the reference storefront): lines live in
@@ -194,18 +195,20 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
     if (lines.length === 0) return { ok: false, error: "Your bag is empty." };
     try {
       // Meta's click-id / browser-id cookies, when the Pixel has loaded and
-      // set them — carried through Shopify as cart attributes so the
-      // orders/paid webhook's server-side Purchase event can include them.
-      // Without these, that event has no fbc/fbp at all (there is no
+      // set them, plus a stable per-browser id (lib/ad-identity.ts) — all
+      // carried through Shopify as cart attributes so the orders/paid
+      // webhook's server-side Purchase event can include them. Without these,
+      // that event has no fbc/fbp/external_id at all (there is no
       // browser-side Purchase pixel to fall back on; see route.ts).
       const fbc = readCookie("_fbc");
       const fbp = readCookie("_fbp");
+      const externalId = getExternalId();
       const res = await fetch("/api/cart/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           lines: lines.map(({ variantId, quantity }) => ({ variantId, quantity })),
-          ...(fbc || fbp ? { meta: { fbc, fbp } } : {}),
+          ...(fbc || fbp || externalId ? { meta: { fbc, fbp, externalId } } : {}),
         }),
       });
       const data = (await res.json().catch(() => ({}))) as { checkoutUrl?: string; error?: string };

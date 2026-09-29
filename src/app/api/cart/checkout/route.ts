@@ -69,18 +69,24 @@ export async function POST(request: NextRequest) {
   const countryCode = country && /^[A-Z]{2}$/.test(country) ? country : null;
 
   // Meta's click-id / browser-id cookies, forwarded by the client from its own
-  // document.cookie (see CartProvider.checkout) — carried as cart attributes
-  // so the orders/paid webhook can read them back for the server-side
-  // Purchase event. Bounded length: these are short opaque tokens, never
-  // free text, so anything longer than Meta's own format is dropped rather
-  // than trusted into a Shopify attribute value.
-  const meta = (body as { meta?: unknown })?.meta as { fbc?: unknown; fbp?: unknown } | undefined;
+  // document.cookie, plus the stable per-browser id from lib/ad-identity.ts
+  // (see CartProvider.checkout) — carried as cart attributes so the
+  // orders/paid webhook can read them back for the server-side Purchase
+  // event. Bounded length: these are short opaque tokens, never free text,
+  // so anything longer than Meta's own format is dropped rather than
+  // trusted into a Shopify attribute value.
+  const meta = (body as { meta?: unknown })?.meta as
+    | { fbc?: unknown; fbp?: unknown; externalId?: unknown }
+    | undefined;
   const attributes: { key: string; value: string }[] = [];
   if (typeof meta?.fbc === "string" && meta.fbc.length > 0 && meta.fbc.length <= 200) {
     attributes.push({ key: "_fbc", value: meta.fbc });
   }
   if (typeof meta?.fbp === "string" && meta.fbp.length > 0 && meta.fbp.length <= 200) {
     attributes.push({ key: "_fbp", value: meta.fbp });
+  }
+  if (typeof meta?.externalId === "string" && meta.externalId.length > 0 && meta.externalId.length <= 200) {
+    attributes.push({ key: "_external_id", value: meta.externalId });
   }
 
   try {
