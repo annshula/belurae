@@ -8,7 +8,12 @@ import { Faq } from "@/components/content/Faq";
 import { SectionHeading } from "@/components/content/SectionHeading";
 import { ProductAccordion } from "@/components/product/ProductAccordion";
 import { ProductGallery } from "@/components/product/ProductGallery";
+import { PurchaseFeedback } from "@/components/product/PurchaseFeedback";
 import { PurchasePanel } from "@/components/product/PurchasePanel";
+import {
+  ProductVideoShowcase,
+  type ShowcaseVideo,
+} from "@/components/product/ProductVideoShowcase";
 import { ReviewsSection } from "@/components/product/ReviewsSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Icon } from "@/components/ui/Icon";
@@ -26,6 +31,23 @@ import { productSchema } from "@/lib/seo/product-schema";
 import { breadcrumbSchema, faqSchema, graph } from "@/lib/seo/schema";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
+
+/**
+ * Local clips for the "See it in action" showcase — served from `public/videos`,
+ * not Shopify media, so they're independent of the catalog sync. Add more here
+ * as they're recorded; no poster is supplied, so each autoplays into its own
+ * first frame.
+ */
+const productVideos: ShowcaseVideo[] = [
+  { src: "/videos/product-1.mp4", alt: "Belurae product video 1" },
+  { src: "/videos/product-2.mp4", alt: "Belurae product video 2" },
+  { src: "/videos/product-3.mp4", alt: "Belurae product video 3" },
+  { src: "/videos/product-4.mp4", alt: "Belurae product video 4" },
+  { src: "/videos/product-5.mp4", alt: "Belurae product video 5" },
+  { src: "/videos/product-6.mp4", alt: "Belurae product video 6" },
+  { src: "/videos/product-7.mp4", alt: "Belurae product video 7" },
+  { src: "/videos/product-8.mp4", alt: "Belurae product video 8" },
+];
 
 /**
  * PDP — ISR. Static HTML from the cached catalog; the products/* webhook
@@ -95,6 +117,14 @@ export default async function ProductPage({ params }: Props) {
    */
   const ratingLine =
     verifiedReviews?.summary ?? demoReviewsFor(record.handle)?.summary ?? null;
+
+  /*
+   * The buy-box carousel shows the head of the same feed, sliced here so five
+   * reviews cross the RSC boundary instead of all 524 of the placeholder set.
+   */
+  const feedbackReviews = (
+    verifiedReviews ?? demoReviewsFor(record.handle)
+  )?.reviews.slice(0, 5);
 
   const crumbs = [
     { label: "Home", href: "/" },
@@ -177,6 +207,9 @@ export default async function ProductPage({ params }: Props) {
 
             <div className="mt-8">
               <PurchasePanel view={view} />
+              {feedbackReviews && feedbackReviews.length > 0 && (
+                <PurchaseFeedback reviews={feedbackReviews} className="mt-5" />
+              )}
             </div>
 
             <ProductAccordion
@@ -270,6 +303,23 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </div>
       </div>
+
+      {/* ── Product videos ────────────────────────────────────────────── */}
+      <section className="py-12 lg:py-16" aria-labelledby="videos">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Real use"
+            title="See it in action."
+            id="videos"
+            size="heading"
+            align="center"
+            intro="Real clips of the mousse in use — patch test, spray, wipe, rinse."
+          />
+        </div>
+        {/* Full-bleed: the row runs edge to edge of the viewport, past
+            container-page's max width, so the marquee has real room to drift. */}
+        <ProductVideoShowcase videos={productVideos} className="mt-8 px-2 sm:px-3" />
+      </section>
 
       {/* ── Feature highlights (from Shopify, alternating image layout) ── */}
       {view.featureHighlights.length > 0 && (
