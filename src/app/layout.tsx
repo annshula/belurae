@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import "./globals.css";
-import { logo, numeral, sans, serif, title, ui } from "./fonts";
+import { logo, numeral, pdpHeading, sans, serif, title, ui } from "./fonts";
 import { Analytics } from "@/components/analytics/Analytics";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
@@ -50,7 +50,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sans.variable} ${serif.variable} ${ui.variable} ${logo.variable} ${numeral.variable} ${title.variable}`}
+      className={`${sans.variable} ${serif.variable} ${ui.variable} ${logo.variable} ${numeral.variable} ${title.variable} ${pdpHeading.variable}`}
     >
       <body className="flex min-h-dvh flex-col">
         <a

@@ -16,7 +16,7 @@ import {
 } from "@/components/product/ProductVideoShowcase";
 import { ReviewsSection } from "@/components/product/ReviewsSection";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { Icon } from "@/components/ui/Icon";
+import { Icon, type IconName } from "@/components/ui/Icon";
 import { Stars } from "@/components/ui/Stars";
 import { guides } from "@/content/guides";
 import { demoReviewsFor } from "@/data/reviews";
@@ -48,6 +48,29 @@ const productVideos: ShowcaseVideo[] = [
   { src: "/videos/product-7.mp4", alt: "Belurae product video 7" },
   { src: "/videos/product-8.mp4", alt: "Belurae product video 8" },
 ];
+
+/**
+ * Keyword → icon for the perk list, checked in order against each perk's
+ * text (case-insensitive) — first match wins. Perks come from the live
+ * Shopify sync (`catalog.json`), so this can't be a fixed per-index mapping;
+ * a perk that matches nothing falls back to the plain checkmark.
+ */
+const PERK_ICON_RULES: [pattern: RegExp, icon: IconName][] = [
+  [/hydrat|moistur/i, "droplet"],
+  [/sensitive/i, "heart"],
+  [/remov.*hair|stubborn hair/i, "scissors"],
+  [/ingrown/i, "shield"],
+  [/long.?lasting|smooth/i, "clock"],
+  [/chemical|clean formula/i, "leaf"],
+  [/hypoallergenic/i, "shield"],
+  [/men and women|all skin types|unisex/i, "users"],
+  [/scent|fragrance|citrus|floral/i, "flower"],
+  [/aloe|glycerin|hyaluronic|extract|oil|botanical/i, "leaf"],
+];
+
+function perkIcon(perk: string): IconName {
+  return PERK_ICON_RULES.find(([pattern]) => pattern.test(perk))?.[1] ?? "check";
+}
 
 /**
  * PDP — ISR. Static HTML from the cached catalog; the products/* webhook
@@ -193,12 +216,13 @@ export default async function ProductPage({ params }: Props) {
                     key={perk}
                     className="flex items-start gap-2.5 text-body-sm"
                   >
-                    {/* items-start, not items-center: a tick centred on the
+                    {/* items-start, not items-center: an icon centred on the
                         whole row drifts down whenever a perk wraps to two
                         lines. It belongs on the first line. */}
-                    <span className="mt-px grid size-5 shrink-0 place-items-center rounded-full bg-sage-600">
-                      <Icon name="check" className="size-3 text-ivory" />
-                    </span>
+                    <Icon
+                      name={perkIcon(perk)}
+                      className="mt-0.5 size-4 shrink-0 text-sage-600"
+                    />
                     {perk}
                   </li>
                 ))}
@@ -313,6 +337,7 @@ export default async function ProductPage({ params }: Props) {
             id="videos"
             size="heading"
             align="center"
+            titleClassName="font-pdp-heading font-semibold"
             intro="Real clips of the mousse in use — patch test, spray, wipe, rinse."
           />
         </div>
@@ -331,6 +356,8 @@ export default async function ProductPage({ params }: Props) {
                 title="What's inside."
                 id="highlights"
                 size="heading"
+                align="center"
+                titleClassName="font-pdp-heading font-semibold"
               />
             </div>
             <div className="container-page mt-8 flex flex-col gap-8 lg:gap-12">
@@ -376,6 +403,8 @@ export default async function ProductPage({ params }: Props) {
             title="Six unhurried steps."
             id="how-to-use"
             size="heading"
+            align="center"
+            titleClassName="font-pdp-heading font-semibold"
             intro={
               <>
                 The short version: patch test, spray, wait 5–10 minutes, wipe,
@@ -427,6 +456,8 @@ export default async function ProductPage({ params }: Props) {
                 title="What's inside."
                 id="ingredients-title"
                 size="heading"
+                align="center"
+                titleClassName="font-pdp-heading font-semibold"
                 intro="The key ingredients the manufacturer lists for this formula, and why formulators use them."
               />
               <div className="glass mt-6 rounded-card p-5 text-body-sm">
@@ -479,6 +510,8 @@ export default async function ProductPage({ params }: Props) {
             title="Where to use it — and where not to."
             id="safety-title"
             size="heading"
+            align="center"
+            titleClassName="font-pdp-heading font-semibold"
             intro={content.safety.note}
           />
           <div className="mt-8 grid gap-3 lg:grid-cols-3">
@@ -540,6 +573,8 @@ export default async function ProductPage({ params }: Props) {
               title="Mousse, razor or wax?"
               id="compare"
               size="heading"
+              align="center"
+              titleClassName="font-pdp-heading font-semibold"
               intro="How they differ in practice — no method is right for everyone."
             />
             <div className="mt-8">
@@ -554,7 +589,7 @@ export default async function ProductPage({ params }: Props) {
           <div>
             <h2
               id="details"
-              className="text-center font-serif text-heading-1 font-light lg:text-left"
+              className="text-center font-pdp-heading text-heading-1 font-semibold"
             >
               Specifications
             </h2>
@@ -594,7 +629,7 @@ export default async function ProductPage({ params }: Props) {
         <div className="container-page">
           <h2
             id="reviews"
-            className="mb-6 text-center font-serif text-heading-1 font-light lg:text-left"
+            className="mb-6 text-center font-pdp-heading text-heading-1 font-semibold"
           >
             Reviews
           </h2>
@@ -611,6 +646,8 @@ export default async function ProductPage({ params }: Props) {
               title="Before you buy."
               id="faq"
               size="heading"
+              align="center"
+              titleClassName="font-pdp-heading font-semibold"
               intro={
                 <>
                   Didn&apos;t find your answer?{" "}
@@ -637,6 +674,8 @@ export default async function ProductPage({ params }: Props) {
               title="Before and after."
               id="learn"
               size="heading"
+              align="center"
+              titleClassName="font-pdp-heading font-semibold"
             />
             <ul className="mt-6 grid gap-3 sm:grid-cols-3">
               {relatedGuides.map((g) => (

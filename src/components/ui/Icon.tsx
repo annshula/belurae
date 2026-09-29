@@ -32,7 +32,12 @@ type IconName =
   | "play"
   | "help"
   | "search"
-  | "info";
+  | "info"
+  | "droplet"
+  | "heart"
+  | "scissors"
+  | "users"
+  | "flower";
 
 const glyphs: Record<IconName, React.ReactNode> = {
   "arrow-right": <path d="M4 12h16m0 0-6-6m6 6-6 6" />,
@@ -176,6 +181,32 @@ const glyphs: Record<IconName, React.ReactNode> = {
       <circle cx="12" cy="12" r="8.5" />
       <path d="M9.3 9.2a2.8 2.8 0 1 1 4.1 2.5c-.9.5-1.4 1-1.4 2.1" />
       <path d="M12 17.3h.01" />
+    </>
+  ),
+  droplet: (
+    <path d="M12 3.5c3.2 4 6 7.8 6 11.2a6 6 0 1 1-12 0c0-3.4 2.8-7.2 6-11.2z" />
+  ),
+  heart: (
+    <path d="M12 20.5s-7.5-4.6-7.5-10.2A4.8 4.8 0 0 1 12 7.4a4.8 4.8 0 0 1 7.5 2.9c0 5.6-7.5 10.2-7.5 10.2z" />
+  ),
+  scissors: (
+    <>
+      <circle cx="6.5" cy="6.5" r="2.5" />
+      <circle cx="6.5" cy="17.5" r="2.5" />
+      <path d="M8.5 8.2 20 19M20 5 8.5 15.8" />
+    </>
+  ),
+  users: (
+    <>
+      <circle cx="9" cy="8" r="3.4" />
+      <path d="M2.8 20c0-3.4 2.8-5.2 6.2-5.2s6.2 1.8 6.2 5.2" />
+      <path d="M16 5.3a3.4 3.4 0 0 1 0 6.6M18.5 14.9c2.3.5 3.7 2 3.7 5.1" />
+    </>
+  ),
+  flower: (
+    <>
+      <circle cx="12" cy="12" r="2.2" />
+      <path d="M12 3.5a3 3 0 0 1 0 6M12 20.5a3 3 0 0 0 0-6M20.5 12a3 3 0 0 0-6 0M3.5 12a3 3 0 0 1 6 0" />
     </>
   ),
 };

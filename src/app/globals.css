@@ -77,6 +77,8 @@
   --font-numeral: var(--ff-numeral), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   /* The PDP product title (h1) only. */
   --font-title: var(--ff-title), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* PDP section headings only — page-scoped override of --font-serif/display. */
+  --font-pdp-heading: var(--ff-pdp-heading), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --text-display-xl: clamp(2.5rem, 1.5rem + 4.4vw, 5.5rem);
   --text-display-xl--line-height: 0.98;

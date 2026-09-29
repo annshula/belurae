@@ -1,4 +1,12 @@
-import { Figtree, Fraunces, Instrument_Serif, Jost, Manrope, Poppins } from "next/font/google";
+import {
+  Figtree,
+  Fraunces,
+  Instrument_Serif,
+  Jost,
+  Manrope,
+  Plus_Jakarta_Sans,
+  Poppins,
+} from "next/font/google";
 
 /**
  * A deliberate multi-role type system, not one font pair reused everywhere —
@@ -81,6 +89,21 @@ export const title = Figtree({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--ff-title",
+  display: "swap",
+  preload: false,
+  fallback: ["ui-sans-serif", "system-ui", "Segoe UI", "Helvetica Neue"],
+});
+
+/**
+ * PDP-only heading face, matching the reference storefront's section
+ * headings (Plus Jakarta Sans) — a page-scoped override, not the site's
+ * default (Fraunces, `--ff-serif`), so only the product page picks it up via
+ * SectionHeading's `titleClassName`.
+ */
+export const pdpHeading = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--ff-pdp-heading",
   display: "swap",
   preload: false,
   fallback: ["ui-sans-serif", "system-ui", "Segoe UI", "Helvetica Neue"],

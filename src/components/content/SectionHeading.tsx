@@ -9,6 +9,7 @@ export function SectionHeading({
   id,
   align = "left",
   className,
+  titleClassName,
   as: Tag = "h2",
   size = "display",
 }: {
@@ -18,6 +19,8 @@ export function SectionHeading({
   id?: string;
   align?: "left" | "center";
   className?: string;
+  /** Overrides the title's own classes (e.g. a page-scoped font swap) without touching every caller. */
+  titleClassName?: string;
   as?: "h1" | "h2";
   size?: "display" | "heading";
 }) {
@@ -46,11 +49,12 @@ export function SectionHeading({
         className={cn(
           "font-serif font-light",
           size === "display" ? "text-display" : "text-heading-1",
+          titleClassName,
         )}
       >
         {title}
       </Tag>
-      {intro && <div className="mt-6 text-body-lg text-ink-soft">{intro}</div>}
+      {intro && <div className="mt-3 text-body text-ink-soft">{intro}</div>}
     </div>
   );
 }
