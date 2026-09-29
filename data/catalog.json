@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-09-29T13:20:54.172Z",
+  "syncedAt": "2026-09-29T20:56:46.047Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -22,7 +22,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-09-29T13:18:22Z",
+      "updatedAt": "2026-09-29T16:54:05Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -58,14 +58,14 @@
               "compareAtAmount": 71,
               "currencyCode": "CAD"
             },
-            "US": {
-              "amount": 39.99,
-              "compareAtAmount": 49.99,
-              "currencyCode": "USD"
+            "AU": {
+              "amount": 59,
+              "compareAtAmount": 73,
+              "currencyCode": "AUD"
             },
             "IN": {
-              "amount": 3911.2,
-              "compareAtAmount": 4889.24,
+              "amount": 3914.32,
+              "compareAtAmount": 4893.15,
               "currencyCode": "INR"
             },
             "ZA": {
@@ -78,10 +78,10 @@
               "compareAtAmount": 39,
               "currencyCode": "GBP"
             },
-            "AU": {
-              "amount": 59,
-              "compareAtAmount": 73,
-              "currencyCode": "AUD"
+            "US": {
+              "amount": 39.99,
+              "compareAtAmount": 49.99,
+              "currencyCode": "USD"
             }
           }
         },
@@ -104,19 +104,19 @@
               "compareAtAmount": 114,
               "currencyCode": "CAD"
             },
-            "US": {
-              "amount": 49.99,
-              "compareAtAmount": 79.99,
-              "currencyCode": "USD"
+            "AU": {
+              "amount": 73,
+              "compareAtAmount": 117,
+              "currencyCode": "AUD"
             },
             "IN": {
-              "amount": 4889.24,
-              "compareAtAmount": 7823.38,
+              "amount": 4893.15,
+              "compareAtAmount": 7829.63,
               "currencyCode": "INR"
             },
             "ZA": {
               "amount": 837,
-              "compareAtAmount": 1340,
+              "compareAtAmount": 1339,
               "currencyCode": "ZAR"
             },
             "GB": {
@@ -124,10 +124,10 @@
               "compareAtAmount": 62,
               "currencyCode": "GBP"
             },
-            "AU": {
-              "amount": 73,
-              "compareAtAmount": 117,
-              "currencyCode": "AUD"
+            "US": {
+              "amount": 49.99,
+              "compareAtAmount": 79.99,
+              "currencyCode": "USD"
             }
           }
         },
@@ -150,19 +150,19 @@
               "compareAtAmount": 159,
               "currencyCode": "CAD"
             },
-            "US": {
-              "amount": 59.99,
-              "compareAtAmount": 111.99,
-              "currencyCode": "USD"
+            "AU": {
+              "amount": 88,
+              "compareAtAmount": 164,
+              "currencyCode": "AUD"
             },
             "IN": {
-              "amount": 5867.29,
-              "compareAtAmount": 10953.12,
+              "amount": 5871.98,
+              "compareAtAmount": 10961.87,
               "currencyCode": "INR"
             },
             "ZA": {
-              "amount": 1005,
-              "compareAtAmount": 1875,
+              "amount": 1004,
+              "compareAtAmount": 1874,
               "currencyCode": "ZAR"
             },
             "GB": {
@@ -170,10 +170,10 @@
               "compareAtAmount": 87,
               "currencyCode": "GBP"
             },
-            "AU": {
-              "amount": 88,
-              "compareAtAmount": 164,
-              "currencyCode": "AUD"
+            "US": {
+              "amount": 59.99,
+              "compareAtAmount": 111.99,
+              "currencyCode": "USD"
             }
           }
         }
@@ -412,6 +412,301 @@
         "Suitable for men and women"
       ],
       "saleEndsAt": "2026-09-30T01:22:48.000Z"
+    },
+    "hydrating-smoothing-toner-even-skin-tone-brightening-skin-refines-skin-texture-fast-absorbing-non-greasy-refreshing-facial-toner": {
+      "id": "gid://shopify/Product/15400113897699",
+      "handle": "hydrating-smoothing-toner-even-skin-tone-brightening-skin-refines-skin-texture-fast-absorbing-non-greasy-refreshing-facial-toner",
+      "title": "Belurae EGF Tox Toner - Hydrating & Smoothing, 100 ml",
+      "vendor": "Belurae",
+      "productType": "",
+      "status": "ACTIVE",
+      "updatedAt": "2026-09-29T20:38:53Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "100ml Boxed",
+            "2 x 100ml Boxed",
+            "3 x 100ml Boxed"
+          ]
+        }
+      ],
+      "availableForSale": true,
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67602800312547",
+          "title": "100ml Boxed",
+          "sku": "14:10#100ml Boxed",
+          "barcode": null,
+          "price": 29.99,
+          "compareAtPrice": 39.99,
+          "availableForSale": true,
+          "options": {
+            "Color": "100ml Boxed"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S7ddfea9d15de4125a98e6af91663ccaer.webp?v=1790708242",
+          "description": null,
+          "pricesByMarket": {}
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67602800345315",
+          "title": "2 x 100ml Boxed",
+          "sku": "14:29#2 x 100ml Boxed",
+          "barcode": null,
+          "price": 59.99,
+          "compareAtPrice": 69.99,
+          "availableForSale": true,
+          "options": {
+            "Color": "2 x 100ml Boxed"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sab77eb44b95248d29004991f8477206cy.webp?v=1790708243",
+          "description": null,
+          "pricesByMarket": {}
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67602800378083",
+          "title": "3 x 100ml Boxed",
+          "sku": "14:173#3 x 100ml Boxed",
+          "barcode": null,
+          "price": 59.99,
+          "compareAtPrice": 99.99,
+          "availableForSale": true,
+          "options": {
+            "Color": "3 x 100ml Boxed"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S457e00b4941949eb8bbf9553d9757cfcS.webp?v=1790708243",
+          "description": null,
+          "pricesByMarket": {}
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/product_2.png?v=1790712659",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S42593e38da8140968501c694e9e1ae8fd.webp?v=1790708243",
+          "width": 3000,
+          "height": 3000,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S6f5d227553d840109831bc77cf7b50a44.webp?v=1790708242",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4711998381cd48c3a04899d46abbfd174.webp?v=1790708243",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/product_image_1.png?v=1790712658",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S998c7918eaef4c2088010aa35853af2as.webp?v=1790708242",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sf397074d122944c48afb898d8f459f84q_81872ac1-5589-4775-bfca-23626cb1e185.webp?v=1790708243",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd2807abe21dd47d79fc62010f0bce4cdx_f999da9e-2b2a-4233-8adb-addd7e3ef1c4.webp?v=1790708243",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sf9726c82f91b4282b50700a1a5d687f8g_b2aa33a3-ac91-4868-b088-6695cd212068.webp?v=1790708242",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S6bcd13de31524ac6b536037c997992a16_b357e32c-f97b-4c09-9111-5ede1cecf842.webp?v=1790708243",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S6f5d227553d840109831bc77cf7b50a44_fe083775-d6bd-4dd2-a22b-c876e37fd53f.webp?v=1790708242",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sf397074d122944c48afb898d8f459f84q.webp?v=1790708243",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd2807abe21dd47d79fc62010f0bce4cdx.webp?v=1790708242",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4911be0aa4254e69a6020e15b6c86d37r.webp?v=1790708243",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S838391d7c5b24108ad0a034663d2b5cfr.webp?v=1790708243",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S90c538839dec48c7b9ab56e6e6a112dcc.webp?v=1790708243",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_3_caf842fb-c719-41d3-8d0b-aa57cad42a70.png?v=1790712660",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S7ddfea9d15de4125a98e6af91663ccaer.webp?v=1790708242",
+          "width": 3000,
+          "height": 3000,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67602800312547"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sab77eb44b95248d29004991f8477206cy.webp?v=1790708243",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67602800345315"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S457e00b4941949eb8bbf9553d9757cfcS.webp?v=1790708243",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67602800378083"
+        }
+      ],
+      "specs": [
+        {
+          "label": "Brand",
+          "value": "Belurae Editor",
+          "description": null
+        },
+        {
+          "label": "Format",
+          "value": "Facial toner, 100 ml",
+          "description": null
+        },
+        {
+          "label": "Key ingredients",
+          "value": "EGF-related ingredients, niacinamide, collagen, hyaluronic acid",
+          "description": null
+        },
+        {
+          "label": "Use on",
+          "value": "Face and neck, avoiding the eye area",
+          "description": null
+        },
+        {
+          "label": "Routine",
+          "value": "Morning and evening, after cleansing",
+          "description": null
+        }
+      ],
+      "featureHighlights": [
+        {
+          "label": "Hydration & softness",
+          "body": "Helps replenish moisture and leave skin feeling fresh, hydrated and comfortable.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S6bcd13de31524ac6b536037c997992a16_b357e32c-f97b-4c09-9111-5ede1cecf842.webp?v=1790708243"
+        },
+        {
+          "label": "Smoother-looking skin",
+          "body": "Helps improve the appearance of dry, rough skin and fine lines for a smoother-looking complexion.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sf9726c82f91b4282b50700a1a5d687f8g_b2aa33a3-ac91-4868-b088-6695cd212068.webp?v=1790708242"
+        },
+        {
+          "label": "Supple, radiant look",
+          "body": "Helps skin look supple, refreshed and naturally radiant.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S998c7918eaef4c2088010aa35853af2as_95480da3-983e-4ad0-9428-c30a2bf89342.webp?v=1790708243"
+        },
+        {
+          "label": "Key ingredients",
+          "body": "EGF-related ingredients, niacinamide, collagen and hyaluronic acid, as listed by the manufacturer.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sf397074d122944c48afb898d8f459f84q_81872ac1-5589-4775-bfca-23626cb1e185.webp?v=1790708243"
+        },
+        {
+          "label": "Easy daily routine",
+          "body": "A 100 ml toner for morning and evening. Pat onto clean skin, avoiding the eye area, then follow with serum and moisturiser.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S6f5d227553d840109831bc77cf7b50a44_fe083775-d6bd-4dd2-a22b-c876e37fd53f.webp?v=1790708242"
+        }
+      ],
+      "perks": [
+        "EGF-related ingredients, collagen & niacinamide",
+        "Hydrates for a fresh, comfortable feel",
+        "Helps skin look plump & radiant",
+        "Helps smooth the look of fine lines",
+        "Easy morning & evening routine"
+      ],
+      "saleEndsAt": "2026-09-30T20:43:01.000Z"
     }
   }
 }

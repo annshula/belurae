@@ -14,7 +14,34 @@ import { getProducts, storeCurrency } from "@/lib/catalog";
 import { buildProductView } from "@/lib/commerce/product-view";
 import { site } from "@/lib/site";
 
-export { AnnouncementBar } from "@/components/layout/HeaderClient";
+/**
+ * The site-wide announcement bar. A plain server component: it is rendered once
+ * in the root layout and never branches on the client, so there is nothing to
+ * mismatch or double up during hydration or navigation. The home page hides it
+ * with CSS (see `[data-announcement]` in globals.css), because the hero carries
+ * the brand message there.
+ */
+export function AnnouncementBar() {
+  return (
+    <div data-announcement className="bg-sage-900 text-sage-100">
+      <p className="container-page flex h-(--announce-h) items-center justify-center gap-4 text-center text-[0.78rem] tracking-[0.06em]">
+        <span>Tracked delivery on every order</span>
+        <span
+          aria-hidden="true"
+          className="hidden size-1 rounded-full bg-sage-400 sm:inline-block"
+        />
+        <span className="hidden sm:inline">Secure checkout by Shopify</span>
+        <span
+          aria-hidden="true"
+          className="hidden size-1 rounded-full bg-sage-400 md:inline-block"
+        />
+        <span className="hidden md:inline">
+          Key ingredients listed on every product
+        </span>
+      </p>
+    </div>
+  );
+}
 
 /**
  * Shop menu content: every real category (from content/collections.ts,

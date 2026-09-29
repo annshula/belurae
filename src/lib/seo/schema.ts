@@ -68,6 +68,22 @@ export function faqSchema(faqs: { q: string; a: string }[]): Json {
   };
 }
 
+export function howToSchema(
+  name: string,
+  steps: { name: string; text: string }[],
+): Json {
+  return {
+    "@type": "HowTo",
+    name,
+    step: steps.map((s, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+    })),
+  };
+}
+
 export function graph(...nodes: Json[]): Json {
   return { "@context": "https://schema.org", "@graph": nodes };
 }

@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 
+import { SaleCountdown } from "@/components/product/SaleCountdown";
 import { useCart } from "@/components/cart/CartProvider";
 import { useLocalization } from "@/components/localization/LocalizationProvider";
-import { SaleCountdown } from "@/components/product/SaleCountdown";
 import { Icon } from "@/components/ui/Icon";
 import { trackSelectVariant, trackViewItem } from "@/lib/analytics";
 import type { ProductView, ViewVariant } from "@/lib/commerce/product-view";
@@ -122,7 +123,7 @@ function PackFieldset({
   const lastIndex = option.values.length - 1;
 
   return (
-    <fieldset>
+    <fieldset className="min-w-0">
       <legend className="mb-4 text-body-sm font-semibold">
         {option.label}
       </legend>
@@ -243,7 +244,10 @@ function PackFieldset({
                   <span className="mt-1 block font-numeral text-[0.75rem] text-ink-soft tabular-nums sm:mt-0.5">
                     {formatMoney(combo.perUnit, combo.currency)} / set
                     {saving != null && (
-                      <span className="text-clay-600"> · Save {formatMoney(saving, combo.currency)}</span>
+                      <span className="text-clay-600">
+                        {" "}
+                        · Save {formatMoney(saving, combo.currency)}
+                      </span>
                     )}
                   </span>
                 )}
@@ -297,7 +301,371 @@ function PackFieldset({
   );
 }
 
-export function PurchasePanel({ view }: { view: ProductView }) {
+/**
+ * "Cards" pack picker (editorial PDP): one card per pack in a row, largest
+ * pack first, each with its own photo, price, per-unit price and saving.
+ * "Best value" is arithmetic — it goes on a pack only when that pack has the
+ * lowest per-unit price of all — never a sales claim.
+ */
+function PackCards({
+  option,
+  selection,
+  view,
+  onChoose,
+  optionAvailable,
+  localizedVariantFor,
+}: {
+  option: ProductView["options"][number];
+  selection: Record<string, string>;
+  view: ProductView;
+  onChoose: (name: string, value: string) => void;
+  optionAvailable: (name: string, value: string) => boolean;
+  localizedVariantFor: (v: ViewVariant) => LocalizedVariant;
+}) {
+  const name = option.name;
+  const rows = option.values
+    .map((value) => {
+      const raw = findVariant(view, { ...selection, [name]: value.value });
+      return { value, combo: raw ? localizedVariantFor(raw) : undefined };
+    })
+    .reverse();
+  const lowest = Math.min(
+    ...rows.flatMap((r) => (r.combo ? [r.combo.perUnit] : [])),
+  );
+  const bestUnits = Math.max(
+    ...rows.flatMap((r) =>
+      r.combo && r.combo.perUnit === lowest ? [r.combo.units] : [],
+    ),
+  );
+
+  /* A bigger pack priced the same as a smaller one is a real "get N free"
+     deal — derived from the two prices, never typed by hand. */
+  const freeFor = (c: LocalizedVariant | undefined) => {
+    if (!c) return null;
+    const same = rows.find(
+      (r) =>
+        r.combo &&
+        r.combo.units < c.units &&
+        Math.abs(r.combo.price - c.price) < 0.005,
+    );
+    return same?.combo ? { free: c.units - same.combo.units, of: same.combo.units } : null;
+  };
+
+  const cards = rows.map(({ value, combo }) => {
+    const exists = Boolean(combo);
+    const deal = freeFor(combo);
+    const offer = deal !== null;
+    const best =
+      !offer &&
+      exists &&
+      combo!.units === bestUnits &&
+      rows.some((r) => r.combo && r.combo.perUnit > lowest);
+    /* Shopify's own compare-at price wins; otherwise the saving is pure
+       arithmetic against buying single bottles. */
+    const pct =
+      combo?.compareAtPercent ??
+      (combo?.savings != null
+        ? Math.round((combo.savings / (combo.savings + combo.price)) * 100)
+        : null);
+    return {
+      value,
+      combo,
+      exists,
+      deal,
+      offer,
+      pct,
+      checked: selection[name] === value.value,
+      available: optionAvailable(name, value.value),
+      tag: deal ? `Mega offer · ${deal.free} free` : best ? "Best value" : null,
+      offerLine: deal && combo ? `${combo.units} for the price of ${deal.of}` : null,
+      saved: combo
+        ? combo.compareAtPrice
+          ? combo.compareAtPrice - combo.price
+          : combo.savings
+        : null,
+      img: combo?.image ?? view.cardImage?.url ?? null,
+    };
+  });
+
+  return (
+    <fieldset className="min-w-0">
+      <legend className="mb-3 text-body font-semibold">{option.label}</legend>
+      {/* Two layouts, each with its own radios (distinct group names so the
+          browser never treats them as one group): a stacked, thumb-first list
+          on phones, and the three photo cards from sm up. */}
+
+      {/* ── Phones ─────────────────────────────────────────────────────── */}
+      <div className="grid grid-cols-1 gap-3 pt-3 sm:hidden">
+        {cards.map((c) => (
+          <label
+            key={c.value.value}
+            data-checked={c.checked}
+            className={cn(
+              "group relative flex cursor-pointer flex-col rounded-[18px] border transition-[border-color,box-shadow,transform] duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-800 motion-safe:active:scale-[0.985]",
+              c.offer ? "bg-linear-to-br from-clay-50 via-clay-50 to-paper" : "bg-paper",
+              c.checked
+                ? c.offer
+                  ? "border-clay-600 shadow-[0_0_0_1px_var(--color-clay-600),0_14px_32px_-16px_rgb(147_88_74/0.5)]"
+                  : "border-sage-800 shadow-[0_0_0_1px_var(--color-sage-800),0_14px_32px_-18px_rgb(36_49_41/0.5)]"
+                : c.offer
+                  ? "border-clay-600/40 hover:border-clay-600"
+                  : "border-sand hover:border-sage-300",
+              !c.exists && "cursor-not-allowed opacity-50",
+            )}
+          >
+            <input
+              type="radio"
+              name={`${name}-m`}
+              value={c.value.value}
+              checked={c.checked}
+              onChange={() => onChoose(name, c.value.value)}
+              disabled={!c.exists}
+              className="sr-only"
+            />
+
+            {/* Floating tag on the card's top edge. */}
+            {c.tag && (
+              <span
+                className={cn(
+                  "absolute -top-3 left-4 z-10 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-ui text-[0.66rem] leading-none font-semibold tracking-[0.08em] text-ivory uppercase shadow-[0_6px_14px_-6px_rgb(40_28_16/0.45)]",
+                  c.offer ? "bg-linear-to-r from-clay-600 to-[#b0715f]" : "bg-sage-800",
+                )}
+              >
+                <Icon name={c.offer ? "gift" : "star"} className="size-3" />
+                {c.tag}
+              </span>
+            )}
+
+            <span className="flex items-center gap-3.5 p-4 pt-5">
+              {/* Photo tile with the selection marker on its corner. */}
+              <span className="relative block size-16 shrink-0">
+                <span
+                  className={cn(
+                    "relative block size-full overflow-hidden rounded-[14px] bg-paper ring-1",
+                    c.offer ? "ring-clay-200" : "ring-sand",
+                  )}
+                >
+                  {c.img && (
+                    <Image
+                      src={c.img}
+                      alt=""
+                      fill
+                      sizes="64px"
+                      className="object-contain p-1 mix-blend-multiply"
+                    />
+                  )}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute -top-1.5 -left-1.5 grid size-5.5 place-items-center rounded-full border-2 bg-paper transition-colors duration-200",
+                    c.checked
+                      ? c.offer
+                        ? "border-clay-600 bg-clay-600"
+                        : "border-sage-800 bg-sage-800"
+                      : "border-sand",
+                  )}
+                >
+                  {c.checked && <Icon name="check" className="size-3 text-ivory" />}
+                </span>
+                {c.deal && (
+                  <span className="absolute -right-2 -bottom-2 grid size-9 place-items-center rounded-full border-2 border-paper bg-clay-600 text-center font-numeral text-[0.55rem] leading-[1.05] font-bold text-ivory">
+                    +{c.deal.free}
+                    <br />
+                    FREE
+                  </span>
+                )}
+              </span>
+
+              <span className="flex min-w-0 flex-1 flex-col items-start">
+                <span className="font-ui text-[1.02rem] leading-tight font-semibold text-ink">
+                  {c.value.label}
+                </span>
+                {c.offerLine && (
+                  <span className="mt-1 text-body-sm font-medium text-clay-600">
+                    {c.offerLine}
+                  </span>
+                )}
+                {c.exists && !c.available && (
+                  <span className="mt-1 text-[0.72rem] text-ink-soft">Sold out</span>
+                )}
+              </span>
+
+              {c.combo && (
+                <span className="flex shrink-0 flex-col items-end">
+                  {c.combo.compareAtPrice && (
+                    <span className="font-numeral text-[0.75rem] text-ink-faint tabular-nums line-through decoration-1">
+                      {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                    </span>
+                  )}
+                  <span
+                    className={cn(
+                      "font-numeral leading-none font-semibold tracking-tight tabular-nums",
+                      c.offer ? "text-[1.6rem] text-clay-600" : "text-[1.3rem] text-ink",
+                    )}
+                  >
+                    {formatMoney(c.combo.price, c.combo.currency)}
+                  </span>
+                </span>
+              )}
+            </span>
+
+            {/* Savings footer: real arithmetic from Shopify's prices. */}
+            {c.combo && c.pct != null && c.pct > 0 && c.saved != null && c.saved > 0.009 && (
+              <span
+                className={cn(
+                  "mt-auto flex items-center justify-between gap-2 rounded-b-[17px] border-t border-dashed px-4 py-2 font-ui text-[0.74rem]",
+                  c.offer
+                    ? "border-clay-200 bg-clay-100/70 text-clay-600"
+                    : "border-sand bg-cream/60 text-sage-800",
+                )}
+              >
+                <span className="font-medium">
+                  You save{" "}
+                  <span className="font-numeral font-semibold tabular-nums">
+                    {formatMoney(c.saved, c.combo.currency)}
+                  </span>
+                </span>
+                <span
+                  className={cn(
+                    "rounded-full px-2 py-0.5 font-numeral text-[0.68rem] font-semibold tabular-nums text-ivory",
+                    c.offer ? "bg-clay-600" : "bg-sage-800",
+                  )}
+                >
+                  −{c.pct}%
+                </span>
+              </span>
+            )}
+          </label>
+        ))}
+      </div>
+
+      {/* ── Tablet and desktop: three photo cards ──────────────────────── */}
+      <div className="hidden gap-3 sm:grid sm:grid-cols-3">
+        {cards.map((c) => (
+          <label
+            key={c.value.value}
+            data-checked={c.checked}
+            className={cn(
+              "relative flex cursor-pointer flex-col items-center rounded-2xl border px-3 pb-3 text-center transition-all duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-800",
+              c.tag ? "pt-8" : "pt-6",
+              c.offer
+                ? cn(
+                    "bg-clay-50",
+                    c.checked
+                      ? "border-clay-600 shadow-[inset_0_0_0_1px_var(--color-clay-600)]"
+                      : "border-clay-600/50 hover:border-clay-600",
+                  )
+                : cn(
+                    "bg-paper",
+                    c.checked
+                      ? "border-sage-800 shadow-[inset_0_0_0_1px_var(--color-sage-800)]"
+                      : "border-sand hover:border-sage-300",
+                  ),
+              !c.exists && "cursor-not-allowed opacity-50",
+            )}
+          >
+            <input
+              type="radio"
+              name={`${name}-d`}
+              value={c.value.value}
+              checked={c.checked}
+              onChange={() => onChoose(name, c.value.value)}
+              disabled={!c.exists}
+              className="sr-only"
+            />
+            {c.tag && (
+              <span
+                className={cn(
+                  "absolute -top-px -left-px rounded-tl-2xl rounded-br-tag px-2.5 py-1.5 font-ui text-[0.68rem] leading-none font-semibold tracking-wide text-ivory uppercase",
+                  c.offer ? "bg-clay-600" : "bg-sage-800",
+                )}
+              >
+                {c.tag}
+              </span>
+            )}
+            <span
+              aria-hidden="true"
+              className={cn(
+                "absolute top-2.5 right-2.5 grid size-5 place-items-center rounded-full border-2 transition-colors duration-200",
+                c.checked
+                  ? c.offer
+                    ? "border-clay-600 bg-clay-600"
+                    : "border-sage-800 bg-sage-800"
+                  : "border-sand bg-ivory",
+              )}
+            >
+              {c.checked && <Icon name="check" className="size-3 text-ivory" />}
+            </span>
+
+            <span className="relative block aspect-square w-full max-w-24">
+              <span className="relative block size-full overflow-hidden rounded-tag bg-paper">
+                {c.img && (
+                  <Image
+                    src={c.img}
+                    alt=""
+                    fill
+                    sizes="96px"
+                    className="object-contain mix-blend-multiply"
+                  />
+                )}
+              </span>
+              {c.deal && (
+                <span className="absolute -right-2 -bottom-2 grid size-10 place-items-center rounded-full border-2 border-paper bg-clay-600 text-center font-numeral text-[0.6rem] leading-[1.05] font-bold text-ivory">
+                  +{c.deal.free}
+                  <br />
+                  FREE
+                </span>
+              )}
+            </span>
+
+            <span className="mt-2 text-body-sm font-medium">{c.value.label}</span>
+            {c.offerLine && (
+              <span className="text-[0.78rem] font-semibold text-clay-600">
+                {c.offerLine}
+              </span>
+            )}
+            {c.combo && (
+              <span className="mt-1 flex flex-col items-center">
+                {c.combo.compareAtPrice && (
+                  <span className="font-numeral text-[0.72rem] text-ink-soft tabular-nums line-through">
+                    {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                  </span>
+                )}
+                <span className="font-numeral text-body-lg font-semibold tabular-nums">
+                  {formatMoney(c.combo.price, c.combo.currency)}
+                </span>
+              </span>
+            )}
+            {c.pct != null && c.pct > 0 && (
+              <span
+                className={cn(
+                  "mt-1.5 rounded-tag px-2 py-0.5 font-numeral text-[0.7rem] font-medium tabular-nums",
+                  c.offer ? "bg-clay-100 text-clay-600" : "bg-sage-100 text-sage-800",
+                )}
+              >
+                Save {c.pct}%
+              </span>
+            )}
+            {c.exists && !c.available && (
+              <span className="mt-1 text-[0.72rem] text-ink-soft">Sold out</span>
+            )}
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+export function PurchasePanel({
+  view,
+  packs = "list",
+}: {
+  view: ProductView;
+  /** "cards": one photo card per pack in a row, instead of the stacked rows. */
+  packs?: "list" | "cards";
+}) {
+  const cardsMode = packs === "cards";
   const { add, open } = useCart();
   const { localizedPriceFor, requestPrices } = useLocalization();
   const initial =
@@ -413,8 +781,8 @@ export function PurchasePanel({ view }: { view: ProductView }) {
     const v = localizedVariantFor(variant);
     return (
       <div className="flex flex-col gap-2">
-        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:justify-between">
+          <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 sm:justify-start">
             {v.compareAtPrice && (
               <p className="font-numeral text-body-lg text-ink-soft tabular-nums line-through">
                 {formatMoney(v.compareAtPrice, v.currency)}
@@ -432,7 +800,9 @@ export function PurchasePanel({ view }: { view: ProductView }) {
               </p>
             )}
           </div>
-          {view.saleEndsAt && <SaleCountdown endsAt={view.saleEndsAt} />}
+          {view.saleEndsAt && (
+            <SaleCountdown endsAt={view.saleEndsAt} variant="inline" />
+          )}
         </div>
       </div>
     );
@@ -443,6 +813,20 @@ export function PurchasePanel({ view }: { view: ProductView }) {
       <div className="space-y-7">
         {view.options.map((option) => {
           const isPack = option.name === view.packOptionName;
+
+          if (isPack && cardsMode) {
+            return (
+              <PackCards
+                key={option.name}
+                option={option}
+                selection={selection}
+                view={view}
+                onChoose={choose}
+                optionAvailable={optionAvailable}
+                localizedVariantFor={localizedVariantFor}
+              />
+            );
+          }
 
           if (isPack) {
             return (
@@ -459,7 +843,7 @@ export function PurchasePanel({ view }: { view: ProductView }) {
           }
 
           return (
-            <fieldset key={option.name}>
+            <fieldset key={option.name} className="min-w-0">
               <legend className="mb-3 flex w-full items-baseline justify-between text-body-sm font-semibold">
                 {option.label}
                 <span className="font-normal text-ink-soft">

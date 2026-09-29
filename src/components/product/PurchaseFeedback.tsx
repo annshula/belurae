@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import { Icon } from "@/components/ui/Icon";
 import { Stars } from "@/components/ui/Stars";
@@ -8,29 +8,46 @@ import type { Review } from "@/lib/judgeme/types";
 import { cn } from "@/lib/utils";
 
 /**
- * The top of the review feed, compressed into a carousel that sits in the buy
- * box directly beneath the "Secure payment by Shopify" reassurance — the last
- * objection the panel has to answer is "what do other people say?".
+ * "What customers say" — a review carousel that sits in the buy box, directly
+ * beneath the reassurance line: the last objection the panel has to answer is
+ * "what do other people say?".
  *
- * Deliberately shallow: it takes the same `Review[]` the full feed renders and
- * shows the first few, so there is no second copy of review data anywhere. The
- * copy, names and countries are whatever the feed is showing (verified Judge.me
- * reviews when they exist, otherwise the placeholder set) — this component adds
- * no content of its own and, like the feed, is never handed to `productSchema`.
- *
- * One slide is visible at a time, so a swipe, an arrow key, the arrow buttons
- * and the dots all do the same job. Slides past the first overflow their track
- * rather than being duplicated, which keeps 5 reviews out of the way of the
- * crawler's first-paint budget.
+ * Two deliberately separate presentations of the same `Review[]` (there is no
+ * second copy of review data; like the feed, neither is ever handed to
+ * `productSchema`):
+ *  - from sm up, the original one-slide-at-a-time carousel with arrows, dots
+ *    and mouse/keyboard paging (`FeedbackDesktop`);
+ *  - on phones, a native scroll-snap strip (`FeedbackMobile`): the browser owns
+ *    touch scrolling, so a swipe always reaches the next review, and the next
+ *    card peeks in from the right the way a native app hints there is more.
  */
 
 /** Enough to show variety without making the panel bottom-heavy. */
 const MAX_SLIDES = 5;
 
-/** Movement in px before a horizontal drag counts as a swipe. */
+/** Movement in px before a horizontal drag counts as a swipe (desktop carousel). */
 const SWIPE_THRESHOLD = 40;
 
 export function PurchaseFeedback({
+  reviews,
+  className,
+}: {
+  reviews: Review[];
+  className?: string;
+}) {
+  return (
+    <>
+      <div className="sm:hidden">
+        <FeedbackMobile reviews={reviews} className={className} />
+      </div>
+      <div className="hidden sm:block">
+        <FeedbackDesktop reviews={reviews} className={className} />
+      </div>
+    </>
+  );
+}
+
+function FeedbackDesktop({
   reviews,
   className,
 }: {
@@ -95,13 +112,13 @@ export function PurchaseFeedback({
 
         {count > 1 && (
           <div className="flex items-center gap-1">
-            <ArrowButton
+            <DesktopArrow
               label="Previous review"
               onClick={() => go(index - 1)}
               icon="chevron-right"
               className="rotate-180"
             />
-            <ArrowButton
+            <DesktopArrow
               label="Next review"
               onClick={() => go(index + 1)}
               icon="chevron-right"
@@ -212,7 +229,7 @@ export function PurchaseFeedback({
 }
 
 /** Circular pager arrow — one glyph, mirrored for "previous". */
-function ArrowButton({
+function DesktopArrow({
   label,
   onClick,
   icon,
@@ -231,6 +248,192 @@ function ArrowButton({
       className="grid size-8 shrink-0 place-items-center rounded-full border border-sage-200 bg-paper text-sage-700 transition-colors duration-300 hover:border-sage-400 hover:text-sage-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600"
     >
       <Icon name={icon} className={cn("size-4", className)} />
+    </button>
+  );
+}
+
+/** Enough to show variety without making the panel bottom-heavy. */
+function FeedbackMobile({
+  reviews,
+  className,
+}: {
+  reviews: Review[];
+  className?: string;
+}) {
+  const slides = reviews.filter((r) => r.rating === 5).slice(0, MAX_SLIDES);
+  const count = slides.length;
+  const [index, setIndex] = useState(0);
+  const trackRef = useRef<HTMLUListElement>(null);
+
+  /** Scrolls the strip so slide `i` sits centred (matches `snap-center`). */
+  const go = useCallback(
+    (i: number) => {
+      const track = trackRef.current;
+      const slide = track?.children[Math.max(0, Math.min(count - 1, i))] as
+        | HTMLElement
+        | undefined;
+      if (!track || !slide) return;
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      track.scrollTo({
+        left: slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2,
+        behavior: reduce ? "auto" : "smooth",
+      });
+    },
+    [count],
+  );
+
+  /** The slide whose centre is nearest the strip's centre is the active one. */
+  const onScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const mid = track.scrollLeft + track.clientWidth / 2;
+    let nearest = 0;
+    let best = Infinity;
+    for (let i = 0; i < track.children.length; i++) {
+      const el = track.children[i] as HTMLElement;
+      const d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - mid);
+      if (d < best) {
+        best = d;
+        nearest = i;
+      }
+    }
+    setIndex((prev) => (prev === nearest ? prev : nearest));
+  };
+
+  if (count === 0) return null;
+
+  return (
+    <section
+      aria-roledescription="carousel"
+      aria-label="What customers say"
+      onKeyDown={(event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          go(index - 1);
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          go(index + 1);
+        }
+      }}
+      className={cn("surface-float px-4 py-4 sm:px-5", className)}
+    >
+      <div className="flex items-center justify-between gap-3">
+        <p className="font-ui text-body-sm font-medium text-ink-soft">
+          What customers say
+        </p>
+
+        {count > 1 && (
+          <div className="flex items-center gap-1">
+            <ArrowButton
+              label="Previous review"
+              onClick={() => go(index - 1)}
+              disabled={index === 0}
+              className="rotate-180"
+            />
+            <ArrowButton
+              label="Next review"
+              onClick={() => go(index + 1)}
+              disabled={index === count - 1}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Bleeds to the card edge on phones so cards can peek in from the side. */}
+      <ul
+        ref={trackRef}
+        onScroll={onScroll}
+        aria-live="polite"
+        className="relative -mx-4 mt-3 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto overscroll-x-contain px-4 pb-1 scrollbar-none sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden"
+      >
+        {slides.map((review, i) => (
+          <li
+            key={review.id}
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${count}`}
+            className="flex w-[86%] shrink-0 snap-center flex-col justify-between gap-4 rounded-2xl bg-cream/70 p-4 sm:w-full"
+          >
+            <div>
+              <p className="flex items-center gap-2">
+                <Stars value={review.rating} starClassName="size-3.5" />
+                <span className="sr-only">{review.rating} out of 5 stars</span>
+              </p>
+              <p className="mt-2.5 line-clamp-5 text-body-sm text-ink">
+                {review.body}
+              </p>
+            </div>
+
+            <footer className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-ui text-body-sm">
+              <span
+                aria-hidden="true"
+                className="grid size-8 shrink-0 place-items-center rounded-full bg-sage-100 text-[0.8rem] font-medium text-sage-600"
+              >
+                {review.author.charAt(0)}
+              </span>
+              <span className="font-medium">{review.author}</span>
+              {review.country && (
+                <span className="text-ink-faint">{review.country}</span>
+              )}
+              <span className="inline-flex items-center gap-1 text-ink-faint">
+                <Icon
+                  name="check"
+                  className="size-3 text-sage-600"
+                  strokeWidth={2.4}
+                />
+                Verified buyer
+              </span>
+            </footer>
+          </li>
+        ))}
+      </ul>
+
+      {count > 1 && (
+        <div className="mt-2.5 flex items-center justify-center gap-1.5">
+          {slides.map((review, i) => (
+            <button
+              key={review.id}
+              type="button"
+              onClick={() => go(i)}
+              aria-label={`Show review ${i + 1} of ${count}`}
+              aria-current={i === index}
+              /* 24px tall hit area around a 6px dot, so it is tappable. */
+              className="grid h-6 place-items-center px-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600"
+            >
+              <span
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300 ease-out-soft",
+                  i === index ? "w-5 bg-sage-600" : "w-1.5 bg-sage-200",
+                )}
+              />
+            </button>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+/** Circular pager arrow — one glyph, mirrored for "previous". */
+function ArrowButton({
+  label,
+  onClick,
+  disabled,
+  className,
+}: {
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={label}
+      className="grid size-8 shrink-0 place-items-center rounded-full border border-sage-200 bg-paper text-sage-700 transition-colors duration-300 hover:border-sage-400 hover:text-sage-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600 disabled:opacity-40"
+    >
+      <Icon name="chevron-right" className={cn("size-4", className)} />
     </button>
   );
 }

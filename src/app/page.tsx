@@ -89,6 +89,7 @@ export default async function HomePage() {
           Pulled up under the transparent header so bar + hero read as one
           surface; fills the viewport below the announcement bar. */}
       <section
+        data-home-hero
         className="-mt-[calc(var(--header-h)+0.5rem)] sm:-mt-[calc(var(--header-h)+0.75rem)]"
         aria-labelledby="hero-title"
       >

@@ -54,13 +54,27 @@ export const collections: CollectionContent[] = [
     ],
   },
   {
+    slug: "skincare",
+    title: "Skincare",
+    seoTitle: "Facial Skincare — Clear Ingredients, Plain Directions",
+    description:
+      "Facial skincare with the key ingredients, directions and safety guidance spelled out on every product page.",
+    intro:
+      "Our skincare range is small on purpose. Each product page says what the manufacturer lists as the key ingredients, how to use it and where not to, and we mark anything we're still waiting on rather than filling the gap with guesses.",
+    categories: ["skincare"],
+    related: [
+      { label: "How to patch test", href: "/guides/how-to-patch-test" },
+      { label: "Ingredients", href: "/ingredients" },
+    ],
+  },
+  {
     slug: "all",
     title: "Shop all",
     seoTitle: "Shop All Beauty & Wellness",
     description:
-      "Everything Belurae sells today — body care for simpler everyday routines, starting with at-home hair removal.",
+      "Everything Belurae sells today — body care and skincare for simpler everyday routines.",
     intro:
-      "Belurae is a small, deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal; body and aftercare products will follow.",
+      "Belurae is a small, deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal and facial skincare.",
     categories: "*",
     related: [
       { label: "Our standards", href: "/pages/standards" },

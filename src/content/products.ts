@@ -13,6 +13,17 @@
 
 export type ProductFaq = { q: string; a: string };
 
+export type PdpIcon =
+  | "leaf"
+  | "star"
+  | "droplet"
+  | "flower"
+  | "heart"
+  | "feather"
+  | "globe"
+  | "shield"
+  | "clock";
+
 export type KeyIngredient = {
   /** Slug of the ingredient page (content/ingredients.ts). */
   slug: string;
@@ -57,6 +68,43 @@ export type ProductContent = {
     ifIrritation: string;
   };
   faqs: ProductFaq[];
+  /** Product-specific copy for PDP sections that were originally written for the mousse. */
+  /** Google product category for Product JSON-LD. */
+  googleCategory: string;
+  pdp: {
+    /** Three icon + text items above the H1. */
+    trust?: { icon: PdpIcon; text: string }[];
+    /** Show Shopify's `custom.perks` one per row instead of two columns. */
+    perksOneColumn?: boolean;
+    /** "flush": gallery photos shown whole (no crop), with no tinted panel or padding. */
+    galleryFit?: "contain" | "flush";
+    /** "cards": the photo-card pack picker instead of stacked rows. */
+    packs?: "list" | "cards";
+    /** "Your daily step" band and the key-ingredients band under it (EditorialBands). */
+    dailyStep?: {
+      eyebrow: string;
+      heading: string;
+      body: string;
+      /** Substring of the Shopify image filename to use as the band photo; hidden if no match. */
+      mediaFile: string;
+      /** CSS object-position for the band photo. */
+      imagePosition?: "right" | "top" | "center";
+      benefits: { icon: PdpIcon; title: string; body: string }[];
+    };
+    /** The local video clips are mousse footage; only products with an intro show the showcase. */
+    videosIntro?: string;
+    howTo: {
+      heading: string;
+      intro: string;
+      guide?: { href: string };
+    };
+    /** Shown beside the key ingredients while the full INCI list is outstanding; the page appends the "check the pack or ask us" line. */
+    ingredientListNote: string;
+    /** The mousse / razor / wax comparison only makes sense for hair removal. */
+    showHairRemovalComparison: boolean;
+    /** Callout under the buy box. */
+    notice: { lead: string; text: string };
+  };
   /** Items still needed from the manufacturer before the content is complete. */
   contentGaps: string[];
 };
@@ -253,11 +301,249 @@ export const products: ProductContent[] = [
         a: "Personal-care products can't be returned once received, unless they arrive damaged, defective or incorrect — contact us and we'll put it right. EU customers also have a 14-day right to cancel. See the refund policy for details.",
       },
     ],
+    googleCategory:
+      "Health & Beauty > Personal Care > Hair Removal > Depilatories",
+    pdp: {
+      videosIntro:
+        "Real clips of the mousse in use — patch test, spray, wipe, rinse.",
+      howTo: {
+        heading: "Six unhurried steps.",
+        intro:
+          "The short version: patch test, spray, wait 5–10 minutes, wipe, rinse, rest.",
+        guide: { href: "/guides/how-to-use-hair-removal-mousse" },
+      },
+      dailyStep: {
+        eyebrow: "Your daily step",
+        heading: "Smooth skin, without the blade.",
+        body: "Spray on, wait 5–10 minutes, then wipe hair away with the included scraper. The manufacturer labels the formula hypoallergenic and additive-free.",
+        mediaFile: "cac920f9-4b70-404b-8f48-2f28a0d05f61",
+        imagePosition: "top",
+        benefits: [
+          {
+            icon: "feather",
+            title: "No blade, no strips",
+            body: "Nothing cuts or pulls at the skin.",
+          },
+          {
+            icon: "clock",
+            title: "5–10 minutes on skin",
+            body: "A defined window from the directions. Rinse off at 10 minutes.",
+          },
+          {
+            icon: "leaf",
+            title: "Light citrus scent",
+            body: "The manufacturer's “Orange Spring Cologne” fragrance.",
+          },
+        ],
+      },
+      ingredientListNote:
+        "We're waiting on the complete INCI list — including the hair-removing active ingredient — from the manufacturer, and will publish it here in full.",
+      showHairRemovalComparison: true,
+      notice: {
+        lead: "Patch test 24 hours before first use.",
+        text: "Not for the face or genitals.",
+      },
+    },
     contentGaps: [
       "Full INCI ingredient list, including the hair-removing active ingredient",
       "Exact wording of the packaging warnings",
       "Name, size and ingredients of the companion serum",
       "Ingredient list and directions for the Smooth cream",
+      "GTIN / barcode",
+    ],
+  },
+  {
+    handle:
+      "hydrating-smoothing-toner-even-skin-tone-brightening-skin-refines-skin-texture-fast-absorbing-non-greasy-refreshing-facial-toner",
+    slug: "hydrating-smoothing-toner-even-skin-tone-brightening-skin-refines-skin-texture-fast-absorbing-non-greasy-refreshing-facial-toner",
+    legacySlugs: [],
+    name: "Belurae EGF Tox Toner",
+    format: "Facial toner · 100 ml",
+    category: { slug: "skincare", name: "Skincare" },
+    benefitLine:
+      "A hydrating facial toner with niacinamide, collagen and hyaluronic acid, made to be patted on after cleansing and before your serum and moisturiser.",
+    manufacturer: "Belurae Editor",
+    seo: {
+      title: "EGF Tox Toner · 100 ml Hydrating Facial Toner",
+      description:
+        "Korean hydrating facial toner (100 ml) listing EGF-related ingredients, niacinamide, collagen and hyaluronic acid. Directions, key ingredients and safety guidance.",
+    },
+    optionLabels: {
+      Color: {
+        label: "Choose your pack",
+        values: {
+          "100ml Boxed": "Single bottle",
+          "2 x 100ml Boxed": "Duo set",
+          "3 x 100ml Boxed": "Buy 2 Get 1",
+        },
+      },
+    },
+    packOption: {
+      name: "Color",
+      units: { "100ml Boxed": 1, "2 x 100ml Boxed": 2, "3 x 100ml Boxed": 3 },
+    },
+    story: {
+      heading: "One easy step between cleanser and serum.",
+      body: [
+        "This is a 100 ml Korean facial toner from Belurae Editor. You pat it onto clean skin, then follow with your usual serum and moisturiser.",
+        "The manufacturer lists EGF-related ingredients, niacinamide, collagen and hyaluronic acid as the key ingredients, and describes the toner as helping skin feel soft, hydrated and supple. Every skin is different, so we suggest a patch test first, and the full directions are below.",
+      ],
+    },
+    highlights: [
+      {
+        title: "Hydrating feel",
+        body: "Described by the manufacturer as helping skin feel fresh, hydrated and comfortable.",
+      },
+      {
+        title: "Smoother-looking skin",
+        body: "The manufacturer says it helps improve the appearance of dry, rough skin and fine lines.",
+      },
+      {
+        title: "Morning and evening",
+        body: "A 100 ml toner designed to fit into a morning and evening routine.",
+      },
+    ],
+    steps: [
+      { title: "Cleanse", body: "Begin with clean skin." },
+      {
+        title: "Apply",
+        body: "Put an appropriate amount on your hands or a cotton pad.",
+      },
+      {
+        title: "Pat on",
+        body: "Gently pat onto your face and neck, avoiding the eye area.",
+      },
+      {
+        title: "Follow up",
+        body: "Follow with your favourite serum and moisturiser.",
+      },
+    ],
+    keyIngredients: [
+      {
+        slug: "egf",
+        name: "EGF-related ingredients",
+        role: "Skin-conditioning. The listing doesn't give the exact ingredient names.",
+      },
+      {
+        slug: "niacinamide",
+        name: "Niacinamide",
+        role: "Helps even the look of skin tone, says the manufacturer.",
+      },
+      {
+        slug: "collagen",
+        name: "Collagen",
+        role: "Supports a smooth, supple feel, says the manufacturer.",
+      },
+      {
+        slug: "hyaluronic-acid",
+        name: "Hyaluronic acid",
+        role: "Helps attract moisture for hydrated, plump-looking skin.",
+      },
+    ],
+    specs: [
+      { label: "Format", value: "Facial toner, 100 ml" },
+      { label: "Use on", value: "Face and neck, avoiding the eye area" },
+      { label: "Origin", value: "Korea (confirm on packaging)" },
+      { label: "Brand", value: "Belurae Editor" },
+    ],
+    inTheBox: [
+      { item: "EGF Tox Toner", detail: "100 ml boxed bottle, per set" },
+    ],
+    safety: {
+      patchTest:
+        "Patch test before first use: apply a small amount to a small area of skin and wait 24 hours. Don't use the product if you notice redness, burning, itching or swelling.",
+      note: "Use according to the directions on the product packaging. Where the pack is less specific, we follow the standard precautions for leave-on skin care below.",
+      use: ["Face", "Neck"],
+      avoid: [
+        "The eye area",
+        "Broken, sunburnt or irritated skin",
+        "Skin that has reacted to a similar product before",
+      ],
+      ifIrritation:
+        "If your skin feels irritated, rinse the area with plenty of cool water and stop using the toner. If irritation continues, contact a doctor or pharmacist.",
+    },
+    faqs: [
+      {
+        q: "What is this product?",
+        a: "A 100 ml facial toner from the Belurae Editor brand, for use after cleansing and before serum and moisturiser.",
+      },
+      {
+        q: "How do I use it?",
+        a: "On clean skin, put an appropriate amount on your hands or a cotton pad and gently pat it onto your face and neck, avoiding the eye area. Follow with your serum and moisturiser.",
+      },
+      {
+        q: "Can I use it morning and evening?",
+        a: "The manufacturer describes it as suited to a morning and evening routine. Use it according to the directions on the pack.",
+      },
+      {
+        q: "What are the key ingredients?",
+        a: "The manufacturer lists EGF-related ingredients, niacinamide, collagen and hyaluronic acid. We're waiting on the full ingredient list and will publish it when we have it.",
+      },
+      {
+        q: "Is it suitable for sensitive skin?",
+        a: "The manufacturer doesn't make a sensitive-skin claim for this toner, and no product suits every skin. Patch test a small area 24 hours before your first full use.",
+      },
+      {
+        q: "Where is it made?",
+        a: "The manufacturer's listing gives Korea as the origin and asks buyers to confirm on the packaging.",
+      },
+      {
+        q: "Can I return it?",
+        a: "Personal-care products can't be returned once received, unless they arrive damaged, defective or incorrect — contact us and we'll put it right. EU customers also have a 14-day right to cancel. See the refund policy for details.",
+      },
+    ],
+    googleCategory:
+      "Health & Beauty > Personal Care > Cosmetics > Skin Care > Facial Toners & Astringents",
+    pdp: {
+      packs: "cards",
+      galleryFit: "flush",
+      perksOneColumn: true,
+      trust: [
+        { icon: "globe", text: "100% Original Korean Skincare" },
+        { icon: "leaf", text: "Zero Harsh Chemicals" },
+        { icon: "droplet", text: "Natural Glass-Skin Bounce" },
+      ],
+      dailyStep: {
+        eyebrow: "Your daily step",
+        heading: "For hydrated, smoother-looking skin.",
+        body: "The manufacturer describes this toner as helping replenish moisture and leave skin feeling fresh, comfortable and supple.",
+        mediaFile: "S838391d7c5b24108ad0a034663d2b5cfr",
+        benefits: [
+          {
+            icon: "droplet",
+            title: "Hydration & softness",
+            body: "Helps replenish moisture and leave skin feeling fresh and comfortable.",
+          },
+          {
+            icon: "star",
+            title: "Smoother-looking skin",
+            body: "Helps improve the appearance of dry, rough skin and fine lines.",
+          },
+          {
+            icon: "leaf",
+            title: "Supple, radiant look",
+            body: "Helps skin look supple, refreshed and naturally radiant.",
+          },
+        ],
+      },
+      howTo: {
+        heading: "Four simple steps.",
+        intro:
+          "The short version: cleanse, apply, pat on, follow with serum and moisturiser.",
+      },
+      ingredientListNote:
+        "We're waiting on the complete INCI list from the manufacturer and will publish it here in full.",
+      showHairRemovalComparison: false,
+      notice: {
+        lead: "Patch test 24 hours before first use.",
+        text: "Avoid the eye area.",
+      },
+    },
+    contentGaps: [
+      "Full INCI ingredient list, including the specific EGF-related ingredient names",
+      "Exact wording of the packaging warnings",
+      "Confirmed country of origin from the pack",
+      "Skin types the manufacturer recommends it for",
       "GTIN / barcode",
     ],
   },

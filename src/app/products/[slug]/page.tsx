@@ -7,6 +7,8 @@ import { ComparisonTable } from "@/components/content/ComparisonTable";
 import { Faq } from "@/components/content/Faq";
 import { SectionHeading } from "@/components/content/SectionHeading";
 import { ProductAccordion } from "@/components/product/ProductAccordion";
+import { SaleCountdown } from "@/components/product/SaleCountdown";
+import { EditorialBands } from "@/components/product/EditorialBands";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { PurchaseFeedback } from "@/components/product/PurchaseFeedback";
 import { PurchasePanel } from "@/components/product/PurchasePanel";
@@ -28,7 +30,12 @@ import { getProductBySlug, storeCurrency } from "@/lib/catalog";
 import { buildProductView } from "@/lib/commerce/product-view";
 import { getProductReviews } from "@/lib/judgeme/reviews";
 import { productSchema } from "@/lib/seo/product-schema";
-import { breadcrumbSchema, faqSchema, graph } from "@/lib/seo/schema";
+import {
+  breadcrumbSchema,
+  faqSchema,
+  graph,
+  howToSchema,
+} from "@/lib/seo/schema";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -60,16 +67,21 @@ const PERK_ICON_RULES: [pattern: RegExp, icon: IconName][] = [
   [/sensitive/i, "heart"],
   [/remov.*hair|stubborn hair/i, "scissors"],
   [/ingrown/i, "shield"],
+  [/fine lines/i, "feather"],
+  [/plump|radiant|supple/i, "star"],
+  [/routine|morning/i, "clock"],
   [/long.?lasting|smooth/i, "clock"],
   [/chemical|clean formula/i, "leaf"],
   [/hypoallergenic/i, "shield"],
   [/men and women|all skin types|unisex/i, "users"],
   [/scent|fragrance|citrus|floral/i, "flower"],
-  [/aloe|glycerin|hyaluronic|extract|oil|botanical/i, "leaf"],
+  [/aloe|glycerin|hyaluronic|extract|oil|botanical|egf|collagen|niacinamide/i, "leaf"],
 ];
 
 function perkIcon(perk: string): IconName {
-  return PERK_ICON_RULES.find(([pattern]) => pattern.test(perk))?.[1] ?? "check";
+  return (
+    PERK_ICON_RULES.find(([pattern]) => pattern.test(perk))?.[1] ?? "check"
+  );
 }
 
 /**
@@ -149,6 +161,8 @@ export default async function ProductPage({ params }: Props) {
     verifiedReviews ?? demoReviewsFor(record.handle)
   )?.reviews.slice(0, 5);
 
+  const perks = view.perks.map((text) => ({ icon: perkIcon(text), text }));
+
   const crumbs = [
     { label: "Home", href: "/" },
     {
@@ -172,15 +186,46 @@ export default async function ProductPage({ params }: Props) {
             ),
           ),
           faqSchema(content.faqs),
+          howToSchema(
+            `How to use ${view.name}`,
+            content.steps.map((step) => ({
+              name: step.title,
+              text: step.body,
+            })),
+          ),
         )}
       />
 
+      {/* ── Offer countdown: a real, merchant-set deadline, shown first ── */}
+      {view.saleEndsAt && <SaleCountdown endsAt={view.saleEndsAt} />}
+
       {/* ── Above the fold ─────────────────────────────────────────────── */}
       <div className="container-page pt-6 pb-10 md:pt-8 lg:pb-14">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
-          <ProductGallery media={view.gallery} productName={view.name} />
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+          <ProductGallery
+            media={view.gallery}
+            productName={view.name}
+            fit={content.pdp.galleryFit}
+          />
 
-          <div className="lg:pt-4">
+          <div className="min-w-0 lg:pt-4">
+            {content.pdp.trust && (
+              <ul className="mb-5 grid grid-cols-3 gap-3 pb-4 font-ui text-caption text-ink-soft">
+                {content.pdp.trust.map((t) => (
+                  <li
+                    key={t.text}
+                    className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-2.5"
+                  >
+                    <Icon
+                      name={t.icon}
+                      className="size-5 shrink-0 text-sage-600"
+                    />
+                    {t.text}
+                  </li>
+                ))}
+              </ul>
+            )}
+
             {ratingLine && ratingLine.count > 0 && (
               /* The rating replaces the old category eyebrow: it is the number
                  shoppers look for first, so it gets its own white chip, and it
@@ -209,28 +254,36 @@ export default async function ProductPage({ params }: Props) {
             </h1>
             {/* <p className="mt-2 text-body-lg text-ink-soft">{content.benefitLine}</p> */}
 
-            {view.perks.length > 0 && (
-              <ul className="mt-5 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
-                {view.perks.map((perk) => (
+            {perks.length > 0 && (
+              <ul
+                className={cn(
+                  "mt-5 grid grid-cols-1 gap-x-4 gap-y-2",
+                  !content.pdp.perksOneColumn && "sm:grid-cols-2",
+                )}
+              >
+                {perks.map((perk) => (
                   <li
-                    key={perk}
+                    key={perk.text}
                     className="flex items-start gap-2.5 text-body-sm"
                   >
                     {/* items-start, not items-center: an icon centred on the
                         whole row drifts down whenever a perk wraps to two
                         lines. It belongs on the first line. */}
                     <Icon
-                      name={perkIcon(perk)}
+                      name={perk.icon}
                       className="mt-0.5 size-4 shrink-0 text-sage-600"
                     />
-                    {perk}
+                    {perk.text}
                   </li>
                 ))}
               </ul>
             )}
 
             <div className="mt-8">
-              <PurchasePanel view={view} />
+              <PurchasePanel
+                view={view}
+                packs={content.pdp.packs}
+              />
               {feedbackReviews && feedbackReviews.length > 0 && (
                 <PurchaseFeedback reviews={feedbackReviews} className="mt-5" />
               )}
@@ -316,9 +369,9 @@ export default async function ProductPage({ params }: Props) {
               />
               <p>
                 <strong className="font-semibold">
-                  Patch test 24 hours before first use.
+                  {content.pdp.notice.lead}
                 </strong>{" "}
-                Not for the face or genitals.{" "}
+                {content.pdp.notice.text}{" "}
                 <a href="#safety" className="link-underline">
                   Where to use it
                 </a>
@@ -329,22 +382,30 @@ export default async function ProductPage({ params }: Props) {
       </div>
 
       {/* ── Product videos ────────────────────────────────────────────── */}
-      <section className="py-12 lg:py-16" aria-labelledby="videos">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="Real use"
-            title="See it in action."
-            id="videos"
-            size="heading"
-            align="center"
-            titleClassName="font-pdp-heading font-semibold"
-            intro="Real clips of the mousse in use — patch test, spray, wipe, rinse."
-          />
-        </div>
-        {/* Full-bleed: the row runs edge to edge of the viewport, past
+      {content.pdp.videosIntro && (
+        <section className="py-12 lg:py-16" aria-labelledby="videos">
+          <div className="container-page">
+            <SectionHeading
+              eyebrow="Real use"
+              title="See it in action."
+              id="videos"
+              size="heading"
+              align="center"
+              titleClassName="font-pdp-heading font-semibold"
+              intro={content.pdp.videosIntro}
+            />
+          </div>
+          {/* Full-bleed: the row runs edge to edge of the viewport, past
             container-page's max width, so the marquee has real room to drift. */}
-        <ProductVideoShowcase videos={productVideos} className="mt-8 px-2 sm:px-3" />
-      </section>
+          <ProductVideoShowcase
+            videos={productVideos}
+            className="mt-8 px-2 sm:px-3"
+          />
+        </section>
+      )}
+
+      {/* ── Your daily step + key ingredients (products that define them) ── */}
+      <EditorialBands content={content} view={view} />
 
       {/* ── Feature highlights (from Shopify, alternating image layout) ── */}
       {view.featureHighlights.length > 0 && (
@@ -400,22 +461,26 @@ export default async function ProductPage({ params }: Props) {
         <div className="container-page">
           <SectionHeading
             eyebrow="How to use"
-            title="Six unhurried steps."
+            title={content.pdp.howTo.heading}
             id="how-to-use"
             size="heading"
             align="center"
             titleClassName="font-pdp-heading font-semibold"
             intro={
               <>
-                The short version: patch test, spray, wait 5–10 minutes, wipe,
-                rinse, rest.{" "}
-                <Link
-                  href="/guides/how-to-use-hair-removal-mousse"
-                  className="link-underline text-ink"
-                >
-                  Read the full guide
-                </Link>
-                .
+                {content.pdp.howTo.intro}
+                {content.pdp.howTo.guide && (
+                  <>
+                    {" "}
+                    <Link
+                      href={content.pdp.howTo.guide.href}
+                      className="link-underline text-ink"
+                    >
+                      Read the full guide
+                    </Link>
+                    .
+                  </>
+                )}
               </>
             }
           />
@@ -442,61 +507,64 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ── Ingredients ───────────────────────────────────────────────── */}
-      <section
-        id="ingredients"
-        className="px-2 sm:px-3"
-        aria-labelledby="ingredients-title"
-      >
-        <div className="rounded-media bg-sage-100 py-12 lg:py-16">
-          <div className="container-page grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-16">
-            <div>
-              <SectionHeading
-                eyebrow="Care, clearly"
-                title="What's inside."
-                id="ingredients-title"
-                size="heading"
-                align="center"
-                titleClassName="font-pdp-heading font-semibold"
-                intro="The key ingredients the manufacturer lists for this formula, and why formulators use them."
-              />
-              <div className="glass mt-6 rounded-card p-5 text-body-sm">
-                <p className="font-medium">Full ingredient list</p>
-                <p className="mt-2 text-ink-soft">
-                  We&apos;re waiting on the complete INCI list — including the
-                  hair-removing active ingredient — from the manufacturer, and
-                  will publish it here in full. Until then, check the pack or{" "}
-                  <a
-                    href={`mailto:${site.supportEmail}?subject=Ingredient%20question`}
-                    className="link-underline text-ink"
-                  >
-                    ask us
-                  </a>
-                  .
-                </p>
+      {!content.pdp.dailyStep && (
+        <>
+          {/* ── Ingredients ───────────────────────────────────────────────── */}
+          <section
+            id="ingredients"
+            className="px-2 sm:px-3"
+            aria-labelledby="ingredients-title"
+          >
+            <div className="rounded-media bg-sage-100 py-12 lg:py-16">
+              <div className="container-page grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-16">
+                <div>
+                  <SectionHeading
+                    eyebrow="Care, clearly"
+                    title="What's inside."
+                    id="ingredients-title"
+                    size="heading"
+                    align="center"
+                    titleClassName="font-pdp-heading font-semibold"
+                    intro="The key ingredients the manufacturer lists for this formula, and why formulators use them."
+                  />
+                  <div className="glass mt-6 rounded-card p-5 text-body-sm">
+                    <p className="font-medium">Full ingredient list</p>
+                    <p className="mt-2 text-ink-soft">
+                      {content.pdp.ingredientListNote} Until then, check the
+                      pack or{" "}
+                      <a
+                        href={`mailto:${site.supportEmail}?subject=Ingredient%20question`}
+                        className="link-underline text-ink"
+                      >
+                        ask us
+                      </a>
+                      .
+                    </p>
+                  </div>
+                </div>
+                <dl className="flex flex-col gap-2">
+                  {content.keyIngredients.map((ing) => (
+                    <div
+                      key={ing.slug}
+                      className="grid gap-1.5 rounded-card bg-porcelain/90 p-4 shadow-soft sm:grid-cols-[210px_1fr] sm:gap-6 sm:p-5"
+                    >
+                      <dt className="font-serif text-heading-3">
+                        <Link
+                          href={`/ingredients/${ing.slug}`}
+                          className="link-underline"
+                        >
+                          {ing.name}
+                        </Link>
+                      </dt>
+                      <dd className="text-ink-soft">{ing.role}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
             </div>
-            <dl className="flex flex-col gap-2">
-              {content.keyIngredients.map((ing) => (
-                <div
-                  key={ing.slug}
-                  className="grid gap-1.5 rounded-card bg-porcelain/90 p-4 shadow-soft sm:grid-cols-[210px_1fr] sm:gap-6 sm:p-5"
-                >
-                  <dt className="font-serif text-heading-3">
-                    <Link
-                      href={`/ingredients/${ing.slug}`}
-                      className="link-underline"
-                    >
-                      {ing.name}
-                    </Link>
-                  </dt>
-                  <dd className="text-ink-soft">{ing.role}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </section>
+          </section>
+        </>
+      )}
 
       {/* ── Safety ────────────────────────────────────────────────────── */}
       <section
@@ -565,24 +633,26 @@ export default async function ProductPage({ params }: Props) {
       </section>
 
       {/* ── Comparison + details ──────────────────────────────────────── */}
-      <section className="px-2 sm:px-3" aria-labelledby="compare">
-        <div className="rounded-media bg-cream py-12 lg:py-16">
-          <div className="container-page">
-            <SectionHeading
-              eyebrow="Compare"
-              title="Mousse, razor or wax?"
-              id="compare"
-              size="heading"
-              align="center"
-              titleClassName="font-pdp-heading font-semibold"
-              intro="How they differ in practice — no method is right for everyone."
-            />
-            <div className="mt-8">
-              <ComparisonTable />
+      {content.pdp.showHairRemovalComparison && (
+        <section className="px-2 sm:px-3" aria-labelledby="compare">
+          <div className="rounded-media bg-cream py-12 lg:py-16">
+            <div className="container-page">
+              <SectionHeading
+                eyebrow="Compare"
+                title="Mousse, razor or wax?"
+                id="compare"
+                size="heading"
+                align="center"
+                titleClassName="font-pdp-heading font-semibold"
+                intro="How they differ in practice — no method is right for everyone."
+              />
+              <div className="mt-8">
+                <ComparisonTable />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="py-12 lg:py-16" aria-labelledby="details">
         <div className="container-page grid gap-8 lg:grid-cols-2 lg:gap-16">

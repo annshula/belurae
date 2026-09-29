@@ -21,7 +21,7 @@ export async function GET() {
     "## Products",
     ...products.map(({ record, content }) => {
       const v = buildProductView(record, content, currency);
-      return `- [${v.name}](${absoluteUrl(v.href)}): ${content.format}. ${content.benefitLine} From ${formatMoney(v.fromPrice, currency)}. Made by ${content.manufacturer}. Key ingredients: ${content.keyIngredients.map((k) => k.name).join(", ")}. Not for the face, genitals or broken skin; patch test 24 hours before first use.`;
+      return `- [${v.name}](${absoluteUrl(v.href)}): ${content.format}. ${content.benefitLine} From ${formatMoney(v.fromPrice, currency)}. Made by ${content.manufacturer}. Key ingredients: ${content.keyIngredients.map((k) => k.name).join(", ")}. Patch test 24 hours before first use. Avoid: ${content.safety.avoid.join("; ").toLowerCase()}.`;
     }),
     "",
     "## Guides",

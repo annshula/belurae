@@ -169,6 +169,11 @@
 /* ── Base ─────────────────────────────────────────────────────────────── */
 
 @layer base {
+  /* The home hero carries the brand message, so the announcement bar is hidden there. */
+  body:has([data-home-hero]) [data-announcement] {
+    display: none;
+  }
+
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;

@@ -1,4 +1,5 @@
 import {
+  Cormorant_Garamond,
   Figtree,
   Fraunces,
   Instrument_Serif,
@@ -107,4 +108,19 @@ export const pdpHeading = Plus_Jakarta_Sans({
   display: "swap",
   preload: false,
   fallback: ["ui-sans-serif", "system-ui", "Segoe UI", "Helvetica Neue"],
+});
+
+/**
+ * Editorial PDP display serif (Cormorant Garamond) — the classical, high-contrast
+ * face in the toner page reference. Applied on the PDP wrapper only (never in the
+ * root layout), so only that route downloads and preloads it.
+ */
+export const editorialDisplay = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--ff-display",
+  display: "swap",
+  preload: true,
+  fallback: ["Georgia", "serif"],
 });

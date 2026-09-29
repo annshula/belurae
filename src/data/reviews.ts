@@ -1,7 +1,8 @@
 /**
- * PLACEHOLDER review set for the Belurae hair-removal mousse.
+ * PLACEHOLDER review sets — one per product — for the Belurae catalogue: the
+ * hair-removal mousse and the EGF Tox toner.
  *
- * This exists so the review surfaces — the rating line above the title and the
+ * These exist so the review surfaces — the rating line above the title and the
  * review feed with its filters — can be built, reviewed and demoed before
  * Judge.me has verified-buyer reviews to serve. The copy is hand-written in a
  * realistic customer register and modelled on the reference storefront's
@@ -22,8 +23,8 @@
  *
  * Generation is deterministic — seeded PRNG, fixed anchor date — so the server
  * and the browser produce identical data. That is what lets the client-side
- * feed import this module directly instead of receiving 524 reviews through the
- * RSC payload, and keeps hydration clean.
+ * feed import this module directly instead of receiving hundreds of reviews
+ * through the RSC payload, and keeps hydration clean.
  */
 
 import {
@@ -32,19 +33,21 @@ import {
   type Review,
 } from "@/lib/judgeme/types";
 
-/** The one product this set belongs to (data/catalog.json's product handle). */
-const DEMO_HANDLE = "bikini-pain-free-hair-removal-spray";
+/** Product handles, as they appear in data/catalog.json. */
+const MOUSSE_HANDLE = "bikini-pain-free-hair-removal-spray";
+const TONER_HANDLE =
+  "hydrating-smoothing-toner-even-skin-tone-brightening-skin-refines-skin-texture-fast-absorbing-non-greasy-refreshing-facial-toner";
 
 /** Date of the newest review, fixed so both renderers agree. Bump when refreshing. */
 const ANCHOR = Date.UTC(2026, 8, 25, 12, 0, 0);
 const DAY = 86_400_000;
 
 /**
- * The star mix behind the headline figures: 524 reviews, average 4.9 —
- * overwhelmingly 5★ with a genuine minority lower down, so the 2★/3★ filters
+ * Mousse star mix — the figures behind its headline: 524 reviews, average 4.9.
+ * Overwhelmingly 5★ with a genuine minority lower down, so the 2★/3★ filters
  * have something real to show rather than an empty state.
  */
-const MIX: { rating: Review["rating"]; count: number }[] = [
+const MOUSSE_MIX: { rating: Review["rating"]; count: number }[] = [
   { rating: 5, count: 478 },
   { rating: 4, count: 32 },
   { rating: 3, count: 8 },
@@ -53,12 +56,12 @@ const MIX: { rating: Review["rating"]; count: number }[] = [
 ];
 
 /**
- * Review copy, in two halves: how a review opens and how it closes. Pairing
- * them is what keeps the feed from rhyming — a single-sentence pool repeats
- * inside two pages, the pairs gave 94 distinct bodies across the set. The
- * smaller bands have no closers; one sentence is enough for 14 reviews.
+ * Mousse review copy, in two halves: how a review opens and how it closes.
+ * Pairing them is what keeps the feed from rhyming — a single-sentence pool
+ * repeats inside two pages, the pairs gave 94 distinct bodies across the set.
+ * The smaller bands have no closers; one sentence is enough for 14 reviews.
  */
-const OPENERS: Record<Review["rating"], string[]> = {
+const MOUSSE_OPENERS: Record<Review["rating"], string[]> = {
   5: [
     "Sprayed an even layer on my legs, waited about eight minutes, then wiped it away with the scraper.",
     "The mousse holds its shape when you spray it, so nothing drips down my leg.",
@@ -102,7 +105,7 @@ const OPENERS: Record<Review["rating"], string[]> = {
   ],
 };
 
-const CLOSERS: Record<Review["rating"], string[]> = {
+const MOUSSE_CLOSERS: Record<Review["rating"], string[]> = {
   5: [
     "No nicks, no wax strips, and my skin felt soft afterwards.",
     "The scent fades quickly, so nothing lingers all day.",
@@ -132,7 +135,7 @@ const CLOSERS: Record<Review["rating"], string[]> = {
   1: [""],
 };
 
-const TITLES: Record<Review["rating"], string[]> = {
+const MOUSSE_TITLES: Record<Review["rating"], string[]> = {
   5: [
     "Replaced my razor",
     "Second pack",
@@ -153,6 +156,126 @@ const TITLES: Record<Review["rating"], string[]> = {
   3: ["Depends on the hair", "Takes some patience", "Only on my shins"],
   2: ["Not for me", "Patches left behind"],
   1: ["Didn't work for me", "Arrived damaged"],
+};
+
+/**
+ * Toner star mix — 340 reviews, average 4.8. Same shape as the mousse set: a
+ * heavy 5★ majority with a real tail, so every filter chip has reviews behind
+ * it and the three star bands sum to something honest.
+ */
+const TONER_MIX: { rating: Review["rating"]; count: number }[] = [
+  { rating: 5, count: 296 },
+  { rating: 4, count: 30 },
+  { rating: 3, count: 8 },
+  { rating: 2, count: 3 },
+  { rating: 1, count: 3 },
+];
+
+/**
+ * Toner review copy. Written against what the manufacturer lists for this
+ * product — a 100 ml hydrating toner with niacinamide, collagen and hyaluronic
+ * acid, patted on after cleansing — so nothing here claims more than the
+ * packaging does (docs/blueprint/01-brand.md §2).
+ */
+const TONER_OPENERS: Record<Review["rating"], string[]> = {
+  5: [
+    "Patted a few drops on after cleansing and it sank in before I'd capped the bottle.",
+    "Two pumps into my palms, pressed in, then straight on with serum.",
+    "I use it morning and night, and it's the step I notice if I skip.",
+    "Bought it for the niacinamide and stayed for how it feels going on.",
+    "Goes on like water and doesn't leave anything tacky behind.",
+    "Second bottle. The first lasted about two months of twice-daily use.",
+    "Layered it under moisturiser on a cold morning and my skin still felt comfortable by lunch.",
+    "Took it on a long flight and it was the one step my skin was happy with.",
+    "A cotton pad soaks up too much, so I use my hands and pat it in.",
+    "Followed the four steps on the leaflet and it slotted into my routine straight away.",
+    "My foundation sits better over this than over the toner I used before.",
+    "Went for the duo set and I'm glad I did — it's the step I'd miss most.",
+  ],
+  4: [
+    "Does what I want from a toner, though I need a little more on my cheeks in winter.",
+    "Light and easy to pat in, and it doesn't fight with my serum.",
+    "Happy with it overall, and I've reordered.",
+    "Nice on my skin, and one bottle has lasted well.",
+    "Absorbs quickly. I'd prefer a bigger bottle for the price.",
+    "Fine under moisturiser, though on very dry days I want a second layer.",
+    "A good step between cleansing and serum — nothing dramatic, just comfortable skin.",
+    "Gentle enough that I use it twice a day without thinking about it.",
+  ],
+  3: [
+    "It's fine, but I don't notice much difference from the toner I used before.",
+    "Does the job. The bottle is smaller than I expected for the price.",
+    "Light and pleasant, though I need to layer it twice in winter.",
+    "Works if you follow the steps. My skin felt tight the day I overdid it.",
+    "Alright, but the cap doesn't seal as tightly as I'd like for travel.",
+  ],
+  2: [
+    "My skin felt tight after about a week, so I stopped and went back to my old toner.",
+    "Arrived with the seal broken and roughly a quarter of the bottle in the box.",
+    "Didn't do much for me — no change I could point to over a month.",
+  ],
+  1: [
+    "Broke me out across my cheeks after a few days, so I stopped using it.",
+    "The pump gave up after two weeks and the rest of the bottle went to waste.",
+    "Nothing changed for me. I gave it a month and went back to what I had.",
+  ],
+};
+
+const TONER_CLOSERS: Record<Review["rating"], string[]> = {
+  5: [
+    "Skin feels soft straight afterwards, not tight.",
+    "No stinging, no stickiness, just calm skin.",
+    "It's the plainest bottle on my shelf and the one I reach for first.",
+    "Layers under sunscreen without pilling.",
+    "It's become the two minutes I actually look forward to.",
+    "My skin looks less dull in the morning, which is why I bought it.",
+    "I patch tested out of habit and had no trouble.",
+    "Cheaper per use than the sheet masks I used to buy.",
+    "The 100 ml bottle fits in my gym bag without leaking.",
+    "Would buy again — and I have.",
+    "Easier to keep up with than the long routine I tried before.",
+    "Small addition, but my routine feels finished with it.",
+  ],
+  4: [
+    "The pump is a bit stiff, but that's my only complaint.",
+    "A solid everyday toner rather than a treat.",
+    "I'd buy a larger size if they made one.",
+    "Worth it, just don't expect a dramatic change overnight.",
+    "Fine on my skin, though I keep it away from my nose in summer.",
+    "Slightly sticky if I use too much, so I've learned to use less.",
+    "Pleasant enough that I'll finish the bottle.",
+    "Good value if you catch it on offer.",
+  ],
+  3: [""],
+  2: [""],
+  1: [""],
+};
+
+const TONER_TITLES: Record<Review["rating"], string[]> = {
+  5: [
+    "Slotted straight into my routine",
+    "Second bottle",
+    "Light and hydrating",
+    "The step I don't skip",
+    "Layers well under serum",
+    "Skin feels softer",
+    "Less dull in the morning",
+    "Good under makeup",
+  ],
+  4: [
+    "Good, with a small caveat",
+    "Does what I need",
+    "Happy with it",
+    "Better in summer than winter",
+    "Solid everyday toner",
+  ],
+  3: [
+    "Fine, not remarkable",
+    "Small bottle for the price",
+    "Two layers in winter",
+  ],
+  2: ["Not for my skin", "Arrived damaged"],
+  1: ["Didn't get on with it", "Pump failed"],
 };
 
 const NAMES = [
@@ -251,11 +374,24 @@ function pick(pool: string[], n: number): string {
   return pool[(n + Math.floor(n / pool.length)) % pool.length]!;
 }
 
-function build(): Review[] {
-  const rand = mulberry32(20260925);
+/**
+ * Everything the generator needs for one product: the handle that asks for it,
+ * the PRNG seed that makes the output stable, the star mix and the copy pools.
+ */
+type ReviewSet = {
+  handle: string;
+  seed: number;
+  mix: { rating: Review["rating"]; count: number }[];
+  openers: Record<Review["rating"], string[]>;
+  closers: Record<Review["rating"], string[]>;
+  titles: Record<Review["rating"], string[]>;
+};
+
+function build(set: ReviewSet): Review[] {
+  const rand = mulberry32(set.seed);
 
   const ratings = shuffled(
-    MIX.flatMap(({ rating, count }) =>
+    set.mix.flatMap(({ rating, count }) =>
       Array.from({ length: count }, () => rating),
     ),
     rand,
@@ -263,11 +399,11 @@ function build(): Review[] {
   const names = shuffled(NAMES, rand);
   const countries = shuffled(COUNTRIES, rand);
   const openers: Record<Review["rating"], string[]> = {
-    5: shuffled(OPENERS[5], rand),
-    4: shuffled(OPENERS[4], rand),
-    3: shuffled(OPENERS[3], rand),
-    2: shuffled(OPENERS[2], rand),
-    1: shuffled(OPENERS[1], rand),
+    5: shuffled(set.openers[5], rand),
+    4: shuffled(set.openers[4], rand),
+    3: shuffled(set.openers[3], rand),
+    2: shuffled(set.openers[2], rand),
+    1: shuffled(set.openers[1], rand),
   };
   const used: Record<Review["rating"], number> = {
     1: 0,
@@ -276,13 +412,13 @@ function build(): Review[] {
     4: 0,
     5: 0,
   };
-  // CLOSERS is only shuffled for the bands that have more than one option.
-  const closers: Record<Review["rating"], string[]> = {
-    5: shuffled(CLOSERS[5], rand),
-    4: shuffled(CLOSERS[4], rand),
-    3: CLOSERS[3],
-    2: CLOSERS[2],
-    1: CLOSERS[1],
+  // Closers are only shuffled for the bands that have more than one option.
+  const closerPools: Record<Review["rating"], string[]> = {
+    5: shuffled(set.closers[5], rand),
+    4: shuffled(set.closers[4], rand),
+    3: set.closers[3],
+    2: set.closers[2],
+    1: set.closers[1],
   };
 
   return ratings.map((rating, i) => {
@@ -296,12 +432,12 @@ function build(): Review[] {
 
     // The closer walks its pool at a different stride to the opener, so the
     // pairs don't cycle in lockstep.
-    const closer = pick(closers[rating], n * 5);
+    const closer = pick(closerPools[rating], n * 5);
 
     return {
       id: `demo-${i + 1}`,
       rating,
-      title: rand() < 0.45 ? pick(TITLES[rating], n) : null,
+      title: rand() < 0.45 ? pick(set.titles[rating], n) : null,
       body: closer
         ? `${pick(openers[rating], n)} ${closer}`
         : pick(openers[rating], n),
@@ -314,15 +450,40 @@ function build(): Review[] {
   });
 }
 
-const demoList = build();
+/** Mousse set — the original placeholder, unchanged: same seed, same pools. */
+const MOUSSE_SET: ReviewSet = {
+  handle: MOUSSE_HANDLE,
+  seed: 20260925,
+  mix: MOUSSE_MIX,
+  openers: MOUSSE_OPENERS,
+  closers: MOUSSE_CLOSERS,
+  titles: MOUSSE_TITLES,
+};
+
+/** Toner set — its own seed, so the two feeds don't shuffle in lockstep. */
+const TONER_SET: ReviewSet = {
+  handle: TONER_HANDLE,
+  seed: 20260926,
+  mix: TONER_MIX,
+  openers: TONER_OPENERS,
+  closers: TONER_CLOSERS,
+  titles: TONER_TITLES,
+};
+
+function materialise(set: ReviewSet): ProductReviews {
+  const reviews = build(set);
+  return { reviews, summary: summarize(reviews) };
+}
+
+/** Handle → placeholder set, built once at module load. */
+const sets = new Map<string, ProductReviews>(
+  [MOUSSE_SET, TONER_SET].map((set) => [set.handle, materialise(set)]),
+);
 
 /** The placeholder set, for callers that already know they want it. */
-export const demoReviews: ProductReviews = {
-  reviews: demoList,
-  summary: summarize(demoList),
-};
+export const demoReviews: ProductReviews = sets.get(MOUSSE_HANDLE)!;
 
 /** Placeholder set for a product handle, or null when we don't have one for it. */
 export function demoReviewsFor(handle: string): ProductReviews | null {
-  return handle === DEMO_HANDLE ? demoReviews : null;
+  return sets.get(handle) ?? null;
 }

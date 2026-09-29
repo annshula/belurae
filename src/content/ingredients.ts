@@ -108,6 +108,56 @@ export const ingredients: Ingredient[] = [
       "As with any plant extract, individual reactions are possible — patch test new products.",
     ],
   },
+  {
+    slug: "egf",
+    name: "EGF-related ingredients",
+    inci: "Varies — often listed as an oligopeptide or polypeptide",
+    summary:
+      "EGF stands for epidermal growth factor, a protein the body makes naturally. In cosmetics, EGF-related ingredients are lab-made versions or relatives of it, and are marketed for skin conditioning.",
+    whatItIs: [
+      "Epidermal growth factor is a small protein found naturally in the body. Cosmetic versions are made in a laboratory, and on an ingredient list they often appear under names such as sh-Oligopeptide-1 or sh-Polypeptide-1.",
+      "“EGF-related” is a broad phrase. The Belurae Editor listing doesn't say which specific ingredient is used, so we can't tell you the exact name or amount.",
+    ],
+    whyUsed: [
+      "Brands include EGF-related ingredients in leave-on products such as toners and serums as part of a skin-conditioning positioning.",
+    ],
+    goodToKnow: [
+      "We make no claim about what EGF does in this toner beyond the manufacturer listing it as a key ingredient. The full ingredient list will show exactly what is inside once we have it.",
+    ],
+  },
+  {
+    slug: "niacinamide",
+    name: "Niacinamide",
+    inci: "Niacinamide",
+    summary:
+      "Niacinamide is a form of vitamin B3 widely used in skin care as a conditioning ingredient.",
+    whatItIs: [
+      "Niacinamide (also called nicotinamide) is a water-soluble form of vitamin B3. It is a common ingredient in toners, serums and moisturisers.",
+    ],
+    whyUsed: [
+      "Formulators use it to condition skin. The manufacturer says it helps improve the appearance of uneven skin tone in this toner.",
+    ],
+    goodToKnow: [
+      "Niacinamide is generally well tolerated, but any active ingredient can bother some skin. A patch test before first use is the simplest check.",
+    ],
+  },
+  {
+    slug: "collagen",
+    name: "Collagen",
+    inci: "Hydrolyzed Collagen / Collagen",
+    summary:
+      "Collagen is a protein. In cosmetics it is used as a skin-conditioning ingredient that helps products feel smooth on the skin.",
+    whatItIs: [
+      "Collagen is the main structural protein in skin. Cosmetic collagen is usually broken down into smaller pieces (hydrolysed collagen) and comes from animal or marine sources.",
+    ],
+    whyUsed: [
+      "In leave-on products it is used for its conditioning, smooth feel. The manufacturer says it supports a smooth, supple feel in this toner.",
+    ],
+    goodToKnow: [
+      "Putting collagen on the skin is not the same as the body making its own collagen. Treat it as a conditioning ingredient.",
+      "If the source matters to you (for example marine or animal), check the pack or ask us.",
+    ],
+  },
 ];
 
 export function ingredientBySlug(slug: string): Ingredient | undefined {

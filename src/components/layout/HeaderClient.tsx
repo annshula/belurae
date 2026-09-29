@@ -17,35 +17,6 @@ import { cn } from "@/lib/utils";
  * All links are real <a> elements in the server HTML, so crawlers see them.
  */
 
-/**
- * The site-wide announcement bar — hidden on the home page, where the hero
- * carries the brand message instead and the transparent header sits directly
- * on the hero panel with nothing above it.
- */
-export function AnnouncementBar() {
-  const pathname = usePathname();
-  if (pathname === "/") return null;
-  return (
-    <div className="bg-sage-900 text-sage-100">
-      <p className="container-page flex h-(--announce-h) items-center justify-center gap-4 text-center text-[0.78rem] tracking-[0.06em]">
-        <span>Tracked delivery on every order</span>
-        <span
-          aria-hidden="true"
-          className="hidden size-1 rounded-full bg-sage-400 sm:inline-block"
-        />
-        <span className="hidden sm:inline">Secure checkout by Shopify</span>
-        <span
-          aria-hidden="true"
-          className="hidden size-1 rounded-full bg-sage-400 md:inline-block"
-        />
-        <span className="hidden md:inline">
-          Key ingredients listed on every product
-        </span>
-      </p>
-    </div>
-  );
-}
-
 export type MegaCategory = {
   label: string;
   href: string;

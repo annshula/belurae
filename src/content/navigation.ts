@@ -29,6 +29,11 @@ export const primaryNav: NavGroup[] = [
         description: "At-home, no-blade hair removal",
       },
       {
+        label: "Skincare",
+        href: "/collections/skincare",
+        description: "Facial toner, in plain words",
+      },
+      {
         label: "Shop all",
         href: "/collections/all",
         description: "Everything Belurae sells today",
@@ -95,6 +100,7 @@ export const footerNav: NavGroup[] = [
     label: "Shop",
     links: [
       { label: "Hair Removal", href: "/collections/hair-removal" },
+      { label: "Skincare", href: "/collections/skincare" },
       { label: "Shop all", href: "/collections/all" },
     ],
   },

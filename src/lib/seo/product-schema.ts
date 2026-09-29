@@ -26,7 +26,7 @@ export function productSchema(
     description: content.benefitLine,
     url,
     image: images,
-    category: "Health & Beauty > Personal Care > Hair Removal > Depilatories",
+    category: content.googleCategory,
     brand: {
       "@type": "Brand",
       name: content.manufacturer.replace(/\s*\(.*\)$/, ""),

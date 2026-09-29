@@ -41,7 +41,10 @@ const SWIPE_THRESHOLD = 40;
 export function ProductGallery({
   media,
   productName,
+  fit = "contain",
 }: {
+  /** "flush": the whole photo, uncropped, with no tinted panel or padding around it. */
+  fit?: "contain" | "flush";
   media: ViewMedia[];
   productName: string;
 }) {
@@ -217,7 +220,10 @@ export function ProductGallery({
                     type="button"
                     onClick={() => setZoomAt(i)}
                     aria-label={`Zoom image ${i + 1}`}
-                    className="well relative block aspect-square w-full cursor-zoom-in overflow-hidden lg:aspect-auto lg:h-(--gallery-h)"
+                    className={cn(
+                      "relative block aspect-square w-full cursor-zoom-in overflow-hidden lg:aspect-auto lg:h-(--gallery-h)",
+                      fit === "contain" && "well",
+                    )}
                   >
                     <Image
                       src={item.url}
@@ -227,7 +233,9 @@ export function ProductGallery({
                       fetchPriority={i === 0 ? "high" : undefined}
                       sizes="(min-width: 1024px) 52vw, 100vw"
                       className={cn(
-                        "object-contain p-6 mix-blend-multiply transition-opacity duration-300 md:p-12",
+                        fit === "flush"
+                          ? "object-contain transition-opacity duration-300"
+                          : "object-contain p-6 mix-blend-multiply transition-opacity duration-300 md:p-12",
                         !loaded.has(i) && "opacity-0",
                       )}
                       onLoad={() => markLoaded(i)}
@@ -306,7 +314,7 @@ export function ProductGallery({
                     sizes="88px"
                     className={cn(
                       "mix-blend-multiply",
-                      item.type === "image"
+                      item.type === "image" && fit === "contain"
                         ? "object-contain p-1.5"
                         : "object-cover",
                     )}
