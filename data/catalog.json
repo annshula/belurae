@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-09-29T08:48:02.272Z",
+  "syncedAt": "2026-09-29T13:20:54.172Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -22,7 +22,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-09-29T08:43:52Z",
+      "updatedAt": "2026-09-29T13:18:22Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -58,30 +58,30 @@
               "compareAtAmount": 71,
               "currencyCode": "CAD"
             },
-            "AU": {
-              "amount": 59,
-              "compareAtAmount": 73,
-              "currencyCode": "AUD"
-            },
-            "ZA": {
-              "amount": 671,
-              "compareAtAmount": 838,
-              "currencyCode": "ZAR"
-            },
             "US": {
               "amount": 39.99,
               "compareAtAmount": 49.99,
               "currencyCode": "USD"
             },
             "IN": {
-              "amount": 3916.31,
-              "compareAtAmount": 4895.63,
+              "amount": 3911.2,
+              "compareAtAmount": 4889.24,
               "currencyCode": "INR"
+            },
+            "ZA": {
+              "amount": 670,
+              "compareAtAmount": 837,
+              "currencyCode": "ZAR"
             },
             "GB": {
               "amount": 31,
               "compareAtAmount": 39,
               "currencyCode": "GBP"
+            },
+            "AU": {
+              "amount": 59,
+              "compareAtAmount": 73,
+              "currencyCode": "AUD"
             }
           }
         },
@@ -104,30 +104,30 @@
               "compareAtAmount": 114,
               "currencyCode": "CAD"
             },
-            "AU": {
-              "amount": 73,
-              "compareAtAmount": 117,
-              "currencyCode": "AUD"
-            },
-            "ZA": {
-              "amount": 838,
-              "compareAtAmount": 1341,
-              "currencyCode": "ZAR"
-            },
             "US": {
               "amount": 49.99,
               "compareAtAmount": 79.99,
               "currencyCode": "USD"
             },
             "IN": {
-              "amount": 4895.63,
-              "compareAtAmount": 7833.59,
+              "amount": 4889.24,
+              "compareAtAmount": 7823.38,
               "currencyCode": "INR"
+            },
+            "ZA": {
+              "amount": 837,
+              "compareAtAmount": 1340,
+              "currencyCode": "ZAR"
             },
             "GB": {
               "amount": 39,
               "compareAtAmount": 62,
               "currencyCode": "GBP"
+            },
+            "AU": {
+              "amount": 73,
+              "compareAtAmount": 117,
+              "currencyCode": "AUD"
             }
           }
         },
@@ -150,30 +150,30 @@
               "compareAtAmount": 159,
               "currencyCode": "CAD"
             },
-            "AU": {
-              "amount": 88,
-              "compareAtAmount": 164,
-              "currencyCode": "AUD"
-            },
-            "ZA": {
-              "amount": 1006,
-              "compareAtAmount": 1877,
-              "currencyCode": "ZAR"
-            },
             "US": {
               "amount": 59.99,
               "compareAtAmount": 111.99,
               "currencyCode": "USD"
             },
             "IN": {
-              "amount": 5874.95,
-              "compareAtAmount": 10967.42,
+              "amount": 5867.29,
+              "compareAtAmount": 10953.12,
               "currencyCode": "INR"
+            },
+            "ZA": {
+              "amount": 1005,
+              "compareAtAmount": 1875,
+              "currencyCode": "ZAR"
             },
             "GB": {
               "amount": 47,
               "compareAtAmount": 87,
               "currencyCode": "GBP"
+            },
+            "AU": {
+              "amount": 88,
+              "compareAtAmount": 164,
+              "currencyCode": "AUD"
             }
           }
         }
@@ -411,7 +411,7 @@
         "Aloe leaf water, glycerin & hyaluronic acid",
         "Suitable for men and women"
       ],
-      "saleEndsAt": null
+      "saleEndsAt": "2026-09-30T01:22:48.000Z"
     }
   }
 }

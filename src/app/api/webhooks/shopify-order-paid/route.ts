@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { belongsToBelurae } from "@/lib/catalog/ownership";
 import { site } from "@/lib/site";
 import {
-  describeCaller,
   isDuplicateWebhook,
   verifyWebhookSignature,
 } from "@/services/webhooks/verify";
@@ -55,19 +54,32 @@ type ShopifyOrder = {
   line_items?: ShopifyLineItem[];
   email?: string | null;
   phone?: string | null;
-  customer?: { id?: number | null; email?: string | null; phone?: string | null } | null;
+  customer?: { email?: string | null; phone?: string | null } | null;
   billing_address?: ShopifyAddress | null;
-  /** Cart attributes carried through to the order — includes _fbc/_fbp when the checkout route set them. */
   note_attributes?: { name?: string; value?: string }[];
+  order_status_url?: string | null;
 };
 
-/** Reads a cart attribute Shopify carried onto the order (see api/cart/checkout/route.ts). */
-function noteAttribute(order: ShopifyOrder, key: string): string | undefined {
-  const value = order.note_attributes?.find((a) => a.name === key)?.value;
-  return value && value.length > 0 ? value : undefined;
+/** Mirrors the cart attribute keys app/api/cart/checkout/route.ts writes at checkout. */
+const AD_IDENTITY_ATTRIBUTE_KEYS = {
+  fbp: "_fbp",
+  fbc: "_fbc",
+} as const;
+
+/** Reads back the fbp/fbc the checkout route put on the cart — this webhook
+ *  has no cookies of its own, so note_attributes is the only way these values
+ *  survive from the shopper's browser to this server-to-server call. */
+function adIdentityFromOrder(order: ShopifyOrder) {
+  const byName = new Map(
+    (order.note_attributes ?? []).map((a) => [a.name, a.value]),
+  );
+  return {
+    fbp: byName.get(AD_IDENTITY_ATTRIBUTE_KEYS.fbp) || undefined,
+    fbc: byName.get(AD_IDENTITY_ATTRIBUTE_KEYS.fbc) || undefined,
+  };
 }
 
-/** Meta/TikTok require PII lowercased + trimmed, then SHA-256 hex — never sent raw. */
+/** Meta/TikTok require PII lowercased + trimmed, then SHA-256 hex — never send it raw. */
 function sha256(value: string): string {
   return createHash("sha256").update(value).digest("hex");
 }
@@ -95,24 +107,12 @@ function customerMatchData(order: ShopifyOrder) {
     st: hashField(address?.province_code),
     zp: hashField(address?.zip),
     country: hashField(address?.country_code),
-    externalId: hashField(order.customer?.id != null ? String(order.customer.id) : undefined),
   };
 }
 
-/** True when a webhook line item belongs to Belurae (the Shopify store is shared). */
+/** True when a webhook line item belongs to Belurae (shared store). */
 function isOurLineItem(line: ShopifyLineItem): boolean {
   return belongsToBelurae({ productId: line.product_id, variantId: line.variant_id });
-}
-
-/**
- * Revenue attributable to Belurae: the order can mix brands on the shared
- * store, so the event value is the sum of our own lines, not the order total.
- */
-function ourValue(order: ShopifyOrder): number {
-  const total = (order.line_items ?? [])
-    .filter(isOurLineItem)
-    .reduce((sum, l) => sum + Number(l.price ?? 0) * (l.quantity ?? 1), 0);
-  return Math.round(total * 100) / 100;
 }
 
 const ack = () => NextResponse.json({ received: true });
@@ -127,10 +127,10 @@ async function sendMetaPurchase(
   const accessToken = process.env.META_CAPI_ACCESS_TOKEN?.trim();
   const version = process.env.META_GRAPH_API_VERSION?.trim() || "v21.0";
   // Meta Events Manager → Test Events issues a per-account code that tags an
-  // event as test traffic: it shows up live in that tool but is excluded from
-  // ad optimization and reporting. Unset in production; set locally or in a
-  // staging env when verifying this pipeline end-to-end so a manual test never
-  // counts as a real conversion.
+  // event as test traffic: it shows up live in that tool but is excluded
+  // from ad optimization and reporting. Unset in production; set locally or
+  // in a staging env when verifying this pipeline end-to-end so a manual
+  // test never counts as a real conversion.
   const testEventCode = process.env.META_TEST_EVENT_CODE?.trim();
   if (!pixelId || !accessToken) {
     console.log(
@@ -147,18 +147,17 @@ async function sendMetaPurchase(
     return;
   }
 
-  const value = ourValue(order);
+  const value = Number(order.current_total_price ?? order.total_price ?? 0);
 
   // Meta's advanced-matching fields (em/ph/fn/ln/ct/st/zp/country) are the
-  // strongest signals in Event Match Quality — stronger than IP/UA combined —
-  // and each takes an array of hashed values per Meta's spec.
+  // strongest signals in Event Match Quality — stronger than IP/UA/fbp/fbc
+  // combined — and each takes an array of hashed values per Meta's spec.
   const match = customerMatchData(order);
-  // fbc/fbp are unhashed per Meta's spec (they're already opaque tokens, not
-  // PII) — carried from the browser's own _fbc/_fbp cookies as cart
-  // attributes at checkout (see api/cart/checkout/route.ts), since this
-  // event has no browser-side Purchase pixel to inherit them from.
-  const fbc = noteAttribute(order, "_fbc");
-  const fbp = noteAttribute(order, "_fbp");
+  // fbp/fbc: read back from the cart's note_attributes (see
+  // adIdentityFromOrder above) — the only way this server-to-server call can
+  // see the browser's own identifiers, since the shopper pays on Shopify's
+  // domain and never returns to a page here with cookies to read.
+  const adIdentity = adIdentityFromOrder(order);
   const userData = {
     client_ip_address: ip ?? undefined,
     client_user_agent: userAgent ?? undefined,
@@ -170,9 +169,8 @@ async function sendMetaPurchase(
     st: match.st ? [match.st] : undefined,
     zp: match.zp ? [match.zp] : undefined,
     country: match.country ? [match.country] : undefined,
-    external_id: match.externalId ? [match.externalId] : undefined,
-    fbc,
-    fbp,
+    fbp: adIdentity.fbp,
+    fbc: adIdentity.fbc,
   };
 
   try {
@@ -190,7 +188,11 @@ async function sendMetaPurchase(
               event_time: Math.floor(Date.now() / 1000),
               event_id: `purchase-${order.id}`,
               action_source: "website",
-              event_source_url: site.url,
+              // Required for web action_source per Meta's docs. Shopify's
+              // own order-status page is the one real, order-specific URL
+              // that exists for this purchase — falls back to this
+              // storefront's own domain on the rare payload that omits it.
+              event_source_url: order.order_status_url || site.url,
               user_data: userData,
               custom_data: {
                 currency: order.currency ?? "USD",
@@ -261,7 +263,9 @@ async function sendGa4Purchase(order: ShopifyOrder): Promise<void> {
               name: "purchase",
               params: {
                 currency: order.currency ?? "USD",
-                value: ourValue(order),
+                value: Number(
+                  order.current_total_price ?? order.total_price ?? 0,
+                ),
                 transaction_id: String(order.id),
                 items,
               },
@@ -305,7 +309,7 @@ async function sendTikTokPurchase(
     return;
   }
 
-  const value = ourValue(order);
+  const value = Number(order.current_total_price ?? order.total_price ?? 0);
 
   // Same hashed-identity boost as Meta CAPI above — TikTok's Events API
   // matches on `email`/`phone_number` (each a hashed array) too.
@@ -370,7 +374,6 @@ export async function POST(request: NextRequest) {
     !verifyWebhookSignature(
       rawBody,
       request.headers.get("x-shopify-hmac-sha256"),
-      describeCaller(request.headers),
     )
   ) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
@@ -385,27 +388,24 @@ export async function POST(request: NextRequest) {
   let order: ShopifyOrder;
   try {
     order = JSON.parse(rawBody) as ShopifyOrder;
-  } catch (error) {
-    console.error(
-      "[webhook] could not parse the orders/paid body as JSON:",
-      error instanceof Error ? error.message : error,
-    );
+  } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  // Logged unconditionally, before any analytics call: the send* helpers can
-  // all no-op silently (missing env config, or no line item matched this
-  // store), which otherwise looks identical in the logs to this route never
-  // having been invoked at all.
-  console.log(
-    `[webhook] order ${order.id} (${order.name ?? "unnamed"}) received, dispatching analytics`,
-  );
+  // Logged unconditionally, before either analytics call: sendMetaPurchase/
+  // sendGa4Purchase can both no-op silently (missing env config, or no line
+  // item matched this store), which otherwise looks identical in the logs
+  // to this route never having been invoked at all.
+  console.log(`[webhook] order ${order.id} (${order.name ?? "unnamed"}) received, dispatching analytics`);
 
+  // x-forwarded-for is a comma-separated proxy chain (client, proxy1,
+  // proxy2, …) behind any reverse proxy/CDN — Meta's client_ip_address
+  // expects a single address, so take just the first hop.
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
-  const userAgent = request.headers.get("user-agent") ?? null;
+  const userAgent = request.headers.get("user-agent");
 
-  // Both forwards are independent and must not block the webhook ack for long.
+  // Fire both analytics beacons in parallel and let them fail independently.
   await Promise.allSettled([
     sendMetaPurchase(order, ip, userAgent),
     sendGa4Purchase(order),
