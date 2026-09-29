@@ -38,7 +38,7 @@ export function ReviewsSection({
   handle: string;
 }) {
   const set = data ?? demoReviewsFor(handle);
-  const reviews = set?.reviews ?? [];
+  const reviews = useMemo(() => set?.reviews ?? [], [set]);
   const summary = set?.summary ?? null;
 
   const [filter, setFilter] = useState<Filter>("all");

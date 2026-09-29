@@ -46,6 +46,15 @@ export function ProductVideoShowcase({
   const pausedRef = useRef(false);
   const dirRef = useRef<1 | -1>(1);
   const resumeTimer = useRef<number | null>(null);
+  /**
+   * Mouse drag only — touch and trackpad already pan an `overflow-x-auto`
+   * list natively. Pointer capture is taken on movement, never on
+   * `pointerdown`: capturing on the way down would retarget the click that
+   * follows to this <ul>, silently swallowing a tap on the play area. A few
+   * pixels of travel decide it — under the threshold the tap goes through,
+   * over it the row takes the drag.
+   */
+  const dragRef = useRef<{ id: number; x: number; left: number; moved: boolean } | null>(null);
 
   const pause = useCallback(() => {
     if (resumeTimer.current !== null) window.clearTimeout(resumeTimer.current);
@@ -123,16 +132,6 @@ export function ProductVideoShowcase({
   }, [videos.length]);
 
   if (videos.length === 0) return null;
-
-  /**
-   * Mouse drag only — touch and trackpad already pan an `overflow-x-auto`
-   * list natively. Pointer capture is taken on movement, never on
-   * `pointerdown`: capturing on the way down would retarget the click that
-   * follows to this <ul>, silently swallowing a tap on the play area. A few
-   * pixels of travel decide it — under the threshold the tap goes through,
-   * over it the row takes the drag.
-   */
-  const dragRef = useRef<{ id: number; x: number; left: number; moved: boolean } | null>(null);
 
   const onPointerDown = (e: ReactPointerEvent<HTMLUListElement>) => {
     const track = trackRef.current;
