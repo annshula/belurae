@@ -60,7 +60,7 @@ export function SaleCountdown({
         aria-live="off"
       >
         <Icon name="clock" className="size-3.5 shrink-0" />
-        Ends in {pad(left.hours)}:{pad(left.minutes)}:{pad(left.seconds)}
+        Offer ends in {pad(left.hours)}:{pad(left.minutes)}:{pad(left.seconds)}
       </p>
     );
   }
