@@ -507,12 +507,7 @@ function PackCards({
             <span className="flex items-center gap-3.5 p-4 pt-5">
               {/* Photo tile with the selection marker on its corner. */}
               <span className="relative block size-16 shrink-0">
-                <span
-                  className={cn(
-                    "relative block size-full overflow-hidden rounded-[14px] bg-paper ring-1",
-                    c.offer ? "ring-clay-200" : "ring-sand",
-                  )}
-                >
+                <span className="relative block size-full overflow-hidden rounded-[14px]">
                   {c.img && (
                     <PackPhoto
                       src={c.img}
@@ -668,7 +663,7 @@ function PackCards({
             </span>
 
             <span className="relative block aspect-square w-full max-w-24">
-              <span className="relative block size-full overflow-hidden rounded-tag bg-paper">
+              <span className="relative block size-full overflow-hidden rounded-tag">
                 {c.img && (
                   <PackPhoto
                     src={c.img}
