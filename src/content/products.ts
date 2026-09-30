@@ -339,6 +339,12 @@ export const products: ProductContent[] = [
       ingredientListNote:
         "We're waiting on the complete INCI list — including the hair-removing active ingredient — from the manufacturer, and will publish it here in full.",
       packs: "cards",
+      galleryFit: "flush",
+      trust: [
+        { icon: "feather", text: "No blade, no wax strips" },
+        { icon: "clock", text: "5–10 minutes on skin" },
+        { icon: "shield", text: "Labelled hypoallergenic" },
+      ],
       showHairRemovalComparison: true,
       notice: {
         lead: "Patch test 24 hours before first use.",
