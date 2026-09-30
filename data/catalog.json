@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-09-29T21:42:01.329Z",
+  "syncedAt": "2026-09-30T09:56:20.354Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -22,7 +22,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-09-29T16:54:05Z",
+      "updatedAt": "2026-09-30T09:53:45Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -45,7 +45,7 @@
           "sku": "CJPF253602701AZ",
           "barcode": null,
           "price": 39.99,
-          "compareAtPrice": 49.99,
+          "compareAtPrice": null,
           "availableForSale": true,
           "options": {
             "Quantity": "1PC"
@@ -55,33 +55,33 @@
           "pricesByMarket": {
             "AU": {
               "amount": 59,
-              "compareAtAmount": 73,
+              "compareAtAmount": null,
               "currencyCode": "AUD"
             },
-            "CA": {
-              "amount": 57,
-              "compareAtAmount": 71,
-              "currencyCode": "CAD"
-            },
-            "ZA": {
-              "amount": 669,
-              "compareAtAmount": 837,
-              "currencyCode": "ZAR"
+            "IN": {
+              "amount": 3909.5,
+              "compareAtAmount": null,
+              "currencyCode": "INR"
             },
             "US": {
               "amount": 39.99,
-              "compareAtAmount": 49.99,
+              "compareAtAmount": null,
               "currencyCode": "USD"
             },
-            "IN": {
-              "amount": 3914.32,
-              "compareAtAmount": 4893.15,
-              "currencyCode": "INR"
+            "ZA": {
+              "amount": 669,
+              "compareAtAmount": null,
+              "currencyCode": "ZAR"
             },
             "GB": {
               "amount": 31,
-              "compareAtAmount": 39,
+              "compareAtAmount": null,
               "currencyCode": "GBP"
+            },
+            "CA": {
+              "amount": 57,
+              "compareAtAmount": null,
+              "currencyCode": "CAD"
             }
           }
         },
@@ -100,34 +100,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 73,
+              "amount": 74,
               "compareAtAmount": 117,
               "currencyCode": "AUD"
             },
-            "CA": {
-              "amount": 71,
-              "compareAtAmount": 114,
-              "currencyCode": "CAD"
-            },
-            "ZA": {
-              "amount": 837,
-              "compareAtAmount": 1339,
-              "currencyCode": "ZAR"
+            "IN": {
+              "amount": 4887.12,
+              "compareAtAmount": 7819.97,
+              "currencyCode": "INR"
             },
             "US": {
               "amount": 49.99,
               "compareAtAmount": 79.99,
               "currencyCode": "USD"
             },
-            "IN": {
-              "amount": 4893.15,
-              "compareAtAmount": 7829.63,
-              "currencyCode": "INR"
+            "ZA": {
+              "amount": 836,
+              "compareAtAmount": 1337,
+              "currencyCode": "ZAR"
             },
             "GB": {
               "amount": 39,
               "compareAtAmount": 62,
               "currencyCode": "GBP"
+            },
+            "CA": {
+              "amount": 71,
+              "compareAtAmount": 114,
+              "currencyCode": "CAD"
             }
           }
         },
@@ -136,7 +136,7 @@
           "title": "3PCS",
           "sku": "CJPF253602710JQ",
           "barcode": null,
-          "price": 59.99,
+          "price": 49.99,
           "compareAtPrice": 111.99,
           "availableForSale": true,
           "options": {
@@ -146,34 +146,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 88,
+              "amount": 74,
               "compareAtAmount": 164,
               "currencyCode": "AUD"
             },
-            "CA": {
-              "amount": 86,
-              "compareAtAmount": 159,
-              "currencyCode": "CAD"
-            },
-            "ZA": {
-              "amount": 1004,
-              "compareAtAmount": 1874,
-              "currencyCode": "ZAR"
+            "IN": {
+              "amount": 4887.12,
+              "compareAtAmount": 10948.36,
+              "currencyCode": "INR"
             },
             "US": {
-              "amount": 59.99,
+              "amount": 49.99,
               "compareAtAmount": 111.99,
               "currencyCode": "USD"
             },
-            "IN": {
-              "amount": 5871.98,
-              "compareAtAmount": 10961.87,
-              "currencyCode": "INR"
+            "ZA": {
+              "amount": 836,
+              "compareAtAmount": 1871,
+              "currencyCode": "ZAR"
             },
             "GB": {
-              "amount": 47,
+              "amount": 39,
               "compareAtAmount": 87,
               "currencyCode": "GBP"
+            },
+            "CA": {
+              "amount": 71,
+              "compareAtAmount": 159,
+              "currencyCode": "CAD"
             }
           }
         }
@@ -411,7 +411,7 @@
         "Aloe leaf water, glycerin & hyaluronic acid",
         "Suitable for men and women"
       ],
-      "saleEndsAt": "2026-09-30T01:22:48.000Z"
+      "saleEndsAt": "2026-10-01T01:22:48.000Z"
     },
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
@@ -420,7 +420,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-09-29T21:40:47Z",
+      "updatedAt": "2026-09-30T09:54:20Z",
       "seo": {
         "title": null,
         "description": null
@@ -443,7 +443,7 @@
           "sku": "14:10#100ml Boxed",
           "barcode": null,
           "price": 29.99,
-          "compareAtPrice": 39.99,
+          "compareAtPrice": null,
           "availableForSale": true,
           "options": {
             "Color": "100ml Boxed"
@@ -453,32 +453,32 @@
           "pricesByMarket": {
             "AU": {
               "amount": 44,
-              "compareAtAmount": 59,
+              "compareAtAmount": null,
               "currencyCode": "AUD"
             },
             "CA": {
               "amount": 43,
-              "compareAtAmount": 57,
+              "compareAtAmount": null,
               "currencyCode": "CAD"
             },
-            "GB": {
-              "amount": 24,
-              "compareAtAmount": 31,
-              "currencyCode": "GBP"
+            "ZA": {
+              "amount": 501,
+              "compareAtAmount": null,
+              "currencyCode": "ZAR"
             },
             "US": {
               "amount": 29.99,
-              "compareAtAmount": 39.99,
+              "compareAtAmount": null,
               "currencyCode": "USD"
             },
-            "ZA": {
-              "amount": 502,
-              "compareAtAmount": 669,
-              "currencyCode": "ZAR"
+            "GB": {
+              "amount": 24,
+              "compareAtAmount": null,
+              "currencyCode": "GBP"
             },
             "IN": {
-              "amount": 2935.5,
-              "compareAtAmount": 3914.32,
+              "amount": 2931.88,
+              "compareAtAmount": null,
               "currencyCode": "INR"
             }
           }
@@ -507,24 +507,24 @@
               "compareAtAmount": 100,
               "currencyCode": "CAD"
             },
-            "GB": {
-              "amount": 47,
-              "compareAtAmount": 54,
-              "currencyCode": "GBP"
+            "ZA": {
+              "amount": 1003,
+              "compareAtAmount": 1170,
+              "currencyCode": "ZAR"
             },
             "US": {
               "amount": 59.99,
               "compareAtAmount": 69.99,
               "currencyCode": "USD"
             },
-            "ZA": {
-              "amount": 1004,
-              "compareAtAmount": 1171,
-              "currencyCode": "ZAR"
+            "GB": {
+              "amount": 47,
+              "compareAtAmount": 54,
+              "currencyCode": "GBP"
             },
             "IN": {
-              "amount": 5871.98,
-              "compareAtAmount": 6850.8,
+              "amount": 5864.74,
+              "compareAtAmount": 6842.36,
               "currencyCode": "INR"
             }
           }
@@ -545,7 +545,7 @@
           "pricesByMarket": {
             "AU": {
               "amount": 88,
-              "compareAtAmount": 146,
+              "compareAtAmount": 147,
               "currencyCode": "AUD"
             },
             "CA": {
@@ -553,24 +553,24 @@
               "compareAtAmount": 142,
               "currencyCode": "CAD"
             },
-            "GB": {
-              "amount": 47,
-              "compareAtAmount": 78,
-              "currencyCode": "GBP"
+            "ZA": {
+              "amount": 1003,
+              "compareAtAmount": 1671,
+              "currencyCode": "ZAR"
             },
             "US": {
               "amount": 59.99,
               "compareAtAmount": 99.99,
               "currencyCode": "USD"
             },
-            "ZA": {
-              "amount": 1004,
-              "compareAtAmount": 1673,
-              "currencyCode": "ZAR"
+            "GB": {
+              "amount": 47,
+              "compareAtAmount": 77,
+              "currencyCode": "GBP"
             },
             "IN": {
-              "amount": 5871.98,
-              "compareAtAmount": 9787.28,
+              "amount": 5864.74,
+              "compareAtAmount": 9775.21,
               "currencyCode": "INR"
             }
           }
@@ -584,6 +584,86 @@
           "height": 1254,
           "alt": null,
           "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/rn-image_picker_lib_temp_f9c75cbd-a652-4cd1-8f5e-37a257cf5d40.png?v=1790742873",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "video",
+          "alt": null,
+          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/78daf075db2549debe55a157d9480a7f.thumbnail.0000000000.jpg?v=1790743402",
+          "width": 1080,
+          "height": 1920,
+          "sources": [
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/78daf075db2549debe55a157d9480a7f/78daf075db2549debe55a157d9480a7f.SD-480p-1.2Mbps-95962456.mp4",
+              "type": "video/mp4",
+              "width": 270
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/78daf075db2549debe55a157d9480a7f/78daf075db2549debe55a157d9480a7f.HD-720p-3.0Mbps-95962456.mp4",
+              "type": "video/mp4",
+              "width": 404
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/78daf075db2549debe55a157d9480a7f/78daf075db2549debe55a157d9480a7f.HD-1080p-4.8Mbps-95962456.mp4",
+              "type": "video/mp4",
+              "width": 606
+            }
+          ]
+        },
+        {
+          "type": "video",
+          "alt": null,
+          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/ceec84e091264bb5875ae9381cded570.thumbnail.0000000000.jpg?v=1790743416",
+          "width": 1080,
+          "height": 1920,
+          "sources": [
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/ceec84e091264bb5875ae9381cded570/ceec84e091264bb5875ae9381cded570.SD-480p-1.2Mbps-95962454.mp4",
+              "type": "video/mp4",
+              "width": 270
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/ceec84e091264bb5875ae9381cded570/ceec84e091264bb5875ae9381cded570.HD-720p-3.0Mbps-95962454.mp4",
+              "type": "video/mp4",
+              "width": 404
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/ceec84e091264bb5875ae9381cded570/ceec84e091264bb5875ae9381cded570.HD-1080p-4.8Mbps-95962454.mp4",
+              "type": "video/mp4",
+              "width": 606
+            }
+          ]
+        },
+        {
+          "type": "video",
+          "alt": null,
+          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/4bb80b8eae684463af2e92678eaa78bd.thumbnail.0000000000.jpg?v=1790743392",
+          "width": 1080,
+          "height": 1920,
+          "sources": [
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/4bb80b8eae684463af2e92678eaa78bd/4bb80b8eae684463af2e92678eaa78bd.SD-480p-1.2Mbps-95962455.mp4",
+              "type": "video/mp4",
+              "width": 270
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/4bb80b8eae684463af2e92678eaa78bd/4bb80b8eae684463af2e92678eaa78bd.HD-720p-3.0Mbps-95962455.mp4",
+              "type": "video/mp4",
+              "width": 404
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/4bb80b8eae684463af2e92678eaa78bd/4bb80b8eae684463af2e92678eaa78bd.HD-1080p-4.8Mbps-95962455.mp4",
+              "type": "video/mp4",
+              "width": 606
+            }
+          ]
         },
         {
           "type": "image",

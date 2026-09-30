@@ -302,6 +302,68 @@ function PackFieldset({
 }
 
 /**
+ * The photo tile for a pack card. When every pack shares one photo (the shop
+ * has a single product shot, not one per pack size), a bigger pack shows that
+ * shot once per set, fanned out — so the card still says "2 sets" or "3 sets"
+ * at a glance without inventing imagery.
+ */
+function PackPhoto({
+  src,
+  units,
+  fan,
+  sizes,
+  padded,
+  reserve,
+}: {
+  src: string;
+  units: number;
+  fan: boolean;
+  sizes: string;
+  padded?: boolean;
+  /** Keep the right edge clear, for a badge that sits on that corner. */
+  reserve?: boolean;
+}) {
+  const count = fan ? Math.min(Math.max(units, 1), 3) : 1;
+  if (count === 1) {
+    return (
+      <Image
+        src={src}
+        alt=""
+        fill
+        sizes={sizes}
+        className={cn("object-contain mix-blend-multiply", padded && "p-1")}
+      />
+    );
+  }
+  /* Bottles sit close together (each shot has empty space around the bottle),
+     and the whole fan stops short of the right edge when a badge sits there. */
+  const step = count === 2 ? 26 : 16;
+  const width = 100 - (count - 1) * step;
+  return (
+    <span
+      className="absolute inset-y-0 left-0"
+      style={{ right: reserve ? "20%" : 0 }}
+    >
+      {Array.from({ length: count }, (_, i) => (
+        <span
+          key={i}
+          className="absolute inset-y-0"
+          style={{ left: `${i * step}%`, width: `${width}%` }}
+        >
+          <Image
+            src={src}
+            alt=""
+            fill
+            sizes={sizes}
+            className="object-contain mix-blend-multiply"
+          />
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/**
  * "Cards" pack picker (editorial PDP): one card per pack in a row, largest
  * pack first, each with its own photo, price, per-unit price and saving.
  * "Best value" is arithmetic — it goes on a pack only when that pack has the
@@ -351,6 +413,10 @@ function PackCards({
     return same?.combo ? { free: c.units - same.combo.units, of: same.combo.units } : null;
   };
 
+  const photoOf = (c: LocalizedVariant | undefined) =>
+    c?.image ?? view.cardImage?.url ?? null;
+  const sharedPhoto = rows.every((r) => photoOf(r.combo) === photoOf(rows[0]?.combo));
+
   const cards = rows.map(({ value, combo }) => {
     const exists = Boolean(combo);
     const deal = freeFor(combo);
@@ -384,6 +450,8 @@ function PackCards({
           : combo.savings
         : null,
       img: combo?.image ?? view.cardImage?.url ?? null,
+      units: combo?.units ?? 1,
+      fan: sharedPhoto,
     };
   });
 
@@ -446,12 +514,13 @@ function PackCards({
                   )}
                 >
                   {c.img && (
-                    <Image
+                    <PackPhoto
                       src={c.img}
-                      alt=""
-                      fill
+                      units={c.units}
+                      fan={c.fan}
+                      reserve={Boolean(c.deal)}
                       sizes="64px"
-                      className="object-contain p-1 mix-blend-multiply"
+                      padded
                     />
                   )}
                 </span>
@@ -601,12 +670,12 @@ function PackCards({
             <span className="relative block aspect-square w-full max-w-24">
               <span className="relative block size-full overflow-hidden rounded-tag bg-paper">
                 {c.img && (
-                  <Image
+                  <PackPhoto
                     src={c.img}
-                    alt=""
-                    fill
+                    units={c.units}
+                    fan={c.fan}
+                    reserve={Boolean(c.deal)}
                     sizes="96px"
-                    className="object-contain mix-blend-multiply"
                   />
                 )}
               </span>
