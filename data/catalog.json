@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-09-30T17:42:05.763Z",
+  "syncedAt": "2026-09-30T18:50:00.600Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -58,30 +58,30 @@
               "compareAtAmount": null,
               "currencyCode": "AUD"
             },
+            "IN": {
+              "amount": 3913.81,
+              "compareAtAmount": null,
+              "currencyCode": "INR"
+            },
             "CA": {
               "amount": 57,
               "compareAtAmount": null,
               "currencyCode": "CAD"
             },
-            "US": {
-              "amount": 39.99,
-              "compareAtAmount": null,
-              "currencyCode": "USD"
-            },
             "ZA": {
-              "amount": 671,
+              "amount": 670,
               "compareAtAmount": null,
               "currencyCode": "ZAR"
-            },
-            "IN": {
-              "amount": 3913.48,
-              "compareAtAmount": null,
-              "currencyCode": "INR"
             },
             "GB": {
               "amount": 31,
               "compareAtAmount": null,
               "currencyCode": "GBP"
+            },
+            "US": {
+              "amount": 39.99,
+              "compareAtAmount": null,
+              "currencyCode": "USD"
             }
           }
         },
@@ -104,30 +104,30 @@
               "compareAtAmount": 118,
               "currencyCode": "AUD"
             },
+            "IN": {
+              "amount": 4892.5,
+              "compareAtAmount": 7828.59,
+              "currencyCode": "INR"
+            },
             "CA": {
               "amount": 72,
               "compareAtAmount": 114,
               "currencyCode": "CAD"
             },
-            "US": {
-              "amount": 49.99,
-              "compareAtAmount": 79.99,
-              "currencyCode": "USD"
-            },
             "ZA": {
               "amount": 838,
-              "compareAtAmount": 1341,
+              "compareAtAmount": 1340,
               "currencyCode": "ZAR"
-            },
-            "IN": {
-              "amount": 4892.09,
-              "compareAtAmount": 7827.93,
-              "currencyCode": "INR"
             },
             "GB": {
               "amount": 39,
               "compareAtAmount": 62,
               "currencyCode": "GBP"
+            },
+            "US": {
+              "amount": 49.99,
+              "compareAtAmount": 79.99,
+              "currencyCode": "USD"
             }
           }
         },
@@ -150,30 +150,30 @@
               "compareAtAmount": 165,
               "currencyCode": "AUD"
             },
+            "IN": {
+              "amount": 4892.5,
+              "compareAtAmount": 10960.42,
+              "currencyCode": "INR"
+            },
             "CA": {
               "amount": 72,
               "compareAtAmount": 160,
               "currencyCode": "CAD"
             },
-            "US": {
-              "amount": 49.99,
-              "compareAtAmount": 111.99,
-              "currencyCode": "USD"
-            },
             "ZA": {
               "amount": 838,
-              "compareAtAmount": 1877,
+              "compareAtAmount": 1876,
               "currencyCode": "ZAR"
-            },
-            "IN": {
-              "amount": 4892.09,
-              "compareAtAmount": 10959.49,
-              "currencyCode": "INR"
             },
             "GB": {
               "amount": 39,
               "compareAtAmount": 87,
               "currencyCode": "GBP"
+            },
+            "US": {
+              "amount": 49.99,
+              "compareAtAmount": 111.99,
+              "currencyCode": "USD"
             }
           }
         }
@@ -481,7 +481,7 @@
               "currencyCode": "AUD"
             },
             "IN": {
-              "amount": 2934.86,
+              "amount": 2935.11,
               "compareAtAmount": null,
               "currencyCode": "INR"
             },
@@ -490,15 +490,15 @@
               "compareAtAmount": null,
               "currencyCode": "CAD"
             },
-            "ZA": {
-              "amount": 503,
-              "compareAtAmount": null,
-              "currencyCode": "ZAR"
-            },
             "US": {
               "amount": 29.99,
               "compareAtAmount": null,
               "currencyCode": "USD"
+            },
+            "ZA": {
+              "amount": 503,
+              "compareAtAmount": null,
+              "currencyCode": "ZAR"
             },
             "GB": {
               "amount": 24,
@@ -527,8 +527,8 @@
               "currencyCode": "AUD"
             },
             "IN": {
-              "amount": 5870.7,
-              "compareAtAmount": 6849.32,
+              "amount": 5871.2,
+              "compareAtAmount": 6849.89,
               "currencyCode": "INR"
             },
             "CA": {
@@ -536,15 +536,15 @@
               "compareAtAmount": 100,
               "currencyCode": "CAD"
             },
-            "ZA": {
-              "amount": 1006,
-              "compareAtAmount": 1173,
-              "currencyCode": "ZAR"
-            },
             "US": {
               "amount": 59.99,
               "compareAtAmount": 69.99,
               "currencyCode": "USD"
+            },
+            "ZA": {
+              "amount": 1005,
+              "compareAtAmount": 1173,
+              "currencyCode": "ZAR"
             },
             "GB": {
               "amount": 47,
@@ -573,8 +573,8 @@
               "currencyCode": "AUD"
             },
             "IN": {
-              "amount": 5870.7,
-              "compareAtAmount": 9785.16,
+              "amount": 5871.2,
+              "compareAtAmount": 9785.98,
               "currencyCode": "INR"
             },
             "CA": {
@@ -582,15 +582,15 @@
               "compareAtAmount": 143,
               "currencyCode": "CAD"
             },
-            "ZA": {
-              "amount": 1006,
-              "compareAtAmount": 1676,
-              "currencyCode": "ZAR"
-            },
             "US": {
               "amount": 59.99,
               "compareAtAmount": 99.99,
               "currencyCode": "USD"
+            },
+            "ZA": {
+              "amount": 1005,
+              "compareAtAmount": 1675,
+              "currencyCode": "ZAR"
             },
             "GB": {
               "amount": 47,
