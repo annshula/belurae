@@ -340,6 +340,7 @@ export const products: ProductContent[] = [
         "We're waiting on the complete INCI list — including the hair-removing active ingredient — from the manufacturer, and will publish it here in full.",
       packs: "cards",
       galleryFit: "flush",
+      perksOneColumn: true,
       trust: [
         { icon: "feather", text: "No blade, no wax strips" },
         { icon: "clock", text: "5–10 minutes on skin" },
