@@ -123,7 +123,7 @@ export const products: ProductContent[] = [
     category: { slug: "hair-removal", name: "Hair Removal" },
     benefitLine:
       "A spray-on hair removal mousse for the body. Spray, wait 5–10 minutes, and wipe hair away with the included scraper — no blade, no wax strips.",
-    manufacturer: "PHOFAY (Cloud Sense)",
+    manufacturer: "Belurae (Cloud Sense)",
     seo: {
       title: "Hair Removal Mousse · 140 ml Spray",
       description:
@@ -231,7 +231,7 @@ export const products: ProductContent[] = [
           "Labelled for sensitive skin (hypoallergenic, no additives) by the manufacturer",
       },
       { label: "Suitable for", value: "Men and women" },
-      { label: "Made by", value: "PHOFAY (Cloud Sense)" },
+      { label: "Made by", value: "Belurae (Cloud Sense)" },
     ],
     inTheBox: [
       {

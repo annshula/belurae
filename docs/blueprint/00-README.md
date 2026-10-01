@@ -27,7 +27,7 @@ Source: `https://shoptrackify.com/products/bikini-pain-free-hair-removal-cream?v
 | Field | Value on page | Source confidence |
 |---|---|---|
 | Actual format | **Spray mousse** (140 ml / 4.73 fl oz can) — not a cream | Specs block |
-| Manufacturer brand | **PHOFAY "Cloud Sense"** | Specs block |
+| Manufacturer brand | **Belurae "Cloud Sense"** | Specs block |
 | SKU prefix | `CJPF2536027…` (CJ Dropshipping catalogue SKU) | JSON-LD |
 | Add-ons | Serum (unnamed, unspecified) · "Smooth" cream tube 100 ml / 3.5 fl oz | Specs, FAQ |
 | In the box | Mousse can + scraper (+ serum or cream by style) | "What's in the box" |
@@ -63,7 +63,7 @@ Source: `https://shoptrackify.com/products/bikini-pain-free-hair-removal-cream?v
 
 Ranked by risk.
 
-1. **Brand identity vs. reality.** The product is a PHOFAY-branded third-party formula. Selling it as a "Belurae formulation" with "thoughtful formulations" copy is a misleading claim. → Decision D1 below.
+1. **Brand identity vs. reality.** The product is a Belurae-branded third-party formula. Selling it as a "Belurae formulation" with "thoughtful formulations" copy is a misleading claim. → Decision D1 below.
 2. **"FDA & CPNP documented"** in the announcement bar. The FDA does not approve cosmetics. Unless a real MoCRA facility registration / product listing and a CPNP notification exist *for this product and this seller*, the line implies an endorsement that does not exist. → Remove until documents are in hand, then show the documents themselves, labelled for what they are.
 3. **Unsupported claims.** "Pain-free" (in the product name), "Minimizes ingrown hair", "Works at the root", "Long-lasting smoothness", "Hydrates skin for up to 24hrs", "35% less chemical ingredients", "Sensitive-skin safe", "Non-irritating". None has substantiation on the page. Depilatories are chemical products that can irritate or burn skin; "pain-free" and "safe" are absolute claims. → Remove or replace with packaging-attributed wording ("labelled hypoallergenic by the manufacturer").
 4. **Reference pricing.** Compare-at prices (e.g. $150 for a 3-pack sold at $99.99 when three singles cost $119.97) look like invented "was" prices. "Save 13%" on a single unit implies a sale with no evidence of a prior selling price. → Show only real multi-unit savings, computed from the single price.
@@ -90,7 +90,7 @@ Not reusable: brand, copy, GSAP + Lenis motion layer (drop it — see 05-archite
 
 | ID | Decision | Options | Recommendation |
 |---|---|---|---|
-| **D1** | How Belurae relates to the PHOFAY product | (a) Private-label: Belurae packaging, Belurae-owned INCI sheet, SDS, CPNP/MoCRA listing in Belurae's name. (b) Curated retailer: Belurae sells it and names the manufacturer on the PDP. (c) Rebrand the listing only. | **(a) before paid launch; (b) as the interim.** (c) is misleading and blocks every trust goal in the brief. |
+| **D1** | How Belurae relates to the Belurae product | (a) Private-label: Belurae packaging, Belurae-owned INCI sheet, SDS, CPNP/MoCRA listing in Belurae's name. (b) Curated retailer: Belurae sells it and names the manufacturer on the PDP. (c) Rebrand the listing only. | **(a) before paid launch; (b) as the interim.** (c) is misleading and blocks every trust goal in the brief. |
 | **D2** | Product name | "Bikini Pain-Free Hair Removal Cream" · "Hair Removal Mousse" · other | **"Belurae Hair Removal Mousse"** (or "Gentle Hair Removal Mousse" if the manufacturer's sensitive-skin claim is substantiated). Drop "pain-free". Keep "bikini" in body copy and FAQs only if packaging permits bikini-line use. |
 | **D3** | Store + domain | Same Trackify store · new Shopify store for Belurae | **New Shopify store** (clean Organization entity, policies, analytics, reviews, Markets). Domain `belurae.com` (availability + trademark check = R10). |
 | **D4** | Editorial source | MDX in repo · Shopify blog/metaobjects · headless CMS | **Product facts in Shopify metafields/metaobjects; guides and journal as MDX in repo.** Revisit a CMS when a non-developer editor joins. |
