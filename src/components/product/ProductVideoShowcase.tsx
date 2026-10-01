@@ -23,7 +23,13 @@ import { cn } from "@/lib/utils";
  * load and decode at once.
  */
 
-export type ShowcaseVideo = { src: string; poster?: string; alt: string };
+export type ShowcaseVideo = {
+  src: string;
+  poster?: string;
+  alt: string;
+  /** Leads the row below the `sm` breakpoint only (CSS order, DOM order unchanged). */
+  mobileFirst?: boolean;
+};
 
 /** Drift speed, px/second. Slow enough to read a card as it goes past. */
 const SPEED_PX_PER_S = 26;
@@ -189,7 +195,13 @@ export function ProductVideoShowcase({
         onBlur={() => pauseThenResume(400)}
       >
         {videos.map((video) => (
-          <li key={video.src} className="h-88 w-64 shrink-0 sm:h-96 sm:w-72">
+          <li
+            key={video.src}
+            className={cn(
+              "h-88 w-64 shrink-0 sm:h-96 sm:w-72",
+              video.mobileFirst && "-order-1 sm:order-none",
+            )}
+          >
             <VideoCard video={video} />
           </li>
         ))}

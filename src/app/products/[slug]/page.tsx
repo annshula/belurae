@@ -46,6 +46,12 @@ import { cn } from "@/lib/utils";
  * first frame.
  */
 const productVideos: ShowcaseVideo[] = [
+  ...[1, 2, 3, 4, 5, 6].map((n) => ({
+    src: `/videos/hair-removal/hair-removal-${n}.mp4`,
+    alt: `Belurae hair removal video ${n}`,
+    // Mobile leads with the 2nd clip; desktop keeps the numbered order.
+    mobileFirst: n === 2,
+  })),
   { src: "/videos/product-1.mp4", alt: "Belurae product video 1" },
   { src: "/videos/product-2.mp4", alt: "Belurae product video 2" },
   { src: "/videos/product-3.mp4", alt: "Belurae product video 3" },
