@@ -63,10 +63,16 @@ const productVideos: ShowcaseVideo[] = [
 ];
 
 /** Toner clips — served from `public/videos/toner` (compressed from `toner_video/`). */
-const tonerVideos: ShowcaseVideo[] = [1, 2, 3, 4, 5].map((n) => ({
-  src: `/videos/toner/toner-${n}.mp4`,
-  alt: `Belurae EGF Tox toner video ${n}`,
-}));
+const tonerVideos: ShowcaseVideo[] = [
+  ...[2, 3].map((n) => ({
+    src: `/videos/toner/toner-new-${n}.mp4`,
+    alt: `Belurae EGF Tox toner video ${n - 1}`,
+  })),
+  ...[1, 2, 3, 4, 5].map((n) => ({
+    src: `/videos/toner/toner-${n}.mp4`,
+    alt: `Belurae EGF Tox toner video ${n + 2}`,
+  })),
+];
 
 /** Per-product clip sets; products without an entry use the mousse clips. */
 const productVideosBySlug: Record<string, ShowcaseVideo[]> = {
