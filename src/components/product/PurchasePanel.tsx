@@ -470,7 +470,7 @@ function PackCards({
             data-checked={c.checked}
             className={cn(
               "group relative flex cursor-pointer flex-col rounded-[18px] border transition-[border-color,box-shadow,transform] duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-800 motion-safe:active:scale-[0.985]",
-              c.offer ? "bg-linear-to-br from-clay-50 via-clay-50 to-paper" : "bg-paper",
+              c.offer ? "bg-white" : "bg-transparent",
               c.checked
                 ? c.offer
                   ? "border-clay-600 shadow-[0_0_0_1px_var(--color-clay-600),0_14px_32px_-16px_rgb(147_88_74/0.5)]"
@@ -533,7 +533,7 @@ function PackCards({
                   {c.checked && <Icon name="check" className="size-3 text-ivory" />}
                 </span>
                 {c.deal && (
-                  <span className="absolute -right-2 -bottom-2 grid size-9 place-items-center rounded-full border-2 border-paper bg-clay-600 text-center font-numeral text-[0.55rem] leading-[1.05] font-bold text-ivory">
+                  <span className="absolute -right-2 -bottom-2 grid size-11 place-items-center rounded-full border-2 border-white bg-gold-500 text-center font-numeral text-[0.62rem] leading-[1.05] font-extrabold text-ink shadow-[0_6px_14px_-4px_rgb(226_165_31/0.7)] motion-safe:animate-[free-pop_1.6s_ease-in-out_infinite]">
                     +{c.deal.free}
                     <br />
                     FREE
@@ -615,13 +615,13 @@ function PackCards({
               c.tag ? "pt-8" : "pt-6",
               c.offer
                 ? cn(
-                    "bg-clay-50",
+                    "bg-white",
                     c.checked
                       ? "border-clay-600 shadow-[inset_0_0_0_1px_var(--color-clay-600)]"
                       : "border-clay-600/50 hover:border-clay-600",
                   )
                 : cn(
-                    "bg-paper",
+                    "bg-transparent",
                     c.checked
                       ? "border-sage-800 shadow-[inset_0_0_0_1px_var(--color-sage-800)]"
                       : "border-sand hover:border-sage-300",
@@ -675,7 +675,7 @@ function PackCards({
                 )}
               </span>
               {c.deal && (
-                <span className="absolute -right-2 -bottom-2 grid size-10 place-items-center rounded-full border-2 border-paper bg-clay-600 text-center font-numeral text-[0.6rem] leading-[1.05] font-bold text-ivory">
+                <span className="absolute -right-2 -bottom-2 grid size-12 place-items-center rounded-full border-2 border-white bg-gold-500 text-center font-numeral text-[0.7rem] leading-[1.05] font-extrabold text-ink shadow-[0_6px_14px_-4px_rgb(226_165_31/0.7)] motion-safe:animate-[free-pop_1.6s_ease-in-out_infinite]">
                   +{c.deal.free}
                   <br />
                   FREE

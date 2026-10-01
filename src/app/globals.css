@@ -675,3 +675,12 @@ dialog.sheet::backdrop {
 .snap-row > * {
   scroll-snap-align: start;
 }
+@keyframes free-pop {
+  0%,
+  100% {
+    transform: scale(1) rotate(-6deg);
+  }
+  50% {
+    transform: scale(1.12) rotate(6deg);
+  }
+}
