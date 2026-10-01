@@ -56,6 +56,17 @@ const productVideos: ShowcaseVideo[] = [
   { src: "/videos/product-8.mp4", alt: "Belurae product video 8" },
 ];
 
+/** Toner clips — served from `public/videos/toner` (compressed from `toner_video/`). */
+const tonerVideos: ShowcaseVideo[] = [1, 2, 3, 4, 5].map((n) => ({
+  src: `/videos/toner/toner-${n}.mp4`,
+  alt: `Belurae EGF Tox toner video ${n}`,
+}));
+
+/** Per-product clip sets; products without an entry use the mousse clips. */
+const productVideosBySlug: Record<string, ShowcaseVideo[]> = {
+  "egf-tox-toner": tonerVideos,
+};
+
 /**
  * Keyword → icon for the perk list, checked in order against each perk's
  * text (case-insensitive) — first match wins. Perks come from the live
@@ -431,7 +442,7 @@ export default async function ProductPage({ params }: Props) {
           {/* Full-bleed: the row runs edge to edge of the viewport, past
             container-page's max width, so the marquee has real room to drift. */}
           <ProductVideoShowcase
-            videos={productVideos}
+            videos={productVideosBySlug[content.slug] ?? productVideos}
             className="mt-8 px-2 sm:px-3"
           />
         </section>

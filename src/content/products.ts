@@ -91,7 +91,7 @@ export type ProductContent = {
       imagePosition?: "right" | "top" | "center";
       benefits: { icon: PdpIcon; title: string; body: string }[];
     };
-    /** The local video clips are mousse footage; only products with an intro show the showcase. */
+    /** Only products with an intro show the video showcase; clips come from `productVideosBySlug` in the PDP page. */
     videosIntro?: string;
     howTo: {
       heading: string;
@@ -503,6 +503,7 @@ export const products: ProductContent[] = [
     googleCategory:
       "Health & Beauty > Personal Care > Cosmetics > Skin Care > Facial Toners & Astringents",
     pdp: {
+      videosIntro: "Short clips of the toner, so you can see the bottle and texture before you buy.",
       packs: "cards",
       galleryFit: "flush",
       perksOneColumn: true,
