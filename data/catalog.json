@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-09-30T18:50:00.600Z",
+  "syncedAt": "2026-10-01T09:54:43.998Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -22,7 +22,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-09-30T17:41:48Z",
+      "updatedAt": "2026-10-01T09:12:32Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -58,25 +58,25 @@
               "compareAtAmount": null,
               "currencyCode": "AUD"
             },
-            "IN": {
-              "amount": 3913.81,
-              "compareAtAmount": null,
-              "currencyCode": "INR"
-            },
             "CA": {
               "amount": 57,
               "compareAtAmount": null,
               "currencyCode": "CAD"
             },
-            "ZA": {
-              "amount": 670,
-              "compareAtAmount": null,
-              "currencyCode": "ZAR"
-            },
             "GB": {
               "amount": 31,
               "compareAtAmount": null,
               "currencyCode": "GBP"
+            },
+            "ZA": {
+              "amount": 677,
+              "compareAtAmount": null,
+              "currencyCode": "ZAR"
+            },
+            "IN": {
+              "amount": 3926.53,
+              "compareAtAmount": null,
+              "currencyCode": "INR"
             },
             "US": {
               "amount": 39.99,
@@ -104,25 +104,25 @@
               "compareAtAmount": 118,
               "currencyCode": "AUD"
             },
-            "IN": {
-              "amount": 4892.5,
-              "compareAtAmount": 7828.59,
-              "currencyCode": "INR"
-            },
             "CA": {
               "amount": 72,
               "compareAtAmount": 114,
               "currencyCode": "CAD"
             },
-            "ZA": {
-              "amount": 838,
-              "compareAtAmount": 1340,
-              "currencyCode": "ZAR"
-            },
             "GB": {
               "amount": 39,
               "compareAtAmount": 62,
               "currencyCode": "GBP"
+            },
+            "ZA": {
+              "amount": 846,
+              "compareAtAmount": 1354,
+              "currencyCode": "ZAR"
+            },
+            "IN": {
+              "amount": 4908.41,
+              "compareAtAmount": 7854.05,
+              "currencyCode": "INR"
             },
             "US": {
               "amount": 49.99,
@@ -150,25 +150,25 @@
               "compareAtAmount": 165,
               "currencyCode": "AUD"
             },
-            "IN": {
-              "amount": 4892.5,
-              "compareAtAmount": 10960.42,
-              "currencyCode": "INR"
-            },
             "CA": {
               "amount": 72,
               "compareAtAmount": 160,
               "currencyCode": "CAD"
             },
-            "ZA": {
-              "amount": 838,
-              "compareAtAmount": 1876,
-              "currencyCode": "ZAR"
-            },
             "GB": {
               "amount": 39,
               "compareAtAmount": 87,
               "currencyCode": "GBP"
+            },
+            "ZA": {
+              "amount": 846,
+              "compareAtAmount": 1895,
+              "currencyCode": "ZAR"
+            },
+            "IN": {
+              "amount": 4908.41,
+              "compareAtAmount": 10996.06,
+              "currencyCode": "INR"
             },
             "US": {
               "amount": 49.99,
@@ -435,7 +435,7 @@
         "Aloe leaf water, glycerin & hyaluronic acid",
         "Suitable for men and women"
       ],
-      "saleEndsAt": "2026-10-01T01:22:48.000Z"
+      "saleEndsAt": "2026-10-02T03:00:00.000Z"
     },
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
@@ -444,7 +444,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-09-30T16:43:46Z",
+      "updatedAt": "2026-10-01T09:54:33Z",
       "seo": {
         "title": null,
         "description": null
@@ -481,24 +481,24 @@
               "currencyCode": "AUD"
             },
             "IN": {
-              "amount": 2935.11,
+              "amount": 2944.65,
               "compareAtAmount": null,
               "currencyCode": "INR"
             },
-            "CA": {
-              "amount": 43,
+            "ZA": {
+              "amount": 508,
               "compareAtAmount": null,
-              "currencyCode": "CAD"
+              "currencyCode": "ZAR"
             },
             "US": {
               "amount": 29.99,
               "compareAtAmount": null,
               "currencyCode": "USD"
             },
-            "ZA": {
-              "amount": 503,
+            "CA": {
+              "amount": 43,
               "compareAtAmount": null,
-              "currencyCode": "ZAR"
+              "currencyCode": "CAD"
             },
             "GB": {
               "amount": 24,
@@ -527,28 +527,28 @@
               "currencyCode": "AUD"
             },
             "IN": {
-              "amount": 5871.2,
-              "compareAtAmount": 6849.89,
+              "amount": 5890.29,
+              "compareAtAmount": 6872.17,
               "currencyCode": "INR"
             },
-            "CA": {
-              "amount": 86,
-              "compareAtAmount": 100,
-              "currencyCode": "CAD"
+            "ZA": {
+              "amount": 1016,
+              "compareAtAmount": 1185,
+              "currencyCode": "ZAR"
             },
             "US": {
               "amount": 59.99,
               "compareAtAmount": 69.99,
               "currencyCode": "USD"
             },
-            "ZA": {
-              "amount": 1005,
-              "compareAtAmount": 1173,
-              "currencyCode": "ZAR"
+            "CA": {
+              "amount": 86,
+              "compareAtAmount": 100,
+              "currencyCode": "CAD"
             },
             "GB": {
               "amount": 47,
-              "compareAtAmount": 54,
+              "compareAtAmount": 55,
               "currencyCode": "GBP"
             }
           }
@@ -569,32 +569,32 @@
           "pricesByMarket": {
             "AU": {
               "amount": 89,
-              "compareAtAmount": 147,
+              "compareAtAmount": 148,
               "currencyCode": "AUD"
             },
             "IN": {
-              "amount": 5871.2,
-              "compareAtAmount": 9785.98,
+              "amount": 5890.29,
+              "compareAtAmount": 9817.8,
               "currencyCode": "INR"
             },
-            "CA": {
-              "amount": 86,
-              "compareAtAmount": 143,
-              "currencyCode": "CAD"
+            "ZA": {
+              "amount": 1016,
+              "compareAtAmount": 1692,
+              "currencyCode": "ZAR"
             },
             "US": {
               "amount": 59.99,
               "compareAtAmount": 99.99,
               "currencyCode": "USD"
             },
-            "ZA": {
-              "amount": 1005,
-              "compareAtAmount": 1675,
-              "currencyCode": "ZAR"
+            "CA": {
+              "amount": 86,
+              "compareAtAmount": 143,
+              "currencyCode": "CAD"
             },
             "GB": {
               "amount": 47,
-              "compareAtAmount": 77,
+              "compareAtAmount": 78,
               "currencyCode": "GBP"
             }
           }
@@ -603,7 +603,47 @@
       "media": [
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/product_2.png?v=1790712659",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_1.png?v=1790847731",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_2_a09616b7-18ad-4b2a-94f4-b2935f32c526.png?v=1790848124",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_3_fa151a0e-22b8-44f9-969c-92ca1e3b3c5d.png?v=1790848179",
+          "width": 1261,
+          "height": 1247,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_5.jpg?v=1790847729",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_4_194dd9cd-ed3c-493d-83db-68b097f91244.png?v=1790848425",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_6_2be3dd12-6e8b-482f-8d00-bb54b65d05a2.png?v=1790848288",
           "width": 1254,
           "height": 1254,
           "alt": null,
@@ -618,76 +658,12 @@
           "variantId": null
         },
         {
-          "type": "video",
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/product_2.png?v=1790712659",
+          "width": 1254,
+          "height": 1254,
           "alt": null,
-          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/78daf075db2549debe55a157d9480a7f.thumbnail.0000000000.jpg?v=1790743402",
-          "width": 1080,
-          "height": 1920,
-          "sources": [
-            {
-              "src": "https://cdn.shopify.com/videos/c/vp/78daf075db2549debe55a157d9480a7f/78daf075db2549debe55a157d9480a7f.SD-480p-1.2Mbps-95962456.mp4",
-              "type": "video/mp4",
-              "width": 270
-            },
-            {
-              "src": "https://cdn.shopify.com/videos/c/vp/78daf075db2549debe55a157d9480a7f/78daf075db2549debe55a157d9480a7f.HD-720p-3.0Mbps-95962456.mp4",
-              "type": "video/mp4",
-              "width": 404
-            },
-            {
-              "src": "https://cdn.shopify.com/videos/c/vp/78daf075db2549debe55a157d9480a7f/78daf075db2549debe55a157d9480a7f.HD-1080p-4.8Mbps-95962456.mp4",
-              "type": "video/mp4",
-              "width": 606
-            }
-          ]
-        },
-        {
-          "type": "video",
-          "alt": null,
-          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/ceec84e091264bb5875ae9381cded570.thumbnail.0000000000.jpg?v=1790743416",
-          "width": 1080,
-          "height": 1920,
-          "sources": [
-            {
-              "src": "https://cdn.shopify.com/videos/c/vp/ceec84e091264bb5875ae9381cded570/ceec84e091264bb5875ae9381cded570.SD-480p-1.2Mbps-95962454.mp4",
-              "type": "video/mp4",
-              "width": 270
-            },
-            {
-              "src": "https://cdn.shopify.com/videos/c/vp/ceec84e091264bb5875ae9381cded570/ceec84e091264bb5875ae9381cded570.HD-720p-3.0Mbps-95962454.mp4",
-              "type": "video/mp4",
-              "width": 404
-            },
-            {
-              "src": "https://cdn.shopify.com/videos/c/vp/ceec84e091264bb5875ae9381cded570/ceec84e091264bb5875ae9381cded570.HD-1080p-4.8Mbps-95962454.mp4",
-              "type": "video/mp4",
-              "width": 606
-            }
-          ]
-        },
-        {
-          "type": "video",
-          "alt": null,
-          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/4bb80b8eae684463af2e92678eaa78bd.thumbnail.0000000000.jpg?v=1790743392",
-          "width": 1080,
-          "height": 1920,
-          "sources": [
-            {
-              "src": "https://cdn.shopify.com/videos/c/vp/4bb80b8eae684463af2e92678eaa78bd/4bb80b8eae684463af2e92678eaa78bd.SD-480p-1.2Mbps-95962455.mp4",
-              "type": "video/mp4",
-              "width": 270
-            },
-            {
-              "src": "https://cdn.shopify.com/videos/c/vp/4bb80b8eae684463af2e92678eaa78bd/4bb80b8eae684463af2e92678eaa78bd.HD-720p-3.0Mbps-95962455.mp4",
-              "type": "video/mp4",
-              "width": 404
-            },
-            {
-              "src": "https://cdn.shopify.com/videos/c/vp/4bb80b8eae684463af2e92678eaa78bd/4bb80b8eae684463af2e92678eaa78bd.HD-1080p-4.8Mbps-95962455.mp4",
-              "type": "video/mp4",
-              "width": 606
-            }
-          ]
+          "variantId": null
         },
         {
           "type": "image",
@@ -905,7 +881,7 @@
         "Helps skin look plump & radiant",
         "Supersized Full-Body Value"
       ],
-      "saleEndsAt": "2026-10-01T03:00:00.000Z"
+      "saleEndsAt": "2026-10-02T03:00:00.000Z"
     }
   }
 }
