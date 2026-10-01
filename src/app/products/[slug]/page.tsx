@@ -86,7 +86,10 @@ const PERK_ICON_RULES: [pattern: RegExp, icon: IconName][] = [
   [/hypoallergenic/i, "shield"],
   [/men and women|all skin types|unisex/i, "users"],
   [/scent|fragrance|citrus|floral/i, "flower"],
-  [/aloe|glycerin|hyaluronic|extract|oil|botanical|egf|collagen|niacinamide/i, "leaf"],
+  [
+    /aloe|glycerin|hyaluronic|extract|oil|botanical|egf|collagen|niacinamide/i,
+    "leaf",
+  ],
 ];
 
 function perkIcon(perk: string): IconName {
@@ -280,7 +283,10 @@ export default async function ProductPage({ params }: Props) {
                     )}
                   >
                     <span className="grid size-8 shrink-0 place-items-center rounded-full bg-sage-100 sm:size-auto sm:bg-transparent">
-                      <Icon name="truck" className="size-4 text-sage-700 sm:size-4" />
+                      <Icon
+                        name="truck"
+                        className="size-4 text-sage-700 sm:size-4"
+                      />
                     </span>
                     <span className="min-w-0 text-[0.8rem] leading-tight font-medium sm:text-body-sm">
                       <span className="sm:hidden">Free worldwide delivery</span>
@@ -324,10 +330,7 @@ export default async function ProductPage({ params }: Props) {
             )}
 
             <div className="mt-8">
-              <PurchasePanel
-                view={view}
-                packs={content.pdp.packs}
-              />
+              <PurchasePanel view={view} packs={content.pdp.packs} />
               {feedbackReviews && feedbackReviews.length > 0 && (
                 <PurchaseFeedback reviews={feedbackReviews} className="mt-5" />
               )}
@@ -572,17 +575,16 @@ export default async function ProductPage({ params }: Props) {
                     intro="The key ingredients the manufacturer lists for this formula, and why formulators use them."
                   />
                   <div className="glass mt-6 rounded-card p-5 text-body-sm">
-                    <p className="font-medium">Full ingredient list</p>
+                    <p className="font-medium">Every ingredient, named</p>
                     <p className="mt-2 text-ink-soft">
-                      {content.pdp.ingredientListNote} Until then, check the
-                      pack or{" "}
+                      {content.pdp.ingredientsNote}{" "}
                       <a
                         href={`mailto:${site.supportEmail}?subject=Ingredient%20question`}
                         className="link-underline text-ink"
                       >
-                        ask us
-                      </a>
-                      .
+                        Ask us
+                      </a>{" "}
+                      about any ingredient and we'll answer.
                     </p>
                   </div>
                 </div>

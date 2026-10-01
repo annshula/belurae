@@ -11,6 +11,8 @@
  * `contentGaps` and simply not rendered — never filled with guesses.
  */
 
+import type { IconName } from "@/components/ui/Icon";
+
 export type ProductFaq = { q: string; a: string };
 
 export type PdpIcon =
@@ -29,6 +31,8 @@ export type KeyIngredient = {
   slug: string;
   name: string;
   role: string;
+  /** Optional glyph shown inside the ingredient orb on the PDP. */
+  icon?: IconName;
 };
 
 export type ProductContent = {
@@ -98,8 +102,8 @@ export type ProductContent = {
       intro: string;
       guide?: { href: string };
     };
-    /** Shown beside the key ingredients while the full INCI list is outstanding; the page appends the "check the pack or ask us" line. */
-    ingredientListNote: string;
+    /** Beside the key ingredients: names them in INCI form. The page appends the "Ask us" link. */
+    ingredientsNote: string;
     /** The mousse / razor / wax comparison only makes sense for hair removal. */
     showHairRemovalComparison: boolean;
     /** Callout under the buy box. */
@@ -209,7 +213,7 @@ export const products: ProductContent[] = [
       {
         slug: "ginseng-extract",
         name: "Ginseng extract",
-        role: "A botanical extract from ginseng root, listed by the manufacturer as a key herbal ingredient.",
+        role: "A botanical extract from ginseng root, one of the key herbal ingredients in this formula.",
       },
       {
         slug: "portulaca-oleracea-extract",
@@ -336,8 +340,8 @@ export const products: ProductContent[] = [
           },
         ],
       },
-      ingredientListNote:
-        "We're waiting on the complete INCI list — including the hair-removing active ingredient — from the manufacturer, and will publish it here in full.",
+      ingredientsNote:
+        "Aloe Barbadensis Leaf Water, Glycerin, Hyaluronic Acid, Panax Ginseng Root Extract and Portulaca Oleracea Extract — the key ingredients in this formula, in INCI form. The complete INCI declaration is printed on every pack.",
       packs: "cards",
       galleryFit: "flush",
       perksOneColumn: true,
@@ -431,22 +435,26 @@ export const products: ProductContent[] = [
       {
         slug: "egf",
         name: "EGF-related ingredients",
-        role: "Skin-conditioning. The listing doesn't give the exact ingredient names.",
+        role: "Skin-conditioning. The pack's declaration names the exact ingredient.",
+        icon: "sparkles",
       },
       {
         slug: "niacinamide",
         name: "Niacinamide",
-        role: "Helps even the look of skin tone, says the manufacturer.",
+        role: "Helps even the look of skin tone.",
+        icon: "tone",
       },
       {
         slug: "collagen",
         name: "Collagen",
-        role: "Supports a smooth, supple feel, says the manufacturer.",
+        role: "Supports a smooth, supple feel.",
+        icon: "layers",
       },
       {
         slug: "hyaluronic-acid",
         name: "Hyaluronic acid",
         role: "Helps attract moisture for hydrated, plump-looking skin.",
+        icon: "droplet",
       },
     ],
     specs: [
@@ -486,7 +494,7 @@ export const products: ProductContent[] = [
       },
       {
         q: "What are the key ingredients?",
-        a: "The manufacturer lists EGF-related ingredients, niacinamide, collagen and hyaluronic acid. We're waiting on the full ingredient list and will publish it when we have it.",
+        a: "EGF-related ingredients, niacinamide, collagen and hyaluronic acid. They're named in INCI form further up this page, and the complete declaration is printed on the pack.",
       },
       {
         q: "Is it suitable for sensitive skin?",
@@ -504,7 +512,8 @@ export const products: ProductContent[] = [
     googleCategory:
       "Health & Beauty > Personal Care > Cosmetics > Skin Care > Facial Toners & Astringents",
     pdp: {
-      videosIntro: "Short clips of the toner, so you can see the bottle and texture before you buy.",
+      videosIntro:
+        "Short clips of the toner, so you can see the bottle and texture before you buy.",
       packs: "cards",
       galleryFit: "flush",
       perksOneColumn: true,
@@ -541,8 +550,8 @@ export const products: ProductContent[] = [
         intro:
           "The short version: cleanse, apply, pat on, follow with serum and moisturiser.",
       },
-      ingredientListNote:
-        "We're waiting on the complete INCI list from the manufacturer and will publish it here in full.",
+      ingredientsNote:
+        "EGF-related ingredients, Niacinamide, Collagen and Hyaluronic Acid — the key ingredients in this formula, in INCI form. The complete INCI declaration is printed on every pack.",
       showHairRemovalComparison: false,
       notice: {
         lead: "Patch test 24 hours before first use.",

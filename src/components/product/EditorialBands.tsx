@@ -115,23 +115,23 @@ export function EditorialBands({
                 "mt-3 text-[clamp(2.1rem,1.6rem+2vw,3.1rem)] leading-[1.02] font-semibold text-sage-900",
               )}
             >
-              What the brand lists.
+              Every ingredient, named.
             </h2>
             <p className="mt-3 max-w-[40ch] text-ink-soft">
-              {content.pdp.ingredientListNote} Until then, check the pack or{" "}
+              {content.pdp.ingredientsNote}{" "}
               <a
                 href={`mailto:${site.supportEmail}?subject=Ingredient%20question`}
                 className="link-underline text-ink"
               >
-                ask us
-              </a>
-              .
+                Ask us
+              </a>{" "}
+              about any ingredient and we'll answer.
             </p>
             <Link
               href="/ingredients"
               className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-control bg-sage-800 px-6 font-ui text-body-sm font-medium text-ivory transition-colors hover:bg-sage-900"
             >
-              Explore full ingredients
+              Explore the ingredient library
               <Icon name="arrow-right" className="size-4" />
             </Link>
           </div>
@@ -145,10 +145,18 @@ export function EditorialBands({
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "size-20 rounded-full shadow-[inset_-6px_-8px_16px_rgb(120_160_185/0.25),inset_6px_6px_14px_rgb(255_255_255/0.9),0_10px_24px_-10px_rgb(80_120_150/0.5)] transition-transform duration-500 group-hover:-translate-y-1 sm:size-24",
+                      "grid size-20 place-items-center rounded-full shadow-[inset_-6px_-8px_16px_rgb(120_160_185/0.25),inset_6px_6px_14px_rgb(255_255_255/0.9),0_10px_24px_-10px_rgb(80_120_150/0.5)] transition-transform duration-500 group-hover:-translate-y-1 sm:size-24",
                       ORBS[i % ORBS.length],
                     )}
-                  />
+                  >
+                    {ing.icon && (
+                      <Icon
+                        name={ing.icon}
+                        className="size-8 text-[#4a7a94] sm:size-9"
+                        strokeWidth={1.4}
+                      />
+                    )}
+                  </span>
                   <span className="mt-4 font-ui font-medium">{ing.name}</span>
                   <span className="mt-1 text-body-sm text-ink-soft">
                     {ing.role}

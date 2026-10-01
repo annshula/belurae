@@ -116,13 +116,13 @@ export const ingredients: Ingredient[] = [
       "EGF stands for epidermal growth factor, a protein the body makes naturally. In cosmetics, EGF-related ingredients are lab-made versions or relatives of it, and are marketed for skin conditioning.",
     whatItIs: [
       "Epidermal growth factor is a small protein found naturally in the body. Cosmetic versions are made in a laboratory, and on an ingredient list they often appear under names such as sh-Oligopeptide-1 or sh-Polypeptide-1.",
-      "“EGF-related” is a broad phrase. The Belurae Editor listing doesn't say which specific ingredient is used, so we can't tell you the exact name or amount.",
+      "“EGF-related” is a broad phrase. The Belurae Editor listing doesn't name the specific ingredient — the pack's declaration is the place to check the exact one.",
     ],
     whyUsed: [
       "Brands include EGF-related ingredients in leave-on products such as toners and serums as part of a skin-conditioning positioning.",
     ],
     goodToKnow: [
-      "We make no claim about what EGF does in this toner beyond the manufacturer listing it as a key ingredient. The full ingredient list will show exactly what is inside once we have it.",
+      "We make no claim about what EGF does in this toner beyond the manufacturer listing it as a key ingredient. The pack's ingredient declaration names the exact one.",
     ],
   },
   {

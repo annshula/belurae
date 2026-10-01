@@ -37,7 +37,10 @@ type IconName =
   | "heart"
   | "scissors"
   | "users"
-  | "flower";
+  | "flower"
+  | "sparkles"
+  | "tone"
+  | "layers";
 
 const glyphs: Record<IconName, React.ReactNode> = {
   "arrow-right": <path d="M4 12h16m0 0-6-6m6 6-6 6" />,
@@ -207,6 +210,24 @@ const glyphs: Record<IconName, React.ReactNode> = {
     <>
       <circle cx="12" cy="12" r="2.2" />
       <path d="M12 3.5a3 3 0 0 1 0 6M12 20.5a3 3 0 0 0 0-6M20.5 12a3 3 0 0 0-6 0M3.5 12a3 3 0 0 1 6 0" />
+    </>
+  ),
+  sparkles: (
+    <>
+      <path d="M10 4.5 11.7 9l4.5 1.7-4.5 1.7L10 17l-1.7-4.6L3.8 10.7 8.3 9z" />
+      <path d="M18 3.5v4M16 5.5h4M18 15.5v4M16 17.5h4" />
+    </>
+  ),
+  tone: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" />
+    </>
+  ),
+  layers: (
+    <>
+      <path d="m12 4 8.5 4.5L12 13 3.5 8.5z" />
+      <path d="m3.5 12.5 8.5 4.5 8.5-4.5M3.5 16.5 12 21l8.5-4.5" />
     </>
   ),
 };
