@@ -305,10 +305,9 @@ export default async function ProductPage({ params }: Props) {
                   {/* Delivery. "Worldwide" is only true while Shopify has a shipping
                       zone for the shopper's country: today 30 countries, all with a
                       free standard rate. Keep the zones in step with this text. */}
-                  <Link
-                    href="/pages/shipping"
+                  <div
                     className={cn(
-                      "flex min-w-0 items-center gap-2.5 rounded-2xl bg-paper px-3 py-2.5 font-ui shadow-soft transition-shadow duration-300 hover:shadow-float sm:rounded-pill sm:py-2 sm:pr-3.5 sm:pl-3",
+                      "flex min-w-0 items-center gap-2.5 rounded-2xl bg-paper px-3 py-2.5 font-ui shadow-soft sm:rounded-pill sm:py-2 sm:pr-3.5 sm:pl-3",
                       !hasRating && "col-span-2",
                     )}
                   >
@@ -324,7 +323,7 @@ export default async function ProductPage({ params }: Props) {
                         Free &amp; fast worldwide delivery
                       </span>
                     </span>
-                  </Link>
+                  </div>
                 </div>
               );
             })()}

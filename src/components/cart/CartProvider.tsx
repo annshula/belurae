@@ -200,9 +200,11 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       if (!v || !v.available) return;
       setRaw((prev) => {
         const existing = prev.find((l) => l.variantId === variantId);
+        // Already in the bag: overwrite its quantity with the one being added
+        // (adding the same item again must not stack up), keeping its place.
         if (existing) {
           return prev.map((l) =>
-            l.variantId === variantId ? { ...l, quantity: Math.min(MAX_QTY, l.quantity + quantity) } : l,
+            l.variantId === variantId ? { ...l, quantity: Math.min(MAX_QTY, quantity) } : l,
           );
         }
         return [...prev, { variantId, quantity: Math.min(MAX_QTY, quantity) }];

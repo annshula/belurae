@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { BagContents } from "@/components/cart/BagContents";
 import { useCart } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
+import { useScrollLock } from "@/lib/scroll-lock";
 
 /**
  * Slide-in bag on a native modal <dialog>: focus trap, Esc and an inert page
@@ -14,6 +15,11 @@ export function CartDrawer() {
   const { isOpen, close, count, announcement } = useCart();
   const ref = useRef<HTMLDialogElement>(null);
   const returnFocus = useRef<Element | null>(null);
+
+  /* Freezes the page behind the bag while it is open. The lock is counted and
+     released by the effect's cleanup, so closing the bag (button, Esc, backdrop
+     click, a link inside it) or unmounting it can never leave the page stuck. */
+  useScrollLock(isOpen);
 
   useEffect(() => {
     const dialog = ref.current;

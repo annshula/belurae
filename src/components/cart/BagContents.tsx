@@ -107,7 +107,7 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <>
       <ul
-        className="flex flex-1 flex-col gap-2.5 overflow-y-auto px-3 py-2"
+        className="flex flex-1 flex-col gap-2.5 overflow-y-auto overscroll-contain px-3 py-2"
         aria-label="Items in your bag"
       >
         {lines.map((line, i) => {
@@ -146,11 +146,12 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
               </Link>
               <div className="flex min-w-0 flex-1 flex-col">
                 <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <Link
                       href={line.href}
                       onClick={onNavigate}
-                      className="text-[0.8125rem] leading-snug font-medium hover:underline"
+                      title={line.productName}
+                      className="block truncate text-[0.8125rem] leading-snug font-medium hover:underline"
                     >
                       {line.productName}
                     </Link>
@@ -164,7 +165,7 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
                     <span className="text-[0.8125rem] font-medium">
                       {formatMoney(line.lineTotal, currency)}
                     </span>
-                    {line.compareAtTotal > line.lineTotal && (
+                    {!hasCoupon && line.compareAtTotal > line.lineTotal && (
                       <span className="text-[0.7rem] text-ink-faint line-through">
                         {formatMoney(line.compareAtTotal, currency)}
                       </span>
@@ -172,20 +173,30 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
                   </p>
                 </div>
                 {hasCoupon && (
-                  <div className="mt-1 flex items-center justify-between gap-2">
-                    <p className="flex flex-wrap items-center gap-1.5 text-[0.7rem]">
-                      <span className="font-medium text-ink">
-                        {line.variantLabel}
-                      </span>
-                      <span className="rounded-tag bg-clay-100 px-1.5 py-0.5 font-numeral font-semibold tracking-wide text-clay-600">
-                        {codes[i]}
-                      </span>
-                      <span className="text-ink-soft">
+                  <>
+                    {/* Line 2: pack + coupon code. Line 3: what it did, with remove. */}
+                    <div className="flex items-center justify-between gap-2 text-[0.72rem]">
+                      <p className="flex min-w-0 items-center gap-1.5">
+                        <span className="font-medium text-ink">
+                          {line.variantLabel}
+                        </span>
+                        <span className="rounded-tag bg-clay-100 px-1.5 py-0.5 font-numeral text-[0.68rem] leading-none font-semibold tracking-wide text-clay-600">
+                          {codes[i]}
+                        </span>
+                      </p>
+                      {line.compareAtTotal > line.lineTotal && (
+                        <span className="shrink-0 font-numeral text-[0.7rem] text-ink-faint tabular-nums line-through">
+                          {formatMoney(line.compareAtTotal, currency)}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="text-[0.7rem] text-ink-soft">
                         applied · saved {line.savedPercent}%
-                      </span>
-                    </p>
-                    {removeButton}
-                  </div>
+                      </p>
+                      {removeButton}
+                    </div>
+                  </>
                 )}
                 <div
                   className={cn(
@@ -276,24 +287,32 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
 
         <dl className="mt-3 space-y-1.5 border-t border-sand pt-3 text-[0.8125rem]">
           {discount > 0.009 && (
-            <div className="flex items-center justify-between gap-3">
-              <dt className="flex flex-wrap items-center gap-1.5 text-ink-soft">
-                Discounts
-                <span className="rounded-tag bg-cream px-1.5 py-0.5 text-[0.7rem] tracking-wide text-ink-soft">
-                  {discountTag}
-                </span>
-                <span className="font-numeral text-[0.7rem] font-semibold text-clay-600 tabular-nums">
-                  {Math.round((discount / (subtotal + discount)) * 100)}% off
-                </span>
-              </dt>
-              <dd className="font-numeral tabular-nums text-ink-soft">
-                −{formatMoney(discount, currency)}
-              </dd>
-            </div>
+            <>
+              <div className="flex items-center justify-between">
+                <dt className="text-ink-soft">Subtotal</dt>
+                <dd className="font-numeral tabular-nums text-ink-soft">
+                  {formatMoney(subtotal + discount, currency)}
+                </dd>
+              </div>
+              <div className="flex items-center justify-between gap-3">
+                <dt className="flex flex-wrap items-center gap-1.5 text-ink-soft">
+                  Discounts
+                  <span className="rounded-tag bg-cream px-1.5 py-0.5 text-[0.7rem] tracking-wide text-ink-soft">
+                    {discountTag}
+                  </span>
+                  <span className="font-numeral text-[0.7rem] font-semibold text-clay-600 tabular-nums">
+                    {Math.round((discount / (subtotal + discount)) * 100)}% off
+                  </span>
+                </dt>
+                <dd className="font-numeral tabular-nums text-clay-600">
+                  −{formatMoney(discount, currency)}
+                </dd>
+              </div>
+            </>
           )}
-          <div className="flex items-center justify-between">
-            <dt className="font-medium">Subtotal</dt>
-            <dd className="font-numeral font-medium tabular-nums">
+          <div className="flex items-center justify-between border-t border-dashed border-sand pt-2 text-[0.95rem]">
+            <dt className="font-semibold">Total</dt>
+            <dd className="font-numeral font-semibold tabular-nums">
               {formatMoney(subtotal, currency)}
             </dd>
           </div>
