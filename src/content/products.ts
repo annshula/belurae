@@ -15,6 +15,29 @@ import type { IconName } from "@/components/ui/Icon";
 
 export type ProductFaq = { q: string; a: string };
 
+/** The neutrals a theme can re-tint (globals.css: --color-<name>). */
+export type SurfaceColors = Record<
+  | "ivory"
+  | "porcelain"
+  | "cream"
+  | "sand"
+  | "linen"
+  | "line"
+  | "ink"
+  | "ink-soft"
+  | "ink-faint",
+  string
+>;
+
+/** The accent a theme can re-tint (globals.css: --color-clay-<step>). */
+export type AccentColors = Record<"50" | "100" | "200" | "300" | "600", string>;
+
+/** A colour ramp, lightest (50) to darkest (900). */
+export type ColorRamp = Record<
+  "50" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900",
+  string
+>;
+
 export type PdpIcon =
   | "leaf"
   | "star"
@@ -80,6 +103,15 @@ export type ProductContent = {
     trust?: { icon: PdpIcon; text: string }[];
     /** Show Shopify's `custom.perks` one per row instead of two columns. */
     perksOneColumn?: boolean;
+    /**
+     * Colour theme of the page, applied document-wide while the page is open
+     * (header and footer included). `primary` is a 50–900 ramp that replaces
+     * the sage tokens — keep 600 dark enough for white text (≥ 4.5:1).
+     * `accent` replaces the clay tokens (savings, tags, timer banner) and
+     * `surface` the warm neutrals: page background, raised cards, washes,
+     * borders and text greys. Omit to keep the brand palette.
+     */
+    theme?: { primary: ColorRamp; accent: AccentColors; surface: SurfaceColors };
     /** "flush": gallery photos shown whole (no crop), with no tinted panel or padding. */
     galleryFit?: "contain" | "flush";
     /** "cards": the photo-card pack picker instead of stacked rows. */
@@ -344,6 +376,39 @@ export const products: ProductContent[] = [
       packs: "cards",
       galleryFit: "flush",
       perksOneColumn: true,
+      /* Lavender, from the bottle cap and label. */
+      theme: {
+        primary: {
+          "50": "#f6f2fb",
+          "100": "#ece4f6",
+          "200": "#d9caee",
+          "300": "#bea5de",
+          "400": "#9e79c9",
+          "500": "#7e53ae",
+          "600": "#65399a",
+          "700": "#522d7b",
+          "800": "#3c2059",
+          "900": "#29153f",
+        },
+        accent: {
+          "50": "#f8f1fb",
+          "100": "#efe2f6",
+          "200": "#dfc6ec",
+          "300": "#b98ad6",
+          "600": "#7b3594",
+        },
+        surface: {
+          ivory: "#f8f5fc",
+          porcelain: "#fdfcff",
+          cream: "#f1ebf8",
+          sand: "#e6dcf1",
+          linen: "#dccfea",
+          line: "#cdbfe0",
+          ink: "#1d1826",
+          "ink-soft": "#554c63",
+          "ink-faint": "#665d74",
+        },
+      },
       trust: [
         { icon: "feather", text: "No blade, no wax strips" },
         { icon: "clock", text: "5–10 minutes on skin" },
@@ -516,6 +581,39 @@ export const products: ProductContent[] = [
       packs: "cards",
       galleryFit: "flush",
       perksOneColumn: true,
+      /* Gold, from the bottle's cap and label. */
+      theme: {
+        primary: {
+          "50": "#fbf7ec",
+          "100": "#f5ecd2",
+          "200": "#ead7a3",
+          "300": "#dcbd6e",
+          "400": "#c9a044",
+          "500": "#b08425",
+          "600": "#8a6417",
+          "700": "#6e4f14",
+          "800": "#523b11",
+          "900": "#3a290c",
+        },
+        accent: {
+          "50": "#fbf4ea",
+          "100": "#f5e4cc",
+          "200": "#ebcb9f",
+          "300": "#d9a766",
+          "600": "#8f5a14",
+        },
+        surface: {
+          ivory: "#fcf8ee",
+          porcelain: "#fffdf7",
+          cream: "#f6eed9",
+          sand: "#eddfbf",
+          linen: "#e4d2a8",
+          line: "#d6c493",
+          ink: "#211c12",
+          "ink-soft": "#5b5240",
+          "ink-faint": "#6b6150",
+        },
+      },
       trust: [
         { icon: "globe", text: "100% Original Korean Skincare" },
         { icon: "leaf", text: "Zero Harsh Chemicals" },

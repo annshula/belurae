@@ -44,10 +44,10 @@ export function CartDrawer() {
         }}
       >
         <div className="flex h-full flex-col">
-          <div className="flex items-center justify-between px-6 pt-5 pb-3">
+          <div className="flex items-center justify-between px-4 pt-3.5 pb-2">
             <h2
               id="bag-title"
-              className="font-serif text-heading-3"
+              className="font-serif text-lg"
               tabIndex={-1}
             >
               Your bag{" "}
@@ -56,7 +56,7 @@ export function CartDrawer() {
             <button
               type="button"
               onClick={close}
-              className="grid size-11 place-items-center rounded-xl bg-sand/70 hover:bg-sand"
+              className="grid size-9 place-items-center rounded-xl bg-sand/70 hover:bg-sand"
               aria-label="Close bag"
             >
               <Icon name="close" />

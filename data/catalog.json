@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-10-01T21:28:07.126Z",
+  "syncedAt": "2026-10-02T11:27:20.333Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -18,11 +18,11 @@
     "bikini-pain-free-hair-removal-spray": {
       "id": "gid://shopify/Product/15395256467683",
       "handle": "bikini-pain-free-hair-removal-spray",
-      "title": "Bikini Pain-Free Hair Removal Mousse",
+      "title": "CloudSense Bikini Pain-Free Hair Removal Mousse",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-01T21:26:33Z",
+      "updatedAt": "2026-10-02T11:11:58Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -44,8 +44,8 @@
           "title": "1PC",
           "sku": "CJPF253602701AZ",
           "barcode": null,
-          "price": 39.99,
-          "compareAtPrice": null,
+          "price": 29.99,
+          "compareAtPrice": 49.99,
           "availableForSale": true,
           "options": {
             "Quantity": "1PC"
@@ -54,34 +54,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 59,
-              "compareAtAmount": null,
+              "amount": 45,
+              "compareAtAmount": 74,
               "currencyCode": "AUD"
             },
+            "ZA": {
+              "amount": 512,
+              "compareAtAmount": 853,
+              "currencyCode": "ZAR"
+            },
+            "US": {
+              "amount": 29.99,
+              "compareAtAmount": 49.99,
+              "currencyCode": "USD"
+            },
             "CA": {
-              "amount": 57,
-              "compareAtAmount": null,
+              "amount": 43,
+              "compareAtAmount": 72,
               "currencyCode": "CAD"
             },
             "IN": {
-              "amount": 3928,
-              "compareAtAmount": null,
+              "amount": 2940.79,
+              "compareAtAmount": 4901.98,
               "currencyCode": "INR"
             },
-            "ZA": {
-              "amount": 681,
-              "compareAtAmount": null,
-              "currencyCode": "ZAR"
-            },
             "GB": {
-              "amount": 31,
-              "compareAtAmount": null,
+              "amount": 24,
+              "compareAtAmount": 39,
               "currencyCode": "GBP"
-            },
-            "US": {
-              "amount": 39.99,
-              "compareAtAmount": null,
-              "currencyCode": "USD"
             }
           }
         },
@@ -90,8 +90,8 @@
           "title": "2PCS",
           "sku": "CJPF253602702BY",
           "barcode": null,
-          "price": 59.99,
-          "compareAtPrice": 79.99,
+          "price": 49.99,
+          "compareAtPrice": 59.98,
           "availableForSale": true,
           "options": {
             "Quantity": "2PCS"
@@ -100,34 +100,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 89,
-              "compareAtAmount": 118,
+              "amount": 74,
+              "compareAtAmount": 89,
               "currencyCode": "AUD"
             },
+            "ZA": {
+              "amount": 853,
+              "compareAtAmount": 1023,
+              "currencyCode": "ZAR"
+            },
+            "US": {
+              "amount": 49.99,
+              "compareAtAmount": 59.98,
+              "currencyCode": "USD"
+            },
             "CA": {
-              "amount": 86,
-              "compareAtAmount": 114,
+              "amount": 72,
+              "compareAtAmount": 86,
               "currencyCode": "CAD"
             },
             "IN": {
-              "amount": 5892.49,
-              "compareAtAmount": 7856.98,
+              "amount": 4901.98,
+              "compareAtAmount": 5881.59,
               "currencyCode": "INR"
             },
-            "ZA": {
-              "amount": 1022,
-              "compareAtAmount": 1362,
-              "currencyCode": "ZAR"
-            },
             "GB": {
-              "amount": 47,
-              "compareAtAmount": 62,
+              "amount": 39,
+              "compareAtAmount": 47,
               "currencyCode": "GBP"
-            },
-            "US": {
-              "amount": 59.99,
-              "compareAtAmount": 79.99,
-              "currencyCode": "USD"
             }
           }
         },
@@ -136,8 +136,8 @@
           "title": "3PCS",
           "sku": "CJPF253602710JQ",
           "barcode": null,
-          "price": 59.99,
-          "compareAtPrice": 119.99,
+          "price": 79.99,
+          "compareAtPrice": 99.97,
           "availableForSale": true,
           "options": {
             "Quantity": "3PCS"
@@ -146,34 +146,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 89,
-              "compareAtAmount": 177,
+              "amount": 118,
+              "compareAtAmount": 148,
               "currencyCode": "AUD"
             },
+            "ZA": {
+              "amount": 1364,
+              "compareAtAmount": 1705,
+              "currencyCode": "ZAR"
+            },
+            "US": {
+              "amount": 79.99,
+              "compareAtAmount": 99.97,
+              "currencyCode": "USD"
+            },
             "CA": {
-              "amount": 86,
-              "compareAtAmount": 171,
+              "amount": 114,
+              "compareAtAmount": 143,
               "currencyCode": "CAD"
             },
             "IN": {
-              "amount": 5892.49,
-              "compareAtAmount": 11785.97,
+              "amount": 7843.75,
+              "compareAtAmount": 9802.97,
               "currencyCode": "INR"
             },
-            "ZA": {
-              "amount": 1022,
-              "compareAtAmount": 2044,
-              "currencyCode": "ZAR"
-            },
             "GB": {
-              "amount": 47,
-              "compareAtAmount": 93,
+              "amount": 62,
+              "compareAtAmount": 78,
               "currencyCode": "GBP"
-            },
-            "US": {
-              "amount": 59.99,
-              "compareAtAmount": 119.99,
-              "currencyCode": "USD"
             }
           }
         }
@@ -181,7 +181,63 @@
       "media": [
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ChatGPT_Image_Sep_27_2026_04_56_24_PM.png?v=1790508401",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Img1.png?v=1790508379",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/img_3.jpg?v=1790880352",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/img_5.jpg?v=1790880353",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "video",
+          "alt": null,
+          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/2898cd8b26394d2f9ca8ab8d7a14a56a.thumbnail.0000000000.jpg?v=1790932954",
+          "width": 720,
+          "height": 1280,
+          "sources": [
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/2898cd8b26394d2f9ca8ab8d7a14a56a/2898cd8b26394d2f9ca8ab8d7a14a56a.SD-480p-0.9Mbps-96207488.mp4",
+              "type": "video/mp4",
+              "width": 270
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/2898cd8b26394d2f9ca8ab8d7a14a56a/2898cd8b26394d2f9ca8ab8d7a14a56a.HD-720p-1.6Mbps-96207488.mp4",
+              "type": "video/mp4",
+              "width": 404
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/2898cd8b26394d2f9ca8ab8d7a14a56a/2898cd8b26394d2f9ca8ab8d7a14a56a.HD-1080p-2.5Mbps-96207488.mp4",
+              "type": "video/mp4",
+              "width": 606
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ff825bef-274d-4c64-af38-1f73c47fa0a8.jpg?v=1790421362",
+          "width": 1500,
+          "height": 1500,
+          "alt": "Four-step instructions: clean, apply, wait 5 to 10 minutes, scrape and rinse",
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_5.png?v=1790508381",
           "width": 1254,
           "height": 1254,
           "alt": null,
@@ -196,20 +252,28 @@
           "variantId": null
         },
         {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/img_5.jpg?v=1790880353",
-          "width": 800,
-          "height": 800,
+          "type": "video",
           "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/img_3.jpg?v=1790880352",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
+          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/4752b143061b4bdfa3e674a6f0d3b4de.thumbnail.0000000000.jpg?v=1790932842",
+          "width": 720,
+          "height": 1280,
+          "sources": [
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/4752b143061b4bdfa3e674a6f0d3b4de/4752b143061b4bdfa3e674a6f0d3b4de.SD-480p-0.9Mbps-96207333.mp4",
+              "type": "video/mp4",
+              "width": 270
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/4752b143061b4bdfa3e674a6f0d3b4de/4752b143061b4bdfa3e674a6f0d3b4de.HD-720p-1.6Mbps-96207333.mp4",
+              "type": "video/mp4",
+              "width": 404
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/4752b143061b4bdfa3e674a6f0d3b4de/4752b143061b4bdfa3e674a6f0d3b4de.HD-1080p-2.5Mbps-96207333.mp4",
+              "type": "video/mp4",
+              "width": 606
+            }
+          ]
         },
         {
           "type": "image",
@@ -253,31 +317,15 @@
         },
         {
           "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ChatGPT_Image_Sep_27_2026_04_56_24_PM.png?v=1790508401",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
           "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_3.png?v=1790508380",
-          "width": 1254,
-          "height": 1254,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Img1.png?v=1790508379",
-          "width": 1254,
-          "height": 1254,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ff825bef-274d-4c64-af38-1f73c47fa0a8.jpg?v=1790421362",
-          "width": 1500,
-          "height": 1500,
-          "alt": "Four-step instructions: clean, apply, wait 5 to 10 minutes, scrape and rinse",
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/image_5.png?v=1790508381",
           "width": 1254,
           "height": 1254,
           "alt": null,
@@ -391,7 +439,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-01T20:49:51Z",
+      "updatedAt": "2026-10-02T11:03:35Z",
       "seo": {
         "title": null,
         "description": null
@@ -413,8 +461,8 @@
           "title": "100ml Boxed",
           "sku": "14:10#100ml Boxed",
           "barcode": null,
-          "price": 39.99,
-          "compareAtPrice": null,
+          "price": 29.99,
+          "compareAtPrice": 39.99,
           "availableForSale": true,
           "options": {
             "Color": "100ml Boxed"
@@ -423,34 +471,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 59,
-              "compareAtAmount": null,
+              "amount": 45,
+              "compareAtAmount": 59,
               "currencyCode": "AUD"
             },
             "CA": {
-              "amount": 57,
-              "compareAtAmount": null,
+              "amount": 43,
+              "compareAtAmount": 57,
               "currencyCode": "CAD"
             },
-            "GB": {
-              "amount": 31,
-              "compareAtAmount": null,
-              "currencyCode": "GBP"
-            },
-            "US": {
-              "amount": 39.99,
-              "compareAtAmount": null,
-              "currencyCode": "USD"
+            "IN": {
+              "amount": 2940.79,
+              "compareAtAmount": 3921.38,
+              "currencyCode": "INR"
             },
             "ZA": {
-              "amount": 681,
-              "compareAtAmount": null,
+              "amount": 512,
+              "compareAtAmount": 682,
               "currencyCode": "ZAR"
             },
-            "IN": {
-              "amount": 3928,
-              "compareAtAmount": null,
-              "currencyCode": "INR"
+            "US": {
+              "amount": 29.99,
+              "compareAtAmount": 39.99,
+              "currencyCode": "USD"
+            },
+            "GB": {
+              "amount": 24,
+              "compareAtAmount": 31,
+              "currencyCode": "GBP"
             }
           }
         },
@@ -459,8 +507,8 @@
           "title": "2 x 100ml Boxed",
           "sku": "14:29#2 x 100ml Boxed",
           "barcode": null,
-          "price": 59.99,
-          "compareAtPrice": 89.99,
+          "price": 49.99,
+          "compareAtPrice": 59.98,
           "availableForSale": true,
           "options": {
             "Color": "2 x 100ml Boxed"
@@ -469,34 +517,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 89,
-              "compareAtAmount": 133,
+              "amount": 74,
+              "compareAtAmount": 89,
               "currencyCode": "AUD"
             },
             "CA": {
-              "amount": 86,
-              "compareAtAmount": 128,
+              "amount": 72,
+              "compareAtAmount": 86,
               "currencyCode": "CAD"
             },
-            "GB": {
-              "amount": 47,
-              "compareAtAmount": 70,
-              "currencyCode": "GBP"
-            },
-            "US": {
-              "amount": 59.99,
-              "compareAtAmount": 89.99,
-              "currencyCode": "USD"
+            "IN": {
+              "amount": 4901.98,
+              "compareAtAmount": 5881.59,
+              "currencyCode": "INR"
             },
             "ZA": {
-              "amount": 1022,
-              "compareAtAmount": 1533,
+              "amount": 853,
+              "compareAtAmount": 1023,
               "currencyCode": "ZAR"
             },
-            "IN": {
-              "amount": 5892.49,
-              "compareAtAmount": 8839.23,
-              "currencyCode": "INR"
+            "US": {
+              "amount": 49.99,
+              "compareAtAmount": 59.98,
+              "currencyCode": "USD"
+            },
+            "GB": {
+              "amount": 39,
+              "compareAtAmount": 47,
+              "currencyCode": "GBP"
             }
           }
         },
@@ -505,8 +553,8 @@
           "title": "3 x 100ml Boxed",
           "sku": "14:173#3 x 100ml Boxed",
           "barcode": null,
-          "price": 59.99,
-          "compareAtPrice": 139.99,
+          "price": 79.99,
+          "compareAtPrice": 89.97,
           "availableForSale": true,
           "options": {
             "Color": "3 x 100ml Boxed"
@@ -515,34 +563,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 89,
-              "compareAtAmount": 207,
+              "amount": 118,
+              "compareAtAmount": 133,
               "currencyCode": "AUD"
             },
             "CA": {
-              "amount": 86,
-              "compareAtAmount": 200,
+              "amount": 114,
+              "compareAtAmount": 129,
               "currencyCode": "CAD"
             },
-            "GB": {
-              "amount": 47,
-              "compareAtAmount": 109,
-              "currencyCode": "GBP"
-            },
-            "US": {
-              "amount": 59.99,
-              "compareAtAmount": 139.99,
-              "currencyCode": "USD"
+            "IN": {
+              "amount": 7843.75,
+              "compareAtAmount": 8822.38,
+              "currencyCode": "INR"
             },
             "ZA": {
-              "amount": 1022,
-              "compareAtAmount": 2384,
+              "amount": 1364,
+              "compareAtAmount": 1535,
               "currencyCode": "ZAR"
             },
-            "IN": {
-              "amount": 5892.49,
-              "compareAtAmount": 13750.46,
-              "currencyCode": "INR"
+            "US": {
+              "amount": 79.99,
+              "compareAtAmount": 89.97,
+              "currencyCode": "USD"
+            },
+            "GB": {
+              "amount": 62,
+              "compareAtAmount": 70,
+              "currencyCode": "GBP"
             }
           }
         }

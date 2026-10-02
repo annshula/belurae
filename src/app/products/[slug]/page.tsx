@@ -199,8 +199,28 @@ export default async function ProductPage({ params }: Props) {
     .filter((g) => g.products.includes(content.slug))
     .slice(0, 3);
 
+  /* Per-product theme: re-points the colour tokens (primary ramp + warm
+     neutrals) document-wide while this page is mounted, so the body
+     background, header and footer follow. Values are static strings from
+     content/products.ts. */
+  const { theme } = content.pdp;
+  const themeCss = theme
+    ? `:root:root{${[
+        ...Object.entries(theme.primary).map(
+          ([step, hex]) => `--color-sage-${step}:${hex}`,
+        ),
+        ...Object.entries(theme.accent).map(
+          ([step, hex]) => `--color-clay-${step}:${hex}`,
+        ),
+        ...Object.entries(theme.surface).map(
+          ([name, hex]) => `--color-${name}:${hex}`,
+        ),
+      ].join(";")}}`
+    : null;
+
   return (
     <>
+      {themeCss && <style dangerouslySetInnerHTML={{ __html: themeCss }} />}
       <JsonLd
         data={graph(
           productSchema(view, content, verifiedReviews?.summary ?? null),
@@ -329,10 +349,12 @@ export default async function ProductPage({ params }: Props) {
                     {/* items-start, not items-center: an icon centred on the
                         whole row drifts down whenever a perk wraps to two
                         lines. It belongs on the first line. */}
-                    <Icon
-                      name={perk.icon}
-                      className="mt-0.5 size-4 shrink-0 text-sage-600"
-                    />
+                    <span
+                      aria-hidden="true"
+                      className="mt-px grid size-5.5 shrink-0 place-items-center rounded-full bg-sage-600 text-ivory"
+                    >
+                      <Icon name={perk.icon} className="size-3" />
+                    </span>
                     {perk.text}
                   </li>
                 ))}
@@ -341,9 +363,6 @@ export default async function ProductPage({ params }: Props) {
 
             <div className="mt-8">
               <PurchasePanel view={view} packs={content.pdp.packs} />
-              {feedbackReviews && feedbackReviews.length > 0 && (
-                <PurchaseFeedback reviews={feedbackReviews} className="mt-5" />
-              )}
             </div>
 
             <ProductAccordion
@@ -434,6 +453,11 @@ export default async function ProductPage({ params }: Props) {
                 </a>
               </p>
             </aside>
+
+            {/* What customers say — right after the patch-test notice. */}
+            {feedbackReviews && feedbackReviews.length > 0 && (
+              <PurchaseFeedback reviews={feedbackReviews} className="mt-5" />
+            )}
           </div>
         </div>
       </div>

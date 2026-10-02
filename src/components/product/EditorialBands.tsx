@@ -21,10 +21,10 @@ const DEFER = "[content-visibility:auto] [contain-intrinsic-size:auto_640px]";
 
 /** Glossy "bubble" fills for the ingredient orbs. */
 const ORBS = [
-  "bg-[radial-gradient(circle_at_32%_28%,#fff_0,#dcebf3_38%,#a9c8da_100%)]",
-  "bg-[radial-gradient(circle_at_32%_28%,#fff_0,#e3eef0_38%,#b5d0d6_100%)]",
-  "bg-[radial-gradient(circle_at_32%_28%,#fff_0,#e6edf3_38%,#b9c9dc_100%)]",
-  "bg-[radial-gradient(circle_at_32%_28%,#fff_0,#dfeef0_38%,#a8cfd2_100%)]",
+  "bg-[radial-gradient(circle_at_32%_28%,#fff_0,var(--color-sage-100)_38%,var(--color-sage-300)_100%)]",
+  "bg-[radial-gradient(circle_at_32%_28%,#fff_0,var(--color-sage-50)_38%,var(--color-sage-200)_100%)]",
+  "bg-[radial-gradient(circle_at_32%_28%,#fff_0,var(--color-sage-100)_38%,var(--color-sage-200)_100%)]",
+  "bg-[radial-gradient(circle_at_32%_28%,#fff_0,var(--color-sage-50)_38%,var(--color-sage-300)_100%)]",
 ];
 
 const POSITION = {
@@ -54,7 +54,7 @@ export function EditorialBands({
         aria-labelledby="daily-title"
         className={cn("px-2 sm:px-3", DEFER)}
       >
-        <div className="mx-auto grid grid-cols-1 max-w-(--page-max) overflow-hidden rounded-media bg-[#f3efe9] lg:grid-cols-[5fr_4fr_4fr]">
+        <div className="mx-auto grid grid-cols-1 max-w-(--page-max) overflow-hidden rounded-media bg-cream lg:grid-cols-[5fr_4fr_4fr]">
           {lifestyle && (
             <div className="relative aspect-4/3 lg:aspect-auto lg:min-h-96">
               <Image
@@ -82,7 +82,7 @@ export function EditorialBands({
             </h2>
             <p className="mt-4 max-w-[44ch] text-ink-soft">{daily.body}</p>
           </div>
-          <ul className="flex flex-col justify-center gap-5 p-6 pt-0 sm:p-10 lg:bg-[#ece7df]/60 lg:pt-10">
+          <ul className="flex flex-col justify-center gap-5 p-6 pt-0 sm:p-10 lg:bg-sand/60 lg:pt-10">
             {daily.benefits.map((b) => (
               <li key={b.title} className="flex items-start gap-4">
                 <span className="grid size-12 shrink-0 place-items-center rounded-full bg-paper shadow-soft">
@@ -104,7 +104,7 @@ export function EditorialBands({
       <section
         id="ingredients"
         aria-labelledby="ingredients-title"
-        className={cn("mt-2 bg-[#f3f5f2] py-12 sm:mt-3 lg:py-16", DEFER)}
+        className={cn("mt-2 bg-sage-50 py-12 sm:mt-3 lg:py-16", DEFER)}
       >
         <div className="container-page grid grid-cols-1 gap-8 lg:grid-cols-[4fr_8fr] lg:items-center lg:gap-10">
           <div>
@@ -146,13 +146,13 @@ export function EditorialBands({
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "grid size-20 place-items-center rounded-full shadow-[inset_-6px_-8px_16px_rgb(120_160_185/0.25),inset_6px_6px_14px_rgb(255_255_255/0.9),0_10px_24px_-10px_rgb(80_120_150/0.5)] transition-transform duration-500 group-hover:-translate-y-1 sm:size-24",
+                      "grid size-20 place-items-center rounded-full shadow-[inset_-6px_-8px_16px_color-mix(in_srgb,var(--color-sage-400)_25%,transparent),inset_6px_6px_14px_rgb(255_255_255/0.9),0_10px_24px_-10px_color-mix(in_srgb,var(--color-sage-500)_50%,transparent)] transition-transform duration-500 group-hover:-translate-y-1 sm:size-24",
                       ORBS[i % ORBS.length],
                     )}
                   >
                     <Icon
                       name={ingredientIcon(ing.slug, ing.icon)}
-                      className="size-8 text-[#4a7a94] sm:size-9"
+                      className="size-8 text-sage-600 sm:size-9"
                       strokeWidth={1.4}
                     />
                   </span>

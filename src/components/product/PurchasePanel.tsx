@@ -366,8 +366,8 @@ function PackPhoto({
 /**
  * "Cards" pack picker (editorial PDP): one card per pack in a row, largest
  * pack first, each with its own photo, price, per-unit price and saving.
- * "Best value" is arithmetic — it goes on a pack only when that pack has the
- * lowest per-unit price of all — never a sales claim.
+ * Cards are labelled "N Pack"; the 2 Pack is tagged "Most popular" and the
+ * 3 Pack "Limited time offer" (merchandising choices, set by the owner).
  */
 function PackCards({
   option,
@@ -391,15 +391,6 @@ function PackCards({
       return { value, combo: raw ? localizedVariantFor(raw) : undefined };
     })
     .reverse();
-  const lowest = Math.min(
-    ...rows.flatMap((r) => (r.combo ? [r.combo.perUnit] : [])),
-  );
-  const bestUnits = Math.max(
-    ...rows.flatMap((r) =>
-      r.combo && r.combo.perUnit === lowest ? [r.combo.units] : [],
-    ),
-  );
-
   /* A bigger pack priced the same as a smaller one is a real "get N free"
      deal — derived from the two prices, never typed by hand. */
   const freeFor = (c: LocalizedVariant | undefined) => {
@@ -413,6 +404,11 @@ function PackCards({
     return same?.combo ? { free: c.units - same.combo.units, of: same.combo.units } : null;
   };
 
+  /* Every card is struck through against the 1 Pack's own compare-at price
+     (no compare-at on the 1 Pack → no strikethrough or save badge anywhere). */
+  const singleCompareAt =
+    rows.find((r) => r.combo?.units === 1)?.combo?.compareAtPrice ?? null;
+
   const photoOf = (c: LocalizedVariant | undefined) =>
     c?.image ?? view.cardImage?.url ?? null;
   const sharedPhoto = rows.every((r) => photoOf(r.combo) === photoOf(rows[0]?.combo));
@@ -421,18 +417,20 @@ function PackCards({
     const exists = Boolean(combo);
     const deal = freeFor(combo);
     const offer = deal !== null;
-    const best =
-      !offer &&
-      exists &&
-      combo!.units === bestUnits &&
-      rows.some((r) => r.combo && r.combo.perUnit > lowest);
-    /* Shopify's own compare-at price wins; otherwise the saving is pure
-       arithmetic against buying single bottles. */
+    /* Every card compares its per-set price against the 1 Pack's own
+       compare-at price — the real struck-through figure, not divided. */
+    /* Pack price ÷ sets, cut (not rounded) to the cent: 49.99 ÷ 2 → 24.99. */
+    const unitPrice = combo
+      ? Math.floor((combo.price / combo.units) * 100 + 1e-6) / 100
+      : null;
+    const unitCompareAt =
+      unitPrice != null && singleCompareAt != null && singleCompareAt > unitPrice
+        ? singleCompareAt
+        : null;
     const pct =
-      combo?.compareAtPercent ??
-      (combo?.savings != null
-        ? Math.round((combo.savings / (combo.savings + combo.price)) * 100)
-        : null);
+      unitPrice != null && unitCompareAt != null
+        ? Math.round((1 - unitPrice / unitCompareAt) * 100)
+        : null;
     return {
       value,
       combo,
@@ -442,13 +440,22 @@ function PackCards({
       pct,
       checked: selection[name] === value.value,
       available: optionAvailable(name, value.value),
-      tag: deal ? `Mega offer · ${deal.free} free` : best ? "Best value" : null,
+      label: combo ? `${combo.units} Pack` : value.label,
+      tag:
+        combo?.units === 2
+          ? "Most popular"
+          : combo?.units === 3
+            ? "Limited time offer"
+            : null,
       offerLine: deal && combo ? `${combo.units} for the price of ${deal.of}` : null,
-      saved: combo
-        ? combo.compareAtPrice
-          ? combo.compareAtPrice - combo.price
-          : combo.savings
-        : null,
+      /* Cards show the per-set price (pack price ÷ sets) as the headline,
+         never the pack total. */
+      unitPrice,
+      unitCompareAt,
+      saved:
+        unitPrice != null && unitCompareAt != null
+          ? unitCompareAt - unitPrice
+          : null,
       img: combo?.image ?? view.cardImage?.url ?? null,
       units: combo?.units ?? 1,
       fan: sharedPhoto,
@@ -473,8 +480,8 @@ function PackCards({
               c.offer ? "bg-white" : "bg-transparent",
               c.checked
                 ? c.offer
-                  ? "border-clay-600 shadow-[0_0_0_1px_var(--color-clay-600),0_14px_32px_-16px_rgb(147_88_74/0.5)]"
-                  : "border-sage-800 shadow-[0_0_0_1px_var(--color-sage-800),0_14px_32px_-18px_rgb(36_49_41/0.5)]"
+                  ? "border-clay-600 shadow-[0_0_0_1px_var(--color-clay-600),0_14px_32px_-16px_color-mix(in_srgb,var(--color-clay-600)_50%,transparent)]"
+                  : "border-sage-800 shadow-[0_0_0_1px_var(--color-sage-800),0_14px_32px_-18px_color-mix(in_srgb,var(--color-sage-800)_50%,transparent)]"
                 : c.offer
                   ? "border-clay-600/40 hover:border-clay-600"
                   : "border-sand hover:border-sage-300",
@@ -496,7 +503,7 @@ function PackCards({
               <span
                 className={cn(
                   "absolute -top-3 left-4 z-10 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-ui text-[0.66rem] leading-none font-semibold tracking-[0.08em] text-ivory uppercase shadow-[0_6px_14px_-6px_rgb(40_28_16/0.45)]",
-                  c.offer ? "bg-linear-to-r from-clay-600 to-[#b0715f]" : "bg-sage-800",
+                  c.offer ? "bg-linear-to-r from-clay-600 to-clay-300" : "bg-sage-800",
                 )}
               >
                 <Icon name={c.offer ? "gift" : "star"} className="size-3" />
@@ -543,7 +550,7 @@ function PackCards({
 
               <span className="flex min-w-0 flex-1 flex-col items-start">
                 <span className="font-ui text-[1.02rem] leading-tight font-semibold text-ink">
-                  {c.value.label}
+                  {c.label}
                 </span>
                 {c.offerLine && (
                   <span className="mt-1 text-body-sm font-medium text-clay-600">
@@ -557,9 +564,9 @@ function PackCards({
 
               {c.combo && (
                 <span className="flex shrink-0 flex-col items-end">
-                  {c.combo.compareAtPrice && (
+                  {c.unitCompareAt != null && (
                     <span className="font-numeral text-[0.75rem] text-ink-faint tabular-nums line-through decoration-1">
-                      {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                      {formatMoney(c.unitCompareAt, c.combo.currency)}
                     </span>
                   )}
                   <span
@@ -568,7 +575,7 @@ function PackCards({
                       c.offer ? "text-[1.6rem] text-clay-600" : "text-[1.3rem] text-ink",
                     )}
                   >
-                    {formatMoney(c.combo.price, c.combo.currency)}
+                    {formatMoney(c.unitPrice ?? c.combo.price, c.combo.currency)}
                   </span>
                 </span>
               )}
@@ -683,7 +690,7 @@ function PackCards({
               )}
             </span>
 
-            <span className="mt-2 text-body-sm font-medium">{c.value.label}</span>
+            <span className="mt-2 text-body-sm font-medium">{c.label}</span>
             {c.offerLine && (
               <span className="text-[0.78rem] font-semibold text-clay-600">
                 {c.offerLine}
@@ -691,13 +698,13 @@ function PackCards({
             )}
             {c.combo && (
               <span className="mt-1 flex flex-col items-center">
-                {c.combo.compareAtPrice && (
+                {c.unitCompareAt != null && (
                   <span className="font-numeral text-[0.72rem] text-ink-soft tabular-nums line-through">
-                    {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                    {formatMoney(c.unitCompareAt, c.combo.currency)}
                   </span>
                 )}
                 <span className="font-numeral text-body-lg font-semibold tabular-nums">
-                  {formatMoney(c.combo.price, c.combo.currency)}
+                  {formatMoney(c.unitPrice ?? c.combo.price, c.combo.currency)}
                 </span>
               </span>
             )}
@@ -813,9 +820,13 @@ export function PurchasePanel({
       url.searchParams.set("variant", numericId(v.id));
       window.history.replaceState(window.history.state, "", url);
     });
-    window.dispatchEvent(
-      new CustomEvent("bl:variant", { detail: { variantId: v.id } }),
-    );
+    // Pack sizes share the product shot, so only a real variant option (colour,
+    // scent…) brings its photo to the gallery stage.
+    if (name !== view.packOptionName) {
+      window.dispatchEvent(
+        new CustomEvent("bl:variant", { detail: { variantId: v.id } }),
+      );
+    }
     trackSelectVariant({
       id: v.id,
       name: view.name,
@@ -842,35 +853,37 @@ export function PurchasePanel({
 
   const priceLine = useMemo(() => {
     if (!variant) return null;
+    /* Price block above the CTA is hidden — the pack cards carry the price.
+       Only the sale timer stays.
     const v = localizedVariantFor(variant);
+    <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 sm:justify-start">
+      {v.compareAtPrice && (
+        <p className="font-numeral text-body-lg text-ink-soft tabular-nums line-through">
+          {formatMoney(v.compareAtPrice, v.currency)}
+        </p>
+      )}
+      <p className="font-numeral text-heading-2 font-semibold tabular-nums" aria-live="polite">
+        {formatMoney(v.price, v.currency)}
+      </p>
+      {v.compareAtPercent && (
+        <p className="inline-flex items-center rounded-tag bg-clay-600 px-2.5 py-1 font-numeral text-[0.8rem] leading-none font-bold tracking-wide text-ivory tabular-nums">
+          −{v.compareAtPercent}% OFF
+        </p>
+      )}
+    </div>
+    */
     return (
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:justify-between">
-          <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 sm:justify-start">
-            {v.compareAtPrice && (
-              <p className="font-numeral text-body-lg text-ink-soft tabular-nums line-through">
-                {formatMoney(v.compareAtPrice, v.currency)}
-              </p>
-            )}
-            <p
-              className="font-numeral text-heading-2 font-semibold tabular-nums"
-              aria-live="polite"
-            >
-              {formatMoney(v.price, v.currency)}
-            </p>
-            {v.compareAtPercent && (
-              <p className="inline-flex items-center rounded-tag bg-clay-600 px-2.5 py-1 font-numeral text-[0.8rem] leading-none font-bold tracking-wide text-ivory tabular-nums">
-                −{v.compareAtPercent}% OFF
-              </p>
-            )}
-          </div>
-          {view.saleEndsAt && (
-            <SaleCountdown endsAt={view.saleEndsAt} variant="inline" />
-          )}
-        </div>
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <p className="inline-flex items-center gap-1.5 rounded-full bg-sage-100 px-3 py-1.5 font-ui text-[0.78rem] leading-none font-semibold text-sage-800">
+          <Icon name="truck" className="size-4 shrink-0" />
+          Free delivery unlocked
+        </p>
+        {view.saleEndsAt && (
+          <SaleCountdown endsAt={view.saleEndsAt} variant="inline" />
+        )}
       </div>
     );
-  }, [variant, localizedVariantFor, view.saleEndsAt]);
+  }, [variant, view.saleEndsAt]);
 
   return (
     <div>

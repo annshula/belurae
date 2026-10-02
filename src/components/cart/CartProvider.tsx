@@ -31,6 +31,12 @@ export type BagVariant = {
   productName: string;
   variantLabel: string;
   price: number;
+  /** The product's 1 Pack compare-at price — what every pack is struck through against. */
+  singleCompareAt: number | null;
+  /** The product's 1 Pack variant, whose live (localized) compare-at price applies. */
+  singleVariantId: string | null;
+  /** Sets in the pack (1 for a single). */
+  units: number;
   image: string | null;
   href: string;
   available: boolean;
@@ -41,7 +47,14 @@ export type BagVariant = {
 export type BagCatalog = { currency: string; variants: Record<string, BagVariant> };
 
 export type BagLine = { variantId: string; quantity: number };
-export type ResolvedLine = BagLine & BagVariant & { lineTotal: number };
+export type ResolvedLine = BagLine &
+  BagVariant & {
+    lineTotal: number;
+    /** What the line would cost at the 1 Pack compare-at price (equals lineTotal when there is none). */
+    compareAtTotal: number;
+    /** Percent off that compare-at price; null when there is no discount. */
+    savedPercent: number | null;
+  };
 
 const STORAGE_KEY = "belurae.bag.v1";
 const MAX_QTY = 10;
@@ -55,6 +68,8 @@ type CartContextValue = {
   lines: ResolvedLine[];
   count: number;
   subtotal: number;
+  /** Total saved against compare-at prices (0 when nothing in the bag has one). */
+  discount: number;
   currency: string;
   isOpen: boolean;
   hydrated: boolean;
@@ -122,8 +137,14 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
   // overlay the PDP uses — otherwise the bag would show base-currency prices
   // to a shopper who has been looking at localized ones the whole time.
   useEffect(() => {
-    requestPrices(raw.map((l) => l.variantId));
-  }, [raw, requestPrices]);
+    const ids = new Set<string>();
+    for (const l of raw) {
+      ids.add(l.variantId);
+      const single = catalog.variants[l.variantId]?.singleVariantId;
+      if (single) ids.add(single);
+    }
+    requestPrices([...ids]);
+  }, [raw, catalog, requestPrices]);
 
   // Lines whose variant no longer exists in the catalog are dropped silently.
   const lines = useMemo<ResolvedLine[]>(
@@ -134,7 +155,29 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
         const live = localizedPriceFor(l.variantId);
         const liveAmount = live ? Number.parseFloat(live.amount) : NaN;
         const price = Number.isFinite(liveAmount) ? liveAmount : v.price;
-        return [{ ...l, ...v, price, lineTotal: Math.round(price * l.quantity * 100) / 100 }];
+        // Struck-through price = the 1 Pack's compare-at × sets in this pack,
+        // in the live currency when the 1 Pack's price has resolved.
+        const liveSingle = v.singleVariantId ? localizedPriceFor(v.singleVariantId) : null;
+        const liveSingleCompare =
+          liveSingle?.compareAtAmount != null ? Number.parseFloat(liveSingle.compareAtAmount) : NaN;
+        const singleCompare = Number.isFinite(liveAmount)
+          ? Number.isFinite(liveSingleCompare)
+            ? liveSingleCompare
+            : null
+          : v.singleCompareAt;
+        const compareAtUnit = singleCompare != null ? singleCompare * v.units : null;
+        const hasDiscount = compareAtUnit != null && compareAtUnit > price;
+        const round = (n: number) => Math.round(n * 100) / 100;
+        return [
+          {
+            ...l,
+            ...v,
+            price,
+            lineTotal: round(price * l.quantity),
+            compareAtTotal: round((hasDiscount ? compareAtUnit : price) * l.quantity),
+            savedPercent: hasDiscount ? Math.round((1 - price / compareAtUnit) * 100) : null,
+          },
+        ];
       }),
     [raw, catalog, localizedPriceFor],
   );
@@ -148,6 +191,8 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
 
   const count = lines.reduce((n, l) => n + l.quantity, 0);
   const subtotal = Math.round(lines.reduce((s, l) => s + l.lineTotal, 0) * 100) / 100;
+  const discount =
+    Math.round((lines.reduce((s, l) => s + l.compareAtTotal, 0) - subtotal) * 100) / 100;
 
   const add = useCallback(
     (variantId: string, quantity = 1) => {
@@ -228,6 +273,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       lines,
       count,
       subtotal,
+      discount,
       currency,
       isOpen,
       hydrated,
@@ -239,7 +285,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       checkout,
       announcement,
     }),
-    [lines, count, subtotal, currency, isOpen, hydrated, add, setQuantity, remove, checkout, announcement],
+    [lines, count, subtotal, discount, currency, isOpen, hydrated, add, setQuantity, remove, checkout, announcement],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
