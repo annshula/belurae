@@ -111,10 +111,9 @@ export const contentPages: ContentPage[] = [
         </ul>
         <h2>What you won&apos;t find here</h2>
         <p>
-          Countdown timers, “only 3 left” banners, borrowed reviews, invented
-          “was” prices, or promises that a product is safe for everyone. If we
-          can&apos;t stand behind a claim with the product&apos;s own
-          information, we don&apos;t make it.
+          We don&apos;t use made-up stock levels, borrowed reviews, or promises
+          that a product is safe for everyone. Any deadline or crossed-out price
+          you see here is real.
         </p>
       </>
     ),
