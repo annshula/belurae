@@ -249,6 +249,7 @@ export function ProductGallery({
                 ) : (
                   <VideoTile
                     video={item}
+                    active={i === active}
                     className="aspect-square overflow-hidden bg-ink lg:aspect-auto lg:h-(--gallery-h)"
                   />
                 )}

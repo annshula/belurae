@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Icon } from "@/components/ui/Icon";
 import { trackViewVideo } from "@/lib/analytics";
@@ -17,13 +17,34 @@ import type { ViewVideo } from "@/lib/commerce/product-view";
 export function VideoTile({
   video,
   className,
+  active,
 }: {
   video: ViewVideo;
   className?: string;
+  /** Whether this slide is the one on stage: it autoplays (muted) on arrival and pauses on leaving. */
+  active: boolean;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const tracked = useRef(false);
+  const mounted = useRef(false);
+
+  // Only react to the visitor moving to or away from the slide — never
+  // autoplay on first paint, so the video stays out of the LCP path.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    if (active) {
+      el.muted = true;
+      el.play().catch(() => {});
+    } else {
+      el.pause();
+    }
+  }, [active]);
 
   const smallest = video.sources[0];
   const hd =
@@ -45,6 +66,7 @@ export function VideoTile({
         controls={playing}
         aria-label={video.alt}
         onPlay={() => {
+          setPlaying(true);
           if (!tracked.current) {
             tracked.current = true;
             trackViewVideo(video.alt, 0);
@@ -60,7 +82,6 @@ export function VideoTile({
         <button
           type="button"
           onClick={() => {
-            setPlaying(true);
             void ref.current?.play();
           }}
           className="group absolute inset-0 grid place-items-center bg-linear-to-t from-ink/35 via-transparent to-transparent"
