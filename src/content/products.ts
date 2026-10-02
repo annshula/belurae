@@ -317,8 +317,8 @@ export const products: ProductContent[] = [
       },
       dailyStep: {
         eyebrow: "Your daily step",
-        heading: "Smooth skin, without the blade.",
-        body: "Spray on, wait 5–10 minutes, then wipe hair away with the included scraper. The manufacturer labels the formula hypoallergenic and additive-free.",
+        heading: "The hair remover that tells you when to stop.",
+        body: "Ten minutes, then rinse, even if some hair remains. Spray on, wait 5–10 minutes, then wipe hair away with the included scraper. Nothing cuts or pulls at the skin, and the full ingredient list is printed on every pack.",
         mediaFile: "cac920f9-4b70-404b-8f48-2f28a0d05f61",
         imagePosition: "top",
         benefits: [
@@ -523,8 +523,8 @@ export const products: ProductContent[] = [
       ],
       dailyStep: {
         eyebrow: "Your daily step",
-        heading: "For hydrated, smoother-looking skin.",
-        body: "The manufacturer describes this toner as helping replenish moisture and leave skin feeling fresh, comfortable and supple.",
+        heading: "One pat. Fresh, soft, ready for your serum.",
+        body: "Fast-absorbing and non-greasy, it pats on in seconds and gets your skin ready for the serum that follows. With EGF-related ingredients, niacinamide, collagen and hyaluronic acid, it helps skin feel soft, hydrated and supple.",
         mediaFile: "S838391d7c5b24108ad0a034663d2b5cfr",
         benefits: [
           {
