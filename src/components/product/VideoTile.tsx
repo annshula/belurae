@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { trackViewVideo } from "@/lib/analytics";
 import type { ViewVideo } from "@/lib/commerce/product-view";
+import { playMuted } from "@/lib/media/autoplay";
 
 /**
  * Click-to-play video: only the poster loads until the visitor asks for the
@@ -34,16 +35,19 @@ export function VideoTile({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (!mounted.current) {
-      mounted.current = true;
+    const first = !mounted.current;
+    mounted.current = true;
+    if (!active) {
+      if (!first) el.pause();
       return;
     }
-    if (active) {
-      el.muted = true;
-      el.play().catch(() => {});
-    } else {
-      el.pause();
-    }
+    if (first) return;
+    let wanted = true;
+    const stop = playMuted(el, () => wanted);
+    return () => {
+      wanted = false;
+      stop();
+    };
   }, [active]);
 
   const smallest = video.sources[0];

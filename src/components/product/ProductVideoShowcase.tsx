@@ -8,6 +8,7 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from "react";
 
+import { playMuted } from "@/lib/media/autoplay";
 import { cn } from "@/lib/utils";
 
 /**
@@ -229,15 +230,24 @@ function VideoCard({ video }: { video: ShowcaseVideo }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    let visible = false;
+    let stop: (() => void) | null = null;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry!.isIntersecting) el.play().catch(() => {});
+        visible = entry!.isIntersecting;
+        stop?.();
+        stop = null;
+        if (visible) stop = playMuted(el, () => visible);
         else el.pause();
       },
       { threshold: 0.5 },
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      visible = false;
+      stop?.();
+      observer.disconnect();
+    };
   }, []);
 
   return (

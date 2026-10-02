@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-10-02T12:54:50.481Z",
+  "syncedAt": "2026-10-02T14:36:52.159Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -22,7 +22,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-02T12:54:17Z",
+      "updatedAt": "2026-10-02T14:29:42Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -54,9 +54,19 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 45,
-              "compareAtAmount": 89,
+              "amount": 44,
+              "compareAtAmount": 88,
               "currencyCode": "AUD"
+            },
+            "ZA": {
+              "amount": 508,
+              "compareAtAmount": 1016,
+              "currencyCode": "ZAR"
+            },
+            "US": {
+              "amount": 29.99,
+              "compareAtAmount": 59.98,
+              "currencyCode": "USD"
             },
             "CA": {
               "amount": 43,
@@ -64,24 +74,14 @@
               "currencyCode": "CAD"
             },
             "IN": {
-              "amount": 2940.73,
-              "compareAtAmount": 5881.46,
+              "amount": 2940.64,
+              "compareAtAmount": 5881.28,
               "currencyCode": "INR"
-            },
-            "ZA": {
-              "amount": 512,
-              "compareAtAmount": 1024,
-              "currencyCode": "ZAR"
             },
             "GB": {
               "amount": 24,
               "compareAtAmount": 47,
               "currencyCode": "GBP"
-            },
-            "US": {
-              "amount": 29.99,
-              "compareAtAmount": 59.98,
-              "currencyCode": "USD"
             }
           }
         },
@@ -101,8 +101,18 @@
           "pricesByMarket": {
             "AU": {
               "amount": 78,
-              "compareAtAmount": 177,
+              "compareAtAmount": 176,
               "currencyCode": "AUD"
+            },
+            "ZA": {
+              "amount": 897,
+              "compareAtAmount": 2031,
+              "currencyCode": "ZAR"
+            },
+            "US": {
+              "amount": 52.99,
+              "compareAtAmount": 119.96,
+              "currencyCode": "USD"
             },
             "CA": {
               "amount": 76,
@@ -110,24 +120,14 @@
               "currencyCode": "CAD"
             },
             "IN": {
-              "amount": 5196.04,
-              "compareAtAmount": 11762.92,
+              "amount": 5195.88,
+              "compareAtAmount": 11762.56,
               "currencyCode": "INR"
-            },
-            "ZA": {
-              "amount": 905,
-              "compareAtAmount": 2047,
-              "currencyCode": "ZAR"
             },
             "GB": {
               "amount": 41,
               "compareAtAmount": 93,
               "currencyCode": "GBP"
-            },
-            "US": {
-              "amount": 52.99,
-              "compareAtAmount": 119.96,
-              "currencyCode": "USD"
             }
           }
         },
@@ -147,33 +147,33 @@
           "pricesByMarket": {
             "AU": {
               "amount": 96,
-              "compareAtAmount": 265,
+              "compareAtAmount": 264,
               "currencyCode": "AUD"
             },
-            "CA": {
-              "amount": 93,
-              "compareAtAmount": 257,
-              "currencyCode": "CAD"
-            },
-            "IN": {
-              "amount": 6372.72,
-              "compareAtAmount": 17644.37,
-              "currencyCode": "INR"
-            },
             "ZA": {
-              "amount": 1109,
-              "compareAtAmount": 3071,
+              "amount": 1100,
+              "compareAtAmount": 3046,
               "currencyCode": "ZAR"
-            },
-            "GB": {
-              "amount": 51,
-              "compareAtAmount": 139,
-              "currencyCode": "GBP"
             },
             "US": {
               "amount": 64.99,
               "compareAtAmount": 179.94,
               "currencyCode": "USD"
+            },
+            "CA": {
+              "amount": 93,
+              "compareAtAmount": 256,
+              "currencyCode": "CAD"
+            },
+            "IN": {
+              "amount": 6372.53,
+              "compareAtAmount": 17643.84,
+              "currencyCode": "INR"
+            },
+            "GB": {
+              "amount": 51,
+              "compareAtAmount": 139,
+              "currencyCode": "GBP"
             }
           }
         }
@@ -438,7 +438,7 @@
         "35% Less Chemical Ingredients",
         "Cruelty-Free & Plant-Based"
       ],
-      "saleEndsAt": "2026-10-03T03:00:00.000Z"
+      "saleEndsAt": "2026-10-04T03:00:00.000Z"
     },
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
@@ -447,7 +447,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-02T11:44:39Z",
+      "updatedAt": "2026-10-02T14:29:22Z",
       "seo": {
         "title": null,
         "description": null
@@ -479,34 +479,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 45,
-              "compareAtAmount": 89,
+              "amount": 44,
+              "compareAtAmount": 88,
               "currencyCode": "AUD"
             },
-            "CA": {
-              "amount": 43,
-              "compareAtAmount": 86,
-              "currencyCode": "CAD"
+            "IN": {
+              "amount": 2940.64,
+              "compareAtAmount": 5881.28,
+              "currencyCode": "INR"
+            },
+            "ZA": {
+              "amount": 508,
+              "compareAtAmount": 1016,
+              "currencyCode": "ZAR"
             },
             "US": {
               "amount": 29.99,
               "compareAtAmount": 59.98,
               "currencyCode": "USD"
             },
-            "IN": {
-              "amount": 2940.73,
-              "compareAtAmount": 5881.46,
-              "currencyCode": "INR"
+            "CA": {
+              "amount": 43,
+              "compareAtAmount": 86,
+              "currencyCode": "CAD"
             },
             "GB": {
               "amount": 24,
               "compareAtAmount": 47,
               "currencyCode": "GBP"
-            },
-            "ZA": {
-              "amount": 512,
-              "compareAtAmount": 1024,
-              "currencyCode": "ZAR"
             }
           }
         },
@@ -526,33 +526,33 @@
           "pricesByMarket": {
             "AU": {
               "amount": 78,
-              "compareAtAmount": 177,
+              "compareAtAmount": 176,
               "currencyCode": "AUD"
             },
-            "CA": {
-              "amount": 76,
-              "compareAtAmount": 171,
-              "currencyCode": "CAD"
+            "IN": {
+              "amount": 5195.88,
+              "compareAtAmount": 11762.56,
+              "currencyCode": "INR"
+            },
+            "ZA": {
+              "amount": 897,
+              "compareAtAmount": 2031,
+              "currencyCode": "ZAR"
             },
             "US": {
               "amount": 52.99,
               "compareAtAmount": 119.96,
               "currencyCode": "USD"
             },
-            "IN": {
-              "amount": 5196.04,
-              "compareAtAmount": 11762.92,
-              "currencyCode": "INR"
+            "CA": {
+              "amount": 76,
+              "compareAtAmount": 171,
+              "currencyCode": "CAD"
             },
             "GB": {
               "amount": 41,
               "compareAtAmount": 93,
               "currencyCode": "GBP"
-            },
-            "ZA": {
-              "amount": 905,
-              "compareAtAmount": 2047,
-              "currencyCode": "ZAR"
             }
           }
         },
@@ -572,33 +572,33 @@
           "pricesByMarket": {
             "AU": {
               "amount": 96,
-              "compareAtAmount": 265,
+              "compareAtAmount": 264,
               "currencyCode": "AUD"
             },
-            "CA": {
-              "amount": 93,
-              "compareAtAmount": 257,
-              "currencyCode": "CAD"
+            "IN": {
+              "amount": 6372.53,
+              "compareAtAmount": 17643.84,
+              "currencyCode": "INR"
+            },
+            "ZA": {
+              "amount": 1100,
+              "compareAtAmount": 3046,
+              "currencyCode": "ZAR"
             },
             "US": {
               "amount": 64.99,
               "compareAtAmount": 179.94,
               "currencyCode": "USD"
             },
-            "IN": {
-              "amount": 6372.72,
-              "compareAtAmount": 17644.37,
-              "currencyCode": "INR"
+            "CA": {
+              "amount": 93,
+              "compareAtAmount": 256,
+              "currencyCode": "CAD"
             },
             "GB": {
               "amount": 51,
               "compareAtAmount": 139,
               "currencyCode": "GBP"
-            },
-            "ZA": {
-              "amount": 1109,
-              "compareAtAmount": 3071,
-              "currencyCode": "ZAR"
             }
           }
         }
@@ -884,7 +884,7 @@
         "Helps skin look plump & radiant",
         "Supersized Full-Body Value"
       ],
-      "saleEndsAt": "2026-10-03T03:00:00.000Z"
+      "saleEndsAt": "2026-10-04T03:00:00.000Z"
     }
   }
 }
