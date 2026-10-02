@@ -21,10 +21,11 @@
  * Delete this file and its two call sites (`ReviewsSection`, the [slug] route's
  * rating line) once real reviews exist.
  *
- * Generation is deterministic — seeded PRNG, fixed anchor date — so the server
- * and the browser produce identical data. That is what lets the client-side
- * feed import this module directly instead of receiving hundreds of reviews
- * through the RSC payload, and keeps hydration clean.
+ * Generation is deterministic — seeded PRNG, and a day anchor both renderers
+ * resolve to the same value — so the server and the browser produce identical
+ * data. That is what lets the client-side feed import this module directly
+ * instead of receiving hundreds of reviews through the RSC payload, and keeps
+ * hydration clean.
  */
 
 import {
@@ -37,9 +38,36 @@ import {
 const MOUSSE_HANDLE = "bikini-pain-free-hair-removal-spray";
 const TONER_HANDLE = "egf-tox-toner";
 
-/** Date of the newest review, fixed so both renderers agree. Bump when refreshing. */
-const ANCHOR = Date.UTC(2026, 8, 25, 12, 0, 0);
 const DAY = 86_400_000;
+
+/**
+ * The feed is anchored to the day it renders, not to a fixed date: reviews are
+ * labelled “Today”, “Yesterday” and the days just before, so a set pinned to a
+ * September date would read as stale by October. The anchor is the current hour
+ * of the current UTC day, taken once at module load — the server render and the
+ * client hydration a moment later resolve it to the same day, and only a
+ * midnight rollover moves a label, by exactly one day.
+ */
+const NOW = new Date();
+const ANCHOR = Date.UTC(
+  NOW.getUTCFullYear(),
+  NOW.getUTCMonth(),
+  NOW.getUTCDate(),
+  NOW.getUTCHours(),
+  0,
+  0,
+);
+
+/**
+ * How far back a set's oldest review falls. Two things pull against each other
+ * here: every review of a set must fit inside the window, or the feed reads as
+ * stale — and the window must be wide enough that one page of the feed spans a
+ * few days, or a 500-review set stamps eight reviews in a row "Today" and the
+ * labels stop carrying any information. At this width a set spreads over ~4
+ * months (a few reviews a day) and page one reads "Today", "Yesterday", "3 days
+ * ago" the way a real feed does.
+ */
+const SPAN_DAYS = 120;
 
 /**
  * Mousse star mix — the figures behind its headline: 524 reviews, average 4.9.
@@ -383,6 +411,12 @@ type ReviewSet = {
   handle: string;
   seed: number;
   mix: { rating: Review["rating"]; count: number }[];
+  /**
+   * The packs reviewers bought, as plain counts: the review says what arrived,
+   * not the shop's tier name for it. Repeats weight the pick, so most reviews
+   * come from a single-pack order and the bigger packs show up less often.
+   */
+  items: string[];
   openers: Record<Review["rating"], string[]>;
   closers: Record<Review["rating"], string[]>;
   titles: Record<Review["rating"], string[]>;
@@ -397,6 +431,8 @@ function build(set: ReviewSet): Review[] {
     ),
     rand,
   );
+  /** One review per step, so the whole set fits inside SPAN_DAYS. */
+  const step = SPAN_DAYS / Math.max(ratings.length - 1, 1);
   const names = shuffled(NAMES, rand);
   const countries = shuffled(COUNTRIES, rand);
   const openers: Record<Review["rating"], string[]> = {
@@ -444,9 +480,20 @@ function build(set: ReviewSet): Review[] {
         : pick(openers[rating], n),
       author,
       country: countries[i % countries.length]!,
-      // Newest first, ~1.25 days apart, jittered but never out of order.
-      createdAt: new Date(ANCHOR - (i * 1.25 + rand()) * DAY).toISOString(),
+      // Newest first, packed into the recent window: each review sits one step
+      // further back than the one before it, jittered inside its own step so
+      // nothing lands on a round hour. The descending order is load-bearing —
+      // the feed and the sort both rely on it.
+      createdAt: new Date(
+        ANCHOR - (i * step + rand() * step) * DAY,
+      ).toISOString(),
       images: [],
+      // Drawn last, after the copy above, so adding these labels didn't
+      // reshuffle a single opener/closer pairing.
+      itemTitle:
+        set.items[
+          Math.min(set.items.length - 1, Math.floor(rand() * set.items.length))
+        ]!,
     };
   });
 }
@@ -456,6 +503,7 @@ const MOUSSE_SET: ReviewSet = {
   handle: MOUSSE_HANDLE,
   seed: 20260925,
   mix: MOUSSE_MIX,
+  items: ["1 Pack", "1 Pack", "1 Pack", "2 Pack", "2 Pack", "3 Pack"],
   openers: MOUSSE_OPENERS,
   closers: MOUSSE_CLOSERS,
   titles: MOUSSE_TITLES,
@@ -466,6 +514,7 @@ const TONER_SET: ReviewSet = {
   handle: TONER_HANDLE,
   seed: 20260926,
   mix: TONER_MIX,
+  items: ["1 Pack", "1 Pack", "1 Pack", "2 Pack", "2 Pack", "3 Pack"],
   openers: TONER_OPENERS,
   closers: TONER_CLOSERS,
   titles: TONER_TITLES,

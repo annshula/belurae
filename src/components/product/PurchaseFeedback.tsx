@@ -61,7 +61,9 @@ function FeedbackDesktop({
   // a drag. Applied on top of the index offset so the track visibly follows
   // the finger instead of only reacting once a threshold is crossed.
   const [dragPercent, setDragPercent] = useState(0);
-  const dragFrom = useRef<{ x: number; id: number; width: number } | null>(null);
+  const dragFrom = useRef<{ x: number; id: number; width: number } | null>(
+    null,
+  );
   const trackRef = useRef<HTMLDivElement>(null);
 
   if (count === 0) return null;
@@ -155,7 +157,9 @@ function FeedbackDesktop({
               ? "transition-none"
               : "transition-transform duration-500",
           )}
-          style={{ transform: `translateX(calc(-${index * 100}% + ${dragPercent}%))` }}
+          style={{
+            transform: `translateX(calc(-${index * 100}% + ${dragPercent}%))`,
+          }}
         >
           {slides.map((review, i) => (
             <li
@@ -190,6 +194,12 @@ function FeedbackDesktop({
                 <span className="font-medium">{review.author}</span>
                 {review.country && (
                   <span className="text-ink-faint">{review.country}</span>
+                )}
+                {review.itemTitle && (
+                  <span className="inline-flex items-center gap-1 text-ink-faint">
+                    <Icon name="package" className="size-3" />
+                    {review.itemTitle}
+                  </span>
                 )}
                 <span className="inline-flex items-center gap-1 text-ink-faint">
                   <Icon
@@ -273,7 +283,9 @@ function FeedbackMobile({
         | HTMLElement
         | undefined;
       if (!track || !slide) return;
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const reduce = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
       track.scrollTo({
         left: slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2,
         behavior: reduce ? "auto" : "smooth",
@@ -373,6 +385,12 @@ function FeedbackMobile({
               <span className="font-medium">{review.author}</span>
               {review.country && (
                 <span className="text-ink-faint">{review.country}</span>
+              )}
+              {review.itemTitle && (
+                <span className="inline-flex items-center gap-1 text-ink-faint">
+                  <Icon name="package" className="size-3" />
+                  {review.itemTitle}
+                </span>
               )}
               <span className="inline-flex items-center gap-1 text-ink-faint">
                 <Icon

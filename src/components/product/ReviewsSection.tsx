@@ -7,7 +7,11 @@ import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Stars } from "@/components/ui/Stars";
 import { demoReviewsFor } from "@/data/reviews";
-import type { ProductReviews, Review } from "@/lib/judgeme/types";
+import {
+  formatReviewDate,
+  type ProductReviews,
+  type Review,
+} from "@/lib/judgeme/types";
 import { cn } from "@/lib/utils";
 
 /**
@@ -306,7 +310,7 @@ function ReviewCard({ review }: { review: Review }) {
             dateTime={review.createdAt.slice(0, 10)}
             className="font-ui text-body-sm text-ink-faint tabular-nums"
           >
-            {formatDate(review.createdAt)}
+            {formatReviewDate(review.createdAt)}
           </time>
         </header>
 
@@ -340,6 +344,22 @@ function ReviewCard({ review }: { review: Review }) {
               </li>
             ))}
           </ul>
+        )}
+
+        {review.itemTitle && (
+          /* What they actually bought. A review with a pack under it reads as a
+             purchase; without one it reads as an opinion floating in space. */
+          <p className="mt-4 inline-flex flex-wrap items-center gap-1.5 rounded-tag bg-cream px-2.5 py-1 font-ui text-body-sm">
+            <Icon
+              name="package"
+              aria-hidden="true"
+              className="size-3.5 shrink-0 text-sage-600"
+            />
+            <span className="text-ink-faint">Bought</span>
+            <span className="font-medium text-ink-soft">
+              {review.itemTitle}
+            </span>
+          </p>
         )}
 
         <footer className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-ui text-body-sm">
@@ -438,18 +458,6 @@ function NoReviewsYet() {
 }
 
 /* ────────────────────────────── helpers ────────────────────────────── */
-
-/** Pinned to UTC so the server and the browser print the same day. */
-function formatDate(iso: string): string {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return "";
-  return new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    timeZone: "UTC",
-  }).format(date);
-}
 
 /** Numeric page window with ellipsis gaps — e.g. [1, "…", 12, 13, 14, "…", 66]. */
 function pageWindow(page: number, total: number): (number | "…")[] {
