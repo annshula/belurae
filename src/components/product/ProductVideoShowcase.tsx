@@ -252,7 +252,10 @@ function VideoCard({ video }: { video: ShowcaseVideo }) {
         playsInline
         aria-label={video.alt}
       >
-        <source src={video.src} type="video/mp4" />
+        {/* `#t=0.001` makes the browser paint a real first frame under
+            preload="metadata" — with no poster, an unplayed card is otherwise
+            just the black `bg-ink` backdrop. */}
+        <source src={`${video.src}#t=0.001`} type="video/mp4" />
       </video>
     </div>
   );
