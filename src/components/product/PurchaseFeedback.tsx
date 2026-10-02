@@ -201,10 +201,10 @@ function FeedbackDesktop({
                     {review.itemTitle}
                   </span>
                 )}
-                <span className="inline-flex items-center gap-1 text-ink-faint">
+                <span className="inline-flex items-center gap-1 font-medium text-success">
                   <Icon
                     name="check"
-                    className="size-3 text-sage-600"
+                    className="size-3 text-success"
                     strokeWidth={2.4}
                   />
                   Verified buyer
@@ -392,10 +392,10 @@ function FeedbackMobile({
                   {review.itemTitle}
                 </span>
               )}
-              <span className="inline-flex items-center gap-1 text-ink-faint">
+              <span className="inline-flex items-center gap-1 font-medium text-success">
                 <Icon
                   name="check"
-                  className="size-3 text-sage-600"
+                  className="size-3 text-success"
                   strokeWidth={2.4}
                 />
                 Verified buyer

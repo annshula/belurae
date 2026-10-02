@@ -373,10 +373,10 @@ function ReviewCard({ review }: { review: Review }) {
           {review.country && (
             <span className="text-ink-faint">{review.country}</span>
           )}
-          <span className="inline-flex items-center gap-1.5 text-ink-faint">
+          <span className="inline-flex items-center gap-1.5 font-medium text-success">
             <Icon
               name="check"
-              className="size-3.5 text-sage-600"
+              className="size-3.5 text-success"
               strokeWidth={2.4}
             />
             Verified buyer
