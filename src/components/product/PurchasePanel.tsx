@@ -404,11 +404,6 @@ function PackCards({
     return same?.combo ? { free: c.units - same.combo.units, of: same.combo.units } : null;
   };
 
-  /* Every card is struck through against the 1 Pack's own compare-at price
-     (no compare-at on the 1 Pack → no strikethrough or save badge anywhere). */
-  const singleCompareAt =
-    rows.find((r) => r.combo?.units === 1)?.combo?.compareAtPrice ?? null;
-
   const photoOf = (c: LocalizedVariant | undefined) =>
     c?.image ?? view.cardImage?.url ?? null;
   const sharedPhoto = rows.every((r) => photoOf(r.combo) === photoOf(rows[0]?.combo));
@@ -417,20 +412,13 @@ function PackCards({
     const exists = Boolean(combo);
     const deal = freeFor(combo);
     const offer = deal !== null;
-    /* Every card compares its per-set price against the 1 Pack's own
-       compare-at price — the real struck-through figure, not divided. */
+    /* Each card shows its own pack's real price and compare-at price, as set
+       in Shopify. The per-set price is a small note beside them. */
     /* Pack price ÷ sets, cut (not rounded) to the cent: 49.99 ÷ 2 → 24.99. */
     const unitPrice = combo
       ? Math.floor((combo.price / combo.units) * 100 + 1e-6) / 100
       : null;
-    const unitCompareAt =
-      unitPrice != null && singleCompareAt != null && singleCompareAt > unitPrice
-        ? singleCompareAt
-        : null;
-    const pct =
-      unitPrice != null && unitCompareAt != null
-        ? Math.round((1 - unitPrice / unitCompareAt) * 100)
-        : null;
+    const pct = combo?.compareAtPercent ?? null;
     return {
       value,
       combo,
@@ -448,10 +436,7 @@ function PackCards({
             ? "Limited time offer"
             : null,
       offerLine: deal && combo ? `${combo.units} for the price of ${deal.of}` : null,
-      /* Cards show the per-set price (pack price ÷ sets) as the headline,
-         never the pack total. */
       unitPrice,
-      unitCompareAt,
       img: combo?.image ?? view.cardImage?.url ?? null,
       units: combo?.units ?? 1,
       fan: sharedPhoto,
@@ -459,6 +444,10 @@ function PackCards({
       featured: combo?.units === 3,
     };
   });
+
+  /* "Save N%" badge: one colour on every card. Solid, so it stays visible on
+     the sage-tinted featured card too. */
+  const SAVE_BADGE = "bg-sage-800 text-ivory";
 
   /* Flat cards — no drop shadows; selection is a 2px border. */
   const surface = (c: (typeof cards)[number]) =>
@@ -560,7 +549,7 @@ function PackCards({
                   <span
                     className={cn(
                       "mt-1 rounded-tag px-1.5 py-0.5 font-numeral text-[0.68rem] leading-none font-medium tabular-nums",
-                      c.offer ? "bg-clay-100 text-clay-600" : "bg-sage-100 text-sage-800",
+                      SAVE_BADGE,
                     )}
                   >
                     Save {c.pct}%
@@ -573,19 +562,40 @@ function PackCards({
 
               {c.combo && (
                 <span className="flex shrink-0 flex-col items-end">
-                  {c.unitCompareAt != null && (
-                    <span className="font-numeral text-[0.7rem] text-ink-faint tabular-nums line-through decoration-1">
-                      {formatMoney(c.unitCompareAt, c.combo.currency)}
-                    </span>
+                  {c.units > 1 && c.unitPrice != null ? (
+                    <>
+                      <span
+                        className={cn(
+                          "font-numeral leading-none font-semibold tracking-tight tabular-nums",
+                          c.offer ? "text-[1.3rem] text-clay-600" : "text-[1.15rem] text-ink",
+                        )}
+                      >
+                        {formatMoney(c.unitPrice, c.combo.currency)}
+                        <span className="ml-1 text-[0.7rem] font-medium tracking-normal text-ink-soft">
+                          each
+                        </span>
+                      </span>
+                      <span className="mt-1 flex items-baseline gap-1.5 font-numeral text-[0.68rem] leading-none text-ink-soft tabular-nums">
+                        {c.combo.compareAtPrice != null && (
+                          <span className="line-through decoration-1">
+                            {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                          </span>
+                        )}
+                        <span>{formatMoney(c.combo.price, c.combo.currency)} total</span>
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      {c.combo.compareAtPrice != null && (
+                        <span className="font-numeral text-[0.7rem] text-ink-faint tabular-nums line-through decoration-1">
+                          {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                        </span>
+                      )}
+                      <span className="font-numeral text-[1.15rem] leading-none font-semibold tracking-tight text-ink tabular-nums">
+                        {formatMoney(c.combo.price, c.combo.currency)}
+                      </span>
+                    </>
                   )}
-                  <span
-                    className={cn(
-                      "font-numeral leading-none font-semibold tracking-tight tabular-nums",
-                      c.offer ? "text-[1.3rem] text-clay-600" : "text-[1.15rem] text-ink",
-                    )}
-                  >
-                    {formatMoney(c.unitPrice ?? c.combo.price, c.combo.currency)}
-                  </span>
                 </span>
               )}
             </span>
@@ -668,21 +678,47 @@ function PackCards({
             )}
             {c.combo && (
               <span className="mt-1 flex flex-col items-center">
-                {c.unitCompareAt != null && (
-                  <span className="font-numeral text-[0.72rem] text-ink-soft tabular-nums line-through">
-                    {formatMoney(c.unitCompareAt, c.combo.currency)}
-                  </span>
+                {c.units > 1 && c.unitPrice != null ? (
+                  <>
+                    <span
+                      className={cn(
+                        "font-numeral text-heading-3 leading-tight font-semibold tabular-nums",
+                        c.offer && "text-clay-600",
+                      )}
+                    >
+                      {formatMoney(c.unitPrice, c.combo.currency)}
+                      <span className="ml-1 text-[0.75rem] font-medium text-ink-soft">
+                        each
+                      </span>
+                    </span>
+                    <span className="mt-0.5 flex items-baseline gap-1.5 font-numeral text-[0.72rem] text-ink-soft tabular-nums">
+                      {c.combo.compareAtPrice != null && (
+                        <span className="line-through">
+                          {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                        </span>
+                      )}
+                      <span>{formatMoney(c.combo.price, c.combo.currency)} total</span>
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    {c.combo.compareAtPrice != null && (
+                      <span className="font-numeral text-[0.72rem] text-ink-soft tabular-nums line-through">
+                        {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                      </span>
+                    )}
+                    <span className="font-numeral text-body-lg font-semibold tabular-nums">
+                      {formatMoney(c.combo.price, c.combo.currency)}
+                    </span>
+                  </>
                 )}
-                <span className="font-numeral text-body-lg font-semibold tabular-nums">
-                  {formatMoney(c.unitPrice ?? c.combo.price, c.combo.currency)}
-                </span>
               </span>
             )}
             {c.pct != null && c.pct > 0 && (
               <span
                 className={cn(
                   "mt-1.5 rounded-tag px-2 py-0.5 font-numeral text-[0.7rem] font-medium tabular-nums",
-                  c.offer ? "bg-clay-100 text-clay-600" : "bg-sage-100 text-sage-800",
+                  SAVE_BADGE,
                 )}
               >
                 Save {c.pct}%

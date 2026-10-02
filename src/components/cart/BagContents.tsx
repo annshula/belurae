@@ -274,14 +274,9 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
               )}
               <span className="font-semibold text-sage-600">FREE</span>
             </p>
-            <span
-              role="switch"
-              aria-checked="true"
-              aria-disabled="true"
-              aria-label="Shipping protection, included free"
-              className="relative block h-5 w-9 rounded-full bg-sage-600"
-            >
-              <span className="absolute top-0.5 right-0.5 size-4 rounded-full bg-ivory shadow-soft" />
+            <span className="inline-flex items-center gap-1 rounded-full bg-sage-600 py-0.5 pr-2 pl-1.5 text-[0.68rem] leading-none font-semibold text-ivory">
+              <Icon name="check" className="size-3" strokeWidth={3} />
+              Added
             </span>
           </div>
         </div>
