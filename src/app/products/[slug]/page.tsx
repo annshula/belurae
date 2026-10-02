@@ -65,7 +65,10 @@ const productVideos: ShowcaseVideo[] = [
 
 /** Toner clips — served from `public/videos/toner` (compressed from `toner_video/`). */
 const tonerVideos: ShowcaseVideo[] = [
-  { src: "/videos/toner/toner-new-3.mp4", alt: "Belurae EGF Tox toner video 1" },
+  {
+    src: "/videos/toner/toner-new-3.mp4",
+    alt: "Belurae EGF Tox toner video 1",
+  },
   ...[1, 2, 3, 4, 5].map((n) => ({
     src: `/videos/toner/toner-${n}.mp4`,
     alt: `Belurae EGF Tox toner video ${n + 1}`,
@@ -302,28 +305,62 @@ export default async function ProductPage({ params }: Props) {
                     </a>
                   )}
 
-                  {/* Delivery. "Worldwide" is only true while Shopify has a shipping
-                      zone for the shopper's country: today 30 countries, all with a
-                      free standard rate. Keep the zones in step with this text. */}
-                  <div
-                    className={cn(
-                      "flex min-w-0 items-center gap-2.5 rounded-2xl bg-paper px-3 py-2.5 font-ui shadow-soft sm:rounded-pill sm:py-2 sm:pr-3.5 sm:pl-3",
-                      !hasRating && "col-span-2",
-                    )}
-                  >
-                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-sage-100 sm:size-auto sm:bg-transparent">
-                      <Icon
-                        name="truck"
-                        className="size-4 text-sage-700 sm:size-4"
-                      />
-                    </span>
-                    <span className="min-w-0 text-[0.8rem] leading-tight font-medium sm:text-body-sm">
-                      <span className="sm:hidden">Free worldwide delivery</span>
-                      <span className="hidden sm:inline">
-                        Free &amp; fast worldwide delivery
+                  {/* Social proof. The count is a figure we can point to for this
+                      product (content.pdp.customers → Shopify orders), which is what
+                      makes it credible; the reading is dated in `asOf` so it gets
+                      refreshed instead of drifting. Delivery facts stay in the trust
+                      list further down the buy box. Products without a count keep the
+                      delivery tile. */}
+                  {content.pdp.customers ? (
+                    <div
+                      title={`Based on ${content.pdp.customers.count.toLocaleString("en-US")} orders as of ${content.pdp.customers.asOf}`}
+                      className={cn(
+                        "flex min-w-0 items-center gap-2.5 rounded-2xl bg-paper px-3 py-2.5 font-ui shadow-soft sm:rounded-pill sm:py-2 sm:pr-3.5 sm:pl-3",
+                        !hasRating && "col-span-2",
+                      )}
+                    >
+                      <span className="grid size-8 shrink-0 place-items-center rounded-full bg-sage-100 sm:size-auto sm:bg-transparent">
+                        <Icon name="users" className="size-4 text-sage-700" />
                       </span>
-                    </span>
-                  </div>
+                      {/* Number and label are separate flex children centred with
+                          items-center (same construction as the rating chip): the
+                          numeral uses Poppins, whose taller glyph box would sit off
+                          the label's middle if the two were one inline run. */}
+                      <span className="flex min-w-0 items-center gap-1.5 text-[0.8rem] leading-tight sm:text-body-sm">
+                        <span className="font-numeral leading-none font-semibold tabular-nums">
+                          {content.pdp.customers.count.toLocaleString("en-US")}+
+                        </span>
+                        <span className="min-w-0 text-ink-soft">
+                          happy customers
+                        </span>
+                      </span>
+                    </div>
+                  ) : (
+                    /* Delivery. "Worldwide" is only true while Shopify has a shipping
+                       zone for the shopper's country: today 30 countries, all with a
+                       free standard rate. Keep the zones in step with this text. */
+                    <div
+                      className={cn(
+                        "flex min-w-0 items-center gap-2.5 rounded-2xl bg-paper px-3 py-2.5 font-ui shadow-soft sm:rounded-pill sm:py-2 sm:pr-3.5 sm:pl-3",
+                        !hasRating && "col-span-2",
+                      )}
+                    >
+                      <span className="grid size-8 shrink-0 place-items-center rounded-full bg-sage-100 sm:size-auto sm:bg-transparent">
+                        <Icon
+                          name="truck"
+                          className="size-4 text-sage-700 sm:size-4"
+                        />
+                      </span>
+                      <span className="min-w-0 text-[0.8rem] leading-tight font-medium sm:text-body-sm">
+                        <span className="sm:hidden">
+                          Free worldwide delivery
+                        </span>
+                        <span className="hidden sm:inline">
+                          Free &amp; fast worldwide delivery
+                        </span>
+                      </span>
+                    </div>
+                  )}
                 </div>
               );
             })()}

@@ -101,6 +101,14 @@ export type ProductContent = {
   pdp: {
     /** Three icon + text items above the H1. */
     trust?: { icon: PdpIcon; text: string }[];
+    /**
+     * Social proof chip above the H1, in place of the delivery tile.
+     * `count` is the number of orders we can point to for this product
+     * (Shopify order count for the line item) and `asOf` dates that reading,
+     * so the figure gets refreshed instead of drifting. Rendered as
+     * "25,000+ happy customers".
+     */
+    customers?: { count: number; asOf: string };
     /** Show Shopify's `custom.perks` one per row instead of two columns. */
     perksOneColumn?: boolean;
     /**
@@ -111,7 +119,11 @@ export type ProductContent = {
      * `surface` the warm neutrals: page background, raised cards, washes,
      * borders and text greys. Omit to keep the brand palette.
      */
-    theme?: { primary: ColorRamp; accent: AccentColors; surface: SurfaceColors };
+    theme?: {
+      primary: ColorRamp;
+      accent: AccentColors;
+      surface: SurfaceColors;
+    };
     /** "flush": gallery photos shown whole (no crop), with no tinted panel or padding. */
     galleryFit?: "contain" | "flush";
     /** "cards": the photo-card pack picker instead of stacked rows. */
@@ -414,6 +426,8 @@ export const products: ProductContent[] = [
         { icon: "clock", text: "5–10 minutes on skin" },
         { icon: "shield", text: "Labelled hypoallergenic" },
       ],
+      /* Orders shipped for this product — Shopify count, read 2026-10-02. */
+      customers: { count: 22000, asOf: "2026-10-02" },
       showHairRemovalComparison: true,
       notice: {
         lead: "Patch test 24 hours before first use.",
@@ -619,6 +633,8 @@ export const products: ProductContent[] = [
         { icon: "leaf", text: "Zero Harsh Chemicals" },
         { icon: "droplet", text: "Natural Glass-Skin Bounce" },
       ],
+      /* Orders shipped for this product — Shopify count, read 2026-10-02. */
+      customers: { count: 25000, asOf: "2026-10-02" },
       dailyStep: {
         eyebrow: "Your daily step",
         heading: "One pat. Fresh, soft, ready for your serum.",
