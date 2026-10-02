@@ -257,115 +257,65 @@ export default async function ProductPage({ params }: Props) {
 
           <div className="min-w-0 lg:pt-4">
             {content.pdp.trust && (
-              <ul className="mb-5 grid grid-cols-3 gap-3 pb-4 font-ui text-caption text-ink-soft">
+              <ul className="mb-4 flex flex-wrap gap-2 font-ui sm:flex-nowrap sm:gap-1.5">
                 {content.pdp.trust.map((t) => (
                   <li
                     key={t.text}
-                    className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-2.5"
+                    className="inline-flex min-w-0 items-center gap-1.5 rounded-full bg-sage-100 px-3 py-1.5 text-[0.78rem] leading-none font-medium whitespace-nowrap text-sage-800 sm:px-2.5 sm:text-[0.72rem]"
                   >
-                    <Icon
-                      name={t.icon}
-                      className="size-5 shrink-0 text-sage-600"
-                    />
-                    {t.text}
+                    <Icon name={t.icon} className="size-4 shrink-0 sm:size-3.5" />
+                    <span className="truncate">{t.text}</span>
                   </li>
                 ))}
               </ul>
             )}
 
-            {/* Rating + delivery. Phones: two equal tiles side by side (the delivery
-                tile spans the row when there is no rating yet). From sm up: two
-                pill chips that wrap only if the column is too narrow. */}
+            {/* Rating + social proof as one plain line of text (no chips). The
+                rating still jumps to the reviews. The customer count is a figure
+                we can point to for this product (content.pdp.customers → Shopify
+                orders), dated in `asOf` so it gets refreshed instead of drifting.
+                Products without a count keep the delivery fact in its place. */}
             {(() => {
               const hasRating = Boolean(ratingLine && ratingLine.count > 0);
+              if (!hasRating && !content.pdp.customers) return null;
               return (
-                <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
+                <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-ui text-body-sm">
                   {ratingLine && ratingLine.count > 0 && (
-                    /* The rating replaces the old category eyebrow: it is the number
-                       shoppers look for first, so it gets its own white chip, and it
-                       jumps to the reviews below. */
                     <a
                       href="#reviews"
-                      className="group flex min-w-0 flex-col justify-center gap-1 rounded-2xl bg-paper px-3 py-2.5 font-ui shadow-soft transition-shadow duration-300 hover:shadow-float sm:flex-row sm:items-center sm:gap-2 sm:rounded-pill sm:py-2 sm:pr-3.5 sm:pl-3"
+                      className="group inline-flex items-center gap-1.5"
                       aria-label={`Rated ${ratingLine.average.toFixed(1)} out of 5 from ${ratingLine.count.toLocaleString("en-US")} reviews — jump to the reviews`}
                     >
                       <Stars value={ratingLine.average} />
-                      <span className="flex items-center gap-1.5 text-[0.8rem] sm:text-body-sm">
-                        <span className="font-numeral font-semibold tabular-nums">
-                          {ratingLine.average.toFixed(1)}
-                        </span>
-                        <span className="truncate text-ink-soft">
-                          {ratingLine.count.toLocaleString("en-US")} reviews
-                        </span>
-                        <Icon
-                          name="chevron-down"
-                          className="hidden size-3.5 shrink-0 text-ink-faint transition-transform duration-300 group-hover:translate-y-0.5 sm:block"
-                        />
+                      <span className="font-numeral font-semibold tabular-nums">
+                        {ratingLine.average.toFixed(1)}
+                      </span>
+                      <span className="text-ink-soft group-hover:underline">
+                        {ratingLine.count.toLocaleString("en-US")} reviews
                       </span>
                     </a>
                   )}
-
-                  {/* Social proof. The count is a figure we can point to for this
-                      product (content.pdp.customers → Shopify orders), which is what
-                      makes it credible; the reading is dated in `asOf` so it gets
-                      refreshed instead of drifting. Delivery facts stay in the trust
-                      list further down the buy box. Products without a count keep the
-                      delivery tile. */}
-                  {content.pdp.customers ? (
-                    <div
-                      title={`Based on ${content.pdp.customers.count.toLocaleString("en-US")} orders as of ${content.pdp.customers.asOf}`}
-                      className={cn(
-                        "flex min-w-0 items-center gap-2.5 rounded-2xl bg-paper px-3 py-2.5 font-ui shadow-soft sm:rounded-pill sm:py-2 sm:pr-3.5 sm:pl-3",
-                        !hasRating && "col-span-2",
-                      )}
-                    >
-                      <span className="grid size-8 shrink-0 place-items-center rounded-full bg-sage-100 sm:size-auto sm:bg-transparent">
-                        <Icon name="users" className="size-4 text-sage-700" />
-                      </span>
-                      {/* Number and label are separate flex children centred with
-                          items-center (same construction as the rating chip): the
-                          numeral uses Poppins, whose taller glyph box would sit off
-                          the label's middle if the two were one inline run. */}
-                      <span className="flex min-w-0 items-center gap-1.5 text-[0.8rem] leading-tight sm:text-body-sm">
-                        <span className="font-numeral leading-none font-semibold tabular-nums">
-                          {content.pdp.customers.count.toLocaleString("en-US")}+
-                        </span>
-                        <span className="min-w-0 text-ink-soft">
-                          happy customers
-                        </span>
-                      </span>
-                    </div>
-                  ) : (
-                    /* Delivery. "Worldwide" is only true while Shopify has a shipping
-                       zone for the shopper's country: today 30 countries, all with a
-                       free standard rate. Keep the zones in step with this text. */
-                    <div
-                      className={cn(
-                        "flex min-w-0 items-center gap-2.5 rounded-2xl bg-paper px-3 py-2.5 font-ui shadow-soft sm:rounded-pill sm:py-2 sm:pr-3.5 sm:pl-3",
-                        !hasRating && "col-span-2",
-                      )}
-                    >
-                      <span className="grid size-8 shrink-0 place-items-center rounded-full bg-sage-100 sm:size-auto sm:bg-transparent">
-                        <Icon
-                          name="truck"
-                          className="size-4 text-sage-700 sm:size-4"
-                        />
-                      </span>
-                      <span className="min-w-0 text-[0.8rem] leading-tight font-medium sm:text-body-sm">
-                        <span className="sm:hidden">
-                          Free worldwide delivery
-                        </span>
-                        <span className="hidden sm:inline">
-                          Free &amp; fast worldwide delivery
-                        </span>
-                      </span>
-                    </div>
+                  {hasRating && content.pdp.customers && (
+                    <span aria-hidden="true" className="text-ink-faint">
+                      ·
+                    </span>
                   )}
-                </div>
+                  {content.pdp.customers && (
+                    <span
+                      title={`Based on ${content.pdp.customers.count.toLocaleString("en-US")} orders as of ${content.pdp.customers.asOf}`}
+                      className="text-ink-soft"
+                    >
+                      <span className="font-numeral font-semibold text-ink tabular-nums">
+                        {content.pdp.customers.count.toLocaleString("en-US")}+
+                      </span>{" "}
+                      happy customers
+                    </span>
+                  )}
+                </p>
               );
             })()}
 
-            <h1 className="mt-4 font-title text-heading-1 font-medium">
+            <h1 className="mt-3 font-serif text-heading-1 font-medium">
               {view.name}
             </h1>
             {/* <p className="mt-2 text-body-lg text-ink-soft">{content.benefitLine}</p> */}

@@ -410,8 +410,8 @@ export const products: ProductContent[] = [
           "600": "#7b3594",
         },
         surface: {
-          ivory: "#f8f5fc",
-          porcelain: "#fdfcff",
+          ivory: "#ffffff",
+          porcelain: "#ffffff",
           cream: "#f1ebf8",
           sand: "#e6dcf1",
           linen: "#dccfea",
@@ -617,8 +617,8 @@ export const products: ProductContent[] = [
           "600": "#8f5a14",
         },
         surface: {
-          ivory: "#fcf8ee",
-          porcelain: "#fffdf7",
+          ivory: "#ffffff",
+          porcelain: "#ffffff",
           cream: "#f6eed9",
           sand: "#eddfbf",
           linen: "#e4d2a8",
