@@ -751,7 +751,7 @@ function FreeDeliveryUnlocked() {
           </span>
           <span
             aria-hidden="true"
-            className="unlock-anim absolute -right-0.5 -bottom-0.5 grid size-4 place-items-center rounded-full border-2 border-sage-50 bg-sage-600 text-ivory motion-safe:animate-[unlock-tick_0.4s_cubic-bezier(0.3,1.6,0.5,1)_0.6s_both]"
+            className="unlock-anim absolute -right-0.5 -bottom-0.5 grid size-4 place-items-center rounded-full border-2 border-sage-50 bg-success text-white motion-safe:animate-[unlock-tick_0.4s_cubic-bezier(0.3,1.6,0.5,1)_0.6s_both]"
           >
             <Icon name="check" className="size-2.5" strokeWidth={3} />
           </span>

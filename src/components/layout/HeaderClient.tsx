@@ -281,6 +281,9 @@ export function HeaderShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const overHero = pathname === "/" && !scrolled;
+  // On product pages the bar only carries a shadow while the page is scrolled;
+  // back at the top it sits flat.
+  const flatAtTop = pathname.startsWith("/products/") && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -294,13 +297,19 @@ export function HeaderShell({ children }: { children: React.ReactNode }) {
       data-over-hero={overHero || undefined}
       style={{ paddingInline: "var(--gutter)" }}
       className={cn(
-        "relative mx-auto grid h-(--header-h) max-w-(--page-max) grid-cols-[1fr_auto_1fr] items-center gap-2 transition-[background-color,box-shadow,backdrop-filter] duration-500 sm:gap-3 lg:gap-4 lg:rounded-[18px]",
+        "relative mx-auto grid h-(--header-h) max-w-(--page-max) grid-cols-[1fr_auto_1fr] items-center gap-2 transition-[background-color,box-shadow,backdrop-filter,translate] duration-500 sm:gap-3 lg:gap-4 lg:rounded-[18px]",
+        // The 12px floating gap above the bar appears only once the page has
+        // scrolled; at rest the bar sits flush with the top. A translate, not a
+        // margin, so the page below never jumps.
+        scrolled && "lg:translate-y-3",
         // Below lg the bar runs edge to edge — a floating rounded card with a
         // drop shadow reads as a widget at phone width. Tonal porcelain on
         // ivory plus one soft shadow is enough to separate it.
         overHero
           ? "bg-transparent shadow-none"
-          : "bg-porcelain shadow-soft lg:shadow-float",
+          : flatAtTop
+            ? "bg-porcelain shadow-none"
+            : "bg-porcelain shadow-soft lg:shadow-float",
       )}
     >
       {children}

@@ -66,8 +66,9 @@ export function SaleCountdown({
         aria-live="off"
       >
         {/* Phones: a full-width "rush" bar, so the deadline never sits alone
-            under the delivery strip as a stray chip. */}
-        <p className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-clay-300 bg-clay-50 px-3 py-1.5 font-ui text-[0.78rem] font-semibold text-clay-600 sm:hidden">
+            under the delivery strip as a stray chip. From sm up the same box sits
+            beside the delivery strip at its natural width. */}
+        <p className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-clay-300 bg-clay-50 px-3 py-1.5 font-ui text-[0.78rem] font-semibold text-clay-600 sm:inline-flex sm:w-auto sm:border-0 sm:bg-transparent sm:px-1 sm:py-0">
           <Icon
             name="clock"
             className="size-4 shrink-0 motion-safe:animate-[free-pop_1.2s_ease-in-out_infinite]"
@@ -86,10 +87,6 @@ export function SaleCountdown({
               </span>
             ))}
           </span>
-        </p>
-        <p className="hidden items-center gap-1.5 rounded-tag bg-clay-50 px-3 py-1.5 font-numeral text-body-sm font-medium text-clay-600 tabular-nums sm:inline-flex">
-          <Icon name="clock" className="size-3.5 shrink-0" />
-          Offer ends in {pad(left.hours)}:{pad(left.minutes)}:{pad(left.seconds)}
         </p>
         <span className="sr-only">
           Offer ends in {left.hours} hours {left.minutes} minutes

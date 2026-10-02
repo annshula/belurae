@@ -91,7 +91,7 @@ export async function Header() {
   return (
     // Flush to the top of the viewport on phones and tablets; the floating bar
     // (with its gap) is a desktop treatment.
-    <header className="sticky top-0 z-30 lg:pt-3">
+    <header className="sticky top-0 z-30">
       <HeaderShell>
         {/* self-stretch so the desktop nav can span the bar's full height —
             the dropdowns hang from the bar's bottom edge (see DesktopNav). */}
