@@ -501,7 +501,7 @@ function PackCards({
             {c.tag && (
               <span
                 className={cn(
-                  "absolute -top-2.5 left-3 z-10 inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-ui text-[0.6rem] leading-none font-semibold tracking-[0.08em] text-ivory uppercase",
+                  "absolute -top-2.5 right-3 z-10 inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-ui text-[0.6rem] leading-none font-semibold tracking-[0.08em] text-ivory uppercase",
                   c.offer ? "bg-linear-to-r from-clay-600 to-clay-300" : "bg-sage-800",
                 )}
               >
