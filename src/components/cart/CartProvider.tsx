@@ -189,7 +189,8 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       .map((l) => localizedPriceFor(l.variantId)?.currencyCode)
       .find((c): c is string => Boolean(c)) ?? catalog.currency;
 
-  const count = lines.reduce((n, l) => n + l.quantity, 0);
+  // Distinct items in the bag, not the sum of their quantities.
+  const count = lines.length;
   const subtotal = Math.round(lines.reduce((s, l) => s + l.lineTotal, 0) * 100) / 100;
   const discount =
     Math.round((lines.reduce((s, l) => s + l.compareAtTotal, 0) - subtotal) * 100) / 100;
