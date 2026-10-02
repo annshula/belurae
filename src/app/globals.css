@@ -684,3 +684,65 @@ dialog.sheet::backdrop {
     transform: scale(1.12) rotate(6deg);
   }
 }
+
+/* "Free delivery unlocked" strip: the truck drives in, confetti bursts once
+   from the badge, and a light sweep passes across now and then. All of it is
+   skipped under prefers-reduced-motion (the strip itself still renders). */
+@keyframes unlock-truck {
+  0% {
+    transform: translateX(-140%) scale(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(8%) scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes unlock-tick {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes unlock-burst {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--bx), var(--by)) rotate(var(--br)) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes unlock-sweep {
+  0%,
+  55% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(320%) skewX(-18deg);
+  }
+}
+@keyframes unlock-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .unlock-anim {
+    animation: none !important;
+  }
+}

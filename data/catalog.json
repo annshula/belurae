@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-10-02T11:27:20.333Z",
+  "syncedAt": "2026-10-02T11:44:46.554Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -22,7 +22,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-02T11:11:58Z",
+      "updatedAt": "2026-10-02T11:43:41Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -45,7 +45,7 @@
           "sku": "CJPF253602701AZ",
           "barcode": null,
           "price": 29.99,
-          "compareAtPrice": 49.99,
+          "compareAtPrice": 59.98,
           "availableForSale": true,
           "options": {
             "Quantity": "1PC"
@@ -53,34 +53,34 @@
           "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/1-pack.png?v=1790789964",
           "description": null,
           "pricesByMarket": {
-            "AU": {
-              "amount": 45,
-              "compareAtAmount": 74,
-              "currencyCode": "AUD"
-            },
-            "ZA": {
-              "amount": 512,
-              "compareAtAmount": 853,
-              "currencyCode": "ZAR"
-            },
             "US": {
               "amount": 29.99,
-              "compareAtAmount": 49.99,
+              "compareAtAmount": 59.98,
               "currencyCode": "USD"
+            },
+            "AU": {
+              "amount": 45,
+              "compareAtAmount": 89,
+              "currencyCode": "AUD"
             },
             "CA": {
               "amount": 43,
-              "compareAtAmount": 72,
+              "compareAtAmount": 86,
               "currencyCode": "CAD"
+            },
+            "ZA": {
+              "amount": 512,
+              "compareAtAmount": 1023,
+              "currencyCode": "ZAR"
             },
             "IN": {
               "amount": 2940.79,
-              "compareAtAmount": 4901.98,
+              "compareAtAmount": 5881.59,
               "currencyCode": "INR"
             },
             "GB": {
               "amount": 24,
-              "compareAtAmount": 39,
+              "compareAtAmount": 47,
               "currencyCode": "GBP"
             }
           }
@@ -90,8 +90,8 @@
           "title": "2PCS",
           "sku": "CJPF253602702BY",
           "barcode": null,
-          "price": 49.99,
-          "compareAtPrice": 59.98,
+          "price": 52.99,
+          "compareAtPrice": 119.96,
           "availableForSale": true,
           "options": {
             "Quantity": "2PCS"
@@ -99,34 +99,34 @@
           "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/2-pack_60c66ba2-fb0d-4eea-9022-bf07cef3ded0.png?v=1790789990",
           "description": null,
           "pricesByMarket": {
-            "AU": {
-              "amount": 74,
-              "compareAtAmount": 89,
-              "currencyCode": "AUD"
-            },
-            "ZA": {
-              "amount": 853,
-              "compareAtAmount": 1023,
-              "currencyCode": "ZAR"
-            },
             "US": {
-              "amount": 49.99,
-              "compareAtAmount": 59.98,
+              "amount": 52.99,
+              "compareAtAmount": 119.96,
               "currencyCode": "USD"
             },
+            "AU": {
+              "amount": 78,
+              "compareAtAmount": 177,
+              "currencyCode": "AUD"
+            },
             "CA": {
-              "amount": 72,
-              "compareAtAmount": 86,
+              "amount": 76,
+              "compareAtAmount": 171,
               "currencyCode": "CAD"
             },
+            "ZA": {
+              "amount": 904,
+              "compareAtAmount": 2046,
+              "currencyCode": "ZAR"
+            },
             "IN": {
-              "amount": 4901.98,
-              "compareAtAmount": 5881.59,
+              "amount": 5196.15,
+              "compareAtAmount": 11763.17,
               "currencyCode": "INR"
             },
             "GB": {
-              "amount": 39,
-              "compareAtAmount": 47,
+              "amount": 41,
+              "compareAtAmount": 93,
               "currencyCode": "GBP"
             }
           }
@@ -136,8 +136,8 @@
           "title": "3PCS",
           "sku": "CJPF253602710JQ",
           "barcode": null,
-          "price": 79.99,
-          "compareAtPrice": 99.97,
+          "price": 64.99,
+          "compareAtPrice": 179.94,
           "availableForSale": true,
           "options": {
             "Quantity": "3PCS"
@@ -145,34 +145,34 @@
           "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/3-pack.png?v=1790790079",
           "description": null,
           "pricesByMarket": {
-            "AU": {
-              "amount": 118,
-              "compareAtAmount": 148,
-              "currencyCode": "AUD"
-            },
-            "ZA": {
-              "amount": 1364,
-              "compareAtAmount": 1705,
-              "currencyCode": "ZAR"
-            },
             "US": {
-              "amount": 79.99,
-              "compareAtAmount": 99.97,
+              "amount": 64.99,
+              "compareAtAmount": 179.94,
               "currencyCode": "USD"
             },
+            "AU": {
+              "amount": 96,
+              "compareAtAmount": 265,
+              "currencyCode": "AUD"
+            },
             "CA": {
-              "amount": 114,
-              "compareAtAmount": 143,
+              "amount": 93,
+              "compareAtAmount": 257,
               "currencyCode": "CAD"
             },
+            "ZA": {
+              "amount": 1109,
+              "compareAtAmount": 3069,
+              "currencyCode": "ZAR"
+            },
             "IN": {
-              "amount": 7843.75,
-              "compareAtAmount": 9802.97,
+              "amount": 6372.86,
+              "compareAtAmount": 17644.76,
               "currencyCode": "INR"
             },
             "GB": {
-              "amount": 62,
-              "compareAtAmount": 78,
+              "amount": 51,
+              "compareAtAmount": 139,
               "currencyCode": "GBP"
             }
           }
@@ -439,7 +439,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-02T11:03:35Z",
+      "updatedAt": "2026-10-02T11:44:18Z",
       "seo": {
         "title": null,
         "description": null
@@ -462,7 +462,7 @@
           "sku": "14:10#100ml Boxed",
           "barcode": null,
           "price": 29.99,
-          "compareAtPrice": 39.99,
+          "compareAtPrice": 59.98,
           "availableForSale": true,
           "options": {
             "Color": "100ml Boxed"
@@ -472,33 +472,33 @@
           "pricesByMarket": {
             "AU": {
               "amount": 45,
-              "compareAtAmount": 59,
+              "compareAtAmount": 89,
               "currencyCode": "AUD"
+            },
+            "GB": {
+              "amount": 24,
+              "compareAtAmount": 47,
+              "currencyCode": "GBP"
             },
             "CA": {
               "amount": 43,
-              "compareAtAmount": 57,
+              "compareAtAmount": 86,
               "currencyCode": "CAD"
-            },
-            "IN": {
-              "amount": 2940.79,
-              "compareAtAmount": 3921.38,
-              "currencyCode": "INR"
             },
             "ZA": {
               "amount": 512,
-              "compareAtAmount": 682,
+              "compareAtAmount": 1023,
               "currencyCode": "ZAR"
             },
             "US": {
               "amount": 29.99,
-              "compareAtAmount": 39.99,
+              "compareAtAmount": 59.98,
               "currencyCode": "USD"
             },
-            "GB": {
-              "amount": 24,
-              "compareAtAmount": 31,
-              "currencyCode": "GBP"
+            "IN": {
+              "amount": 2940.79,
+              "compareAtAmount": 5881.59,
+              "currencyCode": "INR"
             }
           }
         },
@@ -507,8 +507,8 @@
           "title": "2 x 100ml Boxed",
           "sku": "14:29#2 x 100ml Boxed",
           "barcode": null,
-          "price": 49.99,
-          "compareAtPrice": 59.98,
+          "price": 52.99,
+          "compareAtPrice": 119.96,
           "availableForSale": true,
           "options": {
             "Color": "2 x 100ml Boxed"
@@ -517,34 +517,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 74,
-              "compareAtAmount": 89,
+              "amount": 78,
+              "compareAtAmount": 177,
               "currencyCode": "AUD"
             },
+            "GB": {
+              "amount": 41,
+              "compareAtAmount": 93,
+              "currencyCode": "GBP"
+            },
             "CA": {
-              "amount": 72,
-              "compareAtAmount": 86,
+              "amount": 76,
+              "compareAtAmount": 171,
               "currencyCode": "CAD"
             },
-            "IN": {
-              "amount": 4901.98,
-              "compareAtAmount": 5881.59,
-              "currencyCode": "INR"
-            },
             "ZA": {
-              "amount": 853,
-              "compareAtAmount": 1023,
+              "amount": 904,
+              "compareAtAmount": 2046,
               "currencyCode": "ZAR"
             },
             "US": {
-              "amount": 49.99,
-              "compareAtAmount": 59.98,
+              "amount": 52.99,
+              "compareAtAmount": 119.96,
               "currencyCode": "USD"
             },
-            "GB": {
-              "amount": 39,
-              "compareAtAmount": 47,
-              "currencyCode": "GBP"
+            "IN": {
+              "amount": 5196.15,
+              "compareAtAmount": 11763.17,
+              "currencyCode": "INR"
             }
           }
         },
@@ -553,8 +553,8 @@
           "title": "3 x 100ml Boxed",
           "sku": "14:173#3 x 100ml Boxed",
           "barcode": null,
-          "price": 79.99,
-          "compareAtPrice": 89.97,
+          "price": 64.99,
+          "compareAtPrice": 179.94,
           "availableForSale": true,
           "options": {
             "Color": "3 x 100ml Boxed"
@@ -563,34 +563,34 @@
           "description": null,
           "pricesByMarket": {
             "AU": {
-              "amount": 118,
-              "compareAtAmount": 133,
+              "amount": 96,
+              "compareAtAmount": 265,
               "currencyCode": "AUD"
             },
+            "GB": {
+              "amount": 51,
+              "compareAtAmount": 139,
+              "currencyCode": "GBP"
+            },
             "CA": {
-              "amount": 114,
-              "compareAtAmount": 129,
+              "amount": 93,
+              "compareAtAmount": 257,
               "currencyCode": "CAD"
             },
-            "IN": {
-              "amount": 7843.75,
-              "compareAtAmount": 8822.38,
-              "currencyCode": "INR"
-            },
             "ZA": {
-              "amount": 1364,
-              "compareAtAmount": 1535,
+              "amount": 1109,
+              "compareAtAmount": 3069,
               "currencyCode": "ZAR"
             },
             "US": {
-              "amount": 79.99,
-              "compareAtAmount": 89.97,
+              "amount": 64.99,
+              "compareAtAmount": 179.94,
               "currencyCode": "USD"
             },
-            "GB": {
-              "amount": 62,
-              "compareAtAmount": 70,
-              "currencyCode": "GBP"
+            "IN": {
+              "amount": 6372.86,
+              "compareAtAmount": 17644.76,
+              "currencyCode": "INR"
             }
           }
         }

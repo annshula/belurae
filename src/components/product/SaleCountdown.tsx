@@ -52,24 +52,51 @@ export function SaleCountdown({
 
   if (!left) return null;
 
-  if (variant === "inline") {
-    return (
-      <p
-        className="inline-flex items-center gap-1.5 rounded-tag bg-clay-50 px-3 py-1.5 font-numeral text-body-sm font-medium text-clay-600 tabular-nums"
-        role="timer"
-        aria-live="off"
-      >
-        <Icon name="clock" className="size-3.5 shrink-0" />
-        Offer ends in {pad(left.hours)}:{pad(left.minutes)}:{pad(left.seconds)}
-      </p>
-    );
-  }
-
   const units = [
     { label: "hours", value: left.hours },
     { label: "minutes", value: left.minutes },
     { label: "seconds", value: left.seconds },
   ];
+
+  if (variant === "inline") {
+    return (
+      <div
+        className="w-full sm:w-auto"
+        role="timer"
+        aria-live="off"
+      >
+        {/* Phones: a full-width "rush" bar, so the deadline never sits alone
+            under the delivery strip as a stray chip. */}
+        <p className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-clay-300 bg-clay-50 px-3 py-1.5 font-ui text-[0.78rem] font-semibold text-clay-600 sm:hidden">
+          <Icon
+            name="clock"
+            className="size-4 shrink-0 motion-safe:animate-[free-pop_1.2s_ease-in-out_infinite]"
+          />
+          <span>Hurry! Offer ends in</span>
+          <span
+            className="flex items-center gap-0.5 font-numeral text-[0.9rem] font-bold tabular-nums"
+            aria-hidden="true"
+          >
+            {units.map((u, i) => (
+              <span key={u.label} className="flex items-center gap-0.5">
+                {i > 0 && <span className="opacity-70">:</span>}
+                <span className="min-w-5 text-center">
+                  {pad(u.value)}
+                </span>
+              </span>
+            ))}
+          </span>
+        </p>
+        <p className="hidden items-center gap-1.5 rounded-tag bg-clay-50 px-3 py-1.5 font-numeral text-body-sm font-medium text-clay-600 tabular-nums sm:inline-flex">
+          <Icon name="clock" className="size-3.5 shrink-0" />
+          Offer ends in {pad(left.hours)}:{pad(left.minutes)}:{pad(left.seconds)}
+        </p>
+        <span className="sr-only">
+          Offer ends in {left.hours} hours {left.minutes} minutes
+        </span>
+      </div>
+    );
+  }
 
   /* A full-width strip at the very top of the product page, so the deadline is
      the first thing seen. Screen readers get one plain sentence instead of the

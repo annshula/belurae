@@ -452,15 +452,21 @@ function PackCards({
          never the pack total. */
       unitPrice,
       unitCompareAt,
-      saved:
-        unitPrice != null && unitCompareAt != null
-          ? unitCompareAt - unitPrice
-          : null,
       img: combo?.image ?? view.cardImage?.url ?? null,
       units: combo?.units ?? 1,
       fan: sharedPhoto,
+      /* The biggest pack is tinted in the page's primary colour. */
+      featured: combo?.units === 3,
     };
   });
+
+  /* Flat cards — no drop shadows; selection is a 2px border. */
+  const surface = (c: (typeof cards)[number]) =>
+    c.featured
+      ? cn("bg-sage-100", c.checked ? "border-sage-600" : "border-sage-300 hover:border-sage-600")
+      : c.offer
+        ? cn("bg-white", c.checked ? "border-clay-600" : "border-clay-600/50 hover:border-clay-600")
+        : cn("bg-transparent", c.checked ? "border-sage-800" : "border-sand hover:border-sage-300");
 
   return (
     <fieldset className="min-w-0">
@@ -470,21 +476,14 @@ function PackCards({
           on phones, and the three photo cards from sm up. */}
 
       {/* ── Phones ─────────────────────────────────────────────────────── */}
-      <div className="grid grid-cols-1 gap-3 pt-3 sm:hidden">
+      <div className="grid grid-cols-1 gap-4 pt-3 sm:hidden">
         {cards.map((c) => (
           <label
             key={c.value.value}
             data-checked={c.checked}
             className={cn(
-              "group relative flex cursor-pointer flex-col rounded-[18px] border transition-[border-color,box-shadow,transform] duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-800 motion-safe:active:scale-[0.985]",
-              c.offer ? "bg-white" : "bg-transparent",
-              c.checked
-                ? c.offer
-                  ? "border-clay-600 shadow-[0_0_0_1px_var(--color-clay-600),0_14px_32px_-16px_color-mix(in_srgb,var(--color-clay-600)_50%,transparent)]"
-                  : "border-sage-800 shadow-[0_0_0_1px_var(--color-sage-800),0_14px_32px_-18px_color-mix(in_srgb,var(--color-sage-800)_50%,transparent)]"
-                : c.offer
-                  ? "border-clay-600/40 hover:border-clay-600"
-                  : "border-sand hover:border-sage-300",
+              "group relative flex cursor-pointer flex-col rounded-2xl border-2 transition-[border-color,transform] duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-800 motion-safe:active:scale-[0.985]",
+              surface(c),
               !c.exists && "cursor-not-allowed opacity-50",
             )}
           >
@@ -502,7 +501,7 @@ function PackCards({
             {c.tag && (
               <span
                 className={cn(
-                  "absolute -top-3 left-4 z-10 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-ui text-[0.66rem] leading-none font-semibold tracking-[0.08em] text-ivory uppercase shadow-[0_6px_14px_-6px_rgb(40_28_16/0.45)]",
+                  "absolute -top-2.5 left-3 z-10 inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-ui text-[0.6rem] leading-none font-semibold tracking-[0.08em] text-ivory uppercase",
                   c.offer ? "bg-linear-to-r from-clay-600 to-clay-300" : "bg-sage-800",
                 )}
               >
@@ -511,17 +510,17 @@ function PackCards({
               </span>
             )}
 
-            <span className="flex items-center gap-3.5 p-4 pt-5">
+            <span className={cn("flex items-center gap-3 px-3 pb-2.5", c.tag ? "pt-4" : "pt-2.5")}>
               {/* Photo tile with the selection marker on its corner. */}
-              <span className="relative block size-16 shrink-0">
-                <span className="relative block size-full overflow-hidden rounded-[14px]">
+              <span className="relative block size-12 shrink-0">
+                <span className="relative block size-full overflow-hidden rounded-xl">
                   {c.img && (
                     <PackPhoto
                       src={c.img}
                       units={c.units}
                       fan={c.fan}
                       reserve={Boolean(c.deal)}
-                      sizes="64px"
+                      sizes="48px"
                       padded
                     />
                   )}
@@ -529,7 +528,7 @@ function PackCards({
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "absolute -top-1.5 -left-1.5 grid size-5.5 place-items-center rounded-full border-2 bg-paper transition-colors duration-200",
+                    "absolute -top-1.5 -left-1.5 grid size-4.5 place-items-center rounded-full border-2 bg-paper transition-colors duration-200",
                     c.checked
                       ? c.offer
                         ? "border-clay-600 bg-clay-600"
@@ -537,10 +536,10 @@ function PackCards({
                       : "border-sand",
                   )}
                 >
-                  {c.checked && <Icon name="check" className="size-3 text-ivory" />}
+                  {c.checked && <Icon name="check" className="size-2.5 text-ivory" />}
                 </span>
                 {c.deal && (
-                  <span className="absolute -right-2 -bottom-2 grid size-11 place-items-center rounded-full border-2 border-white bg-gold-500 text-center font-numeral text-[0.62rem] leading-[1.05] font-extrabold text-ink shadow-[0_6px_14px_-4px_rgb(226_165_31/0.7)] motion-safe:animate-[free-pop_1.6s_ease-in-out_infinite]">
+                  <span className="absolute -right-2 -bottom-2 grid size-9 place-items-center rounded-full border-2 border-white bg-gold-500 text-center font-numeral text-[0.52rem] leading-[1.05] font-extrabold text-ink motion-safe:animate-[free-pop_1.6s_ease-in-out_infinite]">
                     +{c.deal.free}
                     <br />
                     FREE
@@ -549,30 +548,40 @@ function PackCards({
               </span>
 
               <span className="flex min-w-0 flex-1 flex-col items-start">
-                <span className="font-ui text-[1.02rem] leading-tight font-semibold text-ink">
+                <span className="font-ui text-[0.92rem] leading-tight font-semibold text-ink">
                   {c.label}
                 </span>
                 {c.offerLine && (
-                  <span className="mt-1 text-body-sm font-medium text-clay-600">
+                  <span className="text-[0.74rem] font-medium text-clay-600">
                     {c.offerLine}
                   </span>
                 )}
+                {c.pct != null && c.pct > 0 && (
+                  <span
+                    className={cn(
+                      "mt-1 rounded-tag px-1.5 py-0.5 font-numeral text-[0.68rem] leading-none font-medium tabular-nums",
+                      c.offer ? "bg-clay-100 text-clay-600" : "bg-sage-100 text-sage-800",
+                    )}
+                  >
+                    Save {c.pct}%
+                  </span>
+                )}
                 {c.exists && !c.available && (
-                  <span className="mt-1 text-[0.72rem] text-ink-soft">Sold out</span>
+                  <span className="mt-1 text-[0.7rem] text-ink-soft">Sold out</span>
                 )}
               </span>
 
               {c.combo && (
                 <span className="flex shrink-0 flex-col items-end">
                   {c.unitCompareAt != null && (
-                    <span className="font-numeral text-[0.75rem] text-ink-faint tabular-nums line-through decoration-1">
+                    <span className="font-numeral text-[0.7rem] text-ink-faint tabular-nums line-through decoration-1">
                       {formatMoney(c.unitCompareAt, c.combo.currency)}
                     </span>
                   )}
                   <span
                     className={cn(
                       "font-numeral leading-none font-semibold tracking-tight tabular-nums",
-                      c.offer ? "text-[1.6rem] text-clay-600" : "text-[1.3rem] text-ink",
+                      c.offer ? "text-[1.3rem] text-clay-600" : "text-[1.15rem] text-ink",
                     )}
                   >
                     {formatMoney(c.unitPrice ?? c.combo.price, c.combo.currency)}
@@ -580,33 +589,6 @@ function PackCards({
                 </span>
               )}
             </span>
-
-            {/* Savings footer: real arithmetic from Shopify's prices. */}
-            {c.combo && c.pct != null && c.pct > 0 && c.saved != null && c.saved > 0.009 && (
-              <span
-                className={cn(
-                  "mt-auto flex items-center justify-between gap-2 rounded-b-[17px] border-t border-dashed px-4 py-2 font-ui text-[0.74rem]",
-                  c.offer
-                    ? "border-clay-200 bg-clay-100/70 text-clay-600"
-                    : "border-sand bg-cream/60 text-sage-800",
-                )}
-              >
-                <span className="font-medium">
-                  You save{" "}
-                  <span className="font-numeral font-semibold tabular-nums">
-                    {formatMoney(c.saved, c.combo.currency)}
-                  </span>
-                </span>
-                <span
-                  className={cn(
-                    "rounded-full px-2 py-0.5 font-numeral text-[0.68rem] font-semibold tabular-nums text-ivory",
-                    c.offer ? "bg-clay-600" : "bg-sage-800",
-                  )}
-                >
-                  −{c.pct}%
-                </span>
-              </span>
-            )}
           </label>
         ))}
       </div>
@@ -618,21 +600,9 @@ function PackCards({
             key={c.value.value}
             data-checked={c.checked}
             className={cn(
-              "relative flex cursor-pointer flex-col items-center rounded-2xl border px-3 pb-3 text-center transition-all duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-800",
+              "relative flex cursor-pointer flex-col items-center rounded-2xl border-2 px-3 pb-3 text-center transition-colors duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-800",
               c.tag ? "pt-8" : "pt-6",
-              c.offer
-                ? cn(
-                    "bg-white",
-                    c.checked
-                      ? "border-clay-600 shadow-[inset_0_0_0_1px_var(--color-clay-600)]"
-                      : "border-clay-600/50 hover:border-clay-600",
-                  )
-                : cn(
-                    "bg-transparent",
-                    c.checked
-                      ? "border-sage-800 shadow-[inset_0_0_0_1px_var(--color-sage-800)]"
-                      : "border-sand hover:border-sage-300",
-                  ),
+              surface(c),
               !c.exists && "cursor-not-allowed opacity-50",
             )}
           >
@@ -682,7 +652,7 @@ function PackCards({
                 )}
               </span>
               {c.deal && (
-                <span className="absolute -right-2 -bottom-2 grid size-12 place-items-center rounded-full border-2 border-white bg-gold-500 text-center font-numeral text-[0.7rem] leading-[1.05] font-extrabold text-ink shadow-[0_6px_14px_-4px_rgb(226_165_31/0.7)] motion-safe:animate-[free-pop_1.6s_ease-in-out_infinite]">
+                <span className="absolute -right-2 -bottom-2 grid size-12 place-items-center rounded-full border-2 border-white bg-gold-500 text-center font-numeral text-[0.7rem] leading-[1.05] font-extrabold text-ink motion-safe:animate-[free-pop_1.6s_ease-in-out_infinite]">
                   +{c.deal.free}
                   <br />
                   FREE
@@ -725,6 +695,77 @@ function PackCards({
         ))}
       </div>
     </fieldset>
+  );
+}
+
+/** Confetti pieces: where each flies (px), its spin, and its colour. */
+const CONFETTI = [
+  { x: -46, y: -30, r: -200, c: "bg-gold-500" },
+  { x: -30, y: 34, r: 160, c: "bg-sage-400" },
+  { x: -64, y: 4, r: 240, c: "bg-clay-300" },
+  { x: 8, y: -42, r: -120, c: "bg-sage-400" },
+  { x: 44, y: -34, r: 220, c: "bg-gold-500" },
+  { x: 60, y: 6, r: -180, c: "bg-clay-300" },
+  { x: 34, y: 38, r: 140, c: "bg-sage-400" },
+  { x: -8, y: 44, r: -240, c: "bg-gold-500" },
+] as const;
+
+/**
+ * Celebratory "free delivery unlocked" strip, in the spirit of food-delivery
+ * apps: a green-toned bar, a truck that drives in, a one-off confetti burst
+ * and a soft light sweep. Decorative motion only; the text carries the message.
+ */
+function FreeDeliveryUnlocked() {
+  return (
+    <div className="relative min-w-0 flex-1 basis-56 overflow-hidden rounded-lg border border-dashed border-sage-300 bg-sage-50 py-1.5 pr-3 pl-2 text-sage-800">
+      <span
+        aria-hidden="true"
+        className="unlock-anim pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-linear-to-r from-transparent via-white/70 to-transparent motion-safe:animate-[unlock-sweep_3.6s_ease-in-out_infinite]"
+      />
+      <div className="relative flex items-center gap-3">
+        <span className="relative grid size-9 shrink-0 place-items-center">
+          <span
+            aria-hidden="true"
+            className="unlock-anim absolute inset-0 rounded-full border-2 border-sage-400/60 motion-safe:animate-[unlock-ring_1.8s_ease-out_0.5s_2]"
+          />
+          {CONFETTI.map((p, i) => (
+            <span
+              key={i}
+              aria-hidden="true"
+              className={cn(
+                "unlock-anim absolute top-1/2 left-1/2 h-1.5 w-1 rounded-[1px] opacity-0",
+                p.c,
+                "motion-safe:animate-[unlock-burst_1.1s_ease-out_0.35s_1_both]",
+              )}
+              style={
+                {
+                  "--bx": `${p.x}px`,
+                  "--by": `${p.y}px`,
+                  "--br": `${p.r}deg`,
+                } as React.CSSProperties
+              }
+            />
+          ))}
+          <span className="unlock-anim relative grid size-9 place-items-center text-sage-600 motion-safe:animate-[unlock-truck_0.7s_cubic-bezier(0.2,0.8,0.3,1)_both]">
+            <Icon name="truck" className="size-6" strokeWidth={1.6} />
+          </span>
+          <span
+            aria-hidden="true"
+            className="unlock-anim absolute -right-0.5 -bottom-0.5 grid size-4 place-items-center rounded-full border-2 border-sage-50 bg-sage-600 text-ivory motion-safe:animate-[unlock-tick_0.4s_cubic-bezier(0.3,1.6,0.5,1)_0.6s_both]"
+          >
+            <Icon name="check" className="size-2.5" strokeWidth={3} />
+          </span>
+        </span>
+        <p className="min-w-0 leading-tight">
+          <span className="block font-ui text-[0.82rem] font-semibold tracking-tight">
+            Yay! Free delivery unlocked
+          </span>
+          <span className="block text-[0.7rem] text-ink-soft">
+            Applied to this order
+          </span>
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -874,10 +915,7 @@ export function PurchasePanel({
     */
     return (
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-        <p className="inline-flex items-center gap-1.5 rounded-full bg-sage-100 px-3 py-1.5 font-ui text-[0.78rem] leading-none font-semibold text-sage-800">
-          <Icon name="truck" className="size-4 shrink-0" />
-          Free delivery unlocked
-        </p>
+        <FreeDeliveryUnlocked />
         {view.saleEndsAt && (
           <SaleCountdown endsAt={view.saleEndsAt} variant="inline" />
         )}

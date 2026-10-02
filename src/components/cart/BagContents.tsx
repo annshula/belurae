@@ -282,6 +282,9 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
                 <span className="rounded-tag bg-cream px-1.5 py-0.5 text-[0.7rem] tracking-wide text-ink-soft">
                   {discountTag}
                 </span>
+                <span className="font-numeral text-[0.7rem] font-semibold text-clay-600 tabular-nums">
+                  {Math.round((discount / (subtotal + discount)) * 100)}% off
+                </span>
               </dt>
               <dd className="font-numeral tabular-nums text-ink-soft">
                 −{formatMoney(discount, currency)}
