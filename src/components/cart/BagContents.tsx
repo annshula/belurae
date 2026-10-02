@@ -9,10 +9,6 @@ import { Icon } from "@/components/ui/Icon";
 import { formatMoney } from "@/lib/money";
 import { cn } from "@/lib/utils";
 
-/** The "worth" struck through on the free shipping-protection row (USD only). */
-const PROTECTION_VALUE = 2.29;
-const PROTECTION_CURRENCY = "USD";
-
 const MONTHS = [
   "JAN",
   "FEB",
@@ -43,6 +39,7 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
     subtotal,
     discount,
     currency,
+    protectionValue,
     setQuantity,
     remove,
     checkout,
@@ -90,9 +87,9 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
   const codes = lines.map((l) =>
     l.savedPercent != null ? couponCode(l.units, l.savedPercent) : null,
   );
-  const discountTag = [
-    ...new Set(codes.filter((c): c is string => c !== null)),
-  ].join(" · ");
+  const appliedCodes = [...new Set(codes.filter((c): c is string => c !== null))];
+  const discountTag = appliedCodes.join(" · ");
+  const couponCount = appliedCodes.length;
 
   const onCheckout = async () => {
     setPending(true);
@@ -174,14 +171,14 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
                 </div>
                 {hasCoupon && (
                   <>
-                    {/* Line 2: pack + coupon code. Line 3: what it did, with remove. */}
+                    {/* Line 2: pack + saving badge. Line 3: coupon icon + code, with remove. */}
                     <div className="flex items-center justify-between gap-2 text-[0.72rem]">
                       <p className="flex min-w-0 items-center gap-1.5">
                         <span className="font-medium text-ink">
                           {line.variantLabel}
                         </span>
-                        <span className="rounded-tag bg-clay-100 px-1.5 py-0.5 font-numeral text-[0.68rem] leading-none font-semibold tracking-wide text-clay-600">
-                          {codes[i]}
+                        <span className="rounded-tag bg-clay-100 px-1.5 py-0.5 font-numeral text-[0.7rem] leading-none font-medium text-clay-600 tabular-nums">
+                          Saved {line.savedPercent}%
                         </span>
                       </p>
                       {line.compareAtTotal > line.lineTotal && (
@@ -191,8 +188,12 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
                       )}
                     </div>
                     <div className="flex items-center justify-between gap-2">
-                      <p className="text-[0.7rem] text-ink-soft">
-                        applied · saved {line.savedPercent}%
+                      <p className="flex items-center gap-1 text-[0.7rem] text-ink-soft">
+                        <Icon name="tag" className="size-3 shrink-0 text-clay-600" />
+                        <span className="font-numeral font-semibold tracking-wide text-clay-600">
+                          {codes[i]}
+                        </span>
+                        coupon applied
                       </p>
                       {removeButton}
                     </div>
@@ -266,9 +267,9 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
           </div>
           <div className="flex shrink-0 flex-col items-end gap-1">
             <p className="flex items-baseline gap-1.5 font-numeral text-[0.8125rem] tabular-nums">
-              {currency === PROTECTION_CURRENCY && (
+              {protectionValue != null && (
                 <span className="text-[0.72rem] text-ink-faint line-through">
-                  {formatMoney(PROTECTION_VALUE, PROTECTION_CURRENCY)}
+                  {formatMoney(protectionValue, currency)}
                 </span>
               )}
               <span className="font-semibold text-sage-600">FREE</span>
@@ -297,8 +298,13 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
               <div className="flex items-center justify-between gap-3">
                 <dt className="flex flex-wrap items-center gap-1.5 text-ink-soft">
                   Discounts
-                  <span className="rounded-tag bg-cream px-1.5 py-0.5 text-[0.7rem] tracking-wide text-ink-soft">
-                    {discountTag}
+                  <span
+                    className="inline-flex items-center gap-1 rounded-tag bg-cream px-1.5 py-0.5 font-numeral text-[0.7rem] leading-none text-ink-soft tabular-nums"
+                    title={discountTag}
+                    aria-label={`${couponCount} coupon${couponCount === 1 ? "" : "s"} applied`}
+                  >
+                    <Icon name="tag" className="size-3 text-clay-600" />
+                    {couponCount}
                   </span>
                   <span className="font-numeral text-[0.7rem] font-semibold text-clay-600 tabular-nums">
                     {Math.round((discount / (subtotal + discount)) * 100)}% off

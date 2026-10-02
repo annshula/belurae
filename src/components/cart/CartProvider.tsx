@@ -31,10 +31,8 @@ export type BagVariant = {
   productName: string;
   variantLabel: string;
   price: number;
-  /** The product's 1 Pack compare-at price — what every pack is struck through against. */
-  singleCompareAt: number | null;
-  /** The product's 1 Pack variant, whose live (localized) compare-at price applies. */
-  singleVariantId: string | null;
+  /** This pack's own compare-at price (the whole pack, not per set), when Shopify has one. */
+  compareAtPrice: number | null;
   /** Sets in the pack (1 for a single). */
   units: number;
   image: string | null;
@@ -50,7 +48,7 @@ export type BagLine = { variantId: string; quantity: number };
 export type ResolvedLine = BagLine &
   BagVariant & {
     lineTotal: number;
-    /** What the line would cost at the 1 Pack compare-at price (equals lineTotal when there is none). */
+    /** What the line would cost at the pack's own compare-at price (equals lineTotal when there is none). */
     compareAtTotal: number;
     /** Percent off that compare-at price; null when there is no discount. */
     savedPercent: number | null;
@@ -58,6 +56,8 @@ export type ResolvedLine = BagLine &
 
 const STORAGE_KEY = "belurae.bag.v1";
 const MAX_QTY = 10;
+/** What shipping protection is worth, in the catalog's base currency (USD). */
+const PROTECTION_VALUE_USD = 2.29;
 
 function readCookie(name: string): string | null {
   const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
@@ -71,6 +71,8 @@ type CartContextValue = {
   /** Total saved against compare-at prices (0 when nothing in the bag has one). */
   discount: number;
   currency: string;
+  /** Worth of the free shipping protection in `currency`, or null when it can't be stated. */
+  protectionValue: number | null;
   isOpen: boolean;
   hydrated: boolean;
   open: () => void;
@@ -138,13 +140,19 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
   // to a shopper who has been looking at localized ones the whole time.
   useEffect(() => {
     const ids = new Set<string>();
-    for (const l of raw) {
-      ids.add(l.variantId);
-      const single = catalog.variants[l.variantId]?.singleVariantId;
-      if (single) ids.add(single);
-    }
+    for (const l of raw) ids.add(l.variantId);
     requestPrices([...ids]);
   }, [raw, catalog, requestPrices]);
+
+  // Every line's live price must have landed before any of them is used. Mixing live and
+  // base-currency lines would add two currencies into one total, so until the
+  // whole bag is live it is shown entirely in the catalog's own currency.
+  const localized = useMemo(
+    () =>
+      raw.length > 0 &&
+      raw.every((l) => !catalog.variants[l.variantId] || localizedPriceFor(l.variantId) != null),
+    [raw, catalog, localizedPriceFor],
+  );
 
   // Lines whose variant no longer exists in the catalog are dropped silently.
   const lines = useMemo<ResolvedLine[]>(
@@ -152,21 +160,13 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       raw.flatMap((l) => {
         const v = catalog.variants[l.variantId];
         if (!v) return [];
-        const live = localizedPriceFor(l.variantId);
+        const live = localized ? localizedPriceFor(l.variantId) : null;
         const liveAmount = live ? Number.parseFloat(live.amount) : NaN;
         const price = Number.isFinite(liveAmount) ? liveAmount : v.price;
-        // Struck-through price = the 1 Pack's compare-at × sets in this pack,
-        // in the live currency when the 1 Pack's price has resolved.
-        const liveSingle = v.singleVariantId ? localizedPriceFor(v.singleVariantId) : null;
-        const liveSingleCompare =
-          liveSingle?.compareAtAmount != null ? Number.parseFloat(liveSingle.compareAtAmount) : NaN;
-        const singleCompare = Number.isFinite(liveAmount)
-          ? Number.isFinite(liveSingleCompare)
-            ? liveSingleCompare
-            : null
-          : v.singleCompareAt;
-        const compareAtUnit = singleCompare != null ? singleCompare * v.units : null;
-        const hasDiscount = compareAtUnit != null && compareAtUnit > price;
+        // Struck-through price = this pack's own compare-at, live when localized.
+        const liveCompare = live?.compareAtAmount != null ? Number.parseFloat(live.compareAtAmount) : NaN;
+        const compareAtPack = live ? (Number.isFinite(liveCompare) ? liveCompare : null) : v.compareAtPrice;
+        const hasDiscount = compareAtPack != null && compareAtPack > price;
         const round = (n: number) => Math.round(n * 100) / 100;
         return [
           {
@@ -174,20 +174,37 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
             ...v,
             price,
             lineTotal: round(price * l.quantity),
-            compareAtTotal: round((hasDiscount ? compareAtUnit : price) * l.quantity),
-            savedPercent: hasDiscount ? Math.round((1 - price / compareAtUnit) * 100) : null,
+            compareAtTotal: round((hasDiscount ? compareAtPack : price) * l.quantity),
+            savedPercent: hasDiscount ? Math.round((1 - price / compareAtPack) * 100) : null,
           },
         ];
       }),
-    [raw, catalog, localizedPriceFor],
+    [raw, catalog, localized, localizedPriceFor],
   );
 
   // Shopify localizes every line into one currency together, so the first
   // resolved line's currency (if any) speaks for the whole bag.
   const currency =
-    raw
-      .map((l) => localizedPriceFor(l.variantId)?.currencyCode)
-      .find((c): c is string => Boolean(c)) ?? catalog.currency;
+    (localized
+      ? raw
+          .map((l) => localizedPriceFor(l.variantId)?.currencyCode)
+          .find((c): c is string => Boolean(c))
+      : undefined) ?? catalog.currency;
+
+  // What the shipping-protection line is "worth" (shown struck through next to
+  // FREE), in the bag's currency: the USD figure scaled by the same rate
+  // Shopify applied to the first line. Null when there is no USD base to scale.
+  const protectionValue = (() => {
+    if (catalog.currency !== "USD") return null;
+    if (!localized) return PROTECTION_VALUE_USD;
+    const first = lines[0];
+    const live = first ? localizedPriceFor(first.variantId) : null;
+    const base = first ? catalog.variants[first.variantId]?.price : null;
+    const rate = live && base ? Number.parseFloat(live.amount) / base : NaN;
+    return Number.isFinite(rate) && rate > 0
+      ? Math.round(PROTECTION_VALUE_USD * rate * 100) / 100
+      : null;
+  })();
 
   // Distinct items in the bag, not the sum of their quantities.
   const count = lines.length;
@@ -278,6 +295,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       subtotal,
       discount,
       currency,
+      protectionValue,
       isOpen,
       hydrated,
       open: () => setOpen(true),
@@ -288,7 +306,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       checkout,
       announcement,
     }),
-    [lines, count, subtotal, discount, currency, isOpen, hydrated, add, setQuantity, remove, checkout, announcement],
+    [lines, count, subtotal, discount, currency, protectionValue, isOpen, hydrated, add, setQuantity, remove, checkout, announcement],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

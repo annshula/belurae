@@ -11,8 +11,6 @@ export async function getBagCatalog(): Promise<BagCatalog> {
   for (const { record, content } of products) {
     const view = buildProductView(record, content, currency);
     const fallbackImage = view.cardImage?.url ?? null;
-    // Every pack is compared against the 1 Pack's compare-at price (as on the PDP).
-    const single = view.variants.find((v) => v.units === 1);
     for (const v of view.variants) {
       variants[v.id] = {
         productName: view.name,
@@ -22,8 +20,7 @@ export async function getBagCatalog(): Promise<BagCatalog> {
             ? `${v.units} Pack`
             : v.label,
         price: v.price,
-        singleCompareAt: single?.compareAtPrice ?? null,
-        singleVariantId: single?.id ?? null,
+        compareAtPrice: v.compareAtPrice,
         units: v.units,
         image: v.image ?? fallbackImage,
         href: `${view.href}?variant=${v.id.split("/").pop()}`,

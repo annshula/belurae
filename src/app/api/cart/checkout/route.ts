@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { beluraeVariantIndex } from "@/lib/catalog";
+import { resolveEffectiveCountry } from "@/lib/localization/country";
 import { clientIp, rateLimit } from "@/lib/security/rate-limit";
 import { isStorefrontConfigured } from "@/lib/shopify/config";
 import { createCart } from "@/lib/shopify/storefront";
@@ -65,7 +66,11 @@ export async function POST(request: NextRequest) {
     return json({ error: "The items in your bag are no longer available." }, 400);
   }
 
-  const country = request.headers.get("x-vercel-ip-country");
+  // The same country the on-page prices were fetched for (the visitor's own
+  // choice, else the edge-detected one), so Shopify prices the cart in the same
+  // market and currency the bag displayed. Reading only the IP header here
+  // ignored a manually chosen country and priced checkout differently.
+  const country = await resolveEffectiveCountry();
   const countryCode = country && /^[A-Z]{2}$/.test(country) ? country : null;
 
   // Meta's click-id / browser-id cookies, forwarded by the client from its own
