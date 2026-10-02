@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Icon } from "@/components/ui/Icon";
 import { guides } from "@/content/guides";
+import { ingredientIcon } from "@/content/ingredients";
 import { getProducts, storeCurrency } from "@/lib/catalog";
 import { buildProductView } from "@/lib/commerce/product-view";
 import { faqSchema, graph } from "@/lib/seo/schema";
@@ -42,7 +43,7 @@ const homeFaqs = [
   },
   {
     q: "Where can I use it?",
-    a: "On the body — legs, arms, underarms, back, chest and the outer bikini line. Not on the face, genitals or broken or irritated skin.",
+    a: "On the body — legs, arms, underarms, back, chest, face, eyebrows and the bikini line. Not near the eyes, on the genitals or on broken or irritated skin.",
   },
   {
     q: "How long does delivery take?",
@@ -207,7 +208,7 @@ export default async function HomePage() {
                   </>
                 }
                 id="clearly"
-                intro="Every product we sell lists its key ingredients with a plain explanation of what each one is — and what we're still waiting on from the manufacturer."
+                intro="Every product we sell names its key ingredients in INCI form, with a plain explanation of what each one is and why it's in the formula."
               />
               <ul className="mt-14 grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-5">
                 {heroProduct.content.keyIngredients.map((ing) => (
@@ -220,7 +221,10 @@ export default async function HomePage() {
                       className="group flex h-full min-h-72 flex-col rounded-media bg-porcelain p-6 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-float"
                     >
                       <span className="grid size-10 place-items-center rounded-control bg-sage-100 text-sage-600">
-                        <Icon name="leaf" className="size-4" />
+                        <Icon
+                          name={ingredientIcon(ing.slug, ing.icon)}
+                          className="size-4"
+                        />
                       </span>
                       {/* Fixed title offset + reserved height so every card's
                           name and copy start on the same line; only the CTA

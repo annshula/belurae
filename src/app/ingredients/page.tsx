@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PageHero } from "@/components/content/PageHero";
+import { Icon } from "@/components/ui/Icon";
 import { ingredients } from "@/content/ingredients";
 
 export const metadata: Metadata = {
@@ -29,10 +30,15 @@ export default function IngredientsIndex() {
                 href={`/ingredients/${i.slug}`}
                 className="group flex h-full min-h-80 flex-col rounded-media bg-porcelain p-8 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-float"
               >
-                <span className="self-start rounded-tag bg-cream px-2.5 py-1 text-[0.72rem] tracking-[0.06em] text-ink-soft">
-                  {i.inci}
+                <span className="flex items-start justify-between gap-3">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-control bg-sage-100 text-sage-600">
+                    <Icon name={i.icon} className="size-4" />
+                  </span>
+                  <span className="rounded-tag bg-cream px-2.5 py-1 text-right text-[0.72rem] tracking-[0.06em] text-ink-soft">
+                    {i.inci}
+                  </span>
                 </span>
-                <span className="mt-10 min-h-[2lh] font-serif text-heading-1 font-light">
+                <span className="mt-8 min-h-[2lh] font-serif text-heading-1 font-light">
                   {i.name}
                 </span>
                 <span className="mt-3 text-body-sm text-ink-soft">

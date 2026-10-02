@@ -14,7 +14,7 @@ const methods = [
       Blade: "No",
       Pulling: "No",
       "Time per session": "5–10 minute wait, plus application",
-      "Things to know": "Patch test first; not for face or genitals; light scent",
+      "Things to know": "Patch test first; not for eyes or genitals; light scent",
     },
   },
   {

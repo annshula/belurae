@@ -19,6 +19,7 @@ import {
 import { ReviewsSection } from "@/components/product/ReviewsSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { ingredientIcon } from "@/content/ingredients";
 import { Stars } from "@/components/ui/Stars";
 import { guides } from "@/content/guides";
 import { demoReviewsFor } from "@/data/reviews";
@@ -504,7 +505,7 @@ export default async function ProductPage({ params }: Props) {
                         alt={h.label}
                         fill
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        className="object-contain"
+                        className="object-cover"
                       />
                     </div>
                   )}
@@ -584,7 +585,7 @@ export default async function ProductPage({ params }: Props) {
                     size="heading"
                     align="center"
                     titleClassName="font-pdp-heading font-semibold"
-                    intro="The key ingredients the manufacturer lists for this formula, and why formulators use them."
+                    intro="The key ingredients in this formula, in INCI form, and why each one is used."
                   />
                   <div className="glass mt-6 rounded-card p-5 text-body-sm">
                     <p className="font-medium">Every ingredient, named</p>
@@ -596,7 +597,7 @@ export default async function ProductPage({ params }: Props) {
                       >
                         Ask us
                       </a>{" "}
-                      about any ingredient and we'll answer.
+                      about any ingredient and we&apos;ll answer.
                     </p>
                   </div>
                 </div>
@@ -604,17 +605,25 @@ export default async function ProductPage({ params }: Props) {
                   {content.keyIngredients.map((ing) => (
                     <div
                       key={ing.slug}
-                      className="grid gap-1.5 rounded-card bg-porcelain/90 p-4 shadow-soft sm:grid-cols-[210px_1fr] sm:gap-6 sm:p-5"
+                      className="flex gap-4 rounded-card bg-porcelain/90 p-4 shadow-soft sm:p-5"
                     >
-                      <dt className="font-serif text-heading-3">
-                        <Link
-                          href={`/ingredients/${ing.slug}`}
-                          className="link-underline"
-                        >
-                          {ing.name}
-                        </Link>
-                      </dt>
-                      <dd className="text-ink-soft">{ing.role}</dd>
+                      <span className="grid size-10 shrink-0 place-items-center rounded-control bg-sage-100 text-sage-600">
+                        <Icon
+                          name={ingredientIcon(ing.slug, ing.icon)}
+                          className="size-4"
+                        />
+                      </span>
+                      <div>
+                        <dt className="font-serif text-heading-3">
+                          <Link
+                            href={`/ingredients/${ing.slug}`}
+                            className="link-underline"
+                          >
+                            {ing.name}
+                          </Link>
+                        </dt>
+                        <dd className="mt-1 text-ink-soft">{ing.role}</dd>
+                      </div>
                     </div>
                   ))}
                 </dl>

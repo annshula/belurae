@@ -31,7 +31,7 @@ export type KeyIngredient = {
   slug: string;
   name: string;
   role: string;
-  /** Optional glyph shown inside the ingredient orb on the PDP. */
+  /** Optional override — defaults to the ingredient entity's own glyph. */
   icon?: IconName;
 };
 
@@ -245,16 +245,15 @@ export const products: ProductContent[] = [
         "Patch test before first use: apply a small amount to a small area, remove it as directed, and wait 24 hours. Don't use the product if you notice redness, burning, itching or swelling.",
       note: "Always read the directions and warnings on the pack before use. Where the pack is less specific, we follow the standard precautions for depilatory products below.",
       use: [
+        "Full body",
+        "Bikini and underarms",
         "Legs and arms",
-        "Underarms",
-        "Back and chest",
-        "The outer bikini line — follow the directions on the pack",
+        "Face and ear hair",
       ],
       avoid: [
-        "The face, including eyebrows and around the eyes",
-        "Genitals, the inner bikini area and other mucous membranes",
-        "Broken, sunburnt, irritated or recently shaved/waxed skin",
-        "Skin with moles, scars, cuts or active breakouts",
+        "Around the eyes",
+        "Inside the nose",
+        "Skin with scars, cuts or active breakouts",
       ],
       ifIrritation:
         "If you feel stinging or burning, remove the mousse and rinse the area straight away with plenty of cool water, and stop using it. If irritation continues, contact a doctor or pharmacist.",
@@ -274,11 +273,11 @@ export const products: ProductContent[] = [
       },
       {
         q: "Where can I use it?",
-        a: "On the body: legs, arms, underarms, back, chest and the outer bikini line. Don't use it on your face, genitals, the inner bikini area, or on broken or irritated skin.",
+        a: "On the body: legs, arms, underarms, back, chest, face, eyebrows and the bikini line. Don't use it near your eyes, on the genitals or other mucous membranes, or on broken or irritated skin.",
       },
       {
         q: "Can I use it on the bikini line?",
-        a: "On the outer bikini line only, following the directions on the pack. It is not for use on the genitals or mucous membranes. Patch test first, and keep to the 5–10 minute window.",
+        a: "Yes, following the directions on the pack. It is not for use on the genitals or mucous membranes. Patch test first, and keep to the 5–10 minute window.",
       },
       {
         q: "How do I remove it?",
@@ -353,7 +352,7 @@ export const products: ProductContent[] = [
       showHairRemovalComparison: true,
       notice: {
         lead: "Patch test 24 hours before first use.",
-        text: "Not for the face or genitals.",
+        text: "Not for the eyes, genitals or mucous membranes.",
       },
     },
     contentGaps: [

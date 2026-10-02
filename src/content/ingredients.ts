@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/ui/Icon";
+
 /**
  * Ingredient entities (/ingredients/[slug]). General, widely documented
  * descriptions of what each ingredient is and why formulators use it — never
@@ -10,6 +12,8 @@ export type Ingredient = {
   name: string;
   /** Name as it typically appears on an INCI list. */
   inci: string;
+  /** Glyph shown on ingredient cards, lists and the PDP orbs. */
+  icon: IconName;
   summary: string;
   whatItIs: string[];
   whyUsed: string[];
@@ -21,6 +25,7 @@ export const ingredients: Ingredient[] = [
     slug: "aloe-leaf-water",
     name: "Aloe leaf water",
     inci: "Aloe Barbadensis Leaf Water",
+    icon: "leaf",
     summary:
       "Aloe leaf water is the watery part of the aloe vera leaf, used in body-care formulas as a base ingredient with a soothing, conditioning feel.",
     whatItIs: [
@@ -40,6 +45,7 @@ export const ingredients: Ingredient[] = [
     slug: "glycerin",
     name: "Glycerin",
     inci: "Glycerin",
+    icon: "droplet",
     summary:
       "Glycerin is a humectant — an ingredient that draws water into the outer layer of the skin. It is one of the most widely used ingredients in skin and body care.",
     whatItIs: [
@@ -59,6 +65,7 @@ export const ingredients: Ingredient[] = [
     slug: "hyaluronic-acid",
     name: "Hyaluronic acid",
     inci: "Hyaluronic Acid / Sodium Hyaluronate",
+    icon: "droplet",
     summary:
       "Hyaluronic acid is a humectant that helps the skin's surface hold on to moisture. In cosmetics it is often used in its salt form, sodium hyaluronate.",
     whatItIs: [
@@ -78,6 +85,7 @@ export const ingredients: Ingredient[] = [
     slug: "ginseng-extract",
     name: "Ginseng extract",
     inci: "Panax Ginseng Root Extract",
+    icon: "flower",
     summary:
       "Ginseng extract comes from the root of the ginseng plant and is used in skin and body care as a botanical ingredient.",
     whatItIs: [
@@ -95,6 +103,7 @@ export const ingredients: Ingredient[] = [
     slug: "portulaca-oleracea-extract",
     name: "Portulaca oleracea extract",
     inci: "Portulaca Oleracea Extract",
+    icon: "leaf",
     summary:
       "Portulaca oleracea extract comes from purslane, a common succulent plant, and is used in skin-care formulas as a conditioning botanical.",
     whatItIs: [
@@ -112,6 +121,7 @@ export const ingredients: Ingredient[] = [
     slug: "egf",
     name: "EGF-related ingredients",
     inci: "Varies — often listed as an oligopeptide or polypeptide",
+    icon: "sparkles",
     summary:
       "EGF stands for epidermal growth factor, a protein the body makes naturally. In cosmetics, EGF-related ingredients are lab-made versions or relatives of it, and are marketed for skin conditioning.",
     whatItIs: [
@@ -129,6 +139,7 @@ export const ingredients: Ingredient[] = [
     slug: "niacinamide",
     name: "Niacinamide",
     inci: "Niacinamide",
+    icon: "tone",
     summary:
       "Niacinamide is a form of vitamin B3 widely used in skin care as a conditioning ingredient.",
     whatItIs: [
@@ -145,6 +156,7 @@ export const ingredients: Ingredient[] = [
     slug: "collagen",
     name: "Collagen",
     inci: "Hydrolyzed Collagen / Collagen",
+    icon: "layers",
     summary:
       "Collagen is a protein. In cosmetics it is used as a skin-conditioning ingredient that helps products feel smooth on the skin.",
     whatItIs: [
@@ -162,4 +174,12 @@ export const ingredients: Ingredient[] = [
 
 export function ingredientBySlug(slug: string): Ingredient | undefined {
   return ingredients.find((i) => i.slug === slug);
+}
+
+/**
+ * Glyph for an ingredient wherever it is listed. A product's key-ingredient
+ * entry may override it; otherwise the entity's own glyph is used.
+ */
+export function ingredientIcon(slug: string, override?: IconName): IconName {
+  return override ?? ingredientBySlug(slug)?.icon ?? "leaf";
 }

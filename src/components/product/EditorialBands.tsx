@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { editorialDisplay } from "@/app/fonts";
 import { Icon } from "@/components/ui/Icon";
+import { ingredientIcon } from "@/content/ingredients";
 import type { ProductContent } from "@/content/products";
 import type { ProductView } from "@/lib/commerce/product-view";
 import { site } from "@/lib/site";
@@ -125,7 +126,7 @@ export function EditorialBands({
               >
                 Ask us
               </a>{" "}
-              about any ingredient and we'll answer.
+              about any ingredient and we&apos;ll answer.
             </p>
             <Link
               href="/ingredients"
@@ -149,13 +150,11 @@ export function EditorialBands({
                       ORBS[i % ORBS.length],
                     )}
                   >
-                    {ing.icon && (
-                      <Icon
-                        name={ing.icon}
-                        className="size-8 text-[#4a7a94] sm:size-9"
-                        strokeWidth={1.4}
-                      />
-                    )}
+                    <Icon
+                      name={ingredientIcon(ing.slug, ing.icon)}
+                      className="size-8 text-[#4a7a94] sm:size-9"
+                      strokeWidth={1.4}
+                    />
                   </span>
                   <span className="mt-4 font-ui font-medium">{ing.name}</span>
                   <span className="mt-1 text-body-sm text-ink-soft">

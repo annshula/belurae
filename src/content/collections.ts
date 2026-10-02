@@ -30,7 +30,7 @@ export const collections: CollectionContent[] = [
       heading: "Choosing an at-home method",
       paragraphs: [
         "Razors cut hair at the skin's surface, wax pulls it out from the root, and depilatory mousses and creams break hair down at the surface so it can be wiped away. Depilatories involve no blade and no pulling, cover large areas easily and take around 5–10 minutes of waiting.",
-        "Because they work chemically, they ask for a little care: patch test before first use, keep to the time on the pack, and never use a body product on your face or genitals. Our guides walk through each step.",
+        "Because they work chemically, they ask for a little care: patch test before first use, keep to the time on the pack, and never use a product near your eyes or on your genitals, and use it on your face only if the pack says it's suitable. Our guides walk through each step.",
       ],
     },
     faqs: [
@@ -40,7 +40,7 @@ export const collections: CollectionContent[] = [
       },
       {
         q: "Can I use body hair removal products on my face?",
-        a: "No. Body depilatories are not for the face. Use only products specifically made and labelled for facial use.",
+        a: "Only if the pack says it's suitable for the face, and then only as directed. Keep it away from your eyes, and patch test first.",
       },
       {
         q: "How long do hair removal mousses take?",
@@ -48,9 +48,18 @@ export const collections: CollectionContent[] = [
       },
     ],
     related: [
-      { label: "How to use hair removal mousse", href: "/guides/how-to-use-hair-removal-mousse" },
-      { label: "Choosing a hair removal method", href: "/guides/choosing-a-hair-removal-method" },
-      { label: "Hair removal aftercare", href: "/guides/hair-removal-aftercare" },
+      {
+        label: "How to use hair removal mousse",
+        href: "/guides/how-to-use-hair-removal-mousse",
+      },
+      {
+        label: "Choosing a hair removal method",
+        href: "/guides/choosing-a-hair-removal-method",
+      },
+      {
+        label: "Hair removal aftercare",
+        href: "/guides/hair-removal-aftercare",
+      },
     ],
   },
   {
@@ -60,7 +69,7 @@ export const collections: CollectionContent[] = [
     description:
       "Facial skincare with the key ingredients, directions and safety guidance spelled out on every product page.",
     intro:
-      "Our skincare range is small on purpose. Each product page says what the manufacturer lists as the key ingredients, how to use it and where not to, and we mark anything we're still waiting on rather than filling the gap with guesses.",
+      "Our skincare range is small on purpose. Each product page names the key ingredients in INCI form, how to use it and where not to, and the complete declaration is printed on every pack.",
     categories: ["skincare"],
     related: [
       { label: "How to patch test", href: "/guides/how-to-patch-test" },

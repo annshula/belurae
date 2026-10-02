@@ -211,7 +211,7 @@ export const guides: Guide[] = [
       {
         heading: "Depilatory mousses and creams",
         blocks: [
-          { type: "p", text: "A depilatory breaks down hair at the skin's surface so it can be wiped or rinsed away. There's no blade and no pulling, and it covers large areas easily. It does involve a waiting time and is a chemical process, so patch testing, keeping to the time on the pack and avoiding sensitive areas like the face and genitals are essential." },
+          { type: "p", text: "A depilatory breaks down hair at the skin's surface so it can be wiped or rinsed away. There's no blade and no pulling, and it covers large areas easily. It does involve a waiting time and is a chemical process, so patch testing, keeping to the time on the pack and avoiding the eyes, genitals and other sensitive areas are essential." },
         ],
       },
       {
@@ -220,7 +220,7 @@ export const guides: Guide[] = [
           {
             type: "ul",
             items: [
-              "Which area? Large, flat areas suit sprays and creams; small, curved areas may be easier to shave. Never use body depilatories on the face or genitals.",
+              "Which area? Large, flat areas suit sprays and creams; small, curved areas may be easier to shave. Never use a depilatory near the eyes or on the genitals, and use it on the face only if the pack says it's suitable.",
               "How does your skin usually react? If blades or wax tend to irritate you, a depilatory may be worth a patch test — if chemical products irritate you, it may not.",
               "How much time do you have? Shaving is fastest; a depilatory needs a 5–10 minute wait; waxing takes preparation.",
             ],
