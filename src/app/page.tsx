@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 import { Faq } from "@/components/content/Faq";
@@ -79,7 +78,6 @@ export default async function HomePage() {
     buildProductView(p.record, p.content, currency),
   );
   const heroProduct = products[0];
-  const heroImage = views[0]?.cardImage;
   const featuredGuides = guides.slice(0, 3);
 
   return (
@@ -95,19 +93,33 @@ export default async function HomePage() {
         aria-labelledby="hero-title"
       >
         <div className="relative flex min-h-svh flex-col overflow-hidden bg-cream lg:h-svh">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-40 -left-32 size-136 rounded-full bg-clay-100/70 blur-3xl"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-24 -bottom-48 size-144 rounded-full bg-sage-100/80 blur-3xl"
-          />
+          {/* Generic lifestyle backdrop (aloe, dropper bottle, linen on stone), with
+              a portrait crop for phones and a wide one from lg. Both are already
+              optimised WebP, so a plain <picture> lets the browser fetch only the
+              one that fits instead of preloading both. The clean area of each is
+              where the headline sits; the still life stays at the bottom right. */}
+          <picture className="pointer-events-none absolute inset-0 select-none">
+            <source
+              media="(min-width: 1024px)"
+              srcSet="/images/hero-desktop.webp"
+              width={1536}
+              height={1024}
+            />
+            <img
+              src="/images/hero-mobile.webp"
+              alt=""
+              width={1024}
+              height={1536}
+              fetchPriority="high"
+              decoding="async"
+              className="size-full object-cover object-right-bottom lg:object-[right_70%]"
+            />
+          </picture>
 
-          <div className="container-page relative grid flex-1 items-center gap-6 pt-[calc(var(--header-h)+1.5rem)] pb-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:pt-[calc(var(--header-h)+0.5rem)] lg:pb-8">
-            {/* Centred below lg, where the hero stacks (image, then this copy);
-                it goes back to a left-aligned column beside the image at lg. */}
-            <div className="order-2 text-center lg:order-1 lg:text-left">
+          <div className="container-page relative grid flex-1 items-start gap-6 pt-[calc(var(--header-h)+2.5rem)] pb-8 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-10 lg:pt-[calc(var(--header-h)+0.5rem)] lg:pb-8">
+            {/* Centred on phones; a left-aligned column over the clean half of the
+                photo from lg. */}
+            <div className="text-center lg:text-left">
               <p className="eyebrow eyebrow-dot">Beauty &amp; Wellness</p>
               <h1
                 id="hero-title"
@@ -133,29 +145,6 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="relative order-1 lg:order-2">
-              <div className="relative mx-auto aspect-square w-full max-w-[min(34rem,calc(100svh-var(--header-h)-7rem))] lg:mr-16">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-x-[14%] bottom-[9%] h-[14%] rounded-[50%] bg-linen/80 blur-2xl"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-[10%] rounded-full bg-porcelain/60 blur-2xl"
-                />
-                {heroImage && (
-                  <Image
-                    src={heroImage.url}
-                    alt={heroImage.alt}
-                    fill
-                    priority
-                    fetchPriority="high"
-                    sizes="(min-width: 1024px) 600px, 90vw"
-                    className="object-contain p-4 mix-blend-multiply md:p-6"
-                  />
-                )}
-              </div>
-            </div>
           </div>
         </div>
       </section>
