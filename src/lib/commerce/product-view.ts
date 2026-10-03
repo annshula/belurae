@@ -212,7 +212,6 @@ export function buildProductView(
 
   const available = variants.filter((v) => v.availableForSale);
   const defaultVariant =
-    available.find((v) => v.units === 3) ??
     available.find((v) => v.units === 1) ??
     available[0] ??
     variants[0];
