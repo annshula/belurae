@@ -42,24 +42,25 @@
     "id": "ttm-04",
     "rating": 5,
     "title": null,
-    "body": "I love it. I want to buy some more ! ASAP",
-    "author": "S** R**h S** |** U**",
-    "avatar": "/avatars/ttm-5ee859ea.jpg",
-    "country": "United States",
-    "itemTitle": "1 Pack",
-    "createdAt": "2026-10-03T12:00:00.000Z",
-    "images": [],
-    "source": "tiktok"
-  },
-  {
-    "id": "ttm-05",
-    "rating": 5,
-    "title": null,
     "body": "I have really sensitive skin and while it smelled less funky than Nair it worked just as good! It has like this powder consistently and cools the skin which is cool! Also way quicker ans easier to stay it on than having to apply it like nair. Will definitely be buying this again!",
     "author": "M**r",
     "avatar": "/avatars/ttm-19cd8109.jpg",
     "country": "United States",
     "itemTitle": "2 Pack",
+    "createdAt": "2026-10-03T12:00:00.000Z",
+    "images": [],
+    "source": "tiktok"
+  },
+
+  {
+    "id": "ttm-05",
+    "rating": 5,
+    "title": null,
+    "body": "I love it. I want to buy some more ! ASAP",
+    "author": "S** R**h S** |** U**",
+    "avatar": "/avatars/ttm-5ee859ea.jpg",
+    "country": "United States",
+    "itemTitle": "1 Pack",
     "createdAt": "2026-10-03T12:00:00.000Z",
     "images": [],
     "source": "tiktok"
