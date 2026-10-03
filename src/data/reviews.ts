@@ -558,14 +558,16 @@ const TONER_OWN_REVIEWS: Review[] = [
 ];
 
 /**
- * Newest day first; within one day, reviews with photos ahead of those without,
- * then by time. Only ever reorders inside a day — a review with photos never
- * jumps ahead of a newer day's. (`Array.sort` is stable, so equal reviews keep
- * their order.)
+ * Newest day first; within one day, 5★ down to 1★, then reviews with photos
+ * ahead of those without, then by time. Only ever reorders inside a day — a
+ * higher rating or a photo never jumps ahead of a newer day's. (`Array.sort` is
+ * stable, so equal reviews keep their order.)
  */
 function newestDayPhotosFirst(a: Review, b: Review): number {
   const byDay = b.createdAt.slice(0, 10).localeCompare(a.createdAt.slice(0, 10));
   if (byDay !== 0) return byDay;
+  const byRating = b.rating - a.rating;
+  if (byRating !== 0) return byRating;
   const byPhotos = Number(b.images.length > 0) - Number(a.images.length > 0);
   if (byPhotos !== 0) return byPhotos;
   return b.createdAt.localeCompare(a.createdAt);
