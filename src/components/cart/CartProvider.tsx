@@ -18,6 +18,7 @@ import {
 } from "@/lib/analytics";
 import { useLocalization } from "@/components/localization/LocalizationProvider";
 import { getExternalId } from "@/lib/ad-identity";
+import type { PaymentMethod } from "@/lib/shopify/payments";
 
 /**
  * The bag (same model as the reference storefront): lines live in
@@ -42,7 +43,12 @@ export type BagVariant = {
   hasPackOption: boolean;
 };
 
-export type BagCatalog = { currency: string; variants: Record<string, BagVariant> };
+export type BagCatalog = {
+  currency: string;
+  variants: Record<string, BagVariant>;
+  /** What checkout accepts, from Shopify — empty when it couldn't be read. */
+  payments: PaymentMethod[];
+};
 
 export type BagLine = { variantId: string; quantity: number };
 export type ResolvedLine = BagLine &
@@ -73,6 +79,8 @@ type CartContextValue = {
   currency: string;
   /** Worth of the free shipping protection in `currency`, or null when it can't be stated. */
   protectionValue: number | null;
+  /** Payment methods checkout accepts, for the logo row under the button. */
+  payments: PaymentMethod[];
   isOpen: boolean;
   hydrated: boolean;
   open: () => void;
@@ -296,6 +304,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       discount,
       currency,
       protectionValue,
+      payments: catalog.payments,
       isOpen,
       hydrated,
       open: () => setOpen(true),
@@ -306,7 +315,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       checkout,
       announcement,
     }),
-    [lines, count, subtotal, discount, currency, protectionValue, isOpen, hydrated, add, setQuantity, remove, checkout, announcement],
+    [lines, count, subtotal, discount, currency, protectionValue, catalog.payments, isOpen, hydrated, add, setQuantity, remove, checkout, announcement],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

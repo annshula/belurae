@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { useCart } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
+import { PaymentIcons } from "@/components/ui/PaymentIcons";
 import { formatMoney } from "@/lib/money";
 import { cn } from "@/lib/utils";
 
@@ -44,6 +45,7 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
     remove,
     checkout,
     hydrated,
+    payments,
   } = useCart();
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -333,15 +335,7 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
             ? "Opening secure checkout…"
             : `Checkout • ${formatMoney(subtotal, currency)}`}
         </button>
-        <ul className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[0.72rem] text-ink-soft">
-          <li className="flex items-center gap-1.5">
-            <Icon name="shield" className="size-3.5" /> Secure checkout by
-            Shopify
-          </li>
-          <li className="flex items-center gap-1.5">
-            <Icon name="truck" className="size-3.5" /> Free delivery
-          </li>
-        </ul>
+        <PaymentIcons methods={payments} className="mt-3" />
       </div>
     </>
   );

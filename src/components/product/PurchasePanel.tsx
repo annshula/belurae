@@ -7,6 +7,7 @@ import { SaleCountdown } from "@/components/product/SaleCountdown";
 import { useCart } from "@/components/cart/CartProvider";
 import { useLocalization } from "@/components/localization/LocalizationProvider";
 import { Icon } from "@/components/ui/Icon";
+import { PaymentIcons } from "@/components/ui/PaymentIcons";
 import { trackSelectVariant, trackViewItem } from "@/lib/analytics";
 import type { ProductView, ViewVariant } from "@/lib/commerce/product-view";
 import { formatMoney } from "@/lib/money";
@@ -814,7 +815,7 @@ export function PurchasePanel({
   packs?: "list" | "cards";
 }) {
   const cardsMode = packs === "cards";
-  const { add, open } = useCart();
+  const { add, open, payments } = useCart();
   const { localizedPriceFor, requestPrices } = useLocalization();
   const initial =
     view.variants.find((v) => v.id === view.defaultVariantId) ??
@@ -1070,10 +1071,7 @@ export function PurchasePanel({
             "Add to bag"
           )}
         </button>
-        <p className="mt-3 flex items-center justify-center gap-1.5 font-sans text-[0.8rem] font-medium text-ink-soft">
-          <Icon name="shield" className="size-3.5 shrink-0" />
-          Secure payment by Shopify
-        </p>
+        <PaymentIcons methods={payments} className="mt-3" />
       </div>
 
       {/* Sticky mobile bar */}

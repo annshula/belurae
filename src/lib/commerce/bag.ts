@@ -3,10 +3,15 @@ import "server-only";
 import type { BagCatalog } from "@/components/cart/CartProvider";
 import { getProducts, storeCurrency } from "@/lib/catalog";
 import { buildProductView } from "@/lib/commerce/product-view";
+import { getPaymentMethods } from "@/lib/shopify/payments";
 
 /** The small variant lookup the client bag needs (a few hundred bytes per product). */
 export async function getBagCatalog(): Promise<BagCatalog> {
-  const [products, currency] = await Promise.all([getProducts(), storeCurrency()]);
+  const [products, currency, payments] = await Promise.all([
+    getProducts(),
+    storeCurrency(),
+    getPaymentMethods(),
+  ]);
   const variants: BagCatalog["variants"] = {};
   for (const { record, content } of products) {
     const view = buildProductView(record, content, currency);
@@ -29,5 +34,5 @@ export async function getBagCatalog(): Promise<BagCatalog> {
       };
     }
   }
-  return { currency, variants };
+  return { currency, variants, payments };
 }
