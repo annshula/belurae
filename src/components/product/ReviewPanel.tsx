@@ -295,34 +295,53 @@ export function ReviewExtras({ review }: { review: Review }) {
         </ul>
       )}
 
-      {review.itemTitle && (
-        /* What they actually bought, and when, above the reviewer: a review
-           with a pack and an order date reads as a purchase; without them it
-           reads as an opinion floating in space. */
-        <p className="mt-4 inline-flex flex-wrap items-center gap-1.5 rounded-tag bg-cream px-2.5 py-1 font-ui text-body-sm">
-          <Icon
-            name="package"
-            aria-hidden="true"
-            className="size-3.5 shrink-0 text-sage-600"
-          />
-          <span className="text-ink-faint">Bought</span>
-          <span className="font-medium text-ink-soft">{review.itemTitle}</span>
-          {review.purchasedAt && (
-            <>
-              <span aria-hidden="true" className="text-ink-faint">
-                ·
-              </span>
-              <time
-                dateTime={review.purchasedAt.slice(0, 10)}
-                className="text-ink-faint tabular-nums"
-              >
-                {formatReviewDate(review.purchasedAt)}
-              </time>
-            </>
-          )}
-        </p>
-      )}
+      {/* On a phone the pack sits above the reviewer; from md up it moves to
+          the right end of the reviewer's row (`ReviewFooter`). */}
+      <PurchaseChip review={review} className="mt-4 md:hidden" />
     </>
+  );
+}
+
+/**
+ * What they actually bought, and when: a review with a pack and an order date
+ * reads as a purchase; without them it reads as an opinion floating in space.
+ */
+function PurchaseChip({
+  review,
+  className,
+}: {
+  review: Review;
+  className?: string;
+}) {
+  if (!review.itemTitle) return null;
+  return (
+    <p
+      className={cn(
+        "inline-flex flex-wrap items-center gap-1.5 rounded-tag bg-cream px-2.5 py-1 font-ui text-body-sm",
+        className,
+      )}
+    >
+      <Icon
+        name="package"
+        aria-hidden="true"
+        className="size-3.5 shrink-0 text-sage-600"
+      />
+      <span className="text-ink-faint">Bought</span>
+      <span className="font-medium text-ink-soft">{review.itemTitle}</span>
+      {review.purchasedAt && (
+        <>
+          <span aria-hidden="true" className="text-ink-faint">
+            ·
+          </span>
+          <time
+            dateTime={review.purchasedAt.slice(0, 10)}
+            className="text-ink-faint tabular-nums"
+          >
+            {formatReviewDate(review.purchasedAt)}
+          </time>
+        </>
+      )}
+    </p>
   );
 }
 
@@ -458,11 +477,18 @@ export function Reviewer({
   );
 }
 
-/** The reviewer, under the review and under the pack they bought. */
+/**
+ * The reviewer, under the review. On a phone the pack they bought is above
+ * (`ReviewExtras`); from md up it sits at the right-hand end of this row.
+ */
 export function ReviewFooter({ review }: { review: Review }) {
   return (
-    <footer className="mt-5">
+    <footer className="mt-5 md:flex md:items-center md:justify-between md:gap-4">
       <Reviewer review={review} purchase={false} />
+      <PurchaseChip
+        review={review}
+        className="hidden md:inline-flex md:max-w-[55%] md:shrink-0 md:justify-end"
+      />
     </footer>
   );
 }
