@@ -271,7 +271,7 @@ export function ReviewMeta({
   );
 }
 
-/** Photos, when the review carries any. */
+/** Photos and the pack they bought, when the review carries either. */
 export function ReviewExtras({ review }: { review: Review }) {
   return (
     <>
@@ -295,6 +295,33 @@ export function ReviewExtras({ review }: { review: Review }) {
         </ul>
       )}
 
+      {review.itemTitle && (
+        /* What they actually bought, and when, above the reviewer: a review
+           with a pack and an order date reads as a purchase; without them it
+           reads as an opinion floating in space. */
+        <p className="mt-4 inline-flex flex-wrap items-center gap-1.5 rounded-tag bg-cream px-2.5 py-1 font-ui text-body-sm">
+          <Icon
+            name="package"
+            aria-hidden="true"
+            className="size-3.5 shrink-0 text-sage-600"
+          />
+          <span className="text-ink-faint">Bought</span>
+          <span className="font-medium text-ink-soft">{review.itemTitle}</span>
+          {review.purchasedAt && (
+            <>
+              <span aria-hidden="true" className="text-ink-faint">
+                ·
+              </span>
+              <time
+                dateTime={review.purchasedAt.slice(0, 10)}
+                className="text-ink-faint tabular-nums"
+              >
+                {formatReviewDate(review.purchasedAt)}
+              </time>
+            </>
+          )}
+        </p>
+      )}
     </>
   );
 }
@@ -354,8 +381,16 @@ function VerifiedTick() {
 }
 
 /** Country · pack · purchase date, dot-separated, whichever of them we have. */
-function ReviewerFacts({ review }: { review: Review }) {
-  const { country, itemTitle, purchasedAt } = review;
+function ReviewerFacts({
+  review,
+  purchase,
+}: {
+  review: Review;
+  purchase: boolean;
+}) {
+  const { country } = review;
+  const itemTitle = purchase ? review.itemTitle : undefined;
+  const purchasedAt = purchase ? review.purchasedAt : undefined;
   if (!country && !itemTitle && !purchasedAt) return null;
 
   /* Phones: country on its own line, then the pack and the purchase date on
@@ -397,9 +432,16 @@ function ReviewerFacts({ review }: { review: Review }) {
 /**
  * Who wrote it, in two quiet lines: the name with the trust tick beside it,
  * then where they are, which pack they bought and when. Shared by every review
- * card so the byline looks the same wherever a review appears.
+ * card so the byline looks the same wherever a review appears. `purchase` is
+ * off where the pack and order date already sit above it (`ReviewExtras`).
  */
-export function Reviewer({ review }: { review: Review }) {
+export function Reviewer({
+  review,
+  purchase = true,
+}: {
+  review: Review;
+  purchase?: boolean;
+}) {
   return (
     <div className="flex items-center gap-2.5 font-ui">
       <Avatar review={review} className="size-9" />
@@ -410,17 +452,17 @@ export function Reviewer({ review }: { review: Review }) {
           </span>
           <VerifiedTick />
         </p>
-        <ReviewerFacts review={review} />
+        <ReviewerFacts review={review} purchase={purchase} />
       </div>
     </div>
   );
 }
 
-/** The reviewer, under the review. */
+/** The reviewer, under the review and under the pack they bought. */
 export function ReviewFooter({ review }: { review: Review }) {
   return (
     <footer className="mt-5">
-      <Reviewer review={review} />
+      <Reviewer review={review} purchase={false} />
     </footer>
   );
 }

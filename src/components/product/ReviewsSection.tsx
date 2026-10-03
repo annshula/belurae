@@ -308,7 +308,7 @@ function ReviewCard({ review }: { review: Review }) {
         <ReviewMeta review={review} />
 
         {review.title && (
-          <p className="mt-4 font-serif text-heading-3">{review.title}</p>
+          <p className="mt-4 font-serif text-body-lg">{review.title}</p>
         )}
         {/* Four lines on the card; blank lines between paragraphs are
             flattened here, and the panel holds the full text one paragraph at
@@ -316,7 +316,7 @@ function ReviewCard({ review }: { review: Review }) {
         <p
           ref={bodyRef}
           className={cn(
-            "line-clamp-4 max-w-[68ch] text-ink-soft",
+            "line-clamp-4 max-w-[68ch] text-body-sm text-ink-soft",
             review.title ? "mt-1.5" : "mt-4",
           )}
         >
