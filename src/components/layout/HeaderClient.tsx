@@ -286,10 +286,25 @@ export function HeaderShell({ children }: { children: React.ReactNode }) {
   const flatAtTop = pathname.startsWith("/products/") && !scrolled;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const update = () => setScrolled(window.scrollY > 24);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    // A phone's first load can settle the scroll position (restoration, the
+    // browser bar collapsing) after hydration without a scroll event the bar
+    // would see, leaving it solid at the top until the next real scroll. So
+    // look again once the page has loaded, when it is shown from the
+    // back/forward cache, and when the viewport resizes.
+    window.addEventListener("load", update);
+    window.addEventListener("pageshow", update);
+    window.addEventListener("resize", update);
+    const settle = window.setTimeout(update, 300);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("load", update);
+      window.removeEventListener("pageshow", update);
+      window.removeEventListener("resize", update);
+      window.clearTimeout(settle);
+    };
   }, []);
 
   return (

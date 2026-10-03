@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-10-03T06:21:21.667Z",
+  "syncedAt": "2026-10-03T07:43:40.537Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -18,11 +18,11 @@
     "bikini-pain-free-hair-removal-spray": {
       "id": "gid://shopify/Product/15395256467683",
       "handle": "bikini-pain-free-hair-removal-spray",
-      "title": "CloudSense™ Bikini and Full Body Pain-Free Hair Removal Mousse with Aloe, Ginseng & Hyaluronic Acid | Smooth in 5–10 Min",
+      "title": "Bikini and Full Body Pain-Free Hair Removal Cream for Sensitive Skin, Hypoallergenic Formula-Gentle & Fast-Acting Depilatory with Citrus Scent, Aloe & Hyaluronic Acid for Anti-bacterial, Moisturizing, and Soothing Care, Suitable for Men & Women",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-03T04:26:26Z",
+      "updatedAt": "2026-10-03T07:42:00Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -58,25 +58,25 @@
               "compareAtAmount": 88,
               "currencyCode": "AUD"
             },
-            "US": {
-              "amount": 29.99,
-              "compareAtAmount": 59.98,
-              "currencyCode": "USD"
+            "CA": {
+              "amount": 43,
+              "compareAtAmount": 86,
+              "currencyCode": "CAD"
             },
             "GB": {
               "amount": 24,
               "compareAtAmount": 47,
               "currencyCode": "GBP"
             },
-            "CA": {
-              "amount": 43,
-              "compareAtAmount": 86,
-              "currencyCode": "CAD"
-            },
             "IN": {
               "amount": 2940.67,
               "compareAtAmount": 5881.35,
               "currencyCode": "INR"
+            },
+            "US": {
+              "amount": 29.99,
+              "compareAtAmount": 59.98,
+              "currencyCode": "USD"
             },
             "ZA": {
               "amount": 510,
@@ -104,25 +104,25 @@
               "compareAtAmount": 176,
               "currencyCode": "AUD"
             },
-            "US": {
-              "amount": 52.99,
-              "compareAtAmount": 119.96,
-              "currencyCode": "USD"
+            "CA": {
+              "amount": 76,
+              "compareAtAmount": 171,
+              "currencyCode": "CAD"
             },
             "GB": {
               "amount": 41,
               "compareAtAmount": 93,
               "currencyCode": "GBP"
             },
-            "CA": {
-              "amount": 76,
-              "compareAtAmount": 171,
-              "currencyCode": "CAD"
-            },
             "IN": {
               "amount": 5195.94,
               "compareAtAmount": 11762.7,
               "currencyCode": "INR"
+            },
+            "US": {
+              "amount": 52.99,
+              "compareAtAmount": 119.96,
+              "currencyCode": "USD"
             },
             "ZA": {
               "amount": 901,
@@ -150,25 +150,25 @@
               "compareAtAmount": 264,
               "currencyCode": "AUD"
             },
-            "US": {
-              "amount": 64.99,
-              "compareAtAmount": 179.94,
-              "currencyCode": "USD"
+            "CA": {
+              "amount": 93,
+              "compareAtAmount": 257,
+              "currencyCode": "CAD"
             },
             "GB": {
               "amount": 51,
               "compareAtAmount": 139,
               "currencyCode": "GBP"
             },
-            "CA": {
-              "amount": 93,
-              "compareAtAmount": 257,
-              "currencyCode": "CAD"
-            },
             "IN": {
               "amount": 6372.6,
               "compareAtAmount": 17644.04,
               "currencyCode": "INR"
+            },
+            "US": {
+              "amount": 64.99,
+              "compareAtAmount": 179.94,
+              "currencyCode": "USD"
             },
             "ZA": {
               "amount": 1105,
@@ -443,11 +443,11 @@
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
       "handle": "egf-tox-toner",
-      "title": "EGF Tox Liquid Botox Toner with EGF, Niacinamide, Collagen & Hyaluronic Acid for Smoother, Plumper & Radiant Skin",
+      "title": "[Belurae] EGF Tox Toner | Forehead Firming & Wrinkle Care, Iron Out Fine Lines | PDRN & Collagen & NAD+ EGF Complex | EGF Plumping for Forehead, Longevity Anti-Aging Routine | Korean Skincare, K-Beauty",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-03T04:18:24Z",
+      "updatedAt": "2026-10-03T07:43:19Z",
       "seo": {
         "title": null,
         "description": null
@@ -478,35 +478,35 @@
           "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S7ddfea9d15de4125a98e6af91663ccaer.webp?v=1790708242",
           "description": null,
           "pricesByMarket": {
-            "CA": {
-              "amount": 43,
-              "compareAtAmount": 86,
-              "currencyCode": "CAD"
-            },
             "AU": {
               "amount": 44,
               "compareAtAmount": 88,
               "currencyCode": "AUD"
-            },
-            "IN": {
-              "amount": 2940.67,
-              "compareAtAmount": 5881.35,
-              "currencyCode": "INR"
-            },
-            "US": {
-              "amount": 29.99,
-              "compareAtAmount": 59.98,
-              "currencyCode": "USD"
             },
             "ZA": {
               "amount": 510,
               "compareAtAmount": 1019,
               "currencyCode": "ZAR"
             },
+            "US": {
+              "amount": 29.99,
+              "compareAtAmount": 59.98,
+              "currencyCode": "USD"
+            },
             "GB": {
               "amount": 24,
               "compareAtAmount": 47,
               "currencyCode": "GBP"
+            },
+            "IN": {
+              "amount": 2940.67,
+              "compareAtAmount": 5881.35,
+              "currencyCode": "INR"
+            },
+            "CA": {
+              "amount": 43,
+              "compareAtAmount": 86,
+              "currencyCode": "CAD"
             }
           }
         },
@@ -524,35 +524,35 @@
           "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sab77eb44b95248d29004991f8477206cy.webp?v=1790708243",
           "description": null,
           "pricesByMarket": {
-            "CA": {
-              "amount": 76,
-              "compareAtAmount": 171,
-              "currencyCode": "CAD"
-            },
             "AU": {
               "amount": 78,
               "compareAtAmount": 176,
               "currencyCode": "AUD"
-            },
-            "IN": {
-              "amount": 5195.94,
-              "compareAtAmount": 11762.7,
-              "currencyCode": "INR"
-            },
-            "US": {
-              "amount": 52.99,
-              "compareAtAmount": 119.96,
-              "currencyCode": "USD"
             },
             "ZA": {
               "amount": 901,
               "compareAtAmount": 2038,
               "currencyCode": "ZAR"
             },
+            "US": {
+              "amount": 52.99,
+              "compareAtAmount": 119.96,
+              "currencyCode": "USD"
+            },
             "GB": {
               "amount": 41,
               "compareAtAmount": 93,
               "currencyCode": "GBP"
+            },
+            "IN": {
+              "amount": 5195.94,
+              "compareAtAmount": 11762.7,
+              "currencyCode": "INR"
+            },
+            "CA": {
+              "amount": 76,
+              "compareAtAmount": 171,
+              "currencyCode": "CAD"
             }
           }
         },
@@ -570,35 +570,35 @@
           "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S457e00b4941949eb8bbf9553d9757cfcS.webp?v=1790708243",
           "description": null,
           "pricesByMarket": {
-            "CA": {
-              "amount": 93,
-              "compareAtAmount": 257,
-              "currencyCode": "CAD"
-            },
             "AU": {
               "amount": 96,
               "compareAtAmount": 264,
               "currencyCode": "AUD"
-            },
-            "IN": {
-              "amount": 6372.6,
-              "compareAtAmount": 17644.04,
-              "currencyCode": "INR"
-            },
-            "US": {
-              "amount": 64.99,
-              "compareAtAmount": 179.94,
-              "currencyCode": "USD"
             },
             "ZA": {
               "amount": 1105,
               "compareAtAmount": 3057,
               "currencyCode": "ZAR"
             },
+            "US": {
+              "amount": 64.99,
+              "compareAtAmount": 179.94,
+              "currencyCode": "USD"
+            },
             "GB": {
               "amount": 51,
               "compareAtAmount": 139,
               "currencyCode": "GBP"
+            },
+            "IN": {
+              "amount": 6372.6,
+              "compareAtAmount": 17644.04,
+              "currencyCode": "INR"
+            },
+            "CA": {
+              "amount": 93,
+              "compareAtAmount": 257,
+              "currencyCode": "CAD"
             }
           }
         }
