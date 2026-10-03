@@ -7,6 +7,7 @@ import {
   Reviewer,
   useInlinePreview,
 } from "@/components/product/ReviewPanel";
+import { ReviewPhotos } from "@/components/product/ReviewPhotos";
 import { Icon } from "@/components/ui/Icon";
 import { Stars } from "@/components/ui/Stars";
 import { formatReviewDate, type Review } from "@/lib/judgeme/types";
@@ -132,6 +133,19 @@ function FeedbackSlide({
             </>
           )}
         </p>
+
+        {/* Photos from the order, under the text — the proof a review is real.
+            56px tiles on a phone, 64px from sm: big enough to read as a photo,
+            small enough that three always fit side by side. A tap opens the
+            photo full size. */}
+        <ReviewPhotos
+          images={review.images}
+          author={review.author}
+          max={3}
+          className="mt-3 flex-nowrap"
+          tileClassName="size-14 rounded-lg sm:size-16"
+          sizes="64px"
+        />
       </div>
 
       <footer>

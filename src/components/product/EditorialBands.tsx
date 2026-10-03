@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { editorialDisplay } from "@/app/fonts";
+import { FullIngredientsButton } from "@/components/product/FullIngredients";
 import { Icon } from "@/components/ui/Icon";
 import { ingredientIcon } from "@/content/ingredients";
 import type { ProductContent } from "@/content/products";
@@ -128,6 +129,10 @@ export function EditorialBands({
               </a>{" "}
               about any ingredient and we&apos;ll answer.
             </p>
+            {content.inci && content.inci.length > 0 && (
+              /* The complete declaration, one tap away in a sheet/dialog. */
+              <FullIngredientsButton items={content.inci} className="mt-2" />
+            )}
             <Link
               href="/ingredients"
               className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-control bg-sage-800 px-6 font-ui text-body-sm font-medium text-ivory transition-colors hover:bg-sage-900"
@@ -165,6 +170,7 @@ export function EditorialBands({
             ))}
           </ul>
         </div>
+
       </section>
     </div>
   );

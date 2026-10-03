@@ -23,6 +23,7 @@ import { ingredientIcon } from "@/content/ingredients";
 import { Stars } from "@/components/ui/Stars";
 import { guides } from "@/content/guides";
 import { demoReviewsFor } from "@/data/reviews";
+import { feedPage, photoCount } from "@/lib/reviews/feed";
 import {
   products as productContent,
   productContentByLegacySlug,
@@ -177,8 +178,8 @@ export default async function ProductPage({ params }: Props) {
    *    data/reviews.ts (see its doc comment) while Judge.me has nothing, which
    *    is why the schema above is given `verifiedReviews` and never this.
    */
-  const ratingLine =
-    verifiedReviews?.summary ?? demoReviewsFor(record.handle)?.summary ?? null;
+  const reviewSet = verifiedReviews ?? demoReviewsFor(record.handle);
+  const ratingLine = reviewSet?.summary ?? null;
 
   /*
    * The buy-box carousel shows the head of the same feed, sliced here so a
@@ -186,9 +187,7 @@ export default async function ProductPage({ params }: Props) {
    * set. It is a dozen rather than five because the carousel keeps only the 5★
    * ones — the newest handful of reviews always contains a few lower down.
    */
-  const feedbackReviews = (
-    verifiedReviews ?? demoReviewsFor(record.handle)
-  )?.reviews.slice(0, 12);
+  const feedbackReviews = reviewSet?.reviews.slice(0, 12);
 
   const perks = view.perks.map((text) => ({ icon: perkIcon(text), text }));
 
@@ -763,7 +762,16 @@ export default async function ProductPage({ params }: Props) {
           >
             Reviews
           </h2>
-          <ReviewsSection data={verifiedReviews} handle={view.handle} />
+          <ReviewsSection
+            summary={reviewSet?.summary ?? null}
+            photoCount={reviewSet ? photoCount(reviewSet) : 0}
+            initial={
+              reviewSet
+                ? feedPage(reviewSet, "all", 1)
+                : { items: [], total: 0, page: 1, pages: 1 }
+            }
+            handle={view.handle}
+          />
         </div>
       </section>
 

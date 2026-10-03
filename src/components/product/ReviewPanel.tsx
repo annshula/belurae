@@ -14,12 +14,13 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
+import { ReviewPhotos } from "@/components/product/ReviewPhotos";
 import { Icon } from "@/components/ui/Icon";
 import { Stars } from "@/components/ui/Stars";
-import { formatReviewDate, type Review } from "@/lib/judgeme/types";
+import { formatReviewDate, maskName, type Review } from "@/lib/judgeme/types";
 import { useScrollLock } from "@/lib/scroll-lock";
 import { cn } from "@/lib/utils";
 
@@ -205,22 +206,52 @@ export function Avatar({
   review: Review;
   className?: string;
 }) {
-  if (review.avatar) {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+  // A picture that was cached, or finished before React attached `onLoad`, is
+  // caught here so it doesn't sit under the spinner forever.
+  const check = useCallback((img: HTMLImageElement | null) => {
+    if (img?.complete && img.naturalWidth > 0) setLoaded(true);
+  }, []);
+
+  if (review.avatar && !failed) {
     return (
-      /* Unoptimized on purpose: an avatar is already a 160px thumbnail, and the
-         site's custom loader would otherwise rewrite it into a srcset of
-         derivatives of a derivative. Same call the review photos make. */
-      <Image
-        src={review.avatar}
-        alt=""
-        width={64}
-        height={64}
-        unoptimized
+      <span
         className={cn(
-          "shrink-0 rounded-full bg-sage-100 object-cover",
+          "relative block shrink-0 overflow-hidden rounded-full bg-sage-100",
           className,
         )}
-      />
+      >
+        {/* Unoptimized on purpose: an avatar is already a 160px thumbnail, and
+            the site's custom loader would otherwise rewrite it into a srcset of
+            derivatives of a derivative. Same call the review photos make. */}
+        <Image
+          ref={check}
+          src={review.avatar}
+          alt=""
+          fill
+          sizes="48px"
+          unoptimized
+          className={cn(
+            "object-cover transition-opacity duration-300",
+            !loaded && "opacity-0",
+          )}
+          onLoad={() => setLoaded(true)}
+          // A broken picture falls back to the empty-profile placeholder.
+          onError={() => setFailed(true)}
+        />
+        {!loaded && (
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 grid place-items-center"
+          >
+            <Icon
+              name="spinner"
+              className="size-4.5 animate-spin text-sage-600 motion-reduce:animate-none"
+            />
+          </span>
+        )}
+      </span>
     );
   }
 
@@ -275,25 +306,14 @@ export function ReviewMeta({
 export function ReviewExtras({ review }: { review: Review }) {
   return (
     <>
-      {review.images.length > 0 && (
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {review.images.slice(0, 4).map((src) => (
-            <li
-              key={src}
-              className="relative size-20 overflow-hidden rounded-card bg-cream"
-            >
-              <Image
-                src={src}
-                alt={`Photo from ${review.author}'s review`}
-                fill
-                sizes="80px"
-                className="object-cover"
-                unoptimized
-              />
-            </li>
-          ))}
-        </ul>
-      )}
+      <ReviewPhotos
+        images={review.images}
+        author={review.author}
+        max={4}
+        className="mt-4"
+        tileClassName="size-20 rounded-card"
+        sizes="80px"
+      />
 
       {/* On a phone the pack sits above the reviewer; from md up it moves to
           the right end of the reviewer's row (`ReviewFooter`). */}
@@ -410,7 +430,8 @@ function ReviewerFacts({
   const { country } = review;
   const itemTitle = purchase ? review.itemTitle : undefined;
   const purchasedAt = purchase ? review.purchasedAt : undefined;
-  if (!country && !itemTitle && !purchasedAt) return null;
+  const via = review.source === "tiktok";
+  if (!country && !itemTitle && !purchasedAt && !via) return null;
 
   /* Phones: country on its own line, then the pack and the purchase date on
      the next, so the breaks are chosen rather than wherever the width runs
@@ -444,6 +465,19 @@ function ReviewerFacts({
           )}
         </span>
       )}
+      {via && (
+        /* Said plainly where it was written: this was not a purchase from this
+           store, so it carries no verified tick. The pack and order date, when
+           the export gave them, are TikTok's, not this store's. */
+        <>
+          {(country || itemTitle || purchasedAt) && (
+            <span aria-hidden="true" className="hidden sm:inline">
+              ·
+            </span>
+          )}
+          <span>Review from TikTok Shop</span>
+        </>
+      )}
     </div>
   );
 }
@@ -467,9 +501,10 @@ export function Reviewer({
       <div className="min-w-0 flex-1">
         <p className="flex items-center gap-1.5 leading-tight">
           <span className="truncate text-body-sm leading-tight font-medium text-ink">
-            {review.author}
+            {maskName(review.author)}
           </span>
-          <VerifiedTick />
+          {/* Only a purchase made on this store is "verified". */}
+          {review.source ? null : <VerifiedTick />}
         </p>
         <ReviewerFacts review={review} purchase={purchase} />
       </div>
@@ -523,7 +558,7 @@ function ReviewPanel({
       <div
         role="dialog"
         aria-modal="true"
-        aria-label={`Full review from ${review.author}`}
+        aria-label={`Full review from ${maskName(review.author)}`}
         className="relative flex max-h-[88svh] w-full flex-col overflow-hidden rounded-t-media bg-paper pb-[env(safe-area-inset-bottom)] shadow-drift md:max-h-[80vh] md:max-w-2xl md:rounded-panel md:pb-0"
       >
         {/* The grab handle is the sheet's own dismiss control, not decoration:

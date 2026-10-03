@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-10-03T07:43:40.537Z",
+  "syncedAt": "2026-10-03T12:28:29.857Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -22,7 +22,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-03T07:42:00Z",
+      "updatedAt": "2026-10-03T12:00:53Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -63,16 +63,6 @@
               "compareAtAmount": 86,
               "currencyCode": "CAD"
             },
-            "GB": {
-              "amount": 24,
-              "compareAtAmount": 47,
-              "currencyCode": "GBP"
-            },
-            "IN": {
-              "amount": 2940.67,
-              "compareAtAmount": 5881.35,
-              "currencyCode": "INR"
-            },
             "US": {
               "amount": 29.99,
               "compareAtAmount": 59.98,
@@ -82,6 +72,16 @@
               "amount": 510,
               "compareAtAmount": 1019,
               "currencyCode": "ZAR"
+            },
+            "IN": {
+              "amount": 2940.39,
+              "compareAtAmount": 5880.77,
+              "currencyCode": "INR"
+            },
+            "GB": {
+              "amount": 24,
+              "compareAtAmount": 47,
+              "currencyCode": "GBP"
             }
           }
         },
@@ -109,16 +109,6 @@
               "compareAtAmount": 171,
               "currencyCode": "CAD"
             },
-            "GB": {
-              "amount": 41,
-              "compareAtAmount": 93,
-              "currencyCode": "GBP"
-            },
-            "IN": {
-              "amount": 5195.94,
-              "compareAtAmount": 11762.7,
-              "currencyCode": "INR"
-            },
             "US": {
               "amount": 52.99,
               "compareAtAmount": 119.96,
@@ -128,6 +118,16 @@
               "amount": 901,
               "compareAtAmount": 2038,
               "currencyCode": "ZAR"
+            },
+            "IN": {
+              "amount": 5195.43,
+              "compareAtAmount": 11761.55,
+              "currencyCode": "INR"
+            },
+            "GB": {
+              "amount": 41,
+              "compareAtAmount": 93,
+              "currencyCode": "GBP"
             }
           }
         },
@@ -155,16 +155,6 @@
               "compareAtAmount": 257,
               "currencyCode": "CAD"
             },
-            "GB": {
-              "amount": 51,
-              "compareAtAmount": 139,
-              "currencyCode": "GBP"
-            },
-            "IN": {
-              "amount": 6372.6,
-              "compareAtAmount": 17644.04,
-              "currencyCode": "INR"
-            },
             "US": {
               "amount": 64.99,
               "compareAtAmount": 179.94,
@@ -174,6 +164,16 @@
               "amount": 1105,
               "compareAtAmount": 3057,
               "currencyCode": "ZAR"
+            },
+            "IN": {
+              "amount": 6371.98,
+              "compareAtAmount": 17642.32,
+              "currencyCode": "INR"
+            },
+            "GB": {
+              "amount": 51,
+              "compareAtAmount": 139,
+              "currencyCode": "GBP"
             }
           }
         }
@@ -193,6 +193,14 @@
           "width": 800,
           "height": 800,
           "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a397bcea-f1b9-4237-88a4-8836e059abe8.jpg?v=1790422412",
+          "width": 1600,
+          "height": 800,
+          "alt": "Belurae lab testing overview",
           "variantId": null
         },
         {
@@ -241,14 +249,6 @@
           "width": 1254,
           "height": 1254,
           "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a397bcea-f1b9-4237-88a4-8836e059abe8.jpg?v=1790422412",
-          "width": 1600,
-          "height": 800,
-          "alt": "Belurae lab testing overview",
           "variantId": null
         },
         {
@@ -488,6 +488,11 @@
               "compareAtAmount": 1019,
               "currencyCode": "ZAR"
             },
+            "CA": {
+              "amount": 43,
+              "compareAtAmount": 86,
+              "currencyCode": "CAD"
+            },
             "US": {
               "amount": 29.99,
               "compareAtAmount": 59.98,
@@ -499,14 +504,9 @@
               "currencyCode": "GBP"
             },
             "IN": {
-              "amount": 2940.67,
-              "compareAtAmount": 5881.35,
+              "amount": 2940.39,
+              "compareAtAmount": 5880.77,
               "currencyCode": "INR"
-            },
-            "CA": {
-              "amount": 43,
-              "compareAtAmount": 86,
-              "currencyCode": "CAD"
             }
           }
         },
@@ -534,6 +534,11 @@
               "compareAtAmount": 2038,
               "currencyCode": "ZAR"
             },
+            "CA": {
+              "amount": 76,
+              "compareAtAmount": 171,
+              "currencyCode": "CAD"
+            },
             "US": {
               "amount": 52.99,
               "compareAtAmount": 119.96,
@@ -545,14 +550,9 @@
               "currencyCode": "GBP"
             },
             "IN": {
-              "amount": 5195.94,
-              "compareAtAmount": 11762.7,
+              "amount": 5195.43,
+              "compareAtAmount": 11761.55,
               "currencyCode": "INR"
-            },
-            "CA": {
-              "amount": 76,
-              "compareAtAmount": 171,
-              "currencyCode": "CAD"
             }
           }
         },
@@ -580,6 +580,11 @@
               "compareAtAmount": 3057,
               "currencyCode": "ZAR"
             },
+            "CA": {
+              "amount": 93,
+              "compareAtAmount": 257,
+              "currencyCode": "CAD"
+            },
             "US": {
               "amount": 64.99,
               "compareAtAmount": 179.94,
@@ -591,14 +596,9 @@
               "currencyCode": "GBP"
             },
             "IN": {
-              "amount": 6372.6,
-              "compareAtAmount": 17644.04,
+              "amount": 6371.98,
+              "compareAtAmount": 17642.32,
               "currencyCode": "INR"
-            },
-            "CA": {
-              "amount": 93,
-              "compareAtAmount": 257,
-              "currencyCode": "CAD"
             }
           }
         }

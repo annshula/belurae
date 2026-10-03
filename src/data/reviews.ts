@@ -1,4 +1,4 @@
-/**
+﻿/**
  * PLACEHOLDER review sets — one per product — for the Belurae catalogue: the
  * hair-removal mousse and the EGF Tox toner.
  *
@@ -28,6 +28,8 @@
  * hydration clean.
  */
 
+import hairRemovalTiktok from "../../data/reviews/hair-removal-tiktok.json";
+import tonerTiktok from "../../data/reviews/toner-tiktok.json";
 import {
   summarize,
   type ProductReviews,
@@ -107,7 +109,14 @@ type RealReview = Pick<Review, "rating" | "body"> &
   Partial<
     Pick<
       Review,
-      "title" | "author" | "country" | "itemTitle" | "avatar" | "createdAt"
+      | "title"
+      | "author"
+      | "country"
+      | "itemTitle"
+      | "avatar"
+      | "createdAt"
+      | "purchasedAt"
+      | "images"
     >
   >;
 
@@ -290,128 +299,6 @@ const MOUSSE_TITLES: Record<Review["rating"], string[]> = {
   3: ["Depends on the hair", "Takes some patience", "Only on my shins"],
   2: ["Not for me", "Patches left behind"],
   1: ["Didn't work for me", "Arrived damaged"],
-};
-
-/**
- * Toner star mix — 340 reviews, average 4.8. Same shape as the mousse set: a
- * heavy 5★ majority with a real tail, so every filter chip has reviews behind
- * it and the three star bands sum to something honest.
- */
-const TONER_MIX: { rating: Review["rating"]; count: number }[] = [
-  { rating: 5, count: 296 },
-  { rating: 4, count: 30 },
-  { rating: 3, count: 8 },
-  { rating: 2, count: 3 },
-  { rating: 1, count: 3 },
-];
-
-/**
- * Toner review copy. The angle is "what changed after I started using it" —
- * the difference a customer noticed, when they noticed it and how gradual it
- * was. Still written against what the manufacturer lists for this product (a
- * 100 ml hydrating toner with niacinamide, collagen and hyaluronic acid,
- * patted on after cleansing), so nothing here outruns the packaging and
- * nothing is a medical outcome (docs/blueprint/01-brand.md §2).
- */
-const TONER_OPENERS: Record<Review["rating"], string[]> = {
-  5: [
-    "I started feeling the difference after about a week of using it twice a day.",
-    "Started noticing a difference about ten days in — my skin felt softer under my fingers.",
-    "By the second week my skin had stopped feeling tight straight after cleansing.",
-    "The difference crept up on me. One morning my skin just felt bouncier than usual.",
-    "I didn't expect much in the first few days, then in the second week my cheeks stopped feeling rough.",
-    "Two weeks in and the dry patches on my cheeks don't catch under my makeup any more.",
-    "Morning and night for a fortnight, and my skin looks less tired than it did.",
-    "By the end of the first bottle my skin felt noticeably softer than when I started.",
-    "I notice it most in the mornings — my skin feels less parched when I wake up.",
-    "A couple of weeks in, my skin felt plumper and my moisturiser seemed to sink in faster.",
-    "A month on, my skin feels comfortable all day instead of tight by lunchtime.",
-    "It took about three weeks, but my skin definitely looks less dull than it did.",
-  ],
-  4: [
-    "I saw a difference, but it took longer than I expected — closer to a month for me.",
-    "My skin does feel softer now, mostly in the mornings before I put anything else on.",
-    "After a few weeks my skin felt less tight, which is what I bought it for.",
-    "The change is subtle on me, though the dry patches around my nose are less noticeable.",
-    "Pleasant to use and my skin feels comfortable, though I can't say it transformed anything.",
-    "It took about three weeks before I noticed it, and it's more of a feel than a look for me.",
-    "I can feel the difference after a fortnight, especially on my cheeks, but it is gradual.",
-    "Works for me once I started layering it twice in winter — one pass wasn't quite enough.",
-  ],
-  3: [
-    "It's fine, but I haven't seen much of a difference from the toner I used before.",
-    "Does the job. The bottle is smaller than I expected for the price.",
-    "Light and pleasant, though I need two layers in winter before I feel anything.",
-    "Works if you follow the steps. My skin felt tight the day I overdid it.",
-    "Alright, but the cap doesn't seal as tightly as I'd like for travel.",
-  ],
-  2: [
-    "Used it for a week and my skin felt tight, so I went back to my old toner.",
-    "Arrived with the seal broken and roughly a quarter of the bottle in the box.",
-    "A month in and I honestly can't point to a single difference.",
-  ],
-  1: [
-    "A few days in my cheeks broke out, so I stopped using it.",
-    "The pump gave up after two weeks and the rest of the bottle went to waste.",
-    "I gave it a full month and nothing changed at all.",
-  ],
-};
-
-const TONER_CLOSERS: Record<Review["rating"], string[]> = {
-  5: [
-    "It's the only step I've changed in my routine, so I'm keeping it.",
-    "I patch tested first and haven't had a single problem with it.",
-    "No stinging when I pat it on, even around my nose.",
-    "Layers under sunscreen without pilling.",
-    "Goes on like water and leaves nothing tacky behind.",
-    "One 100 ml bottle has lasted me about two months of twice-daily use.",
-    "It's stayed in both my morning and evening routine since.",
-    "I repurchased before the first bottle ran out, which says it all.",
-    "The four steps on the leaflet are easy to keep up with.",
-    "Cheaper per use than the sheet masks I used to buy.",
-    "It adds about ten seconds to my routine, which is why it stuck.",
-    "Would buy again — and I have.",
-  ],
-  4: [
-    "The pump is a bit stiff, but that's my only complaint.",
-    "A solid everyday toner rather than a dramatic one.",
-    "I'd buy a larger size if they made one.",
-    "Worth it, just don't expect the change overnight.",
-    "Slightly sticky if I use too much, so I've learned to use less.",
-    "Good value if you catch it on offer.",
-    "I keep it away from my nose in summer, and that works for me.",
-    "Pleasant enough that I'll finish the bottle and decide from there.",
-  ],
-  3: [""],
-  2: [""],
-  1: [""],
-};
-
-const TONER_TITLES: Record<Review["rating"], string[]> = {
-  5: [
-    "Felt the difference in a week",
-    "Softer skin by the second week",
-    "The difference crept up on me",
-    "My skin feels bouncier",
-    "Less tight after cleansing",
-    "Second bottle",
-    "Less dull after a month",
-    "The step I keep coming back to",
-  ],
-  4: [
-    "Gradual, but it's working",
-    "Subtle difference, worth it",
-    "Took a month for me",
-    "Softer, just not overnight",
-    "Good, with a small caveat",
-  ],
-  3: [
-    "No real difference for me",
-    "Fine, not remarkable",
-    "Small bottle for the price",
-  ],
-  2: ["Not for my skin", "Arrived damaged"],
-  1: ["Didn't get on with it", "Pump failed"],
 };
 
 const NAMES = [
@@ -622,15 +509,76 @@ const MOUSSE_SET: ReviewSet = {
   realReviews: MOUSSE_REAL_REVIEWS,
 };
 
-/** Toner set — its own seed, so the two feeds don't shuffle in lockstep. */
-const TONER_SET: ReviewSet = {
-  handle: TONER_HANDLE,
-  seed: 20260926,
-  mix: TONER_MIX,
-  items: ["1 Pack", "1 Pack", "1 Pack", "2 Pack", "2 Pack", "3 Pack"],
-  openers: TONER_OPENERS,
-  closers: TONER_CLOSERS,
-  titles: TONER_TITLES,
+/**
+ * The toner's reviews — no generated ones. Reviews from this store's own
+ * customers come first (newest first), then the TikTok Shop export, which
+ * `scripts/import-tiktok-reviews.ts` turned into `data/reviews/toner-tiktok.json`.
+ * The summary (count, average, bars) is worked out from exactly these.
+ *
+ * Customer reviews carry the pack and order date the customer gave us. The
+ * TikTok ones carry TikTok's own pack label (the export's variant is "1 Pack")
+ * and, for the handful of reviews the export dates, the day the order was
+ * placed; they are tagged `source: "tiktok"`, so the card says where they came
+ * from instead of calling them verified buyers.
+ */
+const TONER_OWN_REVIEWS: Review[] = [
+  {
+    id: "toner-1",
+    rating: 5,
+    title: null,
+    body: "Really enjoying this toner so far! It feels light and refreshing, absorbs quickly, and leaves my skin feeling clean and hydrated without being sticky. It has fit easily into my skincare routine, and I’m happy with my purchase.",
+    // Name masked, shown exactly as it was sent.
+    author: "J**t M**a **",
+    country: "Australia",
+    itemTitle: "1 Pack",
+    avatar: "/avatars/pp1.png",
+    images: [
+      "/reviews/toner/jm-1.png",
+      "/reviews/toner/jm-2.png",
+      "/reviews/toner/jm-3.png",
+    ],
+    // Reviewed 3 Oct 2026, for an order placed 28 Sep 2026. Pinned dates, not
+    // anchored ones: a real review keeps the day it was written.
+    createdAt: "2026-10-03T08:00:00.000Z",
+    purchasedAt: "2026-09-28T09:00:00.000Z",
+  },
+  {
+    id: "toner-2",
+    rating: 5,
+    title: null,
+    body: "My product was delivered safely and on time - I started using this evening- I will provide updates on my reels",
+    // Name masked, shown exactly as it was sent. No pack or order date: the
+    // customer didn't give them, so the card doesn't show them.
+    author: "S**7",
+    country: "United States",
+    avatar: "/avatars/pp2.png",
+    images: [],
+    createdAt: "2026-10-03T06:00:00.000Z",
+  },
+];
+
+/**
+ * Newest day first; within one day, reviews with photos ahead of those without,
+ * then by time. Only ever reorders inside a day — a review with photos never
+ * jumps ahead of a newer day's. (`Array.sort` is stable, so equal reviews keep
+ * their order.)
+ */
+function newestDayPhotosFirst(a: Review, b: Review): number {
+  const byDay = b.createdAt.slice(0, 10).localeCompare(a.createdAt.slice(0, 10));
+  if (byDay !== 0) return byDay;
+  const byPhotos = Number(b.images.length > 0) - Number(a.images.length > 0);
+  if (byPhotos !== 0) return byPhotos;
+  return b.createdAt.localeCompare(a.createdAt);
+}
+
+const TONER_REVIEWS: Review[] = [
+  ...TONER_OWN_REVIEWS,
+  ...(tonerTiktok as unknown as Review[]),
+].sort(newestDayPhotosFirst);
+
+const TONER_SET: ProductReviews = {
+  reviews: TONER_REVIEWS,
+  summary: summarize(TONER_REVIEWS),
 };
 
 function materialise(set: ReviewSet): ProductReviews {
@@ -640,6 +588,19 @@ function materialise(set: ReviewSet): ProductReviews {
   set.realReviews?.forEach((real, i) => {
     if (reviews[i]) reviews[i] = { ...reviews[i], ...real };
   });
+  // A real review pins a calendar date while the generated feed floats with
+  // "today", so a pinned one can end up older than the generated review below
+  // it. The feed and the sort rely on newest-first, so push any review that
+  // would sit above its predecessor to just under it.
+  for (let i = 1; i < reviews.length; i += 1) {
+    const above = Date.parse(reviews[i - 1]!.createdAt);
+    if (Date.parse(reviews[i]!.createdAt) >= above) {
+      reviews[i] = {
+        ...reviews[i]!,
+        createdAt: new Date(above - 3_600_000).toISOString(),
+      };
+    }
+  }
   // The order date is settled last, once every review date is final — including
   // the ones a real review pinned — because it is derived from it, four or five
   // days earlier. It is drawn from its own stream: the generator's is mid-story
@@ -648,6 +609,9 @@ function materialise(set: ReviewSet): ProductReviews {
   const lagRand = mulberry32(set.seed ^ 0x5bf03635);
   for (const review of reviews) {
     const lag = 4 + (lagRand() < 0.5 ? 0 : 1);
+    // A real review that came with its own order date keeps it. The stream is
+    // still drawn above, so pinning one doesn't shift any other review's lag.
+    if (review.purchasedAt) continue;
     review.purchasedAt = new Date(
       Date.parse(review.createdAt) - lag * DAY,
     ).toISOString();
@@ -655,10 +619,32 @@ function materialise(set: ReviewSet): ProductReviews {
   return { reviews, summary: summarize(reviews) };
 }
 
-/** Handle → placeholder set, built once at module load. */
-const sets = new Map<string, ProductReviews>(
-  [MOUSSE_SET, TONER_SET].map((set) => [set.handle, materialise(set)]),
-);
+/**
+ * The mousse's reviews — no generated filler. The customer-sent ones
+ * (`MOUSSE_REAL_REVIEWS`) keep the slot fields they have always had, then the
+ * TikTok Shop export (`data/reviews/hair-removal-tiktok.json`, from
+ * `scripts/import-tiktok-reviews.ts --variants`) follows, newest first. The
+ * TikTok ones carry TikTok's own pack label but no order date, and are tagged
+ * `source: "tiktok"`, so they are never shown as verified buyers of this store.
+ * The summary is worked out from exactly these.
+ *
+ * Only the first `MOUSSE_REAL_REVIEWS.length` slots of the generator are used:
+ * they are the ones a real review overwrote, so everything else in them is
+ * the customer's.
+ */
+const MOUSSE_REVIEWS: Review[] = [
+  ...materialise(MOUSSE_SET).reviews.slice(0, MOUSSE_REAL_REVIEWS.length),
+  ...(hairRemovalTiktok as unknown as Review[]),
+].sort(newestDayPhotosFirst);
+
+/** Handle → review set, built once at module load. */
+const sets = new Map<string, ProductReviews>([
+  [
+    MOUSSE_HANDLE,
+    { reviews: MOUSSE_REVIEWS, summary: summarize(MOUSSE_REVIEWS) },
+  ],
+  [TONER_HANDLE, TONER_SET],
+]);
 
 /** The placeholder set, for callers that already know they want it. */
 export const demoReviews: ProductReviews = sets.get(MOUSSE_HANDLE)!;

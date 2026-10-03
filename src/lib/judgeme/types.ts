@@ -42,6 +42,12 @@ export type Review = {
    */
   purchasedAt?: string;
   images: string[];
+  /**
+   * Where the review was written, when it was not written on this store. Set
+   * for reviews carried over from another platform; the card says so, and does
+   * not mark them as verified buyers. Absent means a review from this store.
+   */
+  source?: "tiktok";
 };
 
 export type ReviewSummary = {
@@ -51,6 +57,24 @@ export type ReviewSummary = {
 };
 
 export type ProductReviews = { reviews: Review[]; summary: ReviewSummary };
+
+/** Reviews per page in the feed. */
+export const FEED_PAGE_SIZE = 8;
+
+/** What the feed can be narrowed to: everything, reviews with photos, or one star band. */
+export type FeedFilter = "all" | "photo" | Review["rating"];
+
+/**
+ * One page of the feed, cut on the server so the whole review set never has to
+ * travel to the browser: `total` is how many reviews match the filter, and
+ * `pages` how many pages that makes.
+ */
+export type FeedPage = {
+  items: Review[];
+  total: number;
+  page: number;
+  pages: number;
+};
 
 /**
  * When a review was written, as a short plain date: "Oct 2".
@@ -69,6 +93,29 @@ export function formatReviewDate(iso: string): string {
     day: "numeric",
     timeZone: "UTC",
   }).format(then);
+}
+
+/**
+ * A reviewer's name as shown: each word keeps its first and last letter with
+ * two stars between ("Nicholas M." → "N**s M**"), so a customer is never named
+ * in full. A name that already carries stars was masked by the customer (or by
+ * us, by hand) and is shown exactly as given.
+ */
+export function maskName(name: string): string {
+  // "Verified buyer" is the stand-in when Judge.me has no name at all.
+  if (name.includes("*") || name === "Verified buyer") return name;
+  return name
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => {
+      const letters = word.replace(/\.$/, "");
+      if (letters.length === 0) return word;
+      return letters.length === 1
+        ? `${letters}**`
+        : `${letters[0]}**${letters[letters.length - 1]}`;
+    })
+    .join(" ");
 }
 
 /** Counts, mean (rounded to 1 decimal) and the per-star distribution. */

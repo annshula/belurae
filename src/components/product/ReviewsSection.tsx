@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import {
   ReadMoreButton,
@@ -12,71 +12,90 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Stars } from "@/components/ui/Stars";
-import { demoReviewsFor } from "@/data/reviews";
-import { type ProductReviews, type Review } from "@/lib/judgeme/types";
+import {
+  FEED_PAGE_SIZE,
+  type FeedFilter,
+  type FeedPage,
+  type Review,
+  type ReviewSummary,
+} from "@/lib/judgeme/types";
 import { cn } from "@/lib/utils";
 
 /**
  * The review feed: an aggregate panel (clickable star breakdown), quick filters
  * and a paginated list of full reviews.
  *
- * Two sources, one UI:
- *  - `data` — verified reviews fetched from Judge.me on the server.
- *  - otherwise the placeholder set in `data/reviews.ts`, generated locally, so
- *    524 reviews never travel through the RSC payload. See that file's doc
- *    comment: placeholder reviews are UI only and never reach schema.
- *
- * Client-side because filtering and paging are instant interactions — but the
- * first page is still server-rendered, so reviews are in the HTML for crawlers.
+ * The reviews themselves never ship whole. The server renders page one into the
+ * HTML (so crawlers and first paint have real reviews), and every other page or
+ * filter is fetched from `/api/reviews`, 8 reviews at a time, and kept so going
+ * back to a page is instant. Where they come from — Judge.me, else the local
+ * set in `data/reviews.ts` — is decided on the server (`lib/reviews/feed.ts`).
  */
 
-/** Reviews per page in the feed. */
-const PAGE_SIZE = 8;
 const STAR_ORDER = [5, 4, 3, 2, 1] as const;
 
-type Filter = "all" | "photo" | Review["rating"];
-
 export function ReviewsSection({
-  data,
+  summary,
+  photoCount,
+  initial,
   handle,
 }: {
-  data: ProductReviews | null;
+  /** Null when the product has no reviews at all. */
+  summary: ReviewSummary | null;
+  /** How many reviews carry a photo — the "With photos" chip's count. */
+  photoCount: number;
+  /** Page one of the feed, already in the server-rendered HTML. */
+  initial: FeedPage;
   handle: string;
 }) {
-  const set = data ?? demoReviewsFor(handle);
-  const reviews = useMemo(() => set?.reviews ?? [], [set]);
-  const summary = set?.summary ?? null;
-
-  const [filter, setFilter] = useState<Filter>("all");
-  const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState<FeedFilter>("all");
+  const [current, setCurrent] = useState<FeedPage>(initial);
+  const [loading, setLoading] = useState(false);
+  const [failed, setFailed] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
+  // Pages already fetched, so going back to one is instant and free.
+  const cache = useRef(new Map<string, FeedPage>([["all:1", initial]]));
+  // Only the latest request may land; a slower, older one is dropped.
+  const latest = useRef(0);
 
-  const counts = useMemo(() => {
-    const by: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-    let photos = 0;
-    for (const r of reviews) {
-      by[r.rating] = (by[r.rating] ?? 0) + 1;
-      if (r.images.length > 0) photos += 1;
-    }
-    return { by, photos };
-  }, [reviews]);
-
-  const filtered = useMemo(() => {
-    if (filter === "all") return reviews;
-    if (filter === "photo") return reviews.filter((r) => r.images.length > 0);
-    return reviews.filter((r) => r.rating === filter);
-  }, [reviews, filter]);
+  const load = useCallback(
+    async (nextFilter: FeedFilter, nextPage: number) => {
+      const key = `${nextFilter}:${nextPage}`;
+      const ticket = ++latest.current;
+      const cached = cache.current.get(key);
+      if (cached) {
+        setCurrent(cached);
+        setLoading(false);
+        setFailed(false);
+        return;
+      }
+      setLoading(true);
+      setFailed(false);
+      try {
+        const res = await fetch(
+          `/api/reviews?${new URLSearchParams({
+            handle,
+            filter: String(nextFilter),
+            page: String(nextPage),
+          })}`,
+        );
+        if (!res.ok) throw new Error(`reviews ${res.status}`);
+        const data = (await res.json()) as FeedPage;
+        cache.current.set(key, data);
+        if (ticket === latest.current) setCurrent(data);
+      } catch {
+        if (ticket === latest.current) setFailed(true);
+      } finally {
+        if (ticket === latest.current) setLoading(false);
+      }
+    },
+    [handle],
+  );
 
   if (!summary) return <NoReviewsYet />;
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const safePage = Math.min(page, totalPages);
-  const pageItems = filtered.slice(
-    (safePage - 1) * PAGE_SIZE,
-    safePage * PAGE_SIZE,
-  );
-  const from = filtered.length === 0 ? 0 : (safePage - 1) * PAGE_SIZE + 1;
-  const to = Math.min(safePage * PAGE_SIZE, filtered.length);
+  const from = current.total === 0 ? 0 : (current.page - 1) * FEED_PAGE_SIZE + 1;
+  const to = Math.min(current.page * FEED_PAGE_SIZE, current.total);
   const recommendPercent = summary.count
     ? Math.round(
         ((summary.distribution[5] + summary.distribution[4]) / summary.count) *
@@ -84,38 +103,38 @@ export function ReviewsSection({
       )
     : 0;
 
-  const chooseFilter = (next: Filter) => {
+  const chooseFilter = (next: FeedFilter) => {
     setFilter(next);
-    setPage(1);
+    void load(next, 1);
   };
 
   const goTo = (next: number) => {
-    setPage(Math.min(Math.max(1, next), totalPages));
+    void load(filter, Math.min(Math.max(1, next), current.pages));
     // `scroll-mt` on the list keeps the sticky header off the top review.
     listRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const chips: {
-    id: Filter;
+    id: FeedFilter;
     label: string;
     count: number;
     camera?: boolean;
   }[] = [
-    { id: "all", label: "All reviews", count: reviews.length },
-    ...(counts.photos > 0
+    { id: "all", label: "All reviews", count: summary.count },
+    ...(photoCount > 0
       ? [
           {
-            id: "photo" as Filter,
+            id: "photo" as FeedFilter,
             label: "With photos",
-            count: counts.photos,
+            count: photoCount,
             camera: true,
           },
         ]
       : []),
     ...STAR_ORDER.map((star) => ({
-      id: star as Filter,
+      id: star as FeedFilter,
       label: `${star} star${star === 1 ? "" : "s"}`,
-      count: counts.by[star] ?? 0,
+      count: summary.distribution[star] ?? 0,
     })),
   ];
 
@@ -234,35 +253,59 @@ export function ReviewsSection({
           aria-live="polite"
           className="mt-6 font-ui text-body-sm text-ink-faint tabular-nums"
         >
-          {filtered.length === 0
+          {current.total === 0
             ? "No reviews match this filter."
-            : `Showing ${from}–${to} of ${filtered.length.toLocaleString("en-US")} reviews`}
+            : `Showing ${from}–${to} of ${current.total.toLocaleString("en-US")} reviews`}
         </p>
 
-        {pageItems.length === 0 ? (
+        {failed && (
+          <p
+            role="alert"
+            className="mt-4 rounded-card bg-cream px-4 py-3 font-ui text-body-sm text-ink-soft"
+          >
+            Couldn&apos;t load those reviews.{" "}
+            <button
+              type="button"
+              onClick={() => void load(filter, current.page)}
+              className="link-underline font-medium text-ink"
+            >
+              Try again
+            </button>
+          </p>
+        )}
+
+        {current.items.length === 0 ? (
           <EmptyFilterState onReset={() => chooseFilter("all")} />
         ) : (
-          <ul className="mt-4 flex flex-col gap-4">
-            {pageItems.map((review) => (
+          /* The list stays put and dims while the next page is fetched, so the
+             page never jumps to empty and back. */
+          <ul
+            aria-busy={loading}
+            className={cn(
+              "mt-4 flex flex-col gap-4 transition-opacity duration-200",
+              loading && "pointer-events-none opacity-50",
+            )}
+          >
+            {current.items.map((review) => (
               <ReviewCard key={review.id} review={review} />
             ))}
           </ul>
         )}
 
-        {filtered.length > PAGE_SIZE && (
+        {current.pages > 1 && (
           <nav
             aria-label="Reviews pagination"
             className="mt-8 flex flex-wrap items-center justify-end gap-1.5"
           >
             <PageButton
               label="Previous page"
-              disabled={safePage === 1}
-              onClick={() => goTo(safePage - 1)}
+              disabled={current.page === 1}
+              onClick={() => goTo(current.page - 1)}
             >
               <Icon name="chevron-right" className="size-4 rotate-180" />
             </PageButton>
 
-            {pageWindow(safePage, totalPages).map((entry, i) =>
+            {pageWindow(current.page, current.pages).map((entry, i) =>
               entry === "…" ? (
                 <span
                   key={`gap-${i}`}
@@ -275,7 +318,7 @@ export function ReviewsSection({
                 <PageButton
                   key={entry}
                   label={`Page ${entry}`}
-                  current={entry === safePage}
+                  current={entry === current.page}
                   onClick={() => goTo(entry)}
                 >
                   {entry}
@@ -285,8 +328,8 @@ export function ReviewsSection({
 
             <PageButton
               label="Next page"
-              disabled={safePage === totalPages}
-              onClick={() => goTo(safePage + 1)}
+              disabled={current.page === current.pages}
+              onClick={() => goTo(current.page + 1)}
             >
               <Icon name="chevron-right" className="size-4" />
             </PageButton>
