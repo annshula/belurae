@@ -182,12 +182,13 @@ export default async function ProductPage({ params }: Props) {
   const ratingLine = reviewSet?.summary ?? null;
 
   /*
-   * The buy-box carousel shows the head of the same feed, sliced here so a
-   * dozen reviews cross the RSC boundary instead of all 524 of the placeholder
-   * set. It is a dozen rather than five because the carousel keeps only the 5★
-   * ones — the newest handful of reviews always contains a few lower down.
+   * The buy-box carousel shows the newest 5★ reviews of the same feed, picked
+   * here so five reviews cross the RSC boundary instead of all 524 of the
+   * placeholder set.
    */
-  const feedbackReviews = reviewSet?.reviews.slice(0, 12);
+  const feedbackReviews = reviewSet?.reviews
+    .filter((r) => r.rating === 5)
+    .slice(0, 5);
 
   const perks = view.perks.map((text) => ({ icon: perkIcon(text), text }));
 

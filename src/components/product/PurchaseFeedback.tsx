@@ -162,8 +162,7 @@ function FeedbackDesktop({
   reviews: Review[];
   className?: string;
 }) {
-  // The five newest reviews rather than the five-star ones: there are only
-  // four of those, and a carousel that skips the 4★ is a highlight reel.
+  // The page hands over 5★ reviews only.
   const slides = reviews.slice(0, MAX_SLIDES);
   const count = slides.length;
   const [index, setIndex] = useState(0);
