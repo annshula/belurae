@@ -237,8 +237,11 @@ export function Avatar({
             !loaded && "opacity-0",
           )}
           onLoad={() => setLoaded(true)}
-          // A broken picture falls back to the empty-profile placeholder.
+          // A dead or expired picture falls back to the empty-profile
+          // placeholder — the same as a reviewer with no picture.
           onError={() => setFailed(true)}
+          // Some CDNs refuse a picture whose request names another site.
+          referrerPolicy="no-referrer"
         />
         {!loaded && (
           <span

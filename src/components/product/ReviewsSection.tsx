@@ -14,6 +14,7 @@ import { Icon } from "@/components/ui/Icon";
 import { Stars } from "@/components/ui/Stars";
 import {
   FEED_PAGE_SIZE,
+  SHOW_REVIEW_PHOTOS,
   type FeedFilter,
   type FeedPage,
   type Review,
@@ -121,7 +122,7 @@ export function ReviewsSection({
     camera?: boolean;
   }[] = [
     { id: "all", label: "All reviews", count: summary.count },
-    ...(photoCount > 0
+    ...(SHOW_REVIEW_PHOTOS && photoCount > 0
       ? [
           {
             id: "photo" as FeedFilter,

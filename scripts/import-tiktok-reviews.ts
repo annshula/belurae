@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Turns a TikTok Shop review export into the shape the site's review UI reads,
  * and copies each review's photos onto our own host (TikTok's image links are
  * signed and expire within days).
@@ -31,11 +31,22 @@
  * a home or an address are withheld. Files are named by a hash of the review,
  * so re-running after a merge never attaches a photo to the wrong one.
  *
+ * `--remote-photos` (with --photos) links review photos straight to TikTok's
+ * own image URLs instead of downloading copies; the review UI hides any photo
+ * that no longer loads. Profile pictures (--avatars) are always downloaded:
+ * their signed links expire within days.
+ *
  * Re-runnable: photos already on disk are not downloaded again.
  */
 
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  unlinkSync,
+  writeFileSync,
+} from "node:fs";
 import path from "node:path";
 
 type RawReview = {
@@ -58,6 +69,7 @@ const COUNTRIES: Record<string, string> = {
   AU: "Australia",
 };
 
+const remotePhotos = process.argv.includes("--remote-photos");
 const withPhotos = process.argv.includes("--photos");
 const withAvatars = process.argv.includes("--avatars");
 const withVariants = process.argv.includes("--variants");
@@ -68,7 +80,7 @@ const [rawPath, outPath, photoDir, prefix = "tt"] = process.argv
   .filter((arg) => !arg.startsWith("--"));
 if (!rawPath || !outPath || !photoDir) {
   console.error(
-    "usage: tsx scripts/import-tiktok-reviews.ts <raw.json> <out.json> <photo-dir> [photo-prefix] [--photos] [--avatars] [--variants] [--purchase-dates] [--include-filtered]",
+    "usage: tsx scripts/import-tiktok-reviews.ts <raw.json> <out.json> <photo-dir> [photo-prefix] [--photos] [--avatars] [--variants] [--purchase-dates] [--include-filtered] [--remote-photos]",
   );
   process.exit(1);
 }
@@ -99,8 +111,15 @@ const raw = JSON.parse(readFileSync(rawPath, "utf8")) as {
   reviews: RawReview[];
 };
 
-if (withPhotos) mkdirSync(photoDir, { recursive: true });
+if (withPhotos && !remotePhotos) mkdirSync(photoDir, { recursive: true });
 if (withAvatars) mkdirSync(path.join("public", "avatars"), { recursive: true });
+
+/**
+ * The only hosts a `--remote-photos` link may point at: the TikTok CDNs the page's
+ * Content-Security-Policy (`src/middleware.ts`) allows images from. Anything else
+ * (a Facebook or Google avatar in the export) is dropped rather than linked.
+ */
+const TIKTOK_CDN = /^https:\/\/[^/]+\.(?:tiktokcdn-us|ttcdn-us)\.com\//i;
 mkdirSync(path.dirname(outPath), { recursive: true });
 
 /** Public URL path for a file inside `public/`. */
@@ -114,6 +133,21 @@ async function download(url: string, file: string): Promise<boolean> {
     if (!res.ok) return false;
     writeFileSync(file, Buffer.from(await res.arrayBuffer()));
     return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * True for an image that is (near) solid black — every channel's brightest
+ * pixel is below 40/255. Uses `sharp` (already installed with Next); if it
+ * can't be loaded the check is skipped and the picture is kept.
+ */
+async function isBlank(file: string): Promise<boolean> {
+  try {
+    const { default: sharp } = await import("sharp");
+    const { channels } = await sharp(file).stats();
+    return channels.every((c) => c.max < 40);
   } catch {
     return false;
   }
@@ -144,6 +178,7 @@ async function main() {
   const out = [];
   let failed = 0;
   let withheld = 0;
+  let blank = 0;
   for (const [i, r] of usable.entries()) {
     const n = String(i + 1).padStart(2, "0");
     const key = fileKey(r);
@@ -154,15 +189,27 @@ async function main() {
       ? (r.media_urls ?? [])
       : []
     ).entries()) {
+      if (remotePhotos) {
+        if (TIKTOK_CDN.test(url)) images.push(url);
+        continue;
+      }
       const file = path.join(photoDir!, `${prefix}-${key}-${j + 1}.webp`);
       if (await download(url, file)) images.push(publicPath(file));
       else failed += 1;
     }
     let avatar: string | undefined;
+    // Profile pictures are always copied to our own host: their links expire in
+    // about two days, and a reviewer's picture should not vanish with the link.
     if (withAvatars && r.profile_pic_url) {
       const file = path.join("public", "avatars", `${prefix}-${key}.jpg`);
-      if (await download(r.profile_pic_url, file)) avatar = publicPath(file);
-      else failed += 1;
+      if (!(await download(r.profile_pic_url, file))) failed += 1;
+      else if (await isBlank(file)) {
+        // TikTok serves a solid black square for some accounts with no picture.
+        // That is not a profile photo: drop it, so the card shows the same
+        // empty-profile silhouette it shows for everyone else without one.
+        unlinkSync(file);
+        blank += 1;
+      } else avatar = publicPath(file);
     }
     const itemTitle = withVariants ? packOf(r.item_variant) : undefined;
     const purchasedAt = purchaseDateOf(r);
@@ -190,6 +237,7 @@ async function main() {
       ` ${out.reduce((s, r) => s + r.images.length, 0)} photos and` +
       ` ${out.filter((r) => r.avatar).length} profile pictures saved` +
       (withheld ? `, photos withheld on ${withheld} (address/home)` : "") +
+      (blank ? `, ${blank} blank (black) profile pictures dropped` : "") +
       (failed ? `, ${failed} failed to download` : ""),
   );
 }

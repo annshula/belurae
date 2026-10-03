@@ -48,7 +48,8 @@ const CSP = [
   )}`,
   `style-src 'self' 'unsafe-inline'`,
   `img-src ${join(
-    "'self' data: blob: https://cdn.shopify.com https://judgeme.imgix.net https://*.judge.me",
+    // The two TikTok CDNs are for the imported review photos and avatars.
+    "'self' data: blob: https://cdn.shopify.com https://judgeme.imgix.net https://*.judge.me https://*.tiktokcdn-us.com https://*.ttcdn-us.com",
     GA && "https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.google.com",
     META && "https://www.facebook.com",
     TIKTOK && "https://analytics.tiktok.com",

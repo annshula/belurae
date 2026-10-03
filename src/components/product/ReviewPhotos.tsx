@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
 import { Icon } from "@/components/ui/Icon";
-import { maskName } from "@/lib/judgeme/types";
+import { maskName, SHOW_REVIEW_PHOTOS } from "@/lib/judgeme/types";
 import { cn } from "@/lib/utils";
 
 // Same lightbox the product gallery uses, loaded only when a photo is opened.
@@ -20,7 +20,15 @@ const GalleryLightbox = dynamic(
  * already cached (or finished before React attached `onLoad`) is caught by the
  * ref check, so it doesn't sit under a spinner forever.
  */
-function PhotoImage({ src, sizes }: { src: string; sizes: string }) {
+function PhotoImage({
+  src,
+  sizes,
+  onFail,
+}: {
+  src: string;
+  sizes: string;
+  onFail: () => void;
+}) {
   const [loaded, setLoaded] = useState(false);
   const check = useCallback((img: HTMLImageElement | null) => {
     if (img?.complete && img.naturalWidth > 0) setLoaded(true);
@@ -39,8 +47,10 @@ function PhotoImage({ src, sizes }: { src: string; sizes: string }) {
           !loaded && "opacity-0",
         )}
         onLoad={() => setLoaded(true)}
-        // A broken link shouldn't spin forever either.
-        onError={() => setLoaded(true)}
+        // A link that is dead or expired: the parent drops the whole tile.
+        onError={onFail}
+        // Some CDNs refuse a picture whose request names another site.
+        referrerPolicy="no-referrer"
         /* Unoptimized: the site's custom loader would rewrite a small tile
            into a srcset of derivatives of a derivative. */
         unoptimized
@@ -69,6 +79,10 @@ function PhotoImage({ src, sizes }: { src: string; sizes: string }) {
  * Tiles past `max` collapse into a "+N" on the last one, which opens the
  * lightbox too — every photo is reachable from the lightbox, not only the ones
  * with a tile.
+ *
+ * An image that fails to load (a dead or expired link) is removed, tile and
+ * all — the card shows the pictures that work and nothing for the ones that
+ * don't.
  */
 export function ReviewPhotos({
   images,
@@ -86,6 +100,7 @@ export function ReviewPhotos({
   sizes: string;
 }) {
   const [openAt, setOpenAt] = useState<number | null>(null);
+  const [broken, setBroken] = useState<ReadonlySet<string>>(new Set());
 
   // The review panel closes on Escape too. While the lightbox is up, Escape
   // belongs to the lightbox alone: swallow it here, after the lightbox's own
@@ -99,11 +114,12 @@ export function ReviewPhotos({
     return () => document.removeEventListener("keydown", swallow);
   }, [openAt]);
 
-  if (images.length === 0) return null;
+  const alive = images.filter((src) => !broken.has(src));
+  if (!SHOW_REVIEW_PHOTOS || alive.length === 0) return null;
 
   const name = maskName(author);
-  const shown = images.slice(0, max);
-  const more = images.length - shown.length;
+  const shown = alive.slice(0, max);
+  const more = alive.length - shown.length;
 
   return (
     <>
@@ -114,13 +130,17 @@ export function ReviewPhotos({
               type="button"
               onClick={() => setOpenAt(i)}
               aria-haspopup="dialog"
-              aria-label={`Open photo ${i + 1} of ${images.length} from ${name}'s review`}
+              aria-label={`Open photo ${i + 1} of ${alive.length} from ${name}'s review`}
               className={cn(
                 "relative block cursor-zoom-in overflow-hidden bg-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600",
                 tileClassName,
               )}
             >
-              <PhotoImage src={src} sizes={sizes} />
+              <PhotoImage
+                src={src}
+                sizes={sizes}
+                onFail={() => setBroken((prev) => new Set(prev).add(src))}
+              />
               {more > 0 && i === shown.length - 1 && (
                 <span
                   aria-hidden="true"
@@ -136,7 +156,7 @@ export function ReviewPhotos({
 
       {openAt !== null && (
         <GalleryLightbox
-          slides={images.map((src) => ({
+          slides={alive.map((src) => ({
             src,
             alt: `Photo from ${name}'s review`,
           }))}

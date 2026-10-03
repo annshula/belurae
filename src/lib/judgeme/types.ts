@@ -58,6 +58,13 @@ export type ReviewSummary = {
 
 export type ProductReviews = { reviews: Review[]; summary: ReviewSummary };
 
+/**
+ * Whether review photos are shown anywhere (cards, panel, buy-box carousel, the
+ * "With photos" filter). Off for now: reviews read as text only. The photos
+ * are still in the data — set this to `true` to bring them all back.
+ */
+export const SHOW_REVIEW_PHOTOS = false;
+
 /** Reviews per page in the feed. */
 export const FEED_PAGE_SIZE = 8;
 
