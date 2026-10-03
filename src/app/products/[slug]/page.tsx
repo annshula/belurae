@@ -263,21 +263,21 @@ export default async function ProductPage({ params }: Props) {
                     key={t.text}
                     className="inline-flex min-w-0 items-center gap-1.5 rounded-full bg-sage-100 px-3 py-1.5 text-[0.78rem] leading-none font-medium whitespace-nowrap text-sage-800 sm:px-2.5 sm:text-[0.72rem]"
                   >
-                    <Icon name={t.icon} className="size-4 shrink-0 sm:size-3.5" />
+                    <Icon
+                      name={t.icon}
+                      className="size-4 shrink-0 sm:size-3.5"
+                    />
                     <span className="truncate">{t.text}</span>
                   </li>
                 ))}
               </ul>
             )}
 
-            {/* Rating + social proof as one plain line of text (no chips). The
-                rating still jumps to the reviews. The customer count is a figure
-                we can point to for this product (content.pdp.customers → Shopify
-                orders), dated in `asOf` so it gets refreshed instead of drifting.
-                Products without a count keep the delivery fact in its place. */}
+            {/* Rating line as plain text (no chips). The rating jumps to the
+                reviews. */}
             {(() => {
               const hasRating = Boolean(ratingLine && ratingLine.count > 0);
-              if (!hasRating && !content.pdp.customers) return null;
+              if (!hasRating) return null;
               return (
                 <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-ui text-body-sm">
                   {ratingLine && ratingLine.count > 0 && (
@@ -294,22 +294,6 @@ export default async function ProductPage({ params }: Props) {
                         {ratingLine.count.toLocaleString("en-US")} reviews
                       </span>
                     </a>
-                  )}
-                  {hasRating && content.pdp.customers && (
-                    <span aria-hidden="true" className="text-ink-faint">
-                      ·
-                    </span>
-                  )}
-                  {content.pdp.customers && (
-                    <span
-                      title={`Based on ${content.pdp.customers.count.toLocaleString("en-US")} orders as of ${content.pdp.customers.asOf}`}
-                      className="text-ink-soft"
-                    >
-                      <span className="font-numeral font-semibold text-ink tabular-nums">
-                        {content.pdp.customers.count.toLocaleString("en-US")}+
-                      </span>{" "}
-                      happy customers
-                    </span>
                   )}
                 </p>
               );
