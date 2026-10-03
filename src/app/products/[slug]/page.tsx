@@ -301,7 +301,7 @@ export default async function ProductPage({ params }: Props) {
               );
             })()}
 
-            <h1 className="mt-3 font-serif text-heading-1 font-medium">
+            <h1 className="mt-3 font-serif text-[length:clamp(1.375rem,1.25rem+0.5vw,1.625rem)] leading-[1.15] font-medium text-wrap">
               {view.name}
             </h1>
             {/* <p className="mt-2 text-body-lg text-ink-soft">{content.benefitLine}</p> */}
