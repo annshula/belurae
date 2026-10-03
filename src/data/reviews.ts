@@ -640,6 +640,18 @@ function materialise(set: ReviewSet): ProductReviews {
   set.realReviews?.forEach((real, i) => {
     if (reviews[i]) reviews[i] = { ...reviews[i], ...real };
   });
+  // The order date is settled last, once every review date is final — including
+  // the ones a real review pinned — because it is derived from it, four or five
+  // days earlier. It is drawn from its own stream: the generator's is mid-story
+  // by now, and a modulus over the index would show the gap as a 4,5,4,5 run
+  // down the feed.
+  const lagRand = mulberry32(set.seed ^ 0x5bf03635);
+  for (const review of reviews) {
+    const lag = 4 + (lagRand() < 0.5 ? 0 : 1);
+    review.purchasedAt = new Date(
+      Date.parse(review.createdAt) - lag * DAY,
+    ).toISOString();
+  }
   return { reviews, summary: summarize(reviews) };
 }
 

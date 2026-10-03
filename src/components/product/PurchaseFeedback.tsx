@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useRef, useState } from "react";
 
 import {
-  Avatar,
   ReadMoreButton,
+  Reviewer,
   useInlinePreview,
 } from "@/components/product/ReviewPanel";
 import { Icon } from "@/components/ui/Icon";
@@ -134,26 +134,8 @@ function FeedbackSlide({
         </p>
       </div>
 
-      <footer className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-ui text-body-sm">
-        <Avatar review={review} className="size-8 text-[0.8rem]" />
-        <span className="font-medium">{review.author}</span>
-        {review.country && (
-          <span className="text-ink-faint">{review.country}</span>
-        )}
-        {review.itemTitle && (
-          <span className="inline-flex items-center gap-1 text-ink-faint">
-            <Icon name="package" className="size-3" />
-            {review.itemTitle}
-          </span>
-        )}
-        <span className="inline-flex items-center gap-1 font-medium text-success">
-          <Icon
-            name="check"
-            className="size-3 text-success"
-            strokeWidth={2.4}
-          />
-          Verified buyer
-        </span>
+      <footer>
+        <Reviewer review={review} />
       </footer>
     </li>
   );
@@ -334,7 +316,7 @@ function DesktopArrow({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="grid size-8 shrink-0 place-items-center rounded-full border border-sage-200 bg-paper text-sage-700 transition-colors duration-300 hover:border-sage-400 hover:text-sage-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600"
+      className="grid size-8 shrink-0 place-items-center rounded-full text-sage-700 transition-colors duration-300 hover:bg-sand hover:text-sage-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600"
     >
       <Icon name={icon} className={cn("size-4", className)} />
     </button>
@@ -406,36 +388,22 @@ function FeedbackMobile({
           go(index + 1);
         }
       }}
-      className={cn("surface-float px-4 py-4 sm:px-5", className)}
+      className={className}
     >
-      <div className="flex items-center justify-between gap-3">
-        <p className="font-ui text-body-sm font-medium text-ink-soft">
-          What customers say
-        </p>
+      {/* No white panel and no arrows on a phone: the cards sit straight on the
+          page and a swipe pages them. */}
+      <p className="font-ui text-body-sm font-medium text-ink-soft">
+        What customers say
+      </p>
 
-        {count > 1 && (
-          <div className="flex items-center gap-1">
-            <ArrowButton
-              label="Previous review"
-              onClick={() => go(index - 1)}
-              disabled={index === 0}
-              className="rotate-180"
-            />
-            <ArrowButton
-              label="Next review"
-              onClick={() => go(index + 1)}
-              disabled={index === count - 1}
-            />
-          </div>
-        )}
-      </div>
-
-      {/* Bleeds to the card edge on phones so cards can peek in from the side. */}
+      {/* Runs out to the screen edges (the page gutter is cancelled, then put
+          back as padding) so cards come in from the side and the next one
+          peeks. */}
       <ul
         ref={trackRef}
         onScroll={onScroll}
         aria-live="polite"
-        className="relative -mx-4 mt-3 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto overscroll-x-contain px-4 pb-1 scrollbar-none sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden"
+        className="relative -mx-(--gutter) mt-3 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto overscroll-x-contain px-(--gutter) pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden"
       >
         {slides.map((review, i) => (
           <FeedbackSlide
@@ -443,10 +411,9 @@ function FeedbackMobile({
             review={review}
             index={i}
             count={count}
-            className="flex w-[86%] shrink-0 snap-center flex-col justify-between gap-4 rounded-2xl bg-cream/70 p-4 sm:w-full"
-            /* Darker than the desktop slide: this one sits on the tinted
-               card, where ink-soft loses too much contrast. Five lines here
-               against the desktop's four, which is what it has always had. */
+            className="flex w-[85%] shrink-0 snap-center flex-col justify-between gap-4 rounded-2xl bg-cream/70 p-4"
+            /* Darker than the desktop slide: this one sits on a tinted card,
+               where ink-soft loses too much contrast. */
             bodyClassName="line-clamp-4 text-ink"
           />
         ))}
@@ -475,30 +442,5 @@ function FeedbackMobile({
         </div>
       )}
     </section>
-  );
-}
-
-/** Circular pager arrow — one glyph, mirrored for "previous". */
-function ArrowButton({
-  label,
-  onClick,
-  disabled,
-  className,
-}: {
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
-  className?: string;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      aria-label={label}
-      className="grid size-8 shrink-0 place-items-center rounded-full border border-sage-200 bg-paper text-sage-700 transition-colors duration-300 hover:border-sage-400 hover:text-sage-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600 disabled:opacity-40"
-    >
-      <Icon name="chevron-right" className={cn("size-4", className)} />
-    </button>
   );
 }

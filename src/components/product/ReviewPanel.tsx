@@ -1,5 +1,18 @@
 "use client";
 
+import {
+  autoUpdate,
+  flip,
+  FloatingPortal,
+  offset,
+  shift,
+  useClick,
+  useDismiss,
+  useFloating,
+  useFocus,
+  useHover,
+  useInteractions,
+} from "@floating-ui/react";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -258,7 +271,7 @@ export function ReviewMeta({
   );
 }
 
-/** Photos and the pack they bought, when the review carries either. */
+/** Photos, when the review carries any. */
 export function ReviewExtras({ review }: { review: Review }) {
   return (
     <>
@@ -282,40 +295,132 @@ export function ReviewExtras({ review }: { review: Review }) {
         </ul>
       )}
 
-      {review.itemTitle && (
-        /* What they actually bought. A review with a pack under it reads as a
-           purchase; without one it reads as an opinion floating in space. */
-        <p className="mt-4 inline-flex flex-wrap items-center gap-1.5 rounded-tag bg-cream px-2.5 py-1 font-ui text-body-sm">
-          <Icon
-            name="package"
+    </>
+  );
+}
+
+/**
+ * The verified-buyer mark: just a tick beside the name, with the words in a
+ * tooltip. Hover and keyboard focus show it; a tap toggles it, since a phone
+ * has no hover.
+ */
+function VerifiedTick() {
+  const [open, setOpen] = useState(false);
+
+  const { refs, floatingStyles, context } = useFloating({
+    open,
+    onOpenChange: setOpen,
+    placement: "top",
+    middleware: [offset(8), flip(), shift({ padding: 8 })],
+    whileElementsMounted: autoUpdate,
+  });
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    useHover(context, { mouseOnly: true, move: false }),
+    useFocus(context),
+    useClick(context, { ignoreMouse: true }),
+    useDismiss(context),
+  ]);
+
+  return (
+    <>
+      <button
+        ref={refs.setReference}
+        type="button"
+        aria-label="Verified buyer"
+        /* The before: box widens the tap target well past the 16px tick. */
+        className="relative grid size-4 shrink-0 place-items-center rounded-full bg-success text-paper before:absolute before:-inset-2 before:content-[''] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600"
+        {...getReferenceProps()}
+      >
+        <Icon name="check" className="size-2.5" strokeWidth={3} />
+      </button>
+      {open && (
+        /* In a portal: a carousel track clips its overflow, which would cut a
+           tooltip that pokes out of it. The button already carries the label,
+           so the tooltip is hidden from screen readers rather than read twice. */
+        <FloatingPortal>
+          <div
+            ref={refs.setFloating}
+            style={floatingStyles}
             aria-hidden="true"
-            className="size-3.5 shrink-0 text-sage-600"
-          />
-          <span className="text-ink-faint">Bought</span>
-          <span className="font-medium text-ink-soft">{review.itemTitle}</span>
-        </p>
+            className="z-50 rounded-md bg-ink px-2 py-1 font-ui text-[0.75rem] leading-none font-medium whitespace-nowrap text-paper shadow-md"
+            {...getFloatingProps()}
+          >
+            Verified buyer
+          </div>
+        </FloatingPortal>
       )}
     </>
   );
 }
 
-/** Who wrote it, where they are, and that the order was a real one. */
+/** Country · pack · purchase date, dot-separated, whichever of them we have. */
+function ReviewerFacts({ review }: { review: Review }) {
+  const { country, itemTitle, purchasedAt } = review;
+  if (!country && !itemTitle && !purchasedAt) return null;
+
+  /* Phones: country on its own line, then the pack and the purchase date on
+     the next, so the breaks are chosen rather than wherever the width runs
+     out. From sm up it is one flowing line, as before — `sm:contents` lets the
+     pack and date join the country's row. */
+  return (
+    <div className="flex flex-col gap-y-0.5 text-[0.75rem] leading-snug text-ink-faint sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-1.5 sm:gap-y-0">
+      {country && <span>{country}</span>}
+      {country && (itemTitle || purchasedAt) && (
+        <span aria-hidden="true" className="hidden sm:inline">
+          ·
+        </span>
+      )}
+      {(itemTitle || purchasedAt) && (
+        <span className="flex flex-wrap items-center gap-x-1.5 sm:contents">
+          {itemTitle && <span>{itemTitle}</span>}
+          {itemTitle && purchasedAt && <span aria-hidden="true">·</span>}
+          {purchasedAt && (
+            /* Labelled, unlike the date up beside the stars: it is when they
+               bought, not when they wrote — a review that reads as a purchase
+               that arrived and was used, not an opinion from nowhere. */
+            <span>
+              Bought{" "}
+              <time
+                dateTime={purchasedAt.slice(0, 10)}
+                className="tabular-nums"
+              >
+                {formatReviewDate(purchasedAt)}
+              </time>
+            </span>
+          )}
+        </span>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Who wrote it, in two quiet lines: the name with the trust tick beside it,
+ * then where they are, which pack they bought and when. Shared by every review
+ * card so the byline looks the same wherever a review appears.
+ */
+export function Reviewer({ review }: { review: Review }) {
+  return (
+    <div className="flex items-center gap-2.5 font-ui">
+      <Avatar review={review} className="size-9" />
+      <div className="min-w-0 flex-1">
+        <p className="flex items-center gap-1.5 leading-tight">
+          <span className="truncate text-body-sm leading-tight font-medium text-ink">
+            {review.author}
+          </span>
+          <VerifiedTick />
+        </p>
+        <ReviewerFacts review={review} />
+      </div>
+    </div>
+  );
+}
+
+/** The reviewer, under the review. */
 export function ReviewFooter({ review }: { review: Review }) {
   return (
-    <footer className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-ui text-body-sm">
-      <Avatar review={review} className="size-8" />
-      <span className="font-medium">{review.author}</span>
-      {review.country && (
-        <span className="text-ink-faint">{review.country}</span>
-      )}
-      <span className="inline-flex items-center gap-1.5 font-medium text-success">
-        <Icon
-          name="check"
-          className="size-3.5 text-success"
-          strokeWidth={2.4}
-        />
-        Verified buyer
-      </span>
+    <footer className="mt-5">
+      <Reviewer review={review} />
     </footer>
   );
 }

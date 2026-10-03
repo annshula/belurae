@@ -34,6 +34,13 @@ export type Review = {
   itemTitle?: string;
   /** ISO instant. */
   createdAt: string;
+  /**
+   * When the order behind the review was placed, as an ISO instant. Shown
+   * beside the pack, so a review reads as a purchase that arrived, was used and
+   * then written up rather than as an opinion from nowhere. Optional: a source
+   * that does not know the order date simply does not send one.
+   */
+  purchasedAt?: string;
   images: string[];
 };
 

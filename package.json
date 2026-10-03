@@ -18,6 +18,7 @@
     "node": ">=20.9"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.20",
     "@microsoft/clarity": "^1.0.2",
     "@vercel/blob": "^2.8.0",
     "clsx": "^2.1.1",
