@@ -52,7 +52,9 @@ export default async function RootLayout({
       lang="en"
       className={`${sans.variable} ${serif.variable} ${ui.variable} ${logo.variable} ${numeral.variable} ${title.variable} ${pdpHeading.variable}`}
     >
-      <body className="flex min-h-dvh flex-col">
+      {/* Browser extensions (ColorZilla, CJ…) stamp attributes onto <body>
+          before React hydrates; this silences that one element's mismatch only. */}
+      <body className="flex min-h-dvh flex-col" suppressHydrationWarning>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-60 focus:bg-paper focus:px-4 focus:py-3 focus:shadow-drift"
