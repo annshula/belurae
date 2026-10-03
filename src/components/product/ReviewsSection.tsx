@@ -1,17 +1,19 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
 
+import {
+  ReadMoreButton,
+  ReviewExtras,
+  ReviewFooter,
+  ReviewMeta,
+  useReviewOverflow,
+} from "@/components/product/ReviewPanel";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Stars } from "@/components/ui/Stars";
 import { demoReviewsFor } from "@/data/reviews";
-import {
-  formatReviewDate,
-  type ProductReviews,
-  type Review,
-} from "@/lib/judgeme/types";
+import { type ProductReviews, type Review } from "@/lib/judgeme/types";
 import { cn } from "@/lib/utils";
 
 /**
@@ -298,90 +300,35 @@ export function ReviewsSection({
 /* ─────────────────────────────── pieces ─────────────────────────────── */
 
 function ReviewCard({ review }: { review: Review }) {
+  const { bodyRef, overflowing } = useReviewOverflow(review.body);
+
   return (
     <li>
       <article className="surface p-6 md:p-7">
-        <header className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          <p className="flex items-center gap-2">
-            <Stars value={review.rating} />
-            <span className="sr-only">{review.rating} out of 5 stars</span>
-          </p>
-          <time
-            dateTime={review.createdAt.slice(0, 10)}
-            className="font-ui text-body-sm text-ink-faint tabular-nums"
-          >
-            {formatReviewDate(review.createdAt)}
-          </time>
-        </header>
+        <ReviewMeta review={review} />
 
         {review.title && (
           <p className="mt-4 font-serif text-heading-3">{review.title}</p>
         )}
+        {/* Four lines on the card; blank lines between paragraphs are
+            flattened here, and the panel holds the full text one paragraph at
+            a time. */}
         <p
+          ref={bodyRef}
           className={cn(
-            "max-w-[68ch] text-ink-soft",
+            "line-clamp-4 max-w-[68ch] text-ink-soft",
             review.title ? "mt-1.5" : "mt-4",
           )}
         >
           {review.body}
         </p>
 
-        {review.images.length > 0 && (
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {review.images.slice(0, 4).map((src) => (
-              <li
-                key={src}
-                className="relative size-20 overflow-hidden rounded-card bg-cream"
-              >
-                <Image
-                  src={src}
-                  alt={`Photo from ${review.author}'s review`}
-                  fill
-                  sizes="80px"
-                  className="object-cover"
-                  unoptimized
-                />
-              </li>
-            ))}
-          </ul>
-        )}
+        {/* Flush under the clamp, so it reads as the rest of the sentence the
+            ellipsis cut off. */}
+        {overflowing && <ReadMoreButton review={review} />}
 
-        {review.itemTitle && (
-          /* What they actually bought. A review with a pack under it reads as a
-             purchase; without one it reads as an opinion floating in space. */
-          <p className="mt-4 inline-flex flex-wrap items-center gap-1.5 rounded-tag bg-cream px-2.5 py-1 font-ui text-body-sm">
-            <Icon
-              name="package"
-              aria-hidden="true"
-              className="size-3.5 shrink-0 text-sage-600"
-            />
-            <span className="text-ink-faint">Bought</span>
-            <span className="font-medium text-ink-soft">
-              {review.itemTitle}
-            </span>
-          </p>
-        )}
-
-        <footer className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-ui text-body-sm">
-          <span
-            aria-hidden="true"
-            className="grid size-8 shrink-0 place-items-center rounded-full bg-sage-100 font-medium text-sage-600"
-          >
-            {review.author.charAt(0)}
-          </span>
-          <span className="font-medium">{review.author}</span>
-          {review.country && (
-            <span className="text-ink-faint">{review.country}</span>
-          )}
-          <span className="inline-flex items-center gap-1.5 font-medium text-success">
-            <Icon
-              name="check"
-              className="size-3.5 text-success"
-              strokeWidth={2.4}
-            />
-            Verified buyer
-          </span>
-        </footer>
+        <ReviewExtras review={review} />
+        <ReviewFooter review={review} />
       </article>
     </li>
   );

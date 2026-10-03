@@ -70,9 +70,25 @@ const ANCHOR = Date.UTC(
 const SPAN_DAYS = 120;
 
 /**
+ * The day before the feed renders, late enough to be the newest review on it.
+ * A real review may pin its own date (see `RealReview`), and this one is
+ * "yesterday" written as a date rather than the word: the fixture has no
+ * calendar of its own, so anchoring it to `ANCHOR` is what keeps it yesterday —
+ * and keeps the newest review newest — however long this file lives.
+ */
+const YESTERDAY_LATE = new Date(
+  ANCHOR - (NOW.getUTCHours() + 1) * 3_600_000,
+).toISOString();
+
+/**
  * Mousse star mix — the figures behind its headline: 524 reviews, average 4.9.
  * Overwhelmingly 5★ with a genuine minority lower down, so the 2★/3★ filters
  * have something real to show rather than an empty state.
+ *
+ * The mix generates 478/32/8/3/3. `MOUSSE_REAL_REVIEWS` then rewrites the
+ * newest slots, and since those carry the star counts customers really gave,
+ * the live distribution follows them — 477/33/8/3/3 as things stand, which is
+ * 524 reviews at an average of 4.9.
  */
 const MOUSSE_MIX: { rating: Review["rating"]; count: number }[] = [
   { rating: 5, count: 478 },
@@ -80,6 +96,97 @@ const MOUSSE_MIX: { rating: Review["rating"]; count: number }[] = [
   { rating: 3, count: 8 },
   { rating: 2, count: 3 },
   { rating: 1, count: 3 },
+];
+
+/**
+ * What a real review supplies. `rating` and `body` are the review itself;
+ * everything else is optional, and a field left out stays whatever the slot
+ * the review takes already had.
+ */
+type RealReview = Pick<Review, "rating" | "body"> &
+  Partial<
+    Pick<
+      Review,
+      "title" | "author" | "country" | "itemTitle" | "avatar" | "createdAt"
+    >
+  >;
+
+/**
+ * Real reviews, sent in by customers — the one part of this file that is not
+ * generated. They overwrite the newest slots of the mousse set, which is the
+ * first cards in the feed and the first slides of the buy-box carousel. A real
+ * review sets what the customer wrote and what we know about them; anything it
+ * leaves out — a country we were not told, or the date, always — stays the
+ * slot's. Kept out of the copy pools on purpose: a pool entry is drawn roughly
+ * forty times across a set, and a real review must not repeat down the feed.
+ *
+ * A body may put a blank line between paragraphs — the full-review panel
+ * renders those as separate paragraphs, while the card preview flattens them
+ * into one clamped block.
+ */
+const MOUSSE_REAL_REVIEWS: RealReview[] = [
+  {
+    // The newest of the set, so it takes the top slot: the first card in the
+    // feed and the first slide of the buy-box carousel. Bought the day before
+    // the feed renders, so it reads as a date rather than "Today".
+    rating: 5,
+    title: "Cloudsense Hair Removal Mousse",
+    body: "This is the best product for getting rid of unwanted hair on the market. Love the ease of being able spray and let it sit. I have stubborn hair and I usually have to let it sit longer, about 15 minutes is all it takes and all the hair is gone. Great for bikini areas and other sensitive areas as well. Highly recommend ⭐️⭐️⭐️⭐️⭐️",
+    author: "Jay",
+    country: "United States",
+    itemTitle: "2 Pack",
+    avatar: "/avatars/jay.webp",
+    createdAt: YESTERDAY_LATE,
+  },
+  {
+    rating: 5,
+    title: "It REALLY works!!",
+    body: [
+      "WOW! I am totally blown away at how well this product works. I was extremely skeptical based on all the hype but after looking for an alternative to other hair removal creams, waxing and shaving. I wanted to give this a try.",
+      "I did exactly as the back of the bottle stated, gently shake, do the first few sprays not on body until foam occurs and then spray on and let it sit for 10 min. I let it sit for EXACTLY 10 mins (set a time on phone), did a wipe test with a damp cloth and it was instantly gone, then I of course proceeded to remove the rest with a washcloth and flow of water from the shower.",
+      "As far burning, there was a tiny tingle, I used ALL OVER. I do want to mention the scent is kind of like a light unisex/more male leaning cologne. I will say the smell gets a little stronger as it starts working but I believe that's the foam working/mixing with the hair.",
+      "I highly recommend because I was highly skeptical. I didn't use the scrapper that came with it but if you have a large amount of hair to remove on your legs/arms I can see how it help. I'm curious to see how long the results will last but very happy to put down the razor for now. I do wish you got more product in the bottle for the price but besides that give it a try.",
+    ].join("\n\n"),
+    author: "TK",
+    country: "United States",
+  },
+  {
+    rating: 5,
+    title: null,
+    body: "I have been using this since 2 years now, and it feels this is the best solution for hair removal! Best!! I have tried razor, wax and everything but I think this suits me the best!",
+    // Same display form as every other review — and as Judge.me renders it:
+    // first name + last initial, not the full surname.
+    author: "Nicholas M.",
+    country: "Australia",
+  },
+
+  {
+    // The first review here that marks the product down — on how far one
+    // bottle goes, not on what it does. A 4 for that reason, which is how the
+    // customer told it rather than a star count they gave us.
+    rating: 4,
+    title: null,
+    body: "I honestly didn't expect this product to work as well as it did! I've seen it all over social media and decided to give it a try. I have thick hair and I had no issues taking it off. The only thing that I didn't like was that there was only enough product to use 1.5 times. (I only used it on my legs)…. Other than that I would buy again!",
+    author: "Daisy V.",
+    itemTitle: "1 Pack",
+  },
+  {
+    rating: 5,
+    title: 'Yes, it really works "down there"',
+    body: "This really works!!! It leaves skin as smooth as a baby's butt, including your \"lower\" region. No more shaving or brazilians needed. The smell isn't bad at all and there was no skin irritation at all after leaving it on for 15 minutes. I will probably never shave again.",
+    author: "AZSwimGirl",
+    itemTitle: "1 Pack",
+  },
+  {
+    rating: 4,
+    title: "Smoooooooth but stinky",
+    body: "This stuff works exceptionally well. I did a test spot on my husbands chest, left it on for 10 min and it worked great! So I tried it on my own personal region and left it for the same amount of time and I was shocked at how smooth everything is! There was a small amount of tingling but nothing wild. And so far there is zero after burn! I would have given this 5 stars but this stuff smells ATROCIOUS. So gross. But so far it's worth it. Will update in a day or two if anything changes. Choosing not to share photos. You're welcome.",
+    author: "Matt",
+    country: "United States",
+    itemTitle: "1 Pack",
+    // The first reviewer here with a picture of their own.
+    avatar: "/avatars/matt.webp",
+  },
 ];
 
 /**
@@ -420,6 +527,11 @@ type ReviewSet = {
   openers: Record<Review["rating"], string[]>;
   closers: Record<Review["rating"], string[]>;
   titles: Record<Review["rating"], string[]>;
+  /**
+   * Real, customer-supplied reviews that overwrite the newest generated
+   * reviews, in order. Omit it and the set is entirely generated.
+   */
+  realReviews?: RealReview[];
 };
 
 function build(set: ReviewSet): Review[] {
@@ -507,6 +619,7 @@ const MOUSSE_SET: ReviewSet = {
   openers: MOUSSE_OPENERS,
   closers: MOUSSE_CLOSERS,
   titles: MOUSSE_TITLES,
+  realReviews: MOUSSE_REAL_REVIEWS,
 };
 
 /** Toner set — its own seed, so the two feeds don't shuffle in lockstep. */
@@ -522,6 +635,11 @@ const TONER_SET: ReviewSet = {
 
 function materialise(set: ReviewSet): ProductReviews {
   const reviews = build(set);
+  // Real reviews take the newest slots: spreading each over the generated one
+  // keeps that slot's identity fields and replaces only what the customer says.
+  set.realReviews?.forEach((real, i) => {
+    if (reviews[i]) reviews[i] = { ...reviews[i], ...real };
+  });
   return { reviews, summary: summarize(reviews) };
 }
 

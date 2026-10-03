@@ -181,12 +181,14 @@ export default async function ProductPage({ params }: Props) {
     verifiedReviews?.summary ?? demoReviewsFor(record.handle)?.summary ?? null;
 
   /*
-   * The buy-box carousel shows the head of the same feed, sliced here so five
-   * reviews cross the RSC boundary instead of all 524 of the placeholder set.
+   * The buy-box carousel shows the head of the same feed, sliced here so a
+   * dozen reviews cross the RSC boundary instead of all 524 of the placeholder
+   * set. It is a dozen rather than five because the carousel keeps only the 5★
+   * ones — the newest handful of reviews always contains a few lower down.
    */
   const feedbackReviews = (
     verifiedReviews ?? demoReviewsFor(record.handle)
-  )?.reviews.slice(0, 5);
+  )?.reviews.slice(0, 12);
 
   const perks = view.perks.map((text) => ({ icon: perkIcon(text), text }));
 

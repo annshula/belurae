@@ -15,6 +15,11 @@ export type Review = {
   body: string;
   author: string;
   /**
+   * The reviewer's own picture, when they have one. Most reviews do not, and
+   * the card falls back to an empty-profile placeholder icon.
+   */
+  avatar?: string;
+  /**
    * Reviewer's market, when the source knows it. Judge.me's API does not send
    * one, so this is only ever set by the placeholder dataset.
    */
@@ -40,31 +45,21 @@ export type ReviewSummary = {
 
 export type ProductReviews = { reviews: Review[]; summary: ReviewSummary };
 
-/** Midnight UTC of the day `date` falls in — the unit the labels below use. */
-function dayStart(date: Date): number {
-  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
-}
-
 /**
- * When a review was written, in the feed's own words: "Today", "Yesterday",
- * "N days ago" inside the last week, then a short date (with the year only
- * once it stops being recent).
+ * When a review was written, as a short plain date: "Oct 2".
  *
- * Day-granular on purpose: the first page is server-rendered and the client
- * re-renders it moments later, so a label that only changes when the calendar
- * day does is the one that cannot drift between the two.
+ * Deliberately not "Today"/"Yesterday": the fixture's dates are anchored to
+ * the render day, so a relative label would rewrite itself under a reader who
+ * left the page open, and a fixed date reads the same on the server as it does
+ * after hydration. No year — every review in the feed is from the last few
+ * months, and the year is noise at that distance.
  */
-export function formatReviewDate(iso: string, now: Date = new Date()): string {
+export function formatReviewDate(iso: string): string {
   const then = new Date(iso);
   if (Number.isNaN(then.getTime())) return "";
-  const days = Math.round((dayStart(now) - dayStart(then)) / 86_400_000);
-  if (days <= 0) return "Today";
-  if (days === 1) return "Yesterday";
-  if (days < 7) return `${days} days ago`;
   return new Intl.DateTimeFormat("en-US", {
-    day: "numeric",
     month: "short",
-    ...(days > 300 ? { year: "numeric" } : {}),
+    day: "numeric",
     timeZone: "UTC",
   }).format(then);
 }

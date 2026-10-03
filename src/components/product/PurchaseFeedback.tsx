@@ -2,9 +2,14 @@
 
 import { useCallback, useRef, useState } from "react";
 
+import {
+  Avatar,
+  ReadMoreButton,
+  useInlinePreview,
+} from "@/components/product/ReviewPanel";
 import { Icon } from "@/components/ui/Icon";
 import { Stars } from "@/components/ui/Stars";
-import type { Review } from "@/lib/judgeme/types";
+import { formatReviewDate, type Review } from "@/lib/judgeme/types";
 import { cn } from "@/lib/utils";
 
 /**
@@ -24,6 +29,13 @@ import { cn } from "@/lib/utils";
 
 /** Enough to show variety without making the panel bottom-heavy. */
 const MAX_SLIDES = 5;
+
+/**
+ * Lines of review body a slide shows before the trigger. The line itself is
+ * shared with the trigger — see `useInlinePreview` — so this is the height of
+ * every slide, and of the panel, whether or not its review ran long.
+ */
+const PREVIEW_LINES = 3;
 
 /** Movement in px before a horizontal drag counts as a swipe (desktop carousel). */
 const SWIPE_THRESHOLD = 40;
@@ -47,6 +59,106 @@ export function PurchaseFeedback({
   );
 }
 
+/**
+ * One slide of "What customers say". The desktop carousel and the phone's snap
+ * strip differ only in how the track moves — the card inside them is the same,
+ * so the clamp, its "Read more" and the reviewer's badge live here once.
+ */
+function FeedbackSlide({
+  review,
+  index,
+  count,
+  className,
+  bodyClassName,
+  hidden,
+}: {
+  review: Review;
+  index: number;
+  count: number;
+  className?: string;
+  bodyClassName?: string;
+  hidden?: boolean;
+}) {
+  const { bodyRef, shown, trimmed } = useInlinePreview(
+    review.body,
+    PREVIEW_LINES,
+  );
+
+  return (
+    <li
+      aria-hidden={hidden}
+      aria-roledescription="slide"
+      aria-label={`${index + 1} of ${count}`}
+      className={className}
+    >
+      <div>
+        <header className="flex items-baseline justify-between gap-3">
+          <p className="flex items-center gap-2">
+            <Stars value={review.rating} starClassName="size-3.5" />
+            <span className="sr-only">{review.rating} out of 5 stars</span>
+          </p>
+          {/* The date belongs on the slide: the buy box is where a review is
+              actually read, and “2 days ago” is not a date. */}
+          <time
+            dateTime={review.createdAt.slice(0, 10)}
+            className="font-ui text-body-sm text-ink-faint tabular-nums"
+          >
+            {formatReviewDate(review.createdAt)}
+          </time>
+        </header>
+
+        {review.title && (
+          <p className="mt-2 font-serif text-body-lg font-medium">
+            {review.title}
+          </p>
+        )}
+
+        {/* Three lines, with the trigger sitting inside the last one rather
+            than on a line of its own: a slide stretches to the tallest in the
+            track, so the panel's height must not move because one review ran
+            long. The clamp stays on as the no-JS cut. */}
+        <p
+          ref={bodyRef}
+          className={cn(
+            "mt-2 line-clamp-3 text-body-sm text-ink-soft",
+            bodyClassName,
+          )}
+        >
+          {shown}
+          {trimmed && (
+            <>
+              {"… "}
+              <ReadMoreButton review={review} />
+            </>
+          )}
+        </p>
+      </div>
+
+      <footer className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-ui text-body-sm">
+        <Avatar review={review} className="size-8 text-[0.8rem]" />
+        <span className="font-medium">{review.author}</span>
+        {review.country && (
+          <span className="text-ink-faint">{review.country}</span>
+        )}
+        {review.itemTitle && (
+          <span className="inline-flex items-center gap-1 text-ink-faint">
+            <Icon name="package" className="size-3" />
+            {review.itemTitle}
+          </span>
+        )}
+        <span className="inline-flex items-center gap-1 font-medium text-success">
+          <Icon
+            name="check"
+            className="size-3 text-success"
+            strokeWidth={2.4}
+          />
+          Verified buyer
+        </span>
+      </footer>
+    </li>
+  );
+}
+
 function FeedbackDesktop({
   reviews,
   className,
@@ -54,7 +166,9 @@ function FeedbackDesktop({
   reviews: Review[];
   className?: string;
 }) {
-  const slides = reviews.filter((r) => r.rating === 5).slice(0, MAX_SLIDES);
+  // The five newest reviews rather than the five-star ones: there are only
+  // four of those, and a carousel that skips the 4★ is a highlight reel.
+  const slides = reviews.slice(0, MAX_SLIDES);
   const count = slides.length;
   const [index, setIndex] = useState(0);
   // Percent of one slide's width the track has been dragged so far — 0 outside
@@ -162,55 +276,20 @@ function FeedbackDesktop({
           }}
         >
           {slides.map((review, i) => (
-            <li
+            <FeedbackSlide
               key={review.id}
-              aria-hidden={i !== index}
-              aria-roledescription="slide"
-              aria-label={`${i + 1} of ${count}`}
-              /* min-h holds the track still: review bodies differ in length and
-                 a sliding track is the one place a height change is obvious. */
-              className="flex min-h-20 w-full shrink-0 flex-col gap-3"
-            >
-              <div>
-                <p className="flex items-center gap-2">
-                  <Stars value={review.rating} starClassName="size-3.5" />
-                  <span className="sr-only">
-                    {review.rating} out of 5 stars
-                  </span>
-                </p>
-
-                <p className="mt-2.5 text-body-sm text-ink-soft">
-                  {review.body}
-                </p>
-              </div>
-
-              <footer className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-ui text-body-sm">
-                <span
-                  aria-hidden="true"
-                  className="grid size-7 shrink-0 place-items-center rounded-full bg-sage-100 text-[0.8rem] font-medium text-sage-600"
-                >
-                  {review.author.charAt(0)}
-                </span>
-                <span className="font-medium">{review.author}</span>
-                {review.country && (
-                  <span className="text-ink-faint">{review.country}</span>
-                )}
-                {review.itemTitle && (
-                  <span className="inline-flex items-center gap-1 text-ink-faint">
-                    <Icon name="package" className="size-3" />
-                    {review.itemTitle}
-                  </span>
-                )}
-                <span className="inline-flex items-center gap-1 font-medium text-success">
-                  <Icon
-                    name="check"
-                    className="size-3 text-success"
-                    strokeWidth={2.4}
-                  />
-                  Verified buyer
-                </span>
-              </footer>
-            </li>
+              review={review}
+              index={i}
+              count={count}
+              hidden={i !== index}
+              /* min-h holds the track still: review bodies differ in length
+                 and a sliding track is the one place a height change is
+                 obvious. `justify-between` puts the slack between the text and
+                 the reviewer's row rather than under it, so that row sits on
+                 the slide's floor whichever card is beside it — a short review
+                 must not leave its footer floating up. */
+              className="flex min-h-20 w-full shrink-0 flex-col justify-between gap-3"
+            />
           ))}
         </ul>
       </div>
@@ -270,7 +349,7 @@ function FeedbackMobile({
   reviews: Review[];
   className?: string;
 }) {
-  const slides = reviews.filter((r) => r.rating === 5).slice(0, MAX_SLIDES);
+  const slides = reviews.slice(0, MAX_SLIDES);
   const count = slides.length;
   const [index, setIndex] = useState(0);
   const trackRef = useRef<HTMLUListElement>(null);
@@ -359,49 +438,17 @@ function FeedbackMobile({
         className="relative -mx-4 mt-3 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto overscroll-x-contain px-4 pb-1 scrollbar-none sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden"
       >
         {slides.map((review, i) => (
-          <li
+          <FeedbackSlide
             key={review.id}
-            aria-roledescription="slide"
-            aria-label={`${i + 1} of ${count}`}
+            review={review}
+            index={i}
+            count={count}
             className="flex w-[86%] shrink-0 snap-center flex-col justify-between gap-4 rounded-2xl bg-cream/70 p-4 sm:w-full"
-          >
-            <div>
-              <p className="flex items-center gap-2">
-                <Stars value={review.rating} starClassName="size-3.5" />
-                <span className="sr-only">{review.rating} out of 5 stars</span>
-              </p>
-              <p className="mt-2.5 line-clamp-5 text-body-sm text-ink">
-                {review.body}
-              </p>
-            </div>
-
-            <footer className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-ui text-body-sm">
-              <span
-                aria-hidden="true"
-                className="grid size-8 shrink-0 place-items-center rounded-full bg-sage-100 text-[0.8rem] font-medium text-sage-600"
-              >
-                {review.author.charAt(0)}
-              </span>
-              <span className="font-medium">{review.author}</span>
-              {review.country && (
-                <span className="text-ink-faint">{review.country}</span>
-              )}
-              {review.itemTitle && (
-                <span className="inline-flex items-center gap-1 text-ink-faint">
-                  <Icon name="package" className="size-3" />
-                  {review.itemTitle}
-                </span>
-              )}
-              <span className="inline-flex items-center gap-1 font-medium text-success">
-                <Icon
-                  name="check"
-                  className="size-3 text-success"
-                  strokeWidth={2.4}
-                />
-                Verified buyer
-              </span>
-            </footer>
-          </li>
+            /* Darker than the desktop slide: this one sits on the tinted
+               card, where ink-soft loses too much contrast. Five lines here
+               against the desktop's four, which is what it has always had. */
+            bodyClassName="line-clamp-4 text-ink"
+          />
         ))}
       </ul>
 
