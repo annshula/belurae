@@ -12,9 +12,10 @@ type HeaderSource = { get(name: string): string | null };
  * localhost with no such proxy in front of it, which is why this returns
  * null there — there is nothing to detect.
  *
- * This only ever supplies a country to look up in the catalog's own
- * pre-synced `pricesByMarket` (see lib/catalog/index.ts) — never a live
- * Shopify call, since the catalog is ISR-cached, not per-request.
+ * This only ever supplies the country that `/api/localization` and
+ * `/api/localization/prices` pass to Shopify's Storefront API (`@inContext`),
+ * which returns the localized price — the catalog itself stays base-currency
+ * and ISR-cached.
  */
 export function detectVisitorCountry(headers: HeaderSource): string | null {
   const candidate = headers.get("cf-ipcountry") || headers.get("x-vercel-ip-country");

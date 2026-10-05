@@ -786,21 +786,22 @@ export const products: ProductContent[] = [
     ],
   },
   {
-    handle: "middle-eastern-rose-fragrance",
-    slug: "middle-eastern-rose-fragrance",
+    handle: "voyage-nova-middle-eastern-rose-fragrance",
+    slug: "voyage-nova-middle-eastern-rose-fragrance",
     legacySlugs: [
+      "middle-eastern-rose-fragrance",
       "amz-light-luxury-middle-eastern-rose-fragrance-gentle-rose-scent-elegant-fresh-long-lasting-perfume-for-dating-and-commuting-ver",
     ],
     name: "Middle Eastern Rose Fragrance",
     format: "Fragrance spray · 50 ml",
     category: { slug: "fragrance", name: "Fragrance" },
     benefitLine:
-      "A 50 ml rose fragrance spray with a soft, light rose scent, in its own box: a Christmas gift for the office, or for yourself. Spray it on the wrists, neck and behind the ears.",
+      "A 50 ml rose fragrance spray with a soft, light rose scent, in its own box. Spray it on the wrists, neck and behind the ears. Choose a single bottle, or a Duo or Trio set in the Christmas offer.",
     manufacturer: "Voyage Novus",
     seo: {
-      title: "Rose Fragrance · A Christmas Gift for the Office",
+      title: "Rose Fragrance · Oct Special Offer",
       description:
-        "A 50 ml rose fragrance spray in its own box, with a soft, light rose scent: a Christmas gift for a colleague or yourself. Ingredients, directions and safety guidance.",
+        "A 50 ml rose fragrance spray in its own box, with a soft, light rose scent. Christmas offer on single, Duo and Trio sets. Ingredients, directions and safety guidance.",
     },
     optionLabels: {
       Quantity: {
@@ -839,7 +840,7 @@ export const products: ProductContent[] = [
       },
       {
         title: "Easy to give",
-        body: "A 50 ml bottle that comes in its own box, for a colleague, a Secret Santa or yourself. The Duo and Trio sets cover more than one gift.",
+        body: "A 50 ml bottle that comes in its own box, easy to give or to keep. The Duo and Trio sets cover more than one gift.",
       },
     ],
     steps: [
@@ -952,8 +953,8 @@ export const products: ProductContent[] = [
         a: "The manufacturer's spec sheet says to store it in a cool, dry place, and gives a shelf life of 3 years.",
       },
       {
-        q: "Is it a good Christmas gift for the office?",
-        a: "It is a 50 ml bottle that comes in its own box, which makes it easy to give to a colleague, in a Secret Santa, or to yourself. Scent is personal, though, and personal-care products can't be returned once received (see the refund policy), so choose a rose scent you think they'll like. The Duo and Trio sets are there if you are buying for more than one person.",
+        q: "Is it a good Christmas gift?",
+        a: "It is a 50 ml bottle that comes in its own box, which makes it easy to give. Scent is personal, though, and personal-care products can't be returned once received (see the refund policy), so choose a rose scent you think they'll like. The Duo and Trio sets are there if you are buying for more than one person.",
       },
       {
         q: "Why does the box say Voyage Novus?",
@@ -964,7 +965,8 @@ export const products: ProductContent[] = [
         a: "Personal-care products can't be returned once received, unless they arrive damaged, defective or incorrect — contact us and we'll put it right. EU customers also have a 14-day right to cancel. See the refund policy for details.",
       },
     ],
-    googleCategory: "Health & Beauty > Personal Care > Cosmetics > Perfume & Cologne",
+    googleCategory:
+      "Health & Beauty > Personal Care > Cosmetics > Perfume & Cologne",
     pdp: {
       packs: "cards",
       perSetPrice: false,
@@ -1006,12 +1008,12 @@ export const products: ProductContent[] = [
       trust: [
         { icon: "flower", text: "Rose fragrance · 50 ml" },
         { icon: "droplet", text: "Moist, non-sticky texture" },
-        { icon: "heart", text: "A Christmas gift for the office" },
+        { icon: "heart", text: "Christmas offer" },
       ],
       dailyStep: {
         eyebrow: "Christmas offer",
-        heading: "A rose to wear to work, or to give.",
-        body: "A 50 ml bottle in its own box, easy to give to a colleague, in a Secret Santa, or to yourself. Spray on the wrists, then on the neck and behind the ears, wherever you'd like a hint of rose. The manufacturer describes a moist, refreshing texture that feels comfortable on the skin and isn't sticky.",
+        heading: "A rose to wear, or to give.",
+        body: "A 50 ml bottle in its own box, easy to give or to keep. Spray on the wrists, then on the neck and behind the ears, wherever you'd like a hint of rose. The manufacturer describes a moist, refreshing texture that feels comfortable on the skin and isn't sticky.",
         mediaFile: "H2e3b2e4e8559462abdaecc86923ccdcdb",
         imagePosition: "center",
         benefits: [

@@ -69,7 +69,7 @@ export const collections: CollectionContent[] = [
     description:
       "Facial skincare with the key ingredients, directions and safety guidance spelled out on every product page.",
     intro:
-      "Our skincare range is small on purpose. Each product page names the key ingredients in INCI form, how to use it and where not to, and the complete declaration is printed on every pack.",
+      "Each skincare product page names the key ingredients in INCI form, how to use it and where not to, and the complete declaration is printed on every pack.",
     categories: ["skincare"],
     related: [
       { label: "How to patch test", href: "/guides/how-to-patch-test" },
@@ -83,7 +83,7 @@ export const collections: CollectionContent[] = [
     description:
       "Fragrance sprays with the ingredients, directions and safety guidance spelled out on every product page.",
     intro:
-      "Our fragrance range is small and plainly described. Each product page names the ingredients as the manufacturer lists them, says how to wear it and where not to, and is clear about what we don't yet know.",
+      "Each fragrance product page names the ingredients as the manufacturer lists them, says how to wear it and where not to, and is clear about what we don't yet know.",
     categories: ["fragrance"],
     related: [
       { label: "How to patch test", href: "/guides/how-to-patch-test" },
@@ -97,7 +97,7 @@ export const collections: CollectionContent[] = [
     description:
       "Everything Belurae sells today — body care, skincare and fragrance for simpler everyday routines.",
     intro:
-      "Belurae is a small, deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal, facial skincare and fragrance.",
+      "Belurae is a deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal, facial skincare and fragrance.",
     categories: "*",
     related: [
       { label: "Our standards", href: "/pages/standards" },

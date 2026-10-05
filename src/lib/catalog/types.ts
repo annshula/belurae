@@ -4,12 +4,6 @@
  * Plain data only, safe to import from client components.
  */
 
-export type MarketPrice = {
-  amount: number;
-  compareAtAmount: number | null;
-  currencyCode: string;
-};
-
 export type VariantRecord = {
   id: string;
   title: string;
@@ -22,7 +16,6 @@ export type VariantRecord = {
   /** Option name → value, e.g. { Style: "Spray", Pack: "2PCS" }. */
   options: Record<string, string>;
   image: string | null;
-  pricesByMarket: Record<string, MarketPrice>;
   /** Shopify metafield `belurae.pack_description` — editable in Admin without a redeploy. */
   description: string | null;
 };
@@ -81,6 +74,5 @@ export type CatalogDocument = {
   version: number;
   syncedAt: string;
   shop: { domain: string; name: string; currencyCode: string };
-  markets: string[];
   products: Record<string, ProductRecord>;
 };

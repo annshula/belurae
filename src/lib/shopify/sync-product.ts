@@ -1,10 +1,5 @@
 import { getAdminToken } from "@/lib/shopify/admin-token";
-import {
-  adminEndpoint,
-  isStorefrontConfigured,
-  shopifyConfig,
-} from "@/lib/shopify/config";
-import { getLocalizedVariantPrices } from "@/lib/shopify/localization-service";
+import { adminEndpoint, shopifyConfig } from "@/lib/shopify/config";
 import {
   CATALOG_PATH,
   acquireLock,
@@ -14,7 +9,6 @@ import {
 import { BELURAE_HANDLES } from "@/content/products";
 import type {
   CatalogDocument,
-  MarketPrice,
   ProductRecord,
   MediaRecord,
   VariantRecord,
@@ -103,16 +97,6 @@ type ProductData = {
 
 const SHOP_QUERY = `query { shop { name currencyCode } }`;
 
-const MARKETS_QUERY = `
-query Markets {
-  markets(first: 20) {
-    nodes {
-      enabled
-      regions(first: 10) { nodes { ... on MarketRegionCountry { code } } }
-    }
-  }
-}`;
-
 const PRODUCT_QUERY = `
 query ProductByHandle($handle: String!) {
   productByHandle(handle: $handle) {
@@ -199,27 +183,9 @@ async function adminRequest<T>(
   return body.data as T;
 }
 
-/** Single-country markets are merchant-priced; multi-country ones are the FX catch-all. */
-async function discoverCuratedMarketCountries(): Promise<string[]> {
-  const data = await adminRequest<{
-    markets: {
-      nodes: { enabled: boolean; regions: { nodes: { code?: string }[] } }[];
-    };
-  }>(MARKETS_QUERY);
-  const codes = new Set<string>();
-  for (const market of data.markets.nodes) {
-    if (!market.enabled) continue;
-    const regionCodes = market.regions.nodes
-      .map((r) => r.code)
-      .filter((c): c is string => Boolean(c));
-    if (regionCodes.length === 1) codes.add(regionCodes[0]!);
-  }
-  return [...codes];
-}
-
 const bareUrl = (url: string) => url.split("?")[0] ?? url;
 
-function normalizeVariants(nodes: AdminVariantNode[]): Omit<VariantRecord, "pricesByMarket">[] {
+function normalizeVariants(nodes: AdminVariantNode[]): VariantRecord[] {
   return nodes
     .filter((v) => v.price != null)
     .map((v) => {
@@ -334,39 +300,12 @@ function normalizeSaleEndsAt(field: { value: string } | null): string | null {
   return new Date(time).toISOString();
 }
 
-async function fetchProduct(
-  handle: string,
-  markets: string[],
-): Promise<ProductRecord | null> {
+async function fetchProduct(handle: string): Promise<ProductRecord | null> {
   const data = await adminRequest<ProductData>(PRODUCT_QUERY, { handle });
   const product = data.productByHandle;
   if (!product) return null;
 
   const variants = normalizeVariants(product.variants.nodes);
-  const pricesByVariant = new Map<string, Record<string, MarketPrice>>(
-    variants.map((v) => [v.id, {}]),
-  );
-
-  if (markets.length > 0 && isStorefrontConfigured()) {
-    const ids = variants.map((v) => v.id);
-    await Promise.all(
-      markets.map(async (country) => {
-        const prices = await getLocalizedVariantPrices(ids, country).catch(
-          () => new Map(),
-        );
-        for (const [variantId, localized] of prices) {
-          const bucket = pricesByVariant.get(variantId);
-          if (!bucket) continue;
-          bucket[country] = {
-            amount: Number(localized.amount),
-            compareAtAmount:
-              localized.compareAtAmount != null ? Number(localized.compareAtAmount) : null,
-            currencyCode: localized.currencyCode,
-          };
-        }
-      }),
-    );
-  }
 
   return {
     id: product.id,
@@ -382,7 +321,7 @@ async function fetchProduct(
     },
     options: product.options.map((o) => ({ name: o.name, values: o.values })),
     availableForSale: variants.some((v) => v.availableForSale),
-    variants: variants.map((v) => ({ ...v, pricesByMarket: pricesByVariant.get(v.id) ?? {} })),
+    variants,
     media: normalizeMedia(product.media.nodes, variants),
     specs: normalizeSpecs(product.specs),
     featureHighlights: normalizeFeatureHighlights(product.featureHighlights),
@@ -408,13 +347,11 @@ export async function syncProducts(
   const cfg = shopifyConfig();
   if (!cfg.storeDomain) throw new Error("SHOPIFY_STORE_DOMAIN is not set");
 
-  const [shopData, markets] = await Promise.all([
-    adminRequest<{ shop: { name: string; currencyCode: string } | null }>(SHOP_QUERY),
-    // A missing read_markets scope must not take down the base sync.
-    discoverCuratedMarketCountries().catch(() => [] as string[]),
-  ]);
+  const shopData = await adminRequest<{
+    shop: { name: string; currencyCode: string } | null;
+  }>(SHOP_QUERY);
 
-  const fetched = await Promise.all(handles.map((h) => fetchProduct(h, markets)));
+  const fetched = await Promise.all(handles.map((h) => fetchProduct(h)));
   const missing = handles.filter((_, i) => !fetched[i]);
 
   const lock = await acquireLock();
@@ -428,14 +365,13 @@ export async function syncProducts(
     }
 
     const doc: CatalogDocument = {
-      version: 6,
+      version: 7,
       syncedAt: new Date().toISOString(),
       shop: {
         domain: cfg.storeDomain,
         name: shopData.shop?.name ?? "",
         currencyCode: shopData.shop?.currencyCode ?? "USD",
       },
-      markets,
       products,
     };
     await writeJsonFileAtomic(CATALOG_PATH, doc);
