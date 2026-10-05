@@ -2010,13 +2010,17 @@
     "id": "tt-166",
     "rating": 1,
     "title": null,
-    "body": "My package never arrived, and the refund request was denied even though the delivery was made to an 8842 on a different street. Proof of delivery is invalid. The second picture is my house and the first is wherever my package was left.",
+    "body": "My package never arrived, and the refund request was denied even though the delivery was made to an 8842 on a different street. Proof of delivery is invalid.",
     "author": "E**o 🫶**",
     "avatar": "/avatars/tt-2a9cadbd.jpg",
     "country": "United States",
-    "createdAt": "2026-09-28T12:00:00.000Z",
+    "createdAt": "2026-06-28T12:00:00.000Z",
     "images": [],
-    "source": "tiktok"
+    "source": "tiktok",
+    "reply": {
+      "id": "tt-166-reply",
+      "body": "We’re really sorry you had to deal with this. If your order was delivered to a different address, we completely understand why you’re frustrated, especially after your refund request was denied. We’d like to look into the delivery details and see what happened. Please reach out to us with your order information so we can help get this sorted out."
+    }
   },
   {
     "id": "tt-167",
@@ -2475,9 +2479,13 @@
     "author": "M**v",
     "avatar": "/avatars/tt-b88d5250.jpg",
     "country": "United States",
-    "createdAt": "2026-09-27T12:00:00.000Z",
+    "createdAt": "2026-06-27T12:00:00.000Z",
     "images": [],
-    "source": "tiktok"
+    "source": "tiktok",
+    "reply": {
+      "id": "tt-204-reply",
+      "body": "We’re really sorry about this. We completely understand how frustrating it is to be waiting for your order and then find out it was delivered to the wrong address and even a different neighborhood. We’re not sure how the address got mixed up, but we’d definitely like to look into what happened and make this right. Please reach out to us with your order details so we can help."
+    }
   },
   {
     "id": "tt-205",
@@ -3822,7 +3830,7 @@
     "id": "tt-314",
     "rating": 3,
     "title": null,
-    "body": "Have not used for 30 days yet so I do not have a full review to give at this point this is only for using half a month the formula is very silky and refreshing you get a very large bottle it does make your skin feel very nice and very hydrated and I got it for a 80% discount so I was really excited about that and to be honest I wanted it before but I could not afford the price you know just trying it and not knowing if I was going to like it or not so I'm very happy for the flash sale so that I got to try this product I will be back to edit my comment and my review to at the end of the 30 days to see what my results were.",
+    "body": "Have not used for 30 days yet so I do not have a full review to give at this point this is only for using half a month the formula is very silky and refreshing you get a very large bottle it does make your skin feel very nice and very hydrated and I got it for a 40% discount so I was really excited about that and to be honest I wanted it before but I could not afford the price you know just trying it and not knowing if I was going to like it or not so I'm very happy for the flash sale so that I got to try this product I will be back to edit my comment and my review to at the end of the 30 days to see what my results were.",
     "author": "B**k H**t",
     "avatar": "/avatars/tt-65ab67ad.jpg",
     "country": "United States",
@@ -4818,40 +4826,6 @@
     "source": "tiktok"
   },
   {
-    "id": "tt-396",
-    "rating": 1,
-    "title": null,
-    "body": "Received the envelope but no product inside.",
-    "author": "C**4",
-    "avatar": "/avatars/tt-af357881.jpg",
-    "country": "United States",
-    "createdAt": "2026-09-22T12:00:00.000Z",
-    "images": [
-      "https://p19-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/bc3ff03d6c1a49588b4bcfd7f0e0336f~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/25d15a3a90e04aaf96aed22836f14fb5~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/411b1ecd10e844dc8f306f07bb2e127a~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/6b2e36c415f548ea8378809baa8c176a~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/e10e31f4c083443c875c431913b60432~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/2e6bfbc14c3044a1a5f6dff7ab7abc83~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
-    "id": "tt-397",
-    "rating": 1,
-    "title": null,
-    "body": "Didn’t not revived my order they took the picture of two orders that I meka but they didn’t left them",
-    "author": "L**t",
-    "avatar": "/avatars/tt-6db9a6ab.jpg",
-    "country": "United States",
-    "createdAt": "2026-09-22T12:00:00.000Z",
-    "images": [
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/2f61668b5e784b51a048888d4f0096d2~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/d014d5df2376485b80092a4304c72e3a~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
     "id": "tt-398",
     "rating": 5,
     "title": null,
@@ -5778,37 +5752,6 @@
     "source": "tiktok"
   },
   {
-    "id": "tt-474",
-    "rating": 1,
-    "title": null,
-    "body": "My package was not delivered, the driver sent a pic as “proof” of delivery that it wasn’t worth driving that far!!",
-    "author": "M**C",
-    "avatar": "/avatars/tt-be29ec90.jpg",
-    "country": "United States",
-    "createdAt": "2026-09-20T12:00:00.000Z",
-    "images": [
-      "https://p19-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/24ac8dd160174a0ab9468f2961854b7e~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/5f636a665a9d4ac7868df0dbf04bd00a~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/fd6818dae72c4c1fb2823a150d3c96db~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
-    "id": "tt-475",
-    "rating": 3,
-    "title": null,
-    "body": "The product is not for me. Also, it would’ve been nice to know that it was part of a skin care regiment. A lot of the videos are very misleading",
-    "author": "D**a A**r",
-    "avatar": "/avatars/tt-80a55f5b.jpg",
-    "country": "United States",
-    "createdAt": "2026-09-20T12:00:00.000Z",
-    "images": [
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/64954f6c07c64b15be0eb14145ee5909~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/f0d15cdf7c954b2d8796eca7a0049028~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
     "id": "tt-476",
     "rating": 5,
     "title": null,
@@ -6604,20 +6547,6 @@
     "country": "United States",
     "createdAt": "2026-09-19T12:00:00.000Z",
     "images": [],
-    "source": "tiktok"
-  },
-  {
-    "id": "tt-542",
-    "rating": 1,
-    "title": null,
-    "body": "This has animal products in it and is not vegan. I refuse to use it. Buyers be aware. I would like my money back.",
-    "author": "J**8",
-    "country": "United States",
-    "createdAt": "2026-09-18T12:00:00.000Z",
-    "images": [
-      "https://p19-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/bb97d18756c54cdb99e8347f04156afd~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/764373d9ed314889b98ff27a1464443f~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
     "source": "tiktok"
   },
   {
@@ -7477,36 +7406,6 @@
     "source": "tiktok"
   },
   {
-    "id": "tt-613",
-    "rating": 1,
-    "title": null,
-    "body": "This doesn't work and yes it's the one that everyone is raving about. All it does is give a flow affect from the shimmer additive.",
-    "author": "F**a",
-    "avatar": "/avatars/tt-522665bb.jpg",
-    "country": "United States",
-    "createdAt": "2026-09-16T12:00:00.000Z",
-    "images": [
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/a0111845640c4fd1b9190b17bf39598d~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/e36819f5e4a4414a82da70d1056c247d~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
-    "id": "tt-614",
-    "rating": 1,
-    "title": null,
-    "body": "I’ve seen from different influencers that once it’s apply it gives to a beautiful shine! Well after trying 1 application which eventually turned into 2 - 3 times more. No shine whatsoever. NOT at all happy with this Product. Can I get a refund?",
-    "author": "T**",
-    "avatar": "/avatars/tt-4fb68cad.jpg",
-    "country": "United States",
-    "createdAt": "2026-09-16T12:00:00.000Z",
-    "images": [
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/5e56dc1efe654f64a89911677bd45521~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/49b372d6558f41c2b0dc68d25870a816~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
     "id": "tt-615",
     "rating": 5,
     "title": null,
@@ -7984,24 +7883,6 @@
     "source": "tiktok"
   },
   {
-    "id": "tt-653",
-    "rating": 2,
-    "title": null,
-    "body": "Arrived on time looks good but doesn't explain in english too much its mostly in another language to know what it does",
-    "author": "L**e n**z S**z",
-    "avatar": "/avatars/tt-7dcca465.jpg",
-    "country": "United States",
-    "createdAt": "2026-09-15T12:00:00.000Z",
-    "images": [
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/71c475326e9e4340968b8ddc851ac198~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/a4a12e56c55048158b4978ec7e218dcd~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p19-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/afd318417b15416993f84bd2fcbe50a6~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/d5342a61ec1d4666b9c7b17066c9f21a~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/d4b49b0dbe99468999cb0a5112aa9425~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
     "id": "tt-654",
     "rating": 5,
     "title": null,
@@ -8415,40 +8296,6 @@
     "country": "United States",
     "createdAt": "2026-09-15T12:00:00.000Z",
     "images": [],
-    "source": "tiktok"
-  },
-  {
-    "id": "tt-688",
-    "rating": 1,
-    "title": null,
-    "body": "Never got to try it. Damaged and empty when I received the package",
-    "author": "V**i",
-    "avatar": "/avatars/tt-3ce0d26c.jpg",
-    "country": "United States",
-    "createdAt": "2026-09-14T12:00:00.000Z",
-    "images": [
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/e3b69002e5884e9d8875039ae7b21730~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/05a7ff7760124b70a6541709d57329c0~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p19-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/4acddadf5d8f4c1dae519d1e05439a93~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/89d38320f96447b18b81eb2c3de92112~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/9709ce0c4e034b01a657b2e5f520f14a~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
-    "id": "tt-689",
-    "rating": 1,
-    "title": null,
-    "body": "None I was so excited to use it on my husband face but he didn't notice a difference 😔",
-    "author": "Y**A",
-    "avatar": "/avatars/tt-26bcc456.jpg",
-    "country": "United States",
-    "createdAt": "2026-09-14T12:00:00.000Z",
-    "images": [
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/555afb149747495e9efa67210492dda0~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/a3782aa8ee5f4ab49521ad6fd278b3c0~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/d3e4307dce57499e8d66a462e67dc65a~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
     "source": "tiktok"
   },
   {
@@ -9648,18 +9495,6 @@
     "source": "tiktok"
   },
   {
-    "id": "tt-787",
-    "rating": 1,
-    "title": null,
-    "body": "I never got to enjoy my purchase thanks to the unprofessionalism of the courier whom threw my package at my door WITHOUT ringing my doorbell none the less as instructed ON MY DOOR to activate the security/surveillance recorder which then caused my package to be stolen! The response from the company was\"sorry, here's a $7.00 coupon!\" And I provided proof. Had he followed instructions the surveillance would of set of the sensor indefinitely being able to track every movement and the branding",
-    "author": "P**3",
-    "avatar": "/avatars/tt-a2c1d692.jpg",
-    "country": "United States",
-    "createdAt": "2026-09-09T12:00:00.000Z",
-    "images": [],
-    "source": "tiktok"
-  },
-  {
     "id": "tt-788",
     "rating": 5,
     "title": null,
@@ -9886,22 +9721,6 @@
     "createdAt": "2026-09-01T12:00:00.000Z",
     "images": [
       "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/cdcf2661be1c4b7dbdc58bef8a389a4d~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
-    "id": "tt-804",
-    "rating": 1,
-    "title": null,
-    "body": "None I can’t use I had to throw away in the trash bottle was busted and toner leaked everywhere first delivery was late next bottle came busted no good need full refund now",
-    "author": "v**b",
-    "avatar": "/avatars/tt-0224bce2.jpg",
-    "country": "United States",
-    "createdAt": "2026-08-31T12:00:00.000Z",
-    "images": [
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/3b1bcabbbbb24d0ca1a57de2c385ecf5~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/0d1e52900b3e45828e56022928464c5d~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/87054628360748b9a18cdd4ef6f6348c~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
     ],
     "source": "tiktok"
   },
@@ -10324,20 +10143,6 @@
     "createdAt": "2026-08-19T12:00:00.000Z",
     "images": [
       "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/923b580c6f8d4ec396352a2b6f4c0da9~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
-    "id": "tt-835",
-    "rating": 1,
-    "title": null,
-    "body": "Missing so much product and also an open seal for product. I don’t even want to put this on my face due to the seal being broken. Horrible!",
-    "author": "y**a",
-    "country": "United States",
-    "createdAt": "2026-08-18T12:00:00.000Z",
-    "images": [
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/ececf0dfe94d408ba85a0a54834bd53e~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/b4f1053dec6349c2a00b91e586613543~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
     ],
     "source": "tiktok"
   },
@@ -11121,22 +10926,6 @@
     "createdAt": "2026-06-04T12:00:00.000Z",
     "images": [
       "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/07ecaa86084149a3b599c6f4a27cf850~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
-    ],
-    "source": "tiktok"
-  },
-  {
-    "id": "tt-892",
-    "rating": 1,
-    "title": null,
-    "body": "First of all, it came in a plastic bottle. Also, it looks like it’s been tampered with. In addition, a good amount of it’s gone. Why should I have to go through the effort of a return?",
-    "author": "B**🩷",
-    "avatar": "/avatars/tt-af813674.jpg",
-    "country": "United States",
-    "createdAt": "2026-05-27T12:00:00.000Z",
-    "images": [
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/a1bd76ad89e94f1f8a1917624033fa63~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/1592672d0c734d439a44140313cd06e2~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839",
-      "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/e67dfbf2ff9a4550a5212148dad46539~tplv-fhlh96nyum-crop-webp:300:300.webp?dr=12190&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=useast5&from=2378011839"
     ],
     "source": "tiktok"
   },
