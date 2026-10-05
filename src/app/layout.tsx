@@ -6,6 +6,7 @@ import { logo, numeral, pdpHeading, sans, serif, title, ui } from "./fonts";
 import { Analytics } from "@/components/analytics/Analytics";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
+import { ContentProtection } from "@/components/layout/ContentProtection";
 import { Footer } from "@/components/layout/Footer";
 import { LocalizationProvider } from "@/components/localization/LocalizationProvider";
 import { AnnouncementBar, Header } from "@/components/layout/Header";
@@ -46,10 +47,14 @@ export default async function RootLayout({
   children: ReactNode;
 }) {
   const bagCatalog = await getBagCatalog();
+  // Copy/inspect protection is on unless NEXT_PUBLIC_ALLOW_INSPECT=1 (set it in
+  // .env.local for development). It is a plain on/off switch, not a secret.
+  const protect = process.env.NEXT_PUBLIC_ALLOW_INSPECT !== "1";
 
   return (
     <html
       lang="en"
+      data-protect={protect ? "" : undefined}
       className={`${sans.variable} ${serif.variable} ${ui.variable} ${logo.variable} ${numeral.variable} ${title.variable} ${pdpHeading.variable}`}
     >
       {/* Browser extensions (ColorZilla, CJ…) stamp attributes onto <body>
@@ -73,6 +78,7 @@ export default async function RootLayout({
           </CartProvider>
         </LocalizationProvider>
         <Analytics />
+        {protect && <ContentProtection />}
         <JsonLd data={graph(organizationSchema(), websiteSchema())} />
       </body>
     </html>

@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-05T18:58:18.656Z",
+  "syncedAt": "2026-10-05T19:24:52.904Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -10,11 +10,11 @@
     "bikini-pain-free-hair-removal-spray": {
       "id": "gid://shopify/Product/15395256467683",
       "handle": "bikini-pain-free-hair-removal-spray",
-      "title": "Bikini and Full Body Pain-Free Hair Removal Cream for Sensitive Skin, Hypoallergenic Formula-Gentle & Fast-Acting Depilatory with Citrus Scent, Aloe & Hyaluronic Acid for Anti-bacterial, Moisturizing, and Soothing Care, Suitable for Men & Women",
+      "title": "Belurae Bikini and Full Body Pain-Free Hair Removal Cream for Sensitive Skin, Hypoallergenic Formula-Gentle & Fast-Acting Depilatory with Citrus Scent, Aloe & Hyaluronic Acid for Anti-bacterial, Moisturizing, and Soothing Care, Suitable for Men & Women",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-05T18:57:06Z",
+      "updatedAt": "2026-10-05T19:10:55Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -681,11 +681,11 @@
     "voyage-nova-middle-eastern-rose-fragrance": {
       "id": "gid://shopify/Product/15407150530787",
       "handle": "voyage-nova-middle-eastern-rose-fragrance",
-      "title": "Voyage Nova | Rosey Fruity Floral | Extrait De Parfum 50ml/100ml | Long Lasting Luxury Fragrance | Daily Women's Perfume Alluring Summervibes Sohochic",
+      "title": "Belurae Voyage Nova | Rosey Fruity Floral | Extrait De Parfum 50ml/100ml | Long Lasting Luxury Fragrance | Daily Women's Perfume Alluring Summervibes Sohochic",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-05T18:51:09Z",
+      "updatedAt": "2026-10-05T19:20:15Z",
       "seo": {
         "title": "Middle Eastern Rose Fragrance · 50 ml Spray",
         "description": "A 50 ml rose fragrance spray with a soft, light rose scent. Spray on wrists, neck and behind the ears. Ingredients, directions and safety guidance."
@@ -727,7 +727,7 @@
           "options": {
             "Quantity": "2PCS"
           },
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H7888ad78f56142568598972f1a36801eF.webp?v=1791221611",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/2_pack.png?v=1791228150",
           "description": null
         },
         {
@@ -741,7 +741,7 @@
           "options": {
             "Quantity": "3PCS"
           },
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H7888ad78f56142568598972f1a36801eF.webp?v=1791221611",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/3_pack_bf970e05-4d24-489c-8b83-9f9cb1008b43.png?v=1791228265",
           "description": null
         }
       ],
@@ -752,7 +752,7 @@
           "width": 1600,
           "height": 1600,
           "alt": null,
-          "variantId": "gid://shopify/ProductVariant/67625818456291"
+          "variantId": "gid://shopify/ProductVariant/67625772286179"
         },
         {
           "type": "image",
@@ -793,6 +793,22 @@
           "height": 1600,
           "alt": null,
           "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/2_pack.png?v=1791228150",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67625818423523"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/3_pack_bf970e05-4d24-489c-8b83-9f9cb1008b43.png?v=1791228265",
+          "width": 1448,
+          "height": 1086,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67625818456291"
         }
       ],
       "specs": [
@@ -855,12 +871,11 @@
         }
       ],
       "perks": [
-        "Christmas offer on single, Duo and Trio sets",
-        "Soft, long-lasting rose scent",
-        "Moist, refreshing, non-sticky texture",
-        "Designed to mask body odour",
-        "Rose flower extract, glycerin & propylene glycol",
-        "50 ml bottle in its own box, 3-year shelf life"
+        "8+ Hours Long Lasting",
+        "Rosey Fruity Floral Scent",
+        "Cruelty-Free & Hypoallergenic",
+        "Sustainable Product",
+        "Extrait De Parfum Concentration"
       ],
       "saleEndsAt": "2026-10-09T03:00:00.000Z"
     }
