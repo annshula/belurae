@@ -266,17 +266,17 @@ export default async function ProductPage({ params }: Props) {
 
           <div className="min-w-0 lg:pt-4">
             {content.pdp.trust && (
-              <ul className="mb-4 flex flex-wrap gap-2 font-ui sm:flex-nowrap sm:gap-1.5">
+              <ul className="mb-4 flex flex-wrap gap-2 font-ui sm:gap-1.5">
                 {content.pdp.trust.map((t) => (
                   <li
                     key={t.text}
-                    className="inline-flex min-w-0 items-center gap-1.5 rounded-full bg-sage-100 px-3 py-1.5 text-[0.78rem] leading-none font-medium whitespace-nowrap text-sage-800 sm:px-2.5 sm:text-[0.72rem]"
+                    className="inline-flex min-w-0 items-center gap-1.5 rounded-full bg-sage-100 px-3 py-1.5 text-[0.78rem] leading-none font-medium text-sage-800 sm:px-2.5 sm:text-[0.72rem]"
                   >
                     <Icon
                       name={t.icon}
                       className="size-4 shrink-0 sm:size-3.5"
                     />
-                    <span className="truncate">{t.text}</span>
+                    <span>{t.text}</span>
                   </li>
                 ))}
               </ul>
@@ -341,7 +341,11 @@ export default async function ProductPage({ params }: Props) {
             )}
 
             <div className="mt-8">
-              <PurchasePanel view={view} packs={content.pdp.packs} />
+              <PurchasePanel
+                view={view}
+                packs={content.pdp.packs}
+                perSetPrice={content.pdp.perSetPrice}
+              />
             </div>
 
             <ProductAccordion

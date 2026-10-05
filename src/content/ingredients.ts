@@ -170,6 +170,58 @@ export const ingredients: Ingredient[] = [
       "If the source matters to you (for example marine or animal), check the pack or ask us.",
     ],
   },
+  {
+    slug: "rosa-rugosa-flower-extract",
+    name: "Rosa Rugosa flower extract",
+    inci: "Rosa Rugosa Flower Extract",
+    icon: "flower",
+    summary:
+      "Rosa Rugosa flower extract comes from the flowers of Rosa rugosa, a hardy rose also called the Japanese or beach rose. It is used in cosmetics as a botanical ingredient.",
+    whatItIs: [
+      "Rosa rugosa is a shrub rose with large, fragrant flowers. An extract is made by drawing soluble material out of the petals into a solvent, and on an ingredient list it appears as Rosa Rugosa Flower Extract.",
+    ],
+    whyUsed: [
+      "Rose extracts are used in skin care and fragrance-adjacent products as a botanical ingredient. The manufacturer lists it as the plant ingredient in this fragrance spray.",
+    ],
+    goodToKnow: [
+      "An extract is not the same as a rose essential oil or a perfume. We make no claim about how much is in the formula or what it does for the scent.",
+      "Plant extracts can occasionally cause sensitivity. A patch test before first use is the simplest way to check how your skin responds.",
+    ],
+  },
+  {
+    slug: "propylene-glycol",
+    name: "Propylene glycol",
+    inci: "Propylene Glycol",
+    icon: "droplet",
+    summary:
+      "Propylene glycol is a clear, colourless liquid used in cosmetics as a solvent and humectant, which means it helps other ingredients dissolve and helps a product hold on to water.",
+    whatItIs: [
+      "Propylene glycol is a synthetic organic compound. It is odourless and mixes easily with water, which is why it turns up in so many creams, toners, sprays and cleansers.",
+    ],
+    whyUsed: [
+      "Formulators use it to dissolve other ingredients and to help a formula keep a smooth, even texture. It is listed second in this fragrance spray, after aqua.",
+    ],
+    goodToKnow: [
+      "It is widely used and generally well tolerated, but a small number of people react to it, especially on skin that is already irritated. A patch test before first use is the simplest check.",
+    ],
+  },
+  {
+    slug: "1-2-hexanediol",
+    name: "1,2-Hexanediol",
+    inci: "1,2-Hexanediol",
+    icon: "layers",
+    summary:
+      "1,2-Hexanediol is a clear liquid used in cosmetics as a solvent and conditioning ingredient. It is often found in toners, serums and sprays.",
+    whatItIs: [
+      "1,2-Hexanediol is a small, water-soluble alcohol-type molecule (a diol). It is not the drying kind of alcohol found in some sprays; it is a different ingredient with a different name on the label.",
+    ],
+    whyUsed: [
+      "Formulators use it to help dissolve other ingredients and to give a formula a lighter, less tacky feel.",
+    ],
+    goodToKnow: [
+      "It is generally well tolerated, but any ingredient can bother some skin. Patch test new products before first use.",
+    ],
+  },
 ];
 
 export function ingredientBySlug(slug: string): Ingredient | undefined {

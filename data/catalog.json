@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-10-05T15:09:39.260Z",
+  "syncedAt": "2026-10-05T18:32:24.799Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -22,7 +22,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-05T15:09:27Z",
+      "updatedAt": "2026-10-05T16:49:05Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -53,35 +53,35 @@
           "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/1-pack.png?v=1790789964",
           "description": null,
           "pricesByMarket": {
+            "CA": {
+              "amount": 43,
+              "compareAtAmount": 86,
+              "currencyCode": "CAD"
+            },
             "AU": {
               "amount": 44,
               "compareAtAmount": 88,
               "currencyCode": "AUD"
             },
-            "ZA": {
-              "amount": 511,
-              "compareAtAmount": 1021,
-              "currencyCode": "ZAR"
+            "GB": {
+              "amount": 24,
+              "compareAtAmount": 47,
+              "currencyCode": "GBP"
             },
             "IN": {
-              "amount": 2946.16,
-              "compareAtAmount": 5892.33,
+              "amount": 2946.5,
+              "compareAtAmount": 5893,
               "currencyCode": "INR"
-            },
-            "CA": {
-              "amount": 43,
-              "compareAtAmount": 86,
-              "currencyCode": "CAD"
             },
             "US": {
               "amount": 29.99,
               "compareAtAmount": 59.98,
               "currencyCode": "USD"
             },
-            "GB": {
-              "amount": 24,
-              "compareAtAmount": 47,
-              "currencyCode": "GBP"
+            "ZA": {
+              "amount": 510,
+              "compareAtAmount": 1020,
+              "currencyCode": "ZAR"
             }
           }
         },
@@ -99,35 +99,35 @@
           "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/2-pack_60c66ba2-fb0d-4eea-9022-bf07cef3ded0.png?v=1790789990",
           "description": null,
           "pricesByMarket": {
+            "CA": {
+              "amount": 76,
+              "compareAtAmount": 172,
+              "currencyCode": "CAD"
+            },
             "AU": {
               "amount": 78,
               "compareAtAmount": 176,
               "currencyCode": "AUD"
             },
-            "ZA": {
-              "amount": 902,
-              "compareAtAmount": 2041,
-              "currencyCode": "ZAR"
+            "GB": {
+              "amount": 41,
+              "compareAtAmount": 93,
+              "currencyCode": "GBP"
             },
             "IN": {
-              "amount": 5205.64,
-              "compareAtAmount": 11784.66,
+              "amount": 5206.24,
+              "compareAtAmount": 11786.01,
               "currencyCode": "INR"
-            },
-            "CA": {
-              "amount": 76,
-              "compareAtAmount": 171,
-              "currencyCode": "CAD"
             },
             "US": {
               "amount": 52.99,
               "compareAtAmount": 119.96,
               "currencyCode": "USD"
             },
-            "GB": {
-              "amount": 41,
-              "compareAtAmount": 93,
-              "currencyCode": "GBP"
+            "ZA": {
+              "amount": 901,
+              "compareAtAmount": 2039,
+              "currencyCode": "ZAR"
             }
           }
         },
@@ -145,35 +145,35 @@
           "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/3-pack.png?v=1790790079",
           "description": null,
           "pricesByMarket": {
+            "CA": {
+              "amount": 93,
+              "compareAtAmount": 257,
+              "currencyCode": "CAD"
+            },
             "AU": {
               "amount": 96,
               "compareAtAmount": 264,
               "currencyCode": "AUD"
             },
-            "ZA": {
-              "amount": 1106,
-              "compareAtAmount": 3061,
-              "currencyCode": "ZAR"
+            "GB": {
+              "amount": 51,
+              "compareAtAmount": 139,
+              "currencyCode": "GBP"
             },
             "IN": {
-              "amount": 6384.5,
-              "compareAtAmount": 17676.99,
+              "amount": 6385.23,
+              "compareAtAmount": 17679.01,
               "currencyCode": "INR"
-            },
-            "CA": {
-              "amount": 93,
-              "compareAtAmount": 257,
-              "currencyCode": "CAD"
             },
             "US": {
               "amount": 64.99,
               "compareAtAmount": 179.94,
               "currencyCode": "USD"
             },
-            "GB": {
-              "amount": 51,
-              "compareAtAmount": 139,
-              "currencyCode": "GBP"
+            "ZA": {
+              "amount": 1105,
+              "compareAtAmount": 3058,
+              "currencyCode": "ZAR"
             }
           }
         }
@@ -483,30 +483,30 @@
               "compareAtAmount": 88,
               "currencyCode": "AUD"
             },
-            "CA": {
-              "amount": 43,
-              "compareAtAmount": 86,
-              "currencyCode": "CAD"
-            },
-            "IN": {
-              "amount": 2946.16,
-              "compareAtAmount": 5892.33,
-              "currencyCode": "INR"
-            },
-            "US": {
-              "amount": 29.99,
-              "compareAtAmount": 59.98,
-              "currencyCode": "USD"
-            },
             "GB": {
               "amount": 24,
               "compareAtAmount": 47,
               "currencyCode": "GBP"
             },
             "ZA": {
-              "amount": 511,
-              "compareAtAmount": 1021,
+              "amount": 510,
+              "compareAtAmount": 1020,
               "currencyCode": "ZAR"
+            },
+            "US": {
+              "amount": 29.99,
+              "compareAtAmount": 59.98,
+              "currencyCode": "USD"
+            },
+            "IN": {
+              "amount": 2946.5,
+              "compareAtAmount": 5893,
+              "currencyCode": "INR"
+            },
+            "CA": {
+              "amount": 43,
+              "compareAtAmount": 86,
+              "currencyCode": "CAD"
             }
           }
         },
@@ -529,30 +529,30 @@
               "compareAtAmount": 176,
               "currencyCode": "AUD"
             },
-            "CA": {
-              "amount": 76,
-              "compareAtAmount": 171,
-              "currencyCode": "CAD"
-            },
-            "IN": {
-              "amount": 5205.64,
-              "compareAtAmount": 11784.66,
-              "currencyCode": "INR"
-            },
-            "US": {
-              "amount": 52.99,
-              "compareAtAmount": 119.96,
-              "currencyCode": "USD"
-            },
             "GB": {
               "amount": 41,
               "compareAtAmount": 93,
               "currencyCode": "GBP"
             },
             "ZA": {
-              "amount": 902,
-              "compareAtAmount": 2041,
+              "amount": 901,
+              "compareAtAmount": 2039,
               "currencyCode": "ZAR"
+            },
+            "US": {
+              "amount": 52.99,
+              "compareAtAmount": 119.96,
+              "currencyCode": "USD"
+            },
+            "IN": {
+              "amount": 5206.24,
+              "compareAtAmount": 11786.01,
+              "currencyCode": "INR"
+            },
+            "CA": {
+              "amount": 76,
+              "compareAtAmount": 172,
+              "currencyCode": "CAD"
             }
           }
         },
@@ -575,30 +575,30 @@
               "compareAtAmount": 264,
               "currencyCode": "AUD"
             },
-            "CA": {
-              "amount": 93,
-              "compareAtAmount": 257,
-              "currencyCode": "CAD"
-            },
-            "IN": {
-              "amount": 6384.5,
-              "compareAtAmount": 17676.99,
-              "currencyCode": "INR"
-            },
-            "US": {
-              "amount": 64.99,
-              "compareAtAmount": 179.94,
-              "currencyCode": "USD"
-            },
             "GB": {
               "amount": 51,
               "compareAtAmount": 139,
               "currencyCode": "GBP"
             },
             "ZA": {
-              "amount": 1106,
-              "compareAtAmount": 3061,
+              "amount": 1105,
+              "compareAtAmount": 3058,
               "currencyCode": "ZAR"
+            },
+            "US": {
+              "amount": 64.99,
+              "compareAtAmount": 179.94,
+              "currencyCode": "USD"
+            },
+            "IN": {
+              "amount": 6385.23,
+              "compareAtAmount": 17679.01,
+              "currencyCode": "INR"
+            },
+            "CA": {
+              "amount": 93,
+              "compareAtAmount": 257,
+              "currencyCode": "CAD"
             }
           }
         }
@@ -875,6 +875,195 @@
         "Hydrates for a fresh, comfortable feel",
         "Helps skin look plump & radiant",
         "Supersized Full-Body Value"
+      ],
+      "saleEndsAt": null
+    },
+    "middle-eastern-rose-fragrance": {
+      "id": "gid://shopify/Product/15407150530787",
+      "handle": "middle-eastern-rose-fragrance",
+      "title": "Voyage Nova | Rosey Fruity Floral | Extrait De Parfum 50ml/100ml | Long Lasting Luxury Fragrance | Daily Women's Perfume Alluring Summervibes Sohochic",
+      "vendor": "Belurae",
+      "productType": "Beauty & Wellness",
+      "status": "ACTIVE",
+      "updatedAt": "2026-10-05T18:32:12Z",
+      "seo": {
+        "title": "Middle Eastern Rose Fragrance · 50 ml Spray",
+        "description": "A 50 ml rose fragrance spray with a soft, light rose scent. Spray on wrists, neck and behind the ears. Ingredients, directions and safety guidance."
+      },
+      "options": [
+        {
+          "name": "Quantity",
+          "values": [
+            "1PC",
+            "2PCS",
+            "3PCS"
+          ]
+        }
+      ],
+      "availableForSale": true,
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67625772286179",
+          "title": "1PC",
+          "sku": "19494:75366304#50 ml;200009122:-540823#Rose fragrance",
+          "barcode": null,
+          "price": 49.99,
+          "compareAtPrice": 89.99,
+          "availableForSale": true,
+          "options": {
+            "Quantity": "1PC"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H7888ad78f56142568598972f1a36801eF.webp?v=1791221611",
+          "description": null,
+          "pricesByMarket": {}
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67625818423523",
+          "title": "2PCS",
+          "sku": "ROSE-FRAGRANCE-50ML-2PCS",
+          "barcode": null,
+          "price": 59.99,
+          "compareAtPrice": 179.98,
+          "availableForSale": true,
+          "options": {
+            "Quantity": "2PCS"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H7888ad78f56142568598972f1a36801eF.webp?v=1791221611",
+          "description": null,
+          "pricesByMarket": {}
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67625818456291",
+          "title": "3PCS",
+          "sku": "ROSE-FRAGRANCE-50ML-3PCS",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": 269.97,
+          "availableForSale": true,
+          "options": {
+            "Quantity": "3PCS"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H7888ad78f56142568598972f1a36801eF.webp?v=1791221611",
+          "description": null,
+          "pricesByMarket": {}
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H7888ad78f56142568598972f1a36801eF.webp?v=1791221611",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67625818456291"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H2e3b2e4e8559462abdaecc86923ccdcdb.webp?v=1791221611",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Hcba1e561bb484b69a5f1cfd5f0d76ad0G.webp?v=1791221611",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H8bc1c3f886284c229ed79ddb22be1544c.webp?v=1791221611",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H7f9650a162484b2e972686f8ce930dfd3.webp?v=1791221611",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Hbca07aba2b184ec3842e5b27557f33bcy.webp?v=1791221611",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        }
+      ],
+      "specs": [
+        {
+          "label": "Format",
+          "value": "Fragrance spray, 50 ml / 1.69 fl oz",
+          "description": null
+        },
+        {
+          "label": "Scent",
+          "value": "Rose, described as a luxurious Middle Eastern rose fragrance",
+          "description": null
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Aqua, propylene glycol, glycerin, 1,2-hexanediol, Rosa Rugosa flower extract",
+          "description": null
+        },
+        {
+          "label": "Use on",
+          "value": "Wrists, neck and behind the ears",
+          "description": null
+        },
+        {
+          "label": "Brand on the pack",
+          "value": "Voyage Novus",
+          "description": null
+        },
+        {
+          "label": "Shelf life",
+          "value": "3 years, stored in a cool, dry place",
+          "description": null
+        }
+      ],
+      "featureHighlights": [
+        {
+          "label": "A soft rose scent",
+          "body": "The manufacturer describes it as a luxurious Middle Eastern rose fragrance: light, elegant and soft on the skin.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H2e3b2e4e8559462abdaecc86923ccdcdb.webp?v=1791221611"
+        },
+        {
+          "label": "Hydrating, non-sticky texture",
+          "body": "Described by the manufacturer as a moist, refreshing texture that feels comfortable on the skin and is not sticky.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Hcba1e561bb484b69a5f1cfd5f0d76ad0G.webp?v=1791221611"
+        },
+        {
+          "label": "Made to linger",
+          "body": "The manufacturer calls the scent soft and long-lasting, and says it is designed to mask body odour and add a touch of elegance. How long it lasts varies from person to person.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H8bc1c3f886284c229ed79ddb22be1544c.webp?v=1791221611"
+        },
+        {
+          "label": "A short ingredient list",
+          "body": "Aqua, propylene glycol, glycerin, 1,2-hexanediol and Rosa Rugosa flower extract, as listed by the manufacturer.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H7f9650a162484b2e972686f8ce930dfd3.webp?v=1791221611"
+        },
+        {
+          "label": "Easy to wear",
+          "body": "Spray on the wrists, then on the neck and behind the ears, or wherever you like a hint of fragrance.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Hbca07aba2b184ec3842e5b27557f33bcy.webp?v=1791221611"
+        }
+      ],
+      "perks": [
+        "A Christmas gift for the office, or for yourself",
+        "Soft, long-lasting rose scent",
+        "Moist, refreshing, non-sticky texture",
+        "Designed to mask body odour",
+        "Rose flower extract, glycerin & propylene glycol",
+        "50 ml bottle in its own box, 3-year shelf life"
       ],
       "saleEndsAt": null
     }

@@ -34,6 +34,11 @@ export const primaryNav: NavGroup[] = [
         description: "Facial toner, in plain words",
       },
       {
+        label: "Fragrance",
+        href: "/collections/fragrance",
+        description: "A rose fragrance spray, in plain words",
+      },
+      {
         label: "Shop all",
         href: "/collections/all",
         description: "Everything Belurae sells today",
@@ -101,6 +106,7 @@ export const footerNav: NavGroup[] = [
     links: [
       { label: "Hair Removal", href: "/collections/hair-removal" },
       { label: "Skincare", href: "/collections/skincare" },
+      { label: "Fragrance", href: "/collections/fragrance" },
       { label: "Shop all", href: "/collections/all" },
     ],
   },

@@ -377,6 +377,7 @@ function PackCards({
   onChoose,
   optionAvailable,
   localizedVariantFor,
+  perSetPrice,
 }: {
   option: ProductView["options"][number];
   selection: Record<string, string>;
@@ -384,6 +385,8 @@ function PackCards({
   onChoose: (name: string, value: string) => void;
   optionAvailable: (name: string, value: string) => boolean;
   localizedVariantFor: (v: ViewVariant) => LocalizedVariant;
+  /** Show the "each" price on multi-set cards; off shows every card's own price and compare-at, like the single. */
+  perSetPrice: boolean;
 }) {
   const name = option.name;
   const rows = option.values
@@ -563,7 +566,7 @@ function PackCards({
 
               {c.combo && (
                 <span className="flex shrink-0 flex-col items-end">
-                  {c.units > 1 && c.unitPrice != null ? (
+                  {perSetPrice && c.units > 1 && c.unitPrice != null ? (
                     <>
                       <span
                         className={cn(
@@ -679,7 +682,7 @@ function PackCards({
             )}
             {c.combo && (
               <span className="mt-1 flex flex-col items-center">
-                {c.units > 1 && c.unitPrice != null ? (
+                {perSetPrice && c.units > 1 && c.unitPrice != null ? (
                   <>
                     <span
                       className={cn(
@@ -809,10 +812,13 @@ function FreeDeliveryUnlocked() {
 export function PurchasePanel({
   view,
   packs = "list",
+  perSetPrice = true,
 }: {
   view: ProductView;
   /** "cards": one photo card per pack in a row, instead of the stacked rows. */
   packs?: "list" | "cards";
+  /** Cards only: false shows each pack's own price and compare-at instead of an "each" price. */
+  perSetPrice?: boolean;
 }) {
   const cardsMode = packs === "cards";
   const { add, open, payments } = useCart();
@@ -976,6 +982,7 @@ export function PurchasePanel({
                 onChoose={choose}
                 optionAvailable={optionAvailable}
                 localizedVariantFor={localizedVariantFor}
+                perSetPrice={perSetPrice}
               />
             );
           }

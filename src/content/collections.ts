@@ -77,13 +77,27 @@ export const collections: CollectionContent[] = [
     ],
   },
   {
+    slug: "fragrance",
+    title: "Fragrance",
+    seoTitle: "Fragrance — Ingredients and Directions, Plainly",
+    description:
+      "Fragrance sprays with the ingredients, directions and safety guidance spelled out on every product page.",
+    intro:
+      "Our fragrance range is small and plainly described. Each product page names the ingredients as the manufacturer lists them, says how to wear it and where not to, and is clear about what we don't yet know.",
+    categories: ["fragrance"],
+    related: [
+      { label: "How to patch test", href: "/guides/how-to-patch-test" },
+      { label: "Ingredients", href: "/ingredients" },
+    ],
+  },
+  {
     slug: "all",
     title: "Shop all",
     seoTitle: "Shop All Beauty & Wellness",
     description:
-      "Everything Belurae sells today — body care and skincare for simpler everyday routines.",
+      "Everything Belurae sells today — body care, skincare and fragrance for simpler everyday routines.",
     intro:
-      "Belurae is a small, deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal and facial skincare.",
+      "Belurae is a small, deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal, facial skincare and fragrance.",
     categories: "*",
     related: [
       { label: "Our standards", href: "/pages/standards" },

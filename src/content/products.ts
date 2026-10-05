@@ -134,6 +134,12 @@ export type ProductContent = {
     galleryFit?: "contain" | "flush";
     /** "cards": the photo-card pack picker instead of stacked rows. */
     packs?: "list" | "cards";
+    /**
+     * Cards only. Default true: a multi-set card leads with the per-set ("each")
+     * price. False: every card shows its own price and compare-at, like the
+     * single bottle.
+     */
+    perSetPrice?: boolean;
     /** "Your daily step" band and the key-ingredients band under it (EditorialBands). */
     dailyStep?: {
       eyebrow: string;
@@ -776,6 +782,274 @@ export const products: ProductContent[] = [
       "Exact wording of the packaging warnings",
       "Confirmed country of origin from the pack",
       "Skin types the manufacturer recommends it for",
+      "GTIN / barcode",
+    ],
+  },
+  {
+    handle: "middle-eastern-rose-fragrance",
+    slug: "middle-eastern-rose-fragrance",
+    legacySlugs: [
+      "amz-light-luxury-middle-eastern-rose-fragrance-gentle-rose-scent-elegant-fresh-long-lasting-perfume-for-dating-and-commuting-ver",
+    ],
+    name: "Middle Eastern Rose Fragrance",
+    format: "Fragrance spray · 50 ml",
+    category: { slug: "fragrance", name: "Fragrance" },
+    benefitLine:
+      "A 50 ml rose fragrance spray with a soft, light rose scent, in its own box: a Christmas gift for the office, or for yourself. Spray it on the wrists, neck and behind the ears.",
+    manufacturer: "Voyage Novus",
+    seo: {
+      title: "Rose Fragrance · A Christmas Gift for the Office",
+      description:
+        "A 50 ml rose fragrance spray in its own box, with a soft, light rose scent: a Christmas gift for a colleague or yourself. Ingredients, directions and safety guidance.",
+    },
+    optionLabels: {
+      Quantity: {
+        label: "Choose your pack",
+        values: {
+          "1PC": "Single bottle",
+          "2PCS": "Duo set",
+          "3PCS": "Trio set",
+        },
+      },
+    },
+    packOption: { name: "Quantity", units: { "1PC": 1, "2PCS": 2, "3PCS": 3 } },
+    story: {
+      heading: "A soft rose, sprayed where you want it.",
+      body: [
+        "This is a 50 ml rose fragrance spray. You spray it on the wrists, the neck and behind the ears, wherever you'd like a hint of scent. The manufacturer calls it a luxurious Middle Eastern rose fragrance and describes the scent as soft, light and long-lasting.",
+        "It is a short formula: aqua, propylene glycol, glycerin, 1,2-hexanediol and Rosa Rugosa flower extract are the five ingredients the manufacturer lists. The listing doesn't give a separate fragrance or allergen declaration, so we suggest a patch test first, and the safety notes below say where not to use it.",
+      ],
+    },
+    highlights: [
+      {
+        title: "A soft rose scent",
+        body: "The manufacturer describes a luxurious Middle Eastern rose fragrance that is light and elegant.",
+      },
+      {
+        title: "Moist, non-sticky texture",
+        body: "Described by the manufacturer as refreshing and comfortable on the skin, and not sticky.",
+      },
+      {
+        title: "A short ingredient list",
+        body: "Aqua, propylene glycol, glycerin, 1,2-hexanediol and Rosa Rugosa flower extract, as listed by the manufacturer.",
+      },
+      {
+        title: "Spray and go",
+        body: "On the wrists, the neck and behind the ears, wherever you like a hint of fragrance.",
+      },
+      {
+        title: "Easy to give",
+        body: "A 50 ml bottle that comes in its own box, for a colleague, a Secret Santa or yourself. The Duo and Trio sets cover more than one gift.",
+      },
+    ],
+    steps: [
+      {
+        title: "Patch test",
+        body: "If it's your first time, spray a small amount on a small area, such as the inner wrist, and wait 24 hours.",
+      },
+      {
+        title: "Spray on the wrists",
+        body: "Spray an appropriate amount on your wrists.",
+      },
+      {
+        title: "Neck and behind the ears",
+        body: "Apply to the neck and behind the ears, or any area where you want to leave a fragrance.",
+      },
+      {
+        title: "Enjoy the rose scent",
+        body: "Keep it away from your eyes, and from broken or irritated skin.",
+      },
+    ],
+    keyIngredients: [
+      {
+        slug: "rosa-rugosa-flower-extract",
+        name: "Rosa Rugosa flower extract",
+        role: "A rose flower extract, the botanical ingredient the manufacturer lists.",
+        icon: "flower",
+      },
+      {
+        slug: "glycerin",
+        name: "Glycerin",
+        role: "A humectant: it draws water into the top layer of the skin.",
+      },
+      {
+        slug: "propylene-glycol",
+        name: "Propylene glycol",
+        role: "A clear liquid used in cosmetics as a solvent and humectant.",
+        icon: "droplet",
+      },
+      {
+        slug: "1-2-hexanediol",
+        name: "1,2-Hexanediol",
+        role: "A clear liquid used in cosmetics as a solvent and conditioning ingredient.",
+        icon: "layers",
+      },
+    ],
+    /* As shown on the manufacturer's ingredient graphic, in their order. */
+    inci: [
+      "Aqua",
+      "Propylene Glycol",
+      "Glycerin",
+      "1,2-Hexanediol",
+      "Rosa Rugosa Flower Extract",
+    ],
+    specs: [
+      { label: "Format", value: "Fragrance spray, 50 ml / 1.69 fl oz" },
+      {
+        label: "Scent",
+        value: "Rose, described as a luxurious Middle Eastern rose fragrance",
+      },
+      { label: "Use on", value: "Wrists, neck and behind the ears" },
+      { label: "Shelf life", value: "3 years, stored in a cool, dry place" },
+      { label: "Brand on the pack", value: "Voyage Novus" },
+    ],
+    inTheBox: [
+      {
+        item: "Rose fragrance spray",
+        detail: "50 ml / 1.69 fl oz bottle with its box, per set",
+      },
+    ],
+    safety: {
+      patchTest:
+        "Patch test before first use: spray a small amount on a small area of skin, such as the inner wrist, and wait 24 hours. Don't use the product if you notice redness, burning, itching or swelling.",
+      note: "The manufacturer's listing gives directions but no warnings, so we follow the standard precautions for fragranced skin products below. Read any warnings printed on the pack.",
+      use: ["Wrists", "Neck", "Behind the ears"],
+      avoid: [
+        "The eyes and the area around them",
+        "Broken, sunburnt or irritated skin",
+        "Skin that has reacted to fragranced products before",
+      ],
+      ifIrritation:
+        "If your skin feels irritated, rinse the area with plenty of cool water and stop using it. If it gets in your eyes, rinse them with water. If irritation continues, contact a doctor or pharmacist.",
+    },
+    faqs: [
+      {
+        q: "What is this product?",
+        a: "A 50 ml rose fragrance spray. The manufacturer calls it a luxurious Middle Eastern rose fragrance. You spray it on the wrists, the neck and behind the ears.",
+      },
+      {
+        q: "How do I use it?",
+        a: "Spray an appropriate amount on your wrists, then on the neck and behind the ears, or any area where you want to leave a fragrance.",
+      },
+      {
+        q: "What does it smell like?",
+        a: "A rose scent. The manufacturer describes it as soft, light and elegant. The listing doesn't give scent notes, so we can't describe the top, heart or base.",
+      },
+      {
+        q: "How long does the scent last?",
+        a: "The manufacturer describes the scent as soft and long-lasting but gives no duration. How long a scent lasts varies with the person, their skin and the conditions.",
+      },
+      {
+        q: "What is it made of?",
+        a: "The manufacturer lists aqua, propylene glycol, glycerin, 1,2-hexanediol and Rosa Rugosa flower extract. The listing doesn't include a separate fragrance or allergen declaration, so ask us if you have a known sensitivity.",
+      },
+      {
+        q: "Is it suitable for sensitive skin?",
+        a: "We don't make a sensitive-skin claim for this fragrance, and no product suits every skin. Fragranced products can bother some skin, so patch test a small area 24 hours before your first full use.",
+      },
+      {
+        q: "How should I store it?",
+        a: "The manufacturer's spec sheet says to store it in a cool, dry place, and gives a shelf life of 3 years.",
+      },
+      {
+        q: "Is it a good Christmas gift for the office?",
+        a: "It is a 50 ml bottle that comes in its own box, which makes it easy to give to a colleague, in a Secret Santa, or to yourself. Scent is personal, though, and personal-care products can't be returned once received (see the refund policy), so choose a rose scent you think they'll like. The Duo and Trio sets are there if you are buying for more than one person.",
+      },
+      {
+        q: "Why does the box say Voyage Novus?",
+        a: "That is the name printed on the manufacturer's box and bottle. Belurae is the seller.",
+      },
+      {
+        q: "Can I return it?",
+        a: "Personal-care products can't be returned once received, unless they arrive damaged, defective or incorrect — contact us and we'll put it right. EU customers also have a 14-day right to cancel. See the refund policy for details.",
+      },
+    ],
+    googleCategory: "Health & Beauty > Personal Care > Cosmetics > Perfume & Cologne",
+    pdp: {
+      packs: "cards",
+      perSetPrice: false,
+      galleryFit: "flush",
+      perksOneColumn: true,
+      /* Rose, from the pink box and bottle. */
+      theme: {
+        primary: {
+          "50": "#fdf4f5",
+          "100": "#fae6e9",
+          "200": "#f5ccd3",
+          "300": "#eba3b1",
+          "400": "#de7389",
+          "500": "#c9506b",
+          "600": "#a63555",
+          "700": "#862a45",
+          "800": "#651f35",
+          "900": "#4a1626",
+        },
+        accent: {
+          "50": "#fdf3ef",
+          "100": "#fbe3da",
+          "200": "#f6c8b6",
+          "300": "#ec9f84",
+          "600": "#a4482c",
+        },
+        surface: {
+          ivory: "#ffffff",
+          porcelain: "#ffffff",
+          cream: "#fbeff0",
+          sand: "#f4dfe2",
+          linen: "#ecd0d5",
+          line: "#e2bfc6",
+          ink: "#2a1a1f",
+          "ink-soft": "#66505a",
+          "ink-faint": "#76606a",
+        },
+      },
+      trust: [
+        { icon: "flower", text: "Rose fragrance · 50 ml" },
+        { icon: "droplet", text: "Moist, non-sticky texture" },
+        { icon: "heart", text: "A Christmas gift for the office" },
+      ],
+      dailyStep: {
+        eyebrow: "Christmas offer",
+        heading: "A rose to wear to work, or to give.",
+        body: "A 50 ml bottle in its own box, easy to give to a colleague, in a Secret Santa, or to yourself. Spray on the wrists, then on the neck and behind the ears, wherever you'd like a hint of rose. The manufacturer describes a moist, refreshing texture that feels comfortable on the skin and isn't sticky.",
+        mediaFile: "H2e3b2e4e8559462abdaecc86923ccdcdb",
+        imagePosition: "center",
+        benefits: [
+          {
+            icon: "heart",
+            title: "A soft rose scent",
+            body: "A light, elegant Middle Eastern rose, as the manufacturer describes it.",
+          },
+          {
+            icon: "droplet",
+            title: "Moist, non-sticky feel",
+            body: "Refreshing and comfortable on the skin.",
+          },
+          {
+            icon: "feather",
+            title: "Easy to wear",
+            body: "Wrists, neck and behind the ears.",
+          },
+        ],
+      },
+      howTo: {
+        heading: "Four easy steps.",
+        intro:
+          "The short version: patch test, spray on the wrists, then the neck and behind the ears.",
+      },
+      ingredientsNote:
+        "Aqua, Propylene Glycol, Glycerin, 1,2-Hexanediol and Rosa Rugosa Flower Extract: the five ingredients the manufacturer lists, in INCI form. The listing gives no separate fragrance or allergen declaration, so check the pack and ask us if you have a sensitivity.",
+      showHairRemovalComparison: false,
+      notice: {
+        lead: "Patch test 24 hours before first use.",
+        text: "Avoid the eyes and broken skin.",
+      },
+    },
+    contentGaps: [
+      "Full fragrance and allergen declaration (the listing shows five ingredients, none named as perfume)",
+      "Scent notes (top, heart and base)",
+      "Exact wording of the packaging warnings",
+      "Photos showing the 2-pack and 3-pack",
       "GTIN / barcode",
     ],
   },
