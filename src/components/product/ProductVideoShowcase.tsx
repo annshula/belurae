@@ -8,6 +8,7 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from "react";
 
+import { Icon } from "@/components/ui/Icon";
 import { playMuted } from "@/lib/media/autoplay";
 import { cn } from "@/lib/utils";
 
@@ -223,6 +224,33 @@ export function ProductVideoShowcase({
 
 function VideoCard({ video }: { video: ShowcaseVideo }) {
   const ref = useRef<HTMLVideoElement>(null);
+  /**
+   * The clip has no `src` until its tile is about to be seen. The row sits
+   * well below the fold and holds a dozen clips (tens of MB); with `src` set
+   * on first render every one starts its network request during page load,
+   * competing with the hero image, the scripts and hydration for bandwidth.
+   * Once set it stays set, so scrolling back never refetches.
+   */
+  const [near, setNear] = useState(false);
+  /** The clip has a frame to show; until then the still under it stays visible. */
+  const [ready, setReady] = useState(false);
+  /** The clip could not load: stop the spinner and leave the still. */
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || near) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry!.isIntersecting) return;
+        setNear(true);
+        observer.disconnect();
+      },
+      { rootMargin: "400px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [near]);
 
   // Play only while the card is actually visible — the row renders every
   // card up front (no virtualization), so an unconditional autoplay would
@@ -252,21 +280,54 @@ function VideoCard({ video }: { video: ShowcaseVideo }) {
 
   return (
     <div className="relative size-full overflow-hidden rounded-media bg-ink">
+      {/* The still frame sits under the clip, as a lazy <img> rather than the
+          `poster` attribute: a poster is fetched at page load for every tile,
+          while a lazy image waits until its tile is near the screen. A <video>
+          paints nothing until its first frame decodes, so the still shows
+          through until then and the clip simply covers it. */}
+      {video.poster && (
+        // eslint-disable-next-line @next/next/no-img-element -- a ~15 KB still from /public, already sized for the tile
+        <img
+          src={video.poster}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 size-full object-cover"
+        />
+      )}
       <video
         ref={ref}
-        className="size-full object-cover"
-        poster={video.poster}
-        preload="metadata"
+        /* Kept invisible until it has a frame: some browsers draw a black box
+           for an empty <video>, which would hide the still. */
+        className={cn(
+          "relative size-full object-cover transition-opacity duration-300",
+          !ready && "opacity-0",
+        )}
+        onLoadedData={() => setReady(true)}
+        onError={() => setFailed(true)}
+        preload={near ? "metadata" : "none"}
+        src={near ? `${video.src}#t=0.001` : undefined}
         muted
         loop
         playsInline
         aria-label={video.alt}
-      >
-        {/* `#t=0.001` makes the browser paint a real first frame under
-            preload="metadata" — with no poster, an unplayed card is otherwise
-            just the black `bg-ink` backdrop. */}
-        <source src={`${video.src}#t=0.001`} type="video/mp4" />
-      </video>
+      />
+
+      {/* Spinner while the clip is on its way: from the moment its tile is
+          near the screen (when the request starts) until it has a frame. */}
+      {near && !ready && !failed && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 grid place-items-center"
+        >
+          <span className="glass grid size-11 place-items-center rounded-full">
+            <Icon
+              name="spinner"
+              className="size-5 animate-spin text-ink-soft motion-reduce:animate-none"
+            />
+          </span>
+        </div>
+      )}
     </div>
   );
 }

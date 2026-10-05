@@ -45,36 +45,41 @@ import { cn } from "@/lib/utils";
 /**
  * Local clips for the "See it in action" showcase — served from `public/videos`,
  * not Shopify media, so they're independent of the catalog sync. Add more here
- * as they're recorded; no poster is supplied, so each autoplays into its own
- * first frame.
+ * as they're recorded. Each clip has a still frame beside it (same name,
+ * `.webp`) that shows until the clip itself has loaded: make one with
+ * `ffmpeg -ss 0.5 -i clip.mp4 -frames:v 1 -vf scale=400:-2 -c:v libwebp -quality 70 clip.webp`.
  */
+const clip = (
+  src: string,
+  alt: string,
+  extra?: Partial<ShowcaseVideo>,
+): ShowcaseVideo => ({
+  src,
+  poster: src.replace(/\.mp4$/, ".webp"),
+  alt,
+  ...extra,
+});
+
 const productVideos: ShowcaseVideo[] = [
-  ...[1, 2, 3, 4, 5, 6].map((n) => ({
-    src: `/videos/hair-removal/hair-removal-${n}.mp4`,
-    alt: `Belurae hair removal video ${n}`,
-    // Mobile leads with the 2nd clip; desktop keeps the numbered order.
-    mobileFirst: n === 2,
-  })),
-  { src: "/videos/product-1.mp4", alt: "Belurae product video 1" },
-  { src: "/videos/product-2.mp4", alt: "Belurae product video 2" },
-  { src: "/videos/product-3.mp4", alt: "Belurae product video 3" },
-  { src: "/videos/product-4.mp4", alt: "Belurae product video 4" },
-  { src: "/videos/product-5.mp4", alt: "Belurae product video 5" },
-  { src: "/videos/product-6.mp4", alt: "Belurae product video 6" },
-  { src: "/videos/product-7.mp4", alt: "Belurae product video 7" },
-  { src: "/videos/product-8.mp4", alt: "Belurae product video 8" },
+  ...[1, 2, 3, 4, 5, 6].map((n) =>
+    clip(
+      `/videos/hair-removal/hair-removal-${n}.mp4`,
+      `Belurae hair removal video ${n}`,
+      // Mobile leads with the 2nd clip; desktop keeps the numbered order.
+      { mobileFirst: n === 2 },
+    ),
+  ),
+  ...[1, 2, 3, 4, 5, 6, 7, 8].map((n) =>
+    clip(`/videos/product-${n}.mp4`, `Belurae product video ${n}`),
+  ),
 ];
 
 /** Toner clips — served from `public/videos/toner` (compressed from `toner_video/`). */
 const tonerVideos: ShowcaseVideo[] = [
-  {
-    src: "/videos/toner/toner-new-3.mp4",
-    alt: "Belurae EGF Tox toner video 1",
-  },
-  ...[1, 2, 3, 4, 5].map((n) => ({
-    src: `/videos/toner/toner-${n}.mp4`,
-    alt: `Belurae EGF Tox toner video ${n + 1}`,
-  })),
+  clip("/videos/toner/toner-new-3.mp4", "Belurae EGF Tox toner video 1"),
+  ...[1, 2, 3, 4, 5].map((n) =>
+    clip(`/videos/toner/toner-${n}.mp4`, `Belurae EGF Tox toner video ${n + 1}`),
+  ),
 ];
 
 /** Per-product clip sets; products without an entry use the mousse clips. */
