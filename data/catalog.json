@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-05T19:24:52.904Z",
+  "syncedAt": "2026-10-05T19:40:08.398Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -685,7 +685,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-05T19:20:15Z",
+      "updatedAt": "2026-10-05T19:39:28Z",
       "seo": {
         "title": "Middle Eastern Rose Fragrance · 50 ml Spray",
         "description": "A 50 ml rose fragrance spray with a soft, light rose scent. Spray on wrists, neck and behind the ears. Ingredients, directions and safety guidance."
@@ -741,7 +741,7 @@
           "options": {
             "Quantity": "3PCS"
           },
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/3_pack_bf970e05-4d24-489c-8b83-9f9cb1008b43.png?v=1791228265",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/3pack.png?v=1791229065",
           "description": null
         }
       ],
@@ -756,9 +756,17 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H2e3b2e4e8559462abdaecc86923ccdcdb.webp?v=1791221611",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H8bc1c3f886284c229ed79ddb22be1544c.webp?v=1791221611",
           "width": 1600,
           "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Af091339844b5453e96cb378dd456e0cbt.jpg?v=1791229133",
+          "width": 800,
+          "height": 800,
           "alt": null,
           "variantId": null
         },
@@ -772,7 +780,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H8bc1c3f886284c229ed79ddb22be1544c.webp?v=1791221611",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/H2e3b2e4e8559462abdaecc86923ccdcdb.webp?v=1791221611",
           "width": 1600,
           "height": 1600,
           "alt": null,
@@ -804,11 +812,27 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/3_pack_bf970e05-4d24-489c-8b83-9f9cb1008b43.png?v=1791228265",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/3pack.png?v=1791229065",
           "width": 1448,
           "height": 1086,
           "alt": null,
           "variantId": "gid://shopify/ProductVariant/67625818456291"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/A204fc9437da44f0a93f7f0a0ebbf61d4x.png?v=1791229134",
+          "width": 936,
+          "height": 845,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/A4d9a142962e1425c82ea354a328110fbz.png?v=1791229134",
+          "width": 900,
+          "height": 849,
+          "alt": null,
+          "variantId": null
         }
       ],
       "specs": [
