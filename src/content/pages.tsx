@@ -38,7 +38,7 @@ export const contentPages: ContentPage[] = [
         <p>
           Belurae is a beauty and wellness store built around simpler everyday
           body-care routines. We begin with at-home hair removal — a{" "}
-          {mousse?.format.toLowerCase()} you spray on, leave for 5–10 minutes
+          {mousse?.format.toLowerCase()} you spray on, leave for 3–5 minutes
           and wipe away — and will grow into body care and aftercare, one
           considered product at a time.
         </p>

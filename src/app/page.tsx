@@ -34,7 +34,7 @@ const homeFaqs = [
   },
   {
     q: "How does the hair removal mousse work?",
-    a: "You spray an even layer on clean, dry skin, leave it on for 5–10 minutes, then wipe it away with the hair using the included scraper and rinse. There's no blade and no pulling.",
+    a: "You spray an even layer on clean, dry skin, leave it on for 3–5 minutes, then wipe it away with the hair using the included scraper and rinse. There's no blade and no pulling.",
   },
   {
     q: "Is it suitable for sensitive skin?",

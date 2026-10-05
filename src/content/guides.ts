@@ -36,7 +36,7 @@ export const guides: Guide[] = [
     description:
       "A calm, practical walkthrough of using a spray hair removal mousse at home: preparing skin, timing, removal and aftercare.",
     summary:
-      "Start with clean, dry, unbroken skin and patch test 24 hours before your first use. Spray an even layer over the hair, leave it on for the time on the pack (5–10 minutes for our mousse), wipe it away with the scraper, then rinse thoroughly with lukewarm water. Never go past the maximum time.",
+      "Start with clean, dry, unbroken skin and patch test 24 hours before your first use. Spray an even layer over the hair, leave it on for the time on the pack (3–5 minutes for our mousse), wipe it away with the scraper, then rinse thoroughly with lukewarm water. Never go past the maximum time.",
     readingMinutes: 5,
     published: "2026-09-27",
     updated: "2026-09-27",
@@ -66,7 +66,7 @@ export const guides: Guide[] = [
             items: [
               "Rinse and dry the area. Skin should be completely dry so the mousse sits evenly.",
               "Spray an even layer that fully covers the hair. You don't need to rub it in.",
-              "Start your timer. For our mousse, the window is 5–10 minutes.",
+              "Start your timer. For our mousse, the window is 3–5 minutes.",
               "Around the lower end of the window, test a small patch with the scraper. If hair wipes away easily, remove the rest.",
               "Wipe the mousse off with the scraper in gentle strokes, going against the direction of hair growth.",
               "Rinse the area thoroughly with lukewarm water until no product remains, then pat dry.",
@@ -90,7 +90,7 @@ export const guides: Guide[] = [
       },
     ],
     faqs: [
-      { q: "How long should hair removal mousse stay on?", a: "As long as the pack says and no longer. For our mousse that's 5–10 minutes." },
+      { q: "How long should hair removal mousse stay on?", a: "As long as the pack says and no longer. For our mousse that's 3–5 minutes." },
       { q: "Should I shave before using a hair removal mousse?", a: "No. Shaving just before can leave skin more reactive. Give the area a few days after shaving or waxing." },
     ],
     products: ["bikini-pain-free-hair-removal-spray"],
@@ -222,7 +222,7 @@ export const guides: Guide[] = [
             items: [
               "Which area? Large, flat areas suit sprays and creams; small, curved areas may be easier to shave. Never use a depilatory near the eyes or on the genitals, and use it on the face only if the pack says it's suitable.",
               "How does your skin usually react? If blades or wax tend to irritate you, a depilatory may be worth a patch test — if chemical products irritate you, it may not.",
-              "How much time do you have? Shaving is fastest; a depilatory needs a 5–10 minute wait; waxing takes preparation.",
+              "How much time do you have? Shaving is fastest; a depilatory needs a 3–5 minute wait; waxing takes preparation.",
             ],
           },
         ],

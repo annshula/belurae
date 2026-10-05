@@ -178,12 +178,12 @@ export const products: ProductContent[] = [
     format: "Spray mousse · 140 ml",
     category: { slug: "hair-removal", name: "Hair Removal" },
     benefitLine:
-      "A spray-on hair removal mousse for the body. Spray, wait 5–10 minutes, and wipe hair away with the included scraper — no blade, no wax strips.",
+      "A spray-on hair removal mousse for the body. Spray, wait 3–5 minutes, and wipe hair away with the included scraper — no blade, no wax strips.",
     manufacturer: "Belurae (Cloud Sense)",
     seo: {
       title: "Hair Removal Mousse · 140 ml Spray",
       description:
-        "Spray-on body hair removal mousse with aloe leaf water, glycerin and hyaluronic acid. On skin for 5–10 minutes, then wiped away. Full directions, key ingredients and safety guidance.",
+        "Spray-on body hair removal mousse with aloe leaf water, glycerin and hyaluronic acid. On skin for 3–5 minutes, then wiped away. Full directions, key ingredients and safety guidance.",
     },
     optionLabels: {
       Quantity: {
@@ -202,7 +202,7 @@ export const products: ProductContent[] = [
     story: {
       heading: "Smooth skin, without turning your routine into a chore.",
       body: [
-        "Shaving means a blade against your skin; waxing means pulling. This mousse works differently: you spray an even layer, leave it for 5–10 minutes, then wipe it away together with the hair using the scraper in the box.",
+        "Shaving means a blade against your skin; waxing means pulling. This mousse works differently: you spray an even layer, leave it for 3–5 minutes, then wipe it away together with the hair using the scraper in the box.",
         "The manufacturer labels the formula hypoallergenic and additive-free, with aloe leaf water, glycerin, hyaluronic acid and ginseng and portulaca extracts listed as key ingredients. Every skin is different, though — so we ask everyone to patch test first, and we tell you plainly where not to use it.",
       ],
     },
@@ -212,12 +212,12 @@ export const products: ProductContent[] = [
         body: "Spray on, wait, wipe away with the scraper. Nothing cuts or pulls at the skin.",
       },
       {
-        title: "5–10 minutes on skin",
-        body: "A defined window from the directions. Rinse off at 10 minutes, even if some hair remains.",
+        title: "3–5 minutes on skin",
+        body: "A defined window from the directions. Rinse off at 5 minutes, even if some hair remains.",
       },
       {
-        title: "Labelled hypoallergenic",
-        body: "The manufacturer labels it hypoallergenic, additive-free and suitable for sensitive skin. Patch test 24 hours before first use.",
+        title: "Hydrates Skin Up to 24hrs",
+        body: "With aloe leaf water, glycerin and hyaluronic acid. Patch test 24 hours before first use.",
       },
       {
         title: "Light citrus scent",
@@ -234,8 +234,8 @@ export const products: ProductContent[] = [
         body: "Spray an even layer that fully covers the hair you want to remove.",
       },
       {
-        title: "Wait 5–10 minutes",
-        body: "Leave the mousse on for 5–10 minutes. Don't exceed 10 minutes.",
+        title: "Wait 3–5 minutes",
+        body: "Leave the mousse on for 3–5 minutes. Don't exceed 5 minutes.",
       },
       {
         title: "Remove",
@@ -279,7 +279,7 @@ export const products: ProductContent[] = [
     ],
     specs: [
       { label: "Format", value: "Spray mousse, 140 ml / 4.73 fl oz" },
-      { label: "Time on skin", value: "5–10 minutes" },
+      { label: "Time on skin", value: "3–5 minutes" },
       { label: "Scent", value: "Orange Spring Cologne" },
       {
         label: "Skin type",
@@ -317,11 +317,11 @@ export const products: ProductContent[] = [
     faqs: [
       {
         q: "What is this product?",
-        a: "A spray-on hair removal mousse for the body (140 ml). You apply it to clean, dry skin, leave it on for 5–10 minutes, then wipe it away together with the hair using the included scraper and rinse.",
+        a: "A spray-on hair removal mousse for the body (140 ml). You apply it to clean, dry skin, leave it on for 3–5 minutes, then wipe it away together with the hair using the included scraper and rinse.",
       },
       {
         q: "How long should I leave it on?",
-        a: "5 to 10 minutes. Don't leave it on longer than 10 minutes, even if some hair remains — a longer wait raises the chance of irritation.",
+        a: "3 to 5 minutes. Don't leave it on longer than 5 minutes, even if some hair remains — a longer wait raises the chance of irritation.",
       },
       {
         q: "Is it suitable for sensitive skin?",
@@ -333,7 +333,7 @@ export const products: ProductContent[] = [
       },
       {
         q: "Can I use it on the bikini line?",
-        a: "Yes, following the directions on the pack. It is not for use on the genitals or mucous membranes. Patch test first, and keep to the 5–10 minute window.",
+        a: "Yes, following the directions on the pack. It is not for use on the genitals or mucous membranes. Patch test first, and keep to the 3–5 minute window.",
       },
       {
         q: "How do I remove it?",
@@ -368,13 +368,13 @@ export const products: ProductContent[] = [
       howTo: {
         heading: "Six unhurried steps.",
         intro:
-          "The short version: patch test, spray, wait 5–10 minutes, wipe, rinse, rest.",
+          "The short version: patch test, spray, wait 3–5 minutes, wipe, rinse, rest.",
         guide: { href: "/guides/how-to-use-hair-removal-mousse" },
       },
       dailyStep: {
         eyebrow: "Your daily step",
         heading: "The hair remover that tells you when to stop.",
-        body: "Ten minutes, then rinse, even if some hair remains. Spray on, wait 5–10 minutes, then wipe hair away with the included scraper. Nothing cuts or pulls at the skin, and the full ingredient list is printed on every pack.",
+        body: "Five minutes, then rinse, even if some hair remains. Spray on, wait 3–5 minutes, then wipe hair away with the included scraper. Nothing cuts or pulls at the skin, and the full ingredient list is printed on every pack.",
         mediaFile: "cac920f9-4b70-404b-8f48-2f28a0d05f61",
         imagePosition: "top",
         benefits: [
@@ -385,8 +385,8 @@ export const products: ProductContent[] = [
           },
           {
             icon: "clock",
-            title: "5–10 minutes on skin",
-            body: "A defined window from the directions. Rinse off at 10 minutes.",
+            title: "3–5 minutes on skin",
+            body: "A defined window from the directions. Rinse off at 5 minutes.",
           },
           {
             icon: "leaf",
@@ -435,8 +435,8 @@ export const products: ProductContent[] = [
       },
       trust: [
         { icon: "feather", text: "No blade, no wax strips" },
-        { icon: "clock", text: "5–10 minutes on skin" },
-        { icon: "shield", text: "Labelled hypoallergenic" },
+        { icon: "clock", text: "3–5 minutes on skin" },
+        { icon: "droplet", text: "Hydrates Skin Up to 24hrs" },
       ],
       /* Orders shipped for this product — Shopify count, read 2026-10-02. */
       customers: { count: 22000, asOf: "2026-10-02" },

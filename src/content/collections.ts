@@ -29,7 +29,7 @@ export const collections: CollectionContent[] = [
     education: {
       heading: "Choosing an at-home method",
       paragraphs: [
-        "Razors cut hair at the skin's surface, wax pulls it out from the root, and depilatory mousses and creams break hair down at the surface so it can be wiped away. Depilatories involve no blade and no pulling, cover large areas easily and take around 5–10 minutes of waiting.",
+        "Razors cut hair at the skin's surface, wax pulls it out from the root, and depilatory mousses and creams break hair down at the surface so it can be wiped away. Depilatories involve no blade and no pulling, cover large areas easily and take around 3–5 minutes of waiting.",
         "Because they work chemically, they ask for a little care: patch test before first use, keep to the time on the pack, and never use a product near your eyes or on your genitals, and use it on your face only if the pack says it's suitable. Our guides walk through each step.",
       ],
     },
@@ -44,7 +44,7 @@ export const collections: CollectionContent[] = [
       },
       {
         q: "How long do hair removal mousses take?",
-        a: "Our mousse stays on the skin for 5–10 minutes, then is wiped away and rinsed — around 15 minutes start to finish.",
+        a: "Our mousse stays on the skin for 3–5 minutes, then is wiped away and rinsed — around 10 minutes start to finish.",
       },
     ],
     related: [

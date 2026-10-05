@@ -13,7 +13,7 @@ const methods = [
       "How it works": "Breaks hair down at the skin's surface, then wipes away",
       Blade: "No",
       Pulling: "No",
-      "Time per session": "5–10 minute wait, plus application",
+      "Time per session": "3–5 minute wait, plus application",
       "Things to know": "Patch test first; not for eyes or genitals; light scent",
     },
   },

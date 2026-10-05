@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-05T18:48:18.125Z",
+  "syncedAt": "2026-10-05T18:52:16.933Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -296,7 +296,7 @@
         },
         {
           "label": "Time on skin",
-          "value": "5–10 minutes",
+          "value": "3–5 minutes",
           "description": null
         },
         {
