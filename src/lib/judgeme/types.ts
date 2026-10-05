@@ -48,6 +48,12 @@ export type Review = {
    * not mark them as verified buyers. Absent means a review from this store.
    */
   source?: "tiktok";
+  /**
+   * The shop's public answer to this review. Set by hand in the review data
+   * for the reviews we replied to; the card shows it under the review, and
+   * shows nothing when there is none.
+   */
+  reply?: { id: string; body: string };
 };
 
 export type ReviewSummary = {

@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "syncedAt": "2026-10-03T12:28:29.857Z",
+  "syncedAt": "2026-10-05T15:09:39.260Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -22,7 +22,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-03T12:00:53Z",
+      "updatedAt": "2026-10-05T15:09:27Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Trackify",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -58,6 +58,16 @@
               "compareAtAmount": 88,
               "currencyCode": "AUD"
             },
+            "ZA": {
+              "amount": 511,
+              "compareAtAmount": 1021,
+              "currencyCode": "ZAR"
+            },
+            "IN": {
+              "amount": 2946.16,
+              "compareAtAmount": 5892.33,
+              "currencyCode": "INR"
+            },
             "CA": {
               "amount": 43,
               "compareAtAmount": 86,
@@ -67,16 +77,6 @@
               "amount": 29.99,
               "compareAtAmount": 59.98,
               "currencyCode": "USD"
-            },
-            "ZA": {
-              "amount": 510,
-              "compareAtAmount": 1019,
-              "currencyCode": "ZAR"
-            },
-            "IN": {
-              "amount": 2940.39,
-              "compareAtAmount": 5880.77,
-              "currencyCode": "INR"
             },
             "GB": {
               "amount": 24,
@@ -104,6 +104,16 @@
               "compareAtAmount": 176,
               "currencyCode": "AUD"
             },
+            "ZA": {
+              "amount": 902,
+              "compareAtAmount": 2041,
+              "currencyCode": "ZAR"
+            },
+            "IN": {
+              "amount": 5205.64,
+              "compareAtAmount": 11784.66,
+              "currencyCode": "INR"
+            },
             "CA": {
               "amount": 76,
               "compareAtAmount": 171,
@@ -113,16 +123,6 @@
               "amount": 52.99,
               "compareAtAmount": 119.96,
               "currencyCode": "USD"
-            },
-            "ZA": {
-              "amount": 901,
-              "compareAtAmount": 2038,
-              "currencyCode": "ZAR"
-            },
-            "IN": {
-              "amount": 5195.43,
-              "compareAtAmount": 11761.55,
-              "currencyCode": "INR"
             },
             "GB": {
               "amount": 41,
@@ -150,6 +150,16 @@
               "compareAtAmount": 264,
               "currencyCode": "AUD"
             },
+            "ZA": {
+              "amount": 1106,
+              "compareAtAmount": 3061,
+              "currencyCode": "ZAR"
+            },
+            "IN": {
+              "amount": 6384.5,
+              "compareAtAmount": 17676.99,
+              "currencyCode": "INR"
+            },
             "CA": {
               "amount": 93,
               "compareAtAmount": 257,
@@ -159,16 +169,6 @@
               "amount": 64.99,
               "compareAtAmount": 179.94,
               "currencyCode": "USD"
-            },
-            "ZA": {
-              "amount": 1105,
-              "compareAtAmount": 3057,
-              "currencyCode": "ZAR"
-            },
-            "IN": {
-              "amount": 6371.98,
-              "compareAtAmount": 17642.32,
-              "currencyCode": "INR"
             },
             "GB": {
               "amount": 51,
@@ -237,10 +237,10 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ff825bef-274d-4c64-af38-1f73c47fa0a8.jpg?v=1790421362",
-          "width": 1500,
-          "height": 1500,
-          "alt": "Four-step instructions: clean, apply, wait 5 to 10 minutes, scrape and rinse",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Pastel_Purple_Skincare_Instructions.png?v=1791212953",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
           "variantId": null
         },
         {
@@ -438,16 +438,16 @@
         "35% Less Chemical Ingredients",
         "Cruelty-Free & Plant-Based"
       ],
-      "saleEndsAt": "2026-10-04T03:00:00.000Z"
+      "saleEndsAt": "2026-10-06T03:00:00.000Z"
     },
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
       "handle": "egf-tox-toner",
-      "title": "[Belurae] EGF Tox Toner | Forehead Firming & Wrinkle Care, Iron Out Fine Lines | PDRN & Collagen & NAD+ EGF Complex | EGF Plumping for Forehead, Longevity Anti-Aging Routine | Korean Skincare, K-Beauty",
+      "title": "EGF Tox Toner | Forehead Firming & Wrinkle Care, Iron Out Fine Lines | PDRN & Collagen & NAD+ EGF Complex | EGF Plumping for Forehead, Longevity Anti-Aging Routine | Korean Skincare, K-Beauty",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-03T07:43:19Z",
+      "updatedAt": "2026-10-04T05:15:44Z",
       "seo": {
         "title": null,
         "description": null
@@ -483,15 +483,15 @@
               "compareAtAmount": 88,
               "currencyCode": "AUD"
             },
-            "ZA": {
-              "amount": 510,
-              "compareAtAmount": 1019,
-              "currencyCode": "ZAR"
-            },
             "CA": {
               "amount": 43,
               "compareAtAmount": 86,
               "currencyCode": "CAD"
+            },
+            "IN": {
+              "amount": 2946.16,
+              "compareAtAmount": 5892.33,
+              "currencyCode": "INR"
             },
             "US": {
               "amount": 29.99,
@@ -503,10 +503,10 @@
               "compareAtAmount": 47,
               "currencyCode": "GBP"
             },
-            "IN": {
-              "amount": 2940.39,
-              "compareAtAmount": 5880.77,
-              "currencyCode": "INR"
+            "ZA": {
+              "amount": 511,
+              "compareAtAmount": 1021,
+              "currencyCode": "ZAR"
             }
           }
         },
@@ -529,15 +529,15 @@
               "compareAtAmount": 176,
               "currencyCode": "AUD"
             },
-            "ZA": {
-              "amount": 901,
-              "compareAtAmount": 2038,
-              "currencyCode": "ZAR"
-            },
             "CA": {
               "amount": 76,
               "compareAtAmount": 171,
               "currencyCode": "CAD"
+            },
+            "IN": {
+              "amount": 5205.64,
+              "compareAtAmount": 11784.66,
+              "currencyCode": "INR"
             },
             "US": {
               "amount": 52.99,
@@ -549,10 +549,10 @@
               "compareAtAmount": 93,
               "currencyCode": "GBP"
             },
-            "IN": {
-              "amount": 5195.43,
-              "compareAtAmount": 11761.55,
-              "currencyCode": "INR"
+            "ZA": {
+              "amount": 902,
+              "compareAtAmount": 2041,
+              "currencyCode": "ZAR"
             }
           }
         },
@@ -575,15 +575,15 @@
               "compareAtAmount": 264,
               "currencyCode": "AUD"
             },
-            "ZA": {
-              "amount": 1105,
-              "compareAtAmount": 3057,
-              "currencyCode": "ZAR"
-            },
             "CA": {
               "amount": 93,
               "compareAtAmount": 257,
               "currencyCode": "CAD"
+            },
+            "IN": {
+              "amount": 6384.5,
+              "compareAtAmount": 17676.99,
+              "currencyCode": "INR"
             },
             "US": {
               "amount": 64.99,
@@ -595,10 +595,10 @@
               "compareAtAmount": 139,
               "currencyCode": "GBP"
             },
-            "IN": {
-              "amount": 6371.98,
-              "compareAtAmount": 17642.32,
-              "currencyCode": "INR"
+            "ZA": {
+              "amount": 1106,
+              "compareAtAmount": 3061,
+              "currencyCode": "ZAR"
             }
           }
         }
@@ -876,7 +876,7 @@
         "Helps skin look plump & radiant",
         "Supersized Full-Body Value"
       ],
-      "saleEndsAt": "2026-10-04T03:00:00.000Z"
+      "saleEndsAt": null
     }
   }
 }

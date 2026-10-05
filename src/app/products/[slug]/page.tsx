@@ -6,6 +6,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { ComparisonTable } from "@/components/content/ComparisonTable";
 import { Faq } from "@/components/content/Faq";
 import { SectionHeading } from "@/components/content/SectionHeading";
+import { AnchorScroll } from "@/components/product/AnchorScroll";
 import { ProductAccordion } from "@/components/product/ProductAccordion";
 import { SaleCountdown } from "@/components/product/SaleCountdown";
 import { EditorialBands } from "@/components/product/EditorialBands";
@@ -225,6 +226,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <>
+      <AnchorScroll />
       {themeCss && <style dangerouslySetInnerHTML={{ __html: themeCss }} />}
       <JsonLd
         data={graph(

@@ -20,6 +20,7 @@ import {
   type Review,
   type ReviewSummary,
 } from "@/lib/judgeme/types";
+import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /**
@@ -104,15 +105,21 @@ export function ReviewsSection({
       )
     : 0;
 
+  // `scroll-mt` on the list keeps the sticky header off the top review.
+  const scrollToList = () =>
+    listRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  // A star bar sits in the summary (above the feed on a phone, beside it on a
+  // desktop), so picking one brings the first matching review into view.
   const chooseFilter = (next: FeedFilter) => {
     setFilter(next);
     void load(next, 1);
+    scrollToList();
   };
 
   const goTo = (next: number) => {
     void load(filter, Math.min(Math.max(1, next), current.pages));
-    // `scroll-mt` on the list keeps the sticky header off the top review.
-    listRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollToList();
   };
 
   const chips: {
@@ -373,6 +380,17 @@ function ReviewCard({ review }: { review: Review }) {
 
         <ReviewExtras review={review} />
         <ReviewFooter review={review} />
+
+        {review.reply?.body && (
+          <div className="mt-5 rounded-card bg-cream px-4 py-3.5">
+            <p className="font-ui text-body-sm font-medium text-ink">
+              Reply from {site.name}
+            </p>
+            <p className="mt-1 text-body-sm text-ink-soft">
+              {review.reply.body}
+            </p>
+          </div>
+        )}
       </article>
     </li>
   );

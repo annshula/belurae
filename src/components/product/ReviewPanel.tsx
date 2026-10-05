@@ -468,10 +468,7 @@ function ReviewerFacts({
           )}
         </span>
       )}
-      {via && (
-        /* Said plainly where it was written: this was not a purchase from this
-           store, so it carries no verified tick. The pack and order date, when
-           the export gave them, are TikTok's, not this store's. */
+      {/* {via && (
         <>
           {(country || itemTitle || purchasedAt) && (
             <span aria-hidden="true" className="hidden sm:inline">
@@ -480,7 +477,7 @@ function ReviewerFacts({
           )}
           <span>Review from TikTok Shop</span>
         </>
-      )}
+      )} */}
     </div>
   );
 }
