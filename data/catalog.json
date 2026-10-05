@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-05T20:50:04.451Z",
+  "syncedAt": "2026-10-05T20:57:17.032Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -339,11 +339,11 @@
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
       "handle": "egf-tox-toner",
-      "title": "Belurae Silk Peptide Intensive Smoothing Toner | Forehead Firming & Wrinkle Care, Iron Out Fine Lines | PDRN & Collagen & NAD+ EGF Complex | EGF Plumping for Forehead, Longevity Anti-Aging Routine | Korean Skincare, K-Beauty",
+      "title": "Belurae EGF Tox Toner | Forehead Firming & Wrinkle Care, Iron Out Fine Lines | PDRN & Collagen & NAD+ EGF Complex | EGF Plumping for Forehead, Longevity Anti-Aging Routine | Korean Skincare, K-Beauty",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-05T20:47:31Z",
+      "updatedAt": "2026-10-05T20:55:42Z",
       "seo": {
         "title": null,
         "description": null
@@ -668,13 +668,11 @@
         }
       ],
       "perks": [
-        "Instant Wrinkle Eraser",
-        "Zero Needles, Zero Pain",
-        "Liquid Botox Technology",
-        "EGF-related ingredients, collagen & niacinamide",
-        "Hydrates for a fresh, comfortable feel",
-        "Helps skin look plump & radiant",
-        "Supersized Full-Body Value"
+        "Enhance Skin Texture",
+        "Smoothing Effect",
+        "EGF Ingredient",
+        "Reduces Fine Lines and Wrinkles",
+        "Daily Use Recommended"
       ],
       "saleEndsAt": "2026-10-07T03:00:00.000Z"
     },
@@ -685,7 +683,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-05T20:34:44Z",
+      "updatedAt": "2026-10-05T20:52:25Z",
       "seo": {
         "title": "Middle Eastern Rose Fragrance · 50 ml Spray",
         "description": "A 50 ml rose fragrance spray with a soft, light rose scent. Spray on wrists, neck and behind the ears. Ingredients, directions and safety guidance."
