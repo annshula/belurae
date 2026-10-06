@@ -286,7 +286,8 @@ export default async function ProductPage({ params }: Props) {
                 reviews. */}
             {(() => {
               const hasRating = Boolean(ratingLine && ratingLine.count > 0);
-              if (!hasRating) return null;
+              const sold = content.pdp.sold;
+              if (!hasRating && !sold) return null;
               return (
                 <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-ui text-body-sm">
                   {ratingLine && ratingLine.count > 0 && (
@@ -303,6 +304,21 @@ export default async function ProductPage({ params }: Props) {
                         {ratingLine.count.toLocaleString("en-US")} reviews
                       </span>
                     </a>
+                  )}
+                  {sold && (
+                    <span className="inline-flex items-center gap-x-2.5 text-ink-soft">
+                      {hasRating && (
+                        <span aria-hidden="true" className="text-ink-faint">
+                          ·
+                        </span>
+                      )}
+                      <span>
+                        <span className="font-numeral font-semibold text-ink tabular-nums">
+                          {sold.count.toLocaleString("en-US")}+
+                        </span>{" "}
+                        sold in the last {sold.months} months
+                      </span>
+                    </span>
                   )}
                 </p>
               );

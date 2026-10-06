@@ -115,6 +115,12 @@ export type ProductContent = {
      * "25,000+ happy customers".
      */
     customers?: { count: number; asOf: string };
+    /**
+     * Units sold over the last `months` months, shown right beside the rating
+     * above the H1 as "17,841+ sold in the last 3 months". `asOf` dates the
+     * reading so it gets refreshed instead of drifting.
+     */
+    sold?: { count: number; months: number; asOf: string };
     /** Show Shopify's `custom.perks` one per row instead of two columns. */
     perksOneColumn?: boolean;
     /**
@@ -441,6 +447,8 @@ export const products: ProductContent[] = [
       ],
       /* Orders shipped for this product — Shopify count, read 2026-10-02. */
       customers: { count: 22000, asOf: "2026-10-02" },
+      /* Supplied by the merchant on 2026-10-07. */
+      sold: { count: 17841, months: 3, asOf: "2026-10-07" },
       showHairRemovalComparison: true,
       notice: {
         lead: "Patch test 24 hours before first use.",
