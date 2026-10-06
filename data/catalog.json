@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-06T15:39:47.506Z",
+  "syncedAt": "2026-10-06T19:00:23.124Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -10,11 +10,11 @@
     "bikini-pain-free-hair-removal-spray": {
       "id": "gid://shopify/Product/15395256467683",
       "handle": "bikini-pain-free-hair-removal-spray",
-      "title": "Belurae CloudSense Bikini and Full Body Pain-Free Hair Removal Cream for Sensitive Skin, Hypoallergenic Formula-Gentle & Fast-Acting Depilatory with Citrus Scent, Aloe & Hyaluronic Acid for Anti-bacterial, Moisturizing, and Soothing Care, Unisex",
+      "title": "Bikini Pain-Free Hair Removal Cream for Sensitive Skin, Citrus Scent, Aloe for Anti-bacterial, Moisturizing, and Soothing Care, Unisex",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-06T13:19:33Z",
+      "updatedAt": "2026-10-06T18:43:28Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -339,11 +339,11 @@
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
       "handle": "egf-tox-toner",
-      "title": "Belurae EGF Tox Toner | Forehead Firming & Wrinkle Care, Iron Out Fine Lines | PDRN & Collagen & NAD+ EGF Complex | EGF Plumping for Forehead, Longevity Anti-Aging Routine | Korean Skincare, K-Beauty",
+      "title": "EGF Tox Toner | Forehead Firming & Wrinkle Care, Iron Out Fine Lines | PDRN & Collagen & NAD+ EGF Complex | EGF Plumping for Forehead, Longevity Anti-Aging Routine | Korean Skincare, K-Beauty",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-06T13:20:37Z",
+      "updatedAt": "2026-10-06T16:34:41Z",
       "seo": {
         "title": null,
         "description": null
