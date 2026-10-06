@@ -297,15 +297,26 @@ export function HeaderShell({ children }: { children: React.ReactNode }) {
     window.addEventListener("load", update);
     window.addEventListener("pageshow", update);
     window.addEventListener("resize", update);
-    const settle = window.setTimeout(update, 300);
+    window.addEventListener("scrollend", update);
+    document.addEventListener("visibilitychange", update);
+    // Scroll restoration and the router's scroll-to-top can land at any point
+    // in the first second, on desktop as well, with no event the bar sees.
+    // Re-read the position a few times so the bar always blends over the hero
+    // at the top. Re-run on every route change too: arriving at "/" from a
+    // scrolled page must not keep the previous page's solid state.
+    const settle = [100, 300, 800, 1500].map((ms) =>
+      window.setTimeout(update, ms),
+    );
     return () => {
       window.removeEventListener("scroll", update);
       window.removeEventListener("load", update);
       window.removeEventListener("pageshow", update);
       window.removeEventListener("resize", update);
-      window.clearTimeout(settle);
+      window.removeEventListener("scrollend", update);
+      document.removeEventListener("visibilitychange", update);
+      settle.forEach((id) => window.clearTimeout(id));
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <div
