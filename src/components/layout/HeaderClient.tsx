@@ -285,6 +285,29 @@ export function HeaderShell({ children }: { children: React.ReactNode }) {
   // back at the top it sits flat.
   const flatAtTop = pathname.startsWith("/products/") && !scrolled;
 
+  // A fresh load of the home page always opens on the hero, with the bar
+  // blended into it. Without this the browser restores the old scroll
+  // position on reload, leaving the solid floating bar and the next section's
+  // edge showing. "instant" bypasses the html smooth-scroll rule.
+  useEffect(() => {
+    if (window.location.pathname !== "/" || window.location.hash) return;
+    const toTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      setScrolled(false);
+    };
+    toTop();
+    // The browser can restore the old position as late as the load event, so
+    // go back to the top once more then.
+    if (document.readyState === "complete") return;
+    window.addEventListener("load", toTop, { once: true });
+    return () => window.removeEventListener("load", toTop);
+  }, []);
+  // Only the home page opts out of reload scroll restoration; every other
+  // page keeps the browser's default.
+  useEffect(() => {
+    window.history.scrollRestoration = pathname === "/" ? "manual" : "auto";
+  }, [pathname]);
+
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 24);
     update();
