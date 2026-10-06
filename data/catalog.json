@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-06T12:24:46.409Z",
+  "syncedAt": "2026-10-06T12:55:08.927Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-06T12:24:06Z",
+      "updatedAt": "2026-10-06T12:53:06Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -37,7 +37,7 @@
           "sku": "CJPF253602701AZ",
           "barcode": null,
           "price": 29.99,
-          "compareAtPrice": 59.98,
+          "compareAtPrice": 34.99,
           "availableForSale": true,
           "options": {
             "Quantity": "1PC"
@@ -50,8 +50,8 @@
           "title": "2PCS",
           "sku": "CJPF253602702BY",
           "barcode": null,
-          "price": 52.99,
-          "compareAtPrice": 119.96,
+          "price": 59.99,
+          "compareAtPrice": 79.98,
           "availableForSale": true,
           "options": {
             "Quantity": "2PCS"
@@ -64,8 +64,8 @@
           "title": "3PCS",
           "sku": "CJPF253602710JQ",
           "barcode": null,
-          "price": 64.99,
-          "compareAtPrice": 179.94,
+          "price": 59.99,
+          "compareAtPrice": 119.97,
           "availableForSale": true,
           "options": {
             "Quantity": "3PCS"
@@ -343,7 +343,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-06T08:43:19Z",
+      "updatedAt": "2026-10-06T12:52:26Z",
       "seo": {
         "title": null,
         "description": null
@@ -366,7 +366,7 @@
           "sku": "14:10#100ml Boxed",
           "barcode": null,
           "price": 29.99,
-          "compareAtPrice": 59.98,
+          "compareAtPrice": 34.99,
           "availableForSale": true,
           "options": {
             "Color": "100ml Boxed"
@@ -379,8 +379,8 @@
           "title": "2 x 100ml Boxed",
           "sku": "14:29#2 x 100ml Boxed",
           "barcode": null,
-          "price": 52.99,
-          "compareAtPrice": 119.96,
+          "price": 59.99,
+          "compareAtPrice": 79.98,
           "availableForSale": true,
           "options": {
             "Color": "2 x 100ml Boxed"
@@ -393,8 +393,8 @@
           "title": "3 x 100ml Boxed",
           "sku": "14:173#3 x 100ml Boxed",
           "barcode": null,
-          "price": 64.99,
-          "compareAtPrice": 179.94,
+          "price": 59.99,
+          "compareAtPrice": 119.97,
           "availableForSale": true,
           "options": {
             "Color": "3 x 100ml Boxed"

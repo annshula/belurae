@@ -439,7 +439,7 @@ function PackCards({
           : combo?.units === 3
             ? "Limited time offer"
             : null,
-      offerLine: deal && combo ? `${combo.units} for the price of ${deal.of}` : null,
+      offerLine: deal ? `Buy ${deal.of}, get ${deal.free} free` : null,
       unitPrice,
       img: combo?.image ?? view.cardImage?.url ?? null,
       units: combo?.units ?? 1,
@@ -448,6 +448,11 @@ function PackCards({
       featured: combo?.units === 3,
     };
   });
+
+  /* With a free-set deal on one card, every card shows its own price and
+     compare-at (the deal speaks for itself); otherwise the "each" price leads
+     when the product asks for it. */
+  const showEach = perSetPrice && !cards.some((c) => c.deal);
 
   /* "Save N%" badge: one colour on every card. Solid, so it stays visible on
      the sage-tinted featured card too. */
@@ -566,7 +571,7 @@ function PackCards({
 
               {c.combo && (
                 <span className="flex shrink-0 flex-col items-end">
-                  {perSetPrice && c.units > 1 && c.unitPrice != null ? (
+                  {showEach && c.units > 1 && c.unitPrice != null ? (
                     <>
                       <span
                         className={cn(
@@ -682,7 +687,7 @@ function PackCards({
             )}
             {c.combo && (
               <span className="mt-1 flex flex-col items-center">
-                {perSetPrice && c.units > 1 && c.unitPrice != null ? (
+                {showEach && c.units > 1 && c.unitPrice != null ? (
                   <>
                     <span
                       className={cn(
