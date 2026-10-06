@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-06T12:55:08.927Z",
+  "syncedAt": "2026-10-06T13:02:25.438Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -343,7 +343,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-06T12:52:26Z",
+      "updatedAt": "2026-10-06T13:02:21Z",
       "seo": {
         "title": null,
         "description": null
@@ -411,6 +411,30 @@
           "height": 3000,
           "alt": null,
           "variantId": "gid://shopify/ProductVariant/67602800312547"
+        },
+        {
+          "type": "video",
+          "alt": null,
+          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/ad1a8937217c4303a883d896b6f419c4.thumbnail.0000000000.jpg?v=1791291684",
+          "width": 1080,
+          "height": 1920,
+          "sources": [
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/ad1a8937217c4303a883d896b6f419c4/ad1a8937217c4303a883d896b6f419c4.SD-480p-1.0Mbps-96568560.mp4",
+              "type": "video/mp4",
+              "width": 270
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/ad1a8937217c4303a883d896b6f419c4/ad1a8937217c4303a883d896b6f419c4.HD-720p-2.1Mbps-96568560.mp4",
+              "type": "video/mp4",
+              "width": 404
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/ad1a8937217c4303a883d896b6f419c4/ad1a8937217c4303a883d896b6f419c4.HD-1080p-3.3Mbps-96568560.mp4",
+              "type": "video/mp4",
+              "width": 606
+            }
+          ]
         },
         {
           "type": "image",
