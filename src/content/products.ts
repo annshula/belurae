@@ -404,7 +404,7 @@ export const products: ProductContent[] = [
       ingredientsNote:
         "Aloe Barbadensis Leaf Water, Glycerin, Hyaluronic Acid, Panax Ginseng Root Extract and Portulaca Oleracea Extract — the key ingredients in this formula, in INCI form. The complete INCI declaration is printed on every pack.",
       packs: "cards",
-      perSetPrice: false,
+      perSetPrice: true,
       galleryFit: "flush",
       perksOneColumn: true,
       /* Lavender, from the bottle cap and label. */

@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-07T13:48:51.588Z",
+  "syncedAt": "2026-10-07T14:08:13.138Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -50,7 +50,7 @@
           "title": "2PCS",
           "sku": "CJPF253602702BY",
           "barcode": null,
-          "price": 49.99,
+          "price": 47.99,
           "compareAtPrice": 59.98,
           "availableForSale": true,
           "options": {
