@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-07T13:43:04.201Z",
+  "syncedAt": "2026-10-07T13:48:51.588Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -64,7 +64,7 @@
           "title": "3PCS",
           "sku": "CJPF253602710JQ",
           "barcode": null,
-          "price": 69.99,
+          "price": 59.99,
           "compareAtPrice": 89.97,
           "availableForSale": true,
           "options": {
