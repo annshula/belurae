@@ -1159,7 +1159,10 @@ export const products: ProductContent[] = [
       },
     ],
     specs: [
-      { label: "Format", value: "Liquid body adhesive, 20 ml / 0.7 fl oz tube" },
+      {
+        label: "Format",
+        value: "Liquid body adhesive, 20 ml / 0.7 fl oz tube",
+      },
       {
         label: "Formula",
         value:
@@ -1237,8 +1240,9 @@ export const products: ProductContent[] = [
     ],
     googleCategory: "Apparel & Accessories > Clothing Accessories",
     pdp: {
-      videosIntro:
-        "See how body glue goes on and holds, in short clips.",
+      videosIntro: "See how body glue goes on and holds, in short clips.",
+      /* Supplied by the merchant on 2026-10-09. */
+      sold: { count: 5345, months: 2, asOf: "2026-10-09" },
       galleryFit: "flush",
       perksOneColumn: true,
       /* Pink, from the pink tube and box. */
