@@ -29,6 +29,7 @@
  */
 
 import hairRemovalTiktok from "../../data/reviews/hair-removal-tiktok.json";
+import bodyAdhesiveTiktok from "../../data/reviews/body-adhesive-tiktok.json";
 import tonerTiktok from "../../data/reviews/toner-tiktok.json";
 import {
   summarize,
@@ -39,6 +40,7 @@ import {
 /** Product handles, as they appear in data/catalog.json. */
 const MOUSSE_HANDLE = "bikini-pain-free-hair-removal-spray";
 const TONER_HANDLE = "egf-tox-toner";
+const BODY_ADHESIVE_HANDLE = "body-adhesive";
 
 const DAY = 86_400_000;
 
@@ -641,6 +643,18 @@ const MOUSSE_REVIEWS: Review[] = [
   ...(hairRemovalTiktok as unknown as Review[]),
 ].sort(newestDayPhotosFirst);
 
+/**
+ * The body adhesive's reviews — no generated ones, only the TikTok Shop export
+ * (`data/reviews/body-adhesive-tiktok.json`, from
+ * `scripts/import-tiktok-reviews.ts --variants`), newest first. They carry
+ * TikTok's own pack label and are tagged `source: "tiktok"`, so they are never
+ * shown as verified buyers of this store. The summary is worked out from
+ * exactly these.
+ */
+const BODY_ADHESIVE_REVIEWS: Review[] = [
+  ...(bodyAdhesiveTiktok as unknown as Review[]),
+].sort(newestDayPhotosFirst);
+
 /** Handle → review set, built once at module load. */
 const sets = new Map<string, ProductReviews>([
   [
@@ -648,6 +662,13 @@ const sets = new Map<string, ProductReviews>([
     { reviews: MOUSSE_REVIEWS, summary: summarize(MOUSSE_REVIEWS) },
   ],
   [TONER_HANDLE, TONER_SET],
+  [
+    BODY_ADHESIVE_HANDLE,
+    {
+      reviews: BODY_ADHESIVE_REVIEWS,
+      summary: summarize(BODY_ADHESIVE_REVIEWS),
+    },
+  ],
 ]);
 
 /** The placeholder set, for callers that already know they want it. */

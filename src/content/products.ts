@@ -1237,6 +1237,8 @@ export const products: ProductContent[] = [
     ],
     googleCategory: "Apparel & Accessories > Clothing Accessories",
     pdp: {
+      videosIntro:
+        "See how body glue goes on and holds, in short clips.",
       galleryFit: "flush",
       perksOneColumn: true,
       /* Pink, from the pink tube and box. */
