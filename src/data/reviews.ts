@@ -139,7 +139,7 @@ const MOUSSE_REAL_REVIEWS: RealReview[] = [
     // feed and the first slide of the buy-box carousel. Bought the day before
     // the feed renders, so it reads as a date rather than "Today".
     rating: 5,
-    title: "Cloudsense Hair Removal Mousse",
+    title: "This is amazing!",
     body: "This is the best product for getting rid of unwanted hair on the market. Love the ease of being able spray and let it sit. I have stubborn hair and I usually have to let it sit longer, about 15 minutes is all it takes and all the hair is gone. Great for bikini areas and other sensitive areas as well. Highly recommend ⭐️⭐️⭐️⭐️⭐️",
     author: "Jay",
     country: "United States",
@@ -564,7 +564,9 @@ const TONER_OWN_REVIEWS: Review[] = [
  * stable, so equal reviews keep their order.)
  */
 function newestDayPhotosFirst(a: Review, b: Review): number {
-  const byDay = b.createdAt.slice(0, 10).localeCompare(a.createdAt.slice(0, 10));
+  const byDay = b.createdAt
+    .slice(0, 10)
+    .localeCompare(a.createdAt.slice(0, 10));
   if (byDay !== 0) return byDay;
   const byRating = b.rating - a.rating;
   if (byRating !== 0) return byRating;
