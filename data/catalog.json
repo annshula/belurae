@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-08T18:51:50.321Z",
+  "syncedAt": "2026-10-08T20:19:50.332Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -925,14 +925,14 @@
       ],
       "saleEndsAt": "2026-10-09T03:00:00.000Z"
     },
-    "body-adhesive": {
+    "belurae-body-adhesive": {
       "id": "gid://shopify/Product/15413115486435",
-      "handle": "body-adhesive",
+      "handle": "belurae-body-adhesive",
       "title": "Body Adhesive - Sweat & Water Resistant, Stain-Free, Easy to Remove with Soap and Water, Perfect for Confidence and Security in Outfits",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-08T18:43:02Z",
+      "updatedAt": "2026-10-08T20:16:56Z",
       "seo": {
         "title": "Body Adhesive · 20 ml Liquid Tube",
         "description": "A 20 ml liquid body adhesive for clothes, dancewear and tape. Sweat and water resistant, latex-free, washes off with water. Directions and safety guidance."
@@ -958,7 +958,7 @@
           "options": {
             "Color": "20mlX1"
           },
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd12194b11b3245ab9d4d9c2747421b79O.webp?v=1791481794",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Pink_Body_Glue_Tube_with_1_Pack_Badge.png?v=1791490288",
           "description": null
         }
       ],
@@ -966,6 +966,14 @@
         {
           "type": "image",
           "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/belurae_body_glue.png?v=1791484813",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Max_Hold_Zero_Slips.png?v=1791487293",
           "width": 1254,
           "height": 1254,
           "alt": null,
@@ -1164,7 +1172,7 @@
           "width": 1001,
           "height": 1001,
           "alt": null,
-          "variantId": "gid://shopify/ProductVariant/67647736611043"
+          "variantId": null
         },
         {
           "type": "image",
@@ -1173,6 +1181,14 @@
           "height": 1001,
           "alt": null,
           "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Pink_Body_Glue_Tube_with_1_Pack_Badge.png?v=1791490288",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67647736611043"
         }
       ],
       "specs": [

@@ -90,7 +90,7 @@ const glueVideos: ShowcaseVideo[] = [1, 2, 3, 4, 5].map((n) =>
 /** Per-product clip sets; products without an entry use the mousse clips. */
 const productVideosBySlug: Record<string, ShowcaseVideo[]> = {
   "egf-tox-toner": tonerVideos,
-  "body-adhesive": glueVideos,
+  "belurae-body-adhesive": glueVideos,
 };
 
 /**

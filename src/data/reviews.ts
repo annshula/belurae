@@ -40,7 +40,7 @@ import {
 /** Product handles, as they appear in data/catalog.json. */
 const MOUSSE_HANDLE = "bikini-pain-free-hair-removal-spray";
 const TONER_HANDLE = "egf-tox-toner";
-const BODY_ADHESIVE_HANDLE = "body-adhesive";
+const BODY_ADHESIVE_HANDLE = "belurae-body-adhesive";
 
 const DAY = 86_400_000;
 

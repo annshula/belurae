@@ -15,6 +15,8 @@ export type PackTier = {
   size: number;
   /** Percent off the whole line at this quantity. */
   discountPercent: number;
+  /** Photo for this pack's card; falls back to the variant's own image. */
+  image?: string;
 };
 
 /** The discount for `quantity`: the highest tier it has reached, so 4+ keeps the 3-pack rate. */

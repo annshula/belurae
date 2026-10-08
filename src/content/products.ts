@@ -1072,9 +1072,10 @@ export const products: ProductContent[] = [
     ],
   },
   {
-    handle: "body-adhesive",
-    slug: "body-adhesive",
+    handle: "belurae-body-adhesive",
+    slug: "belurae-body-adhesive",
     legacySlugs: [
+      "body-adhesive",
       "liquid-body-adhesive-glue-for-clothes-clear-body-glue-for-clothes-clothing-glue-for-skin-body-tape-alternative-for-women",
     ],
     name: "Body Adhesive",
@@ -1096,8 +1097,16 @@ export const products: ProductContent[] = [
        and "Buy 3+ Save 30%" do the pricing at checkout. */
     packTiers: [
       { size: 1, discountPercent: 0 },
-      { size: 2, discountPercent: 20 },
-      { size: 3, discountPercent: 30 },
+      {
+        size: 2,
+        discountPercent: 20,
+        image: "/images/body-adhesive/pack-2.webp",
+      },
+      {
+        size: 3,
+        discountPercent: 30,
+        image: "/images/body-adhesive/pack-3.webp",
+      },
     ],
     story: {
       heading: "A liquid hold for the outfit you want to keep still.",

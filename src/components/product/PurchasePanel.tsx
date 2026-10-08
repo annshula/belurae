@@ -932,7 +932,7 @@ export function PurchasePanel({
         compareAtPercent: p.percent > 0 ? p.percent : null,
         availableForSale: canBuy,
         sku: variant.sku,
-        image: variant.image,
+        image: t.image ?? variant.image,
         units: t.size,
         savings: null,
         perUnit: Math.round((p.total / t.size) * 100) / 100,
