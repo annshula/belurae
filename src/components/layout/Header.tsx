@@ -30,7 +30,7 @@ export function AnnouncementBar() {
           aria-hidden="true"
           className="hidden size-1 rounded-full bg-sage-400 sm:inline-block"
         />
-        <span className="hidden sm:inline">Secure checkout by Shopify</span>
+        <span className="hidden sm:inline">Secure checkout</span>
         <span
           aria-hidden="true"
           className="hidden size-1 rounded-full bg-sage-400 md:inline-block"

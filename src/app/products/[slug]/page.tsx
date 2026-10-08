@@ -439,24 +439,26 @@ export default async function ProductPage({ params }: Props) {
               </li>
             </ul>
 
-            <aside
-              className="mt-3 flex gap-3 rounded-card bg-clay-100 p-5 text-body-sm"
-              aria-label="Patch test"
-            >
-              <Icon
-                name="info"
-                className="mt-0.5 size-5 shrink-0 text-clay-600"
-              />
-              <p>
-                <strong className="font-semibold">
-                  {content.pdp.notice.lead}
-                </strong>{" "}
-                {content.pdp.notice.text}{" "}
-                <a href="#safety" className="link-underline">
-                  Where to use it
-                </a>
-              </p>
-            </aside>
+            {content.pdp.notice && (
+              <aside
+                className="mt-3 flex gap-3 rounded-card bg-clay-100 p-5 text-body-sm"
+                aria-label="Patch test"
+              >
+                <Icon
+                  name="info"
+                  className="mt-0.5 size-5 shrink-0 text-clay-600"
+                />
+                <p>
+                  <strong className="font-semibold">
+                    {content.pdp.notice.lead}
+                  </strong>{" "}
+                  {content.pdp.notice.text}{" "}
+                  <a href="#safety" className="link-underline">
+                    Where to use it
+                  </a>
+                </p>
+              </aside>
+            )}
           </div>
         </div>
       </div>
@@ -490,7 +492,7 @@ export default async function ProductPage({ params }: Props) {
       {/* ── Feature highlights (from Shopify, alternating image layout) ── */}
       {view.featureHighlights.length > 0 && (
         <section className="px-2 sm:px-3" aria-labelledby="highlights">
-          <div className="rounded-media bg-cream py-12 lg:py-16">
+          <div className="rounded-media bg-ivory py-12 lg:py-16">
             <div className="container-page">
               <SectionHeading
                 eyebrow="The details"
@@ -722,7 +724,7 @@ export default async function ProductPage({ params }: Props) {
       {/* ── Comparison + details ──────────────────────────────────────── */}
       {content.pdp.showHairRemovalComparison && (
         <section className="px-2 sm:px-3" aria-labelledby="compare">
-          <div className="rounded-media bg-cream py-12 lg:py-16">
+          <div className="rounded-media bg-ivory py-12 lg:py-16">
             <div className="container-page">
               <SectionHeading
                 eyebrow="Compare"
@@ -805,7 +807,7 @@ export default async function ProductPage({ params }: Props) {
 
       {/* ── FAQ ───────────────────────────────────────────────────────── */}
       <section className="px-2 sm:px-3" aria-labelledby="faq">
-        <div className="rounded-media bg-cream py-12 lg:py-16">
+        <div className="rounded-media bg-ivory py-12 lg:py-16">
           <div className="container-page grid gap-8 lg:grid-cols-[4fr_8fr] lg:gap-16">
             <SectionHeading
               eyebrow="Questions"

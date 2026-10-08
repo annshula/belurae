@@ -55,7 +55,7 @@ export function EditorialBands({
         aria-labelledby="daily-title"
         className={cn("px-2 sm:px-3", DEFER)}
       >
-        <div className="mx-auto grid grid-cols-1 max-w-(--page-max) overflow-hidden rounded-media bg-cream lg:grid-cols-[5fr_4fr_4fr]">
+        <div className="mx-auto grid grid-cols-1 max-w-(--page-max) overflow-hidden rounded-media bg-ivory lg:grid-cols-[5fr_4fr_4fr]">
           {lifestyle && (
             <div className="relative aspect-4/3 lg:aspect-auto lg:min-h-96">
               <Image
@@ -83,7 +83,7 @@ export function EditorialBands({
             </h2>
             <p className="mt-4 max-w-[44ch] text-ink-soft">{daily.body}</p>
           </div>
-          <ul className="flex flex-col justify-center gap-5 p-6 pt-0 sm:p-10 lg:bg-sand/60 lg:pt-10">
+          <ul className="flex flex-col justify-center gap-5 p-6 pt-0 sm:p-10 lg:pt-10">
             {daily.benefits.map((b) => (
               <li key={b.title} className="flex items-start gap-4">
                 <span className="grid size-12 shrink-0 place-items-center rounded-full bg-paper shadow-soft">
@@ -105,7 +105,7 @@ export function EditorialBands({
       <section
         id="ingredients"
         aria-labelledby="ingredients-title"
-        className={cn("mt-2 bg-sage-50 py-12 sm:mt-3 lg:py-16", DEFER)}
+        className={cn("mt-2 bg-ivory py-12 sm:mt-3 lg:py-16", DEFER)}
       >
         <div className="container-page grid grid-cols-1 gap-8 lg:grid-cols-[4fr_8fr] lg:items-center lg:gap-10">
           <div>

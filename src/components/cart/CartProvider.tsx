@@ -18,6 +18,7 @@ import {
 } from "@/lib/analytics";
 import { useLocalization } from "@/components/localization/LocalizationProvider";
 import { getExternalId } from "@/lib/ad-identity";
+import { tierPrice, type PackTier } from "@/lib/commerce/tiers";
 import type { PaymentMethod } from "@/lib/shopify/payments";
 
 /**
@@ -41,6 +42,8 @@ export type BagVariant = {
   available: boolean;
   /** True when the product's variants are pack sizes (buying more means picking a bigger pack, not a stepper). */
   hasPackOption: boolean;
+  /** Quantity-break packs on this one variant: the line's quantity picks the discount. Null when the product has none. */
+  tiers: PackTier[] | null;
 };
 
 export type BagCatalog = {
@@ -176,6 +179,22 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
         const compareAtPack = live ? (Number.isFinite(liveCompare) ? liveCompare : null) : v.compareAtPrice;
         const hasDiscount = compareAtPack != null && compareAtPack > price;
         const round = (n: number) => Math.round(n * 100) / 100;
+        // Quantity-break products: Shopify's automatic discount takes the tier's
+        // percent off the whole line; the struck-through price is the same units
+        // at the unit's compare-at (or plain) price, as on the product page.
+        if (v.tiers) {
+          const t = tierPrice(price, l.quantity, v.tiers, compareAtPack);
+          return [
+            {
+              ...l,
+              ...v,
+              price,
+              lineTotal: t.total,
+              compareAtTotal: t.full,
+              savedPercent: t.percent > 0 ? t.percent : null,
+            },
+          ];
+        }
         return [
           {
             ...l,

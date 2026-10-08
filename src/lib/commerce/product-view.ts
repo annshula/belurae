@@ -5,6 +5,7 @@ import type {
   SpecRecord,
 } from "@/lib/catalog/types";
 import type { ProductContent } from "@/content/products";
+import type { PackTier } from "@/lib/commerce/tiers";
 
 /**
  * Client-safe product view: the minimal, serialisable shape the PDP islands,
@@ -76,6 +77,8 @@ export type ProductView = {
   cardImage: ViewImage | null;
   cardImageAlt: ViewImage | null;
   packOptionName: string | null;
+  /** Quantity-break packs on the single variant (1 / 2 / 3 Pack), or null when packs are separate variants. */
+  packTiers: PackTier[] | null;
   /** Shopify `custom.specs` metaobjects — the merchant's own spec sheet. */
   specs: SpecRecord[];
   /** Shopify `custom.feature_highlights` metaobjects — used for the alternating image section. */
@@ -243,6 +246,7 @@ export function buildProductView(
     cardImage: images[0] ?? null,
     cardImageAlt: images[1] ?? null,
     packOptionName: packName,
+    packTiers: content.packTiers ?? null,
     specs: record.specs,
     featureHighlights: record.featureHighlights,
     perks: orderPerks(record.perks),

@@ -39,6 +39,11 @@ export const primaryNav: NavGroup[] = [
         description: "A rose fragrance spray, in plain words",
       },
       {
+        label: "Body Adhesive",
+        href: "/collections/body-adhesive",
+        description: "Liquid hold for clothes and tape, in plain words",
+      },
+      {
         label: "Shop all",
         href: "/collections/all",
         description: "Everything Belurae sells today",
@@ -107,6 +112,7 @@ export const footerNav: NavGroup[] = [
       { label: "Hair Removal", href: "/collections/hair-removal" },
       { label: "Skincare", href: "/collections/skincare" },
       { label: "Fragrance", href: "/collections/fragrance" },
+      { label: "Body Adhesive", href: "/collections/body-adhesive" },
       { label: "Shop all", href: "/collections/all" },
     ],
   },

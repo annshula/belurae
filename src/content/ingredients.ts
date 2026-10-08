@@ -222,6 +222,43 @@ export const ingredients: Ingredient[] = [
       "It is generally well tolerated, but any ingredient can bother some skin. Patch test new products before first use.",
     ],
   },
+  {
+    slug: "acrylic-copolymer",
+    name: "Acrylic copolymer",
+    inci: "Acrylic copolymer, as listed by the manufacturer",
+    icon: "layers",
+    summary:
+      "Acrylic copolymers are film-forming polymers: long chains that dry into a thin, flexible layer. They are used in cosmetics, hair styling and skin adhesives.",
+    whatItIs: [
+      "A copolymer is a polymer made from two or more building blocks. Acrylic copolymers are made from acrylic-type building blocks and are usually supplied as a liquid that dries into a film.",
+      "The manufacturer lists “cosmetic-grade acrylic copolymer” as the adhesive base of this body adhesive but doesn't name the exact grade, so we can't give its INCI name.",
+    ],
+    whyUsed: [
+      "As the water in the formula evaporates, the polymer is left behind as a thin film that stays slightly tacky. That tack is what holds fabric, tape or a hairpiece against the skin.",
+      "Because the film is water-soluble in this formula, warm water or a wet cloth is what dissolves it again.",
+    ],
+    goodToKnow: [
+      "Acrylic-type polymers can occasionally cause a skin reaction in sensitive people. A patch test before first use is the simplest way to check how your skin responds.",
+      "We make no claim about how much is in the formula. The manufacturer gives no percentage.",
+    ],
+  },
+  {
+    slug: "water",
+    name: "Water",
+    inci: "Aqua",
+    icon: "droplet",
+    summary:
+      "Water, listed as Aqua on an ingredient list, is the base of most cosmetic formulas. It dissolves or carries the other ingredients.",
+    whatItIs: [
+      "On an INCI list, water appears as Aqua. In cosmetics it is purified, so it is not the same as water straight from the tap.",
+    ],
+    whyUsed: [
+      "In a water-based adhesive, water carries the polymer and keeps the formula liquid in the tube. It evaporates as the adhesive dries. The manufacturer says the layer turns clear and tacky in 20–30 seconds.",
+    ],
+    goodToKnow: [
+      "The manufacturer gives a shelf life of 3 years.",
+    ],
+  },
 ];
 
 export function ingredientBySlug(slug: string): Ingredient | undefined {

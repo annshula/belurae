@@ -30,6 +30,11 @@ function couponCode(units: number, percent: number) {
   return `${MONTHS[new Date().getMonth()]}P${units}${percent}`;
 }
 
+/** Quantity-break lines read "2 Pack", like the product page cards; everything else keeps its variant label. */
+function packLabel(line: { tiers: unknown; quantity: number; variantLabel: string }) {
+  return line.tiers ? `${line.quantity} Pack` : line.variantLabel;
+}
+
 /**
  * Bag body shared by the drawer and the /cart page: lines, subtotal, checkout.
  * `onNavigate` closes the drawer when a link is followed.
@@ -87,7 +92,9 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
 
   /* The label of each pack discount applied, e.g. OCTP347 (month · pack · saved %). */
   const codes = lines.map((l) =>
-    l.savedPercent != null ? couponCode(l.units, l.savedPercent) : null,
+    l.savedPercent != null
+      ? couponCode(l.tiers ? l.quantity : l.units, l.savedPercent)
+      : null,
   );
   const appliedCodes = [...new Set(codes.filter((c): c is string => c !== null))];
   const discountTag = appliedCodes.join(" · ");
@@ -111,6 +118,9 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
       >
         {lines.map((line, i) => {
           const hasCoupon = Boolean(codes[i]) && line.savedPercent != null;
+          /* Packs (separate variants or quantity breaks) are chosen on the
+             product page, so these lines have no quantity stepper. */
+          const fixedPack = line.hasPackOption || Boolean(line.tiers);
           const removeButton = (
             <button
               type="button"
@@ -156,7 +166,7 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
                     </Link>
                     {!hasCoupon && (
                       <p className="text-[0.72rem] text-ink-soft">
-                        {line.variantLabel}
+                        {packLabel(line)}
                       </p>
                     )}
                   </div>
@@ -177,7 +187,7 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
                     <div className="flex items-center justify-between gap-2 text-[0.72rem]">
                       <p className="flex min-w-0 items-center gap-1.5">
                         <span className="font-medium text-ink">
-                          {line.variantLabel}
+                          {packLabel(line)}
                         </span>
                         <span className="rounded-tag bg-clay-100 px-1.5 py-0.5 font-numeral text-[0.7rem] leading-none font-medium text-clay-600 tabular-nums">
                           Saved {line.savedPercent}%
@@ -204,10 +214,10 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
                 <div
                   className={cn(
                     "mt-auto flex items-center justify-between pt-1.5",
-                    line.hasPackOption && hasCoupon && "hidden",
+                    fixedPack && hasCoupon && "hidden",
                   )}
                 >
-                  {line.hasPackOption ? null : (
+                  {fixedPack ? null : (
                     <div
                       className="flex items-center rounded-tag bg-cream"
                       role="group"

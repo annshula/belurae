@@ -12,6 +12,7 @@
  */
 
 import type { IconName } from "@/components/ui/Icon";
+import type { PackTier } from "@/lib/commerce/tiers";
 
 export type ProductFaq = { q: string; a: string };
 
@@ -80,6 +81,12 @@ export type ProductContent = {
   >;
   /** Option whose values are pack sizes, mapped to unit counts. */
   packOption?: { name: string; units: Record<string, number> };
+  /**
+   * Quantity-break packs on ONE variant (one SKU): a "2 Pack" is quantity 2 of
+   * the same variant. The percentages must match the Shopify automatic
+   * discounts, which do the real pricing at checkout (see lib/commerce/tiers.ts).
+   */
+  packTiers?: PackTier[];
   story: { heading: string; body: string[] };
   highlights: { title: string; body: string }[];
   steps: { title: string; body: string }[];
@@ -168,8 +175,8 @@ export type ProductContent = {
     ingredientsNote: string;
     /** The mousse / razor / wax comparison only makes sense for hair removal. */
     showHairRemovalComparison: boolean;
-    /** Callout under the buy box. */
-    notice: { lead: string; text: string };
+    /** Callout under the buy box; omit to hide it. */
+    notice?: { lead: string; text: string };
   };
   /** Items still needed from the manufacturer before the content is complete. */
   contentGaps: string[];
@@ -1061,6 +1068,254 @@ export const products: ProductContent[] = [
       "Scent notes (top, heart and base)",
       "Exact wording of the packaging warnings",
       "Photos showing the 2-pack and 3-pack",
+      "GTIN / barcode",
+    ],
+  },
+  {
+    handle: "body-adhesive",
+    slug: "body-adhesive",
+    legacySlugs: [
+      "liquid-body-adhesive-glue-for-clothes-clear-body-glue-for-clothes-clothing-glue-for-skin-body-tape-alternative-for-women",
+    ],
+    name: "Body Adhesive",
+    format: "Liquid body adhesive · 20 ml",
+    category: { slug: "body-adhesive", name: "Body Adhesive" },
+    benefitLine:
+      "A 20 ml liquid adhesive for holding clothes, dancewear and tape against the skin. Dab on a thin layer, wait 20–30 seconds, press and hold. Rinse with warm water to remove.",
+    manufacturer: "Belurae (Body Glue)",
+    seo: {
+      title: "Body Adhesive · 20 ml Liquid Tube",
+      description:
+        "A 20 ml liquid body adhesive for clothes, dancewear and tape. Sweat and water resistant, latex-free, washes off with water. Directions, ingredients and safety guidance.",
+    },
+    optionLabels: {
+      Color: { label: "Size", values: { "20mlX1": "20 ml" } },
+    },
+    /* One variant, one SKU: a 2 or 3 Pack is the same tube at quantity 2 or 3.
+       The Shopify automatic discounts "Body Adhesive Pack - Buy 2 Save 20%"
+       and "Buy 3+ Save 30%" do the pricing at checkout. */
+    packTiers: [
+      { size: 1, discountPercent: 0 },
+      { size: 2, discountPercent: 20 },
+      { size: 3, discountPercent: 30 },
+    ],
+    story: {
+      heading: "A liquid hold for the outfit you want to keep still.",
+      body: [
+        "This is a 20 ml tube of liquid body adhesive. You dab a thin layer on clean, dry skin or on the inside of the garment, wait 20–30 seconds until it turns clear and tacky, then press the fabric, tape or hairpiece into place. When you're done, warm water or a wet cloth dissolves it.",
+        "The manufacturer describes a latex-free, hypoallergenic formula made from acrylic copolymer and water, with a sweat-resistant, water-soluble hold that leaves no sticky residue and doesn't stain fabric. The listing gives no hold time and no warnings, so we ask everyone to patch test first, and the safety notes below say where not to use it.",
+      ],
+    },
+    highlights: [
+      {
+        title: "A secure hold",
+        body: "The manufacturer describes an all-day hold for clothes, dancewear, costumes and athletic tape.",
+      },
+      {
+        title: "Dries in 20–30 seconds",
+        body: "Wait until it turns clear and tacky, then press and hold for a few seconds.",
+      },
+      {
+        title: "Washes off with any soap and water",
+        body: "Warm water or a wet cloth dissolves it. The manufacturer says it leaves no sticky residue.",
+      },
+      {
+        title: "Latex-free formula",
+        body: "Acrylic copolymer and water, as listed by the manufacturer. Patch test 24 hours before first use.",
+      },
+    ],
+    steps: [
+      {
+        title: "Prepare",
+        body: "Clean and dry the skin thoroughly to remove oils, lotions and sweat. If it's your first time, patch test a small area 24 hours before.",
+      },
+      {
+        title: "Apply",
+        body: "Squeeze the tube gently and spread a thin, even layer on the skin or on the inside of the garment.",
+      },
+      {
+        title: "Let it set",
+        body: "Wait 20–30 seconds, until the adhesive turns clear and tacky to the touch.",
+      },
+      {
+        title: "Press and hold",
+        body: "Press the fabric, wig or tape firmly onto the prepared skin and hold it for a few seconds to set.",
+      },
+      {
+        title: "Remove",
+        body: "Rinse the area with warm water, or wipe with a wet cloth, until the adhesive dissolves completely.",
+      },
+    ],
+    keyIngredients: [
+      {
+        slug: "acrylic-copolymer",
+        name: "Acrylic copolymer",
+        role: "A film-forming polymer that dries into a thin, tacky layer. The adhesive base the manufacturer lists.",
+      },
+      {
+        slug: "water",
+        name: "Water",
+        role: "The base of the formula: it carries the polymer and evaporates as the adhesive dries.",
+      },
+    ],
+    specs: [
+      { label: "Format", value: "Liquid body adhesive, 20 ml / 0.7 fl oz tube" },
+      {
+        label: "Formula",
+        value:
+          "Acrylic copolymer and water, as listed by the manufacturer. Latex-free",
+      },
+      { label: "Dries in", value: "20–30 seconds, until clear and tacky" },
+      { label: "Removal", value: "Warm water or a wet cloth; soap and water" },
+      { label: "Shelf life", value: "3 years" },
+      { label: "Brand on the pack", value: "Body Glue" },
+    ],
+    inTheBox: [
+      {
+        item: "Body adhesive",
+        detail: "20 ml / 0.7 fl oz tube, with its box",
+      },
+    ],
+    safety: {
+      patchTest:
+        "Patch test before first use: apply a small amount to a small area of skin, let it set, remove it as directed, and wait 24 hours. Don't use the product if you notice redness, burning, itching or swelling.",
+      note: "The manufacturer's listing gives directions but no warnings, so we follow the standard precautions for skin adhesives below. Read any warnings printed on the pack.",
+      use: [
+        "Clean, dry, intact skin",
+        "The inside of clothing and dancewear",
+        "Tape, wigs and hairpieces, as the manufacturer lists",
+      ],
+      avoid: [
+        "The eyes and the area around them",
+        "Broken, sunburnt or irritated skin",
+        "Skin that has reacted to adhesives before",
+      ],
+      ifIrritation:
+        "If your skin feels irritated, rinse the area with warm water to dissolve the adhesive and stop using it. If it gets in your eyes, rinse them with water. If irritation continues, contact a doctor or pharmacist.",
+    },
+    faqs: [
+      {
+        q: "What is this product?",
+        a: "A 20 ml tube of liquid body adhesive. You apply a thin layer to the skin or the inside of a garment, let it turn clear and tacky, then press fabric, tape or a hairpiece into place. It rinses off with water.",
+      },
+      {
+        q: "How do I use it?",
+        a: "Clean and dry the skin, spread a thin even layer, wait 20–30 seconds until it is clear and tacky, then press the fabric firmly onto the skin and hold it for a few seconds.",
+      },
+      {
+        q: "How do I remove it?",
+        a: "Rinse the area with warm water, or wipe with a wet cloth, until the adhesive dissolves. The listing also describes it as easy to remove with soap and water.",
+      },
+      {
+        q: "Will it stain my clothes?",
+        a: "The manufacturer says it won't stain or damage delicate fabrics and leaves no sticky residue. Fabrics differ, so if a garment is delicate or precious, test a hidden spot first.",
+      },
+      {
+        q: "Is it sweat-proof and waterproof?",
+        a: "The manufacturer describes it as sweat-resistant and water-resistant, and also as water-soluble, which is why it washes off. The listing gives no hold time, so we can't say how many hours it lasts for a given activity.",
+      },
+      {
+        q: "Is it suitable for sensitive skin?",
+        a: "The manufacturer describes the formula as latex-free, gentle and hypoallergenic, but no product suits every skin. Patch test a small area 24 hours before your first full use.",
+      },
+      {
+        q: "What can I use it for?",
+        a: "The manufacturer lists strapless dresses and straps, dancewear and costumes, athletic tape and bandages, slip-prone socks, compression stockings, cosplay gear, and lace front wigs and hairpieces.",
+      },
+      {
+        q: "What is it made of?",
+        a: "The manufacturer lists cosmetic-grade acrylic copolymer and water. The listing doesn't include a full ingredient declaration, so ask us if you have a known sensitivity.",
+      },
+      {
+        q: "How much is in a tube, and how long does it keep?",
+        a: "20 ml (0.7 fl oz). The manufacturer gives a shelf life of 3 years.",
+      },
+      {
+        q: "Can I return it?",
+        a: "Personal-care products can't be returned once received, unless they arrive damaged, defective or incorrect — contact us and we'll put it right. EU customers also have a 14-day right to cancel. See the refund policy for details.",
+      },
+    ],
+    googleCategory: "Apparel & Accessories > Clothing Accessories",
+    pdp: {
+      galleryFit: "flush",
+      perksOneColumn: true,
+      /* Pink, from the pink tube and box. */
+      theme: {
+        primary: {
+          "50": "#fef3f8",
+          "100": "#fce4ef",
+          "200": "#f9c9de",
+          "300": "#f4a0c3",
+          "400": "#ec6fa3",
+          "500": "#d9528d",
+          "600": "#c2447c",
+          "700": "#a13866",
+          "800": "#7e2c50",
+          "900": "#5a203a",
+        },
+        accent: {
+          "50": "#fdf2f7",
+          "100": "#fbe2ed",
+          "200": "#f6c6da",
+          "300": "#ec9bbb",
+          "600": "#a13866",
+        },
+        surface: {
+          ivory: "#ffffff",
+          porcelain: "#ffffff",
+          cream: "#fdf1f5",
+          sand: "#f9e0e9",
+          linen: "#f0cdda",
+          line: "#e6bccb",
+          ink: "#2b1a22",
+          "ink-soft": "#66505b",
+          "ink-faint": "#76606b",
+        },
+      },
+      trust: [
+        { icon: "droplet", text: "Sweat & water resistant" },
+        { icon: "shield", text: "Latex-free formula" },
+        { icon: "feather", text: "Washes off with any soap and water" },
+      ],
+      dailyStep: {
+        eyebrow: "Your outfit, secured",
+        heading: "Wear it. Move in it. Wash it off.",
+        body: "Dab a thin layer on clean, dry skin or the inside of the garment, wait 20–30 seconds until it turns clear and tacky, then press and hold. When you're done, rinse with warm water or wipe with a wet cloth. The manufacturer describes a hold that keeps straps, necklines and tape in place, and a formula that leaves no sticky residue.",
+        mediaFile: "S1f0cc8f94de94998937789ab4290f48av",
+        imagePosition: "center",
+        benefits: [
+          {
+            icon: "shield",
+            title: "A secure hold",
+            body: "The manufacturer's description for clothes, dancewear and tape.",
+          },
+          {
+            icon: "droplet",
+            title: "Sweat and water resistant",
+            body: "And water-soluble, so it still washes off.",
+          },
+          {
+            icon: "clock",
+            title: "Dries in 20–30 seconds",
+            body: "Clear and tacky to the touch, then press and hold.",
+          },
+        ],
+      },
+      howTo: {
+        heading: "Five simple steps.",
+        intro:
+          "The short version: clean and dry the skin, apply a thin layer, wait 20–30 seconds, press and hold, rinse to remove.",
+      },
+      ingredientsNote:
+        "Acrylic copolymer and water: the two ingredients the manufacturer lists. The listing gives no full ingredient declaration, so check the pack and ask us if you have a sensitivity.",
+      showHairRemovalComparison: false,
+    },
+    contentGaps: [
+      "Full ingredient (INCI) declaration; the listing names acrylic copolymer and water only",
+      "How long it holds, and under what conditions",
+      "Exact wording of the packaging warnings",
+      "Whether it is suitable near the face or hairline (the listing mentions lace front wigs but gives no warnings)",
+      "Manufacturer's name (the listing says no brand; the pack reads Body Glue)",
       "GTIN / barcode",
     ],
   },

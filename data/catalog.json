@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-08T02:35:39.478Z",
+  "syncedAt": "2026-10-08T18:51:50.321Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-08T02:34:51Z",
+      "updatedAt": "2026-10-08T18:02:04Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -924,6 +924,326 @@
         "Extrait De Parfum Concentration"
       ],
       "saleEndsAt": "2026-10-09T03:00:00.000Z"
+    },
+    "body-adhesive": {
+      "id": "gid://shopify/Product/15413115486435",
+      "handle": "body-adhesive",
+      "title": "Body Adhesive - Sweat & Water Resistant, Stain-Free, Easy to Remove with Soap and Water, Perfect for Confidence and Security in Outfits",
+      "vendor": "Belurae",
+      "productType": "Beauty & Wellness",
+      "status": "ACTIVE",
+      "updatedAt": "2026-10-08T18:43:02Z",
+      "seo": {
+        "title": "Body Adhesive · 20 ml Liquid Tube",
+        "description": "A 20 ml liquid body adhesive for clothes, dancewear and tape. Sweat and water resistant, latex-free, washes off with water. Directions and safety guidance."
+      },
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "20mlX1"
+          ]
+        }
+      ],
+      "availableForSale": true,
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67647736611043",
+          "title": "20mlX1",
+          "sku": "14:29#20mlX1",
+          "barcode": null,
+          "price": 49.99,
+          "compareAtPrice": 58.5,
+          "availableForSale": true,
+          "options": {
+            "Color": "20mlX1"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd12194b11b3245ab9d4d9c2747421b79O.webp?v=1791481794",
+          "description": null
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/belurae_body_glue.png?v=1791484813",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Belurae__None_of_the_Damage.png?v=1791484585",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "video",
+          "alt": null,
+          "poster": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/preview_images/9db330925c154b0e9964a4069e904be1.thumbnail.0000000000.jpg?v=1791483668",
+          "width": 720,
+          "height": 960,
+          "sources": [
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/9db330925c154b0e9964a4069e904be1/9db330925c154b0e9964a4069e904be1.SD-480p-0.9Mbps-96846104.mp4",
+              "type": "video/mp4",
+              "width": 360
+            },
+            {
+              "src": "https://cdn.shopify.com/videos/c/vp/9db330925c154b0e9964a4069e904be1/9db330925c154b0e9964a4069e904be1.HD-720p-1.6Mbps-96846104.mp4",
+              "type": "video/mp4",
+              "width": 540
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/c228f7e436024514bf685d1ee2301661_tplv-fhlh96nyum-resize-webp_800_800.webp?v=1791483649",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/3a5344d2b4d040a4a0512f191816eb3d_tplv-fhlh96nyum-resize-webp_800_800.webp?v=1791483650",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/24bd05daebe94f38a9c9a26ce8d437a2_tplv-fhlh96nyum-resize-webp_800_800.webp?v=1791483648",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S6637d3a35df1472ca4594ed2f2a49211K.jpg?v=1791483538",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sb466d587494e4416a0670ba8cd73e9aeM_c2034376-7054-42e3-be5e-67752f80a84b.webp?v=1791481795",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S179f1b1da055496eb7137250cffdaf6cF.webp?v=1791481795",
+          "width": 1500,
+          "height": 1494,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sc307c246377d40ef85346fe370678261C_b42394b5-dd10-4848-b832-cd9a6bf757ba.webp?v=1791481794",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4c88bad8403b423b9895e6563d762f96v.webp?v=1791481794",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sbfaa1327ead84672a413a2160c7aab68M.webp?v=1791481794",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd07967cef3f24e6d9582b3e04c4da27bI.webp?v=1791481794",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S99d322074da942eb8227bd9324a26a67E.webp?v=1791481795",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4c88bad8403b423b9895e6563d762f96v_9f42dc37-3f97-4f76-bd58-b324c7ff4355.webp?v=1791481794",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sb466d587494e4416a0670ba8cd73e9aeM.webp?v=1791481795",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sc307c246377d40ef85346fe370678261C.webp?v=1791481794",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S1f0cc8f94de94998937789ab4290f48av.webp?v=1791481795",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sbfaa1327ead84672a413a2160c7aab68M_1e7b417f-a88b-46ce-9efe-0dc110d8bfa9.webp?v=1791481794",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4fe7ece552414fb1ac4a7633531c3b1aZ.webp?v=1791481795",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sf51c060b262b4ca797dda2c8506aafc3s.webp?v=1791481795",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd07967cef3f24e6d9582b3e04c4da27bI_b818ff10-9b5c-42c7-90ac-5ffd7ea7caa8.webp?v=1791481795",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S5ce932862e044b3aba480c3300b72a33a.jpg?v=1791483541",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd12194b11b3245ab9d4d9c2747421b79O.webp?v=1791481794",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67647736611043"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd12194b11b3245ab9d4d9c2747421b79O_a980b4cd-58a8-48e9-9f13-95cf5d9eb4e1.webp?v=1791481795",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        }
+      ],
+      "specs": [
+        {
+          "label": "Format",
+          "value": "Liquid body adhesive, 20 ml / 0.7 fl oz tube",
+          "description": null
+        },
+        {
+          "label": "Formula",
+          "value": "Acrylic copolymer and water, as listed by the manufacturer. Latex-free",
+          "description": null
+        },
+        {
+          "label": "Dries in",
+          "value": "20–30 seconds, until clear and tacky",
+          "description": null
+        },
+        {
+          "label": "Removal",
+          "value": "Warm water or a wet cloth; soap and water",
+          "description": null
+        },
+        {
+          "label": "Shelf life",
+          "value": "3 years",
+          "description": null
+        },
+        {
+          "label": "Brand on the pack",
+          "value": "Body Glue",
+          "description": null
+        }
+      ],
+      "featureHighlights": [
+        {
+          "label": "Keeps your outfit in place",
+          "body": "The manufacturer describes a secure, all-day hold for clothes, dancewear, costumes and athletic tape, so straps, necklines and strapless dresses stay where you put them. The listing gives no number of hours, and how long it holds varies with the fabric, the skin and what you are doing.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sbfaa1327ead84672a413a2160c7aab68M.webp?v=1791481794"
+        },
+        {
+          "label": "Sweat and water resistant",
+          "body": "Described as sweat-resistant and water-resistant, for workouts, dance and long days out. It is also water-soluble, which is why it washes off when you want it to.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sf51c060b262b4ca797dda2c8506aafc3s.webp?v=1791481795"
+        },
+        {
+          "label": "Washes off, no sticky residue",
+          "body": "Rinse with warm water, or wipe with a wet cloth, until the adhesive dissolves. The manufacturer says it leaves no sticky residue and won't stain or damage delicate fabrics. If a garment is precious, test a hidden spot first.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S99d322074da942eb8227bd9324a26a67E.webp?v=1791481795"
+        },
+        {
+          "label": "A latex-free, skin-friendly formula",
+          "body": "The manufacturer lists acrylic copolymer and water, and describes the formula as gentle, latex-free and hypoallergenic. No product suits every skin, so patch test 24 hours before your first use.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd07967cef3f24e6d9582b3e04c4da27bI.webp?v=1791481794"
+        },
+        {
+          "label": "One tube, plenty of uses",
+          "body": "Listed uses include strapless dresses and straps, dancewear and costumes, athletic tape and bandages, slip-prone socks, compression stockings, cosplay gear, and lace front wigs and hairpieces.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4c88bad8403b423b9895e6563d762f96v.webp?v=1791481794"
+        }
+      ],
+      "perks": [
+        "Keep clothing in place",
+        "Secure All-Day Hold",
+        "Sweat and water resistant",
+        "No staining",
+        "Easy removal",
+        "Latex-Free Formula",
+        "Confidence and security"
+      ],
+      "saleEndsAt": "2026-10-10T03:00:00.000Z"
     }
   }
 }

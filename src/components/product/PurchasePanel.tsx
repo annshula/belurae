@@ -9,6 +9,7 @@ import { useLocalization } from "@/components/localization/LocalizationProvider"
 import { Icon } from "@/components/ui/Icon";
 import { PaymentIcons } from "@/components/ui/PaymentIcons";
 import { trackSelectVariant, trackViewItem } from "@/lib/analytics";
+import { tierPrice } from "@/lib/commerce/tiers";
 import type { ProductView, ViewVariant } from "@/lib/commerce/product-view";
 import { formatMoney } from "@/lib/money";
 import { cn } from "@/lib/utils";
@@ -394,7 +395,9 @@ function PackCards({
       const raw = findVariant(view, { ...selection, [name]: value.value });
       return { value, combo: raw ? localizedVariantFor(raw) : undefined };
     })
-    .sort((a, b) => (a.combo?.units ?? Infinity) - (b.combo?.units ?? Infinity));
+    .sort(
+      (a, b) => (a.combo?.units ?? Infinity) - (b.combo?.units ?? Infinity),
+    );
   /* A bigger pack priced the same as a smaller one is a real "get N free"
      deal — derived from the two prices, never typed by hand. */
   const freeFor = (c: LocalizedVariant | undefined) => {
@@ -405,12 +408,16 @@ function PackCards({
         r.combo.units < c.units &&
         Math.abs(r.combo.price - c.price) < 0.005,
     );
-    return same?.combo ? { free: c.units - same.combo.units, of: same.combo.units } : null;
+    return same?.combo
+      ? { free: c.units - same.combo.units, of: same.combo.units }
+      : null;
   };
 
   const photoOf = (c: LocalizedVariant | undefined) =>
     c?.image ?? view.cardImage?.url ?? null;
-  const sharedPhoto = rows.every((r) => photoOf(r.combo) === photoOf(rows[0]?.combo));
+  const sharedPhoto = rows.every(
+    (r) => photoOf(r.combo) === photoOf(rows[0]?.combo),
+  );
 
   const cards = rows.map(({ value, combo }) => {
     const exists = Boolean(combo);
@@ -461,10 +468,23 @@ function PackCards({
   /* Flat cards — no drop shadows; selection is a 2px border. */
   const surface = (c: (typeof cards)[number]) =>
     c.featured
-      ? cn("bg-sage-100", c.checked ? "border-sage-600" : "border-sage-300 hover:border-sage-600")
+      ? cn(
+          "bg-sage-100",
+          c.checked
+            ? "border-sage-600"
+            : "border-sage-300 hover:border-sage-600",
+        )
       : c.offer
-        ? cn("bg-white", c.checked ? "border-clay-600" : "border-clay-600/50 hover:border-clay-600")
-        : cn("bg-transparent", c.checked ? "border-sage-800" : "border-sand hover:border-sage-300");
+        ? cn(
+            "bg-white",
+            c.checked
+              ? "border-clay-600"
+              : "border-clay-600/50 hover:border-clay-600",
+          )
+        : cn(
+            "bg-transparent",
+            c.checked ? "border-sage-800" : "border-sand hover:border-sage-300",
+          );
 
   return (
     <fieldset className="min-w-0">
@@ -500,7 +520,9 @@ function PackCards({
               <span
                 className={cn(
                   "absolute -top-2.5 right-3 z-10 inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-ui text-[0.6rem] leading-none font-semibold tracking-[0.08em] text-ivory uppercase",
-                  c.offer ? "bg-linear-to-r from-clay-600 to-clay-300" : "bg-sage-800",
+                  c.offer
+                    ? "bg-linear-to-r from-clay-600 to-clay-300"
+                    : "bg-sage-800",
                 )}
               >
                 <Icon name={c.offer ? "gift" : "star"} className="size-3" />
@@ -508,7 +530,12 @@ function PackCards({
               </span>
             )}
 
-            <span className={cn("flex items-center gap-3 px-3 pb-2.5", c.tag ? "pt-4" : "pt-2.5")}>
+            <span
+              className={cn(
+                "flex items-center gap-3 px-3 pb-2.5",
+                c.tag ? "pt-4" : "pt-2.5",
+              )}
+            >
               {/* Photo tile with the selection marker on its corner. */}
               <span className="relative block size-12 shrink-0">
                 <span className="relative block size-full overflow-hidden rounded-xl">
@@ -534,7 +561,9 @@ function PackCards({
                       : "border-sand",
                   )}
                 >
-                  {c.checked && <Icon name="check" className="size-2.5 text-ivory" />}
+                  {c.checked && (
+                    <Icon name="check" className="size-2.5 text-ivory" />
+                  )}
                 </span>
                 {c.deal && (
                   <span className="absolute -right-2 -bottom-2 grid size-9 place-items-center rounded-full border-2 border-white bg-gold-500 text-center font-numeral text-[0.52rem] leading-[1.05] font-extrabold text-ink motion-safe:animate-[free-pop_1.6s_ease-in-out_infinite]">
@@ -565,7 +594,9 @@ function PackCards({
                   </span>
                 )}
                 {c.exists && !c.available && (
-                  <span className="mt-1 text-[0.7rem] text-ink-soft">Sold out</span>
+                  <span className="mt-1 text-[0.7rem] text-ink-soft">
+                    Sold out
+                  </span>
                 )}
               </span>
 
@@ -576,7 +607,9 @@ function PackCards({
                       <span
                         className={cn(
                           "font-numeral leading-none font-semibold tracking-tight tabular-nums",
-                          c.offer ? "text-[1.3rem] text-clay-600" : "text-[1.15rem] text-ink",
+                          c.offer
+                            ? "text-[1.3rem] text-clay-600"
+                            : "text-[1.15rem] text-ink",
                         )}
                       >
                         {formatMoney(c.unitPrice, c.combo.currency)}
@@ -587,17 +620,25 @@ function PackCards({
                       <span className="mt-1 flex items-baseline gap-1.5 font-numeral text-[0.68rem] leading-none text-ink-soft tabular-nums">
                         {c.combo.compareAtPrice != null && (
                           <span className="line-through decoration-1">
-                            {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                            {formatMoney(
+                              c.combo.compareAtPrice,
+                              c.combo.currency,
+                            )}
                           </span>
                         )}
-                        <span>{formatMoney(c.combo.price, c.combo.currency)} total</span>
+                        <span>
+                          {formatMoney(c.combo.price, c.combo.currency)} total
+                        </span>
                       </span>
                     </>
                   ) : (
                     <>
                       {c.combo.compareAtPrice != null && (
                         <span className="font-numeral text-[0.7rem] text-ink-faint tabular-nums line-through decoration-1">
-                          {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                          {formatMoney(
+                            c.combo.compareAtPrice,
+                            c.combo.currency,
+                          )}
                         </span>
                       )}
                       <span className="font-numeral text-[1.15rem] leading-none font-semibold tracking-tight text-ink tabular-nums">
@@ -703,10 +744,15 @@ function PackCards({
                     <span className="mt-0.5 flex items-baseline gap-1.5 font-numeral text-[0.72rem] text-ink-soft tabular-nums">
                       {c.combo.compareAtPrice != null && (
                         <span className="line-through">
-                          {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                          {formatMoney(
+                            c.combo.compareAtPrice,
+                            c.combo.currency,
+                          )}
                         </span>
                       )}
-                      <span>{formatMoney(c.combo.price, c.combo.currency)} total</span>
+                      <span>
+                        {formatMoney(c.combo.price, c.combo.currency)} total
+                      </span>
                     </span>
                   </>
                 ) : (
@@ -734,7 +780,9 @@ function PackCards({
               </span>
             )}
             {c.exists && !c.available && (
-              <span className="mt-1 text-[0.72rem] text-ink-soft">Sold out</span>
+              <span className="mt-1 text-[0.72rem] text-ink-soft">
+                Sold out
+              </span>
             )}
           </label>
         ))}
@@ -835,6 +883,10 @@ export function PurchasePanel({
     initial.options,
   );
   const [added, setAdded] = useState(false);
+  /* Quantity-break products: the chosen pack is the quantity added to the bag. */
+  const tiers =
+    view.packTiers && view.packTiers.length > 1 ? view.packTiers : null;
+  const [qty, setQty] = useState(1);
   const [, startTransition] = useTransition();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [showSticky, setShowSticky] = useState(false);
@@ -856,6 +908,47 @@ export function PurchasePanel({
     [localizedPriceFor, singleUnitVariant, view.currency],
   );
   const localizedVariant = localizedVariantFor(variant ?? initial);
+
+  /* Quantity-break products: 1 / 2 / 3 Pack are the SAME variant at quantity
+     1 / 2 / 3, so they are shown with the very same pack cards as the products
+     that sell packs as separate variants. Each tier becomes a pack row priced
+     by lib/commerce/tiers.ts, which mirrors the Shopify automatic discounts
+     that charge it at checkout. */
+  const tierView = useMemo(() => {
+    if (!tiers || !variant) return null;
+    const optionName = "Pack";
+    const rows: ViewVariant[] = tiers.map((t) => {
+      const p = tierPrice(
+        localizedVariant.price,
+        t.size,
+        tiers,
+        localizedVariant.compareAtPrice,
+      );
+      return {
+        id: `${variant.id}#${t.size}`,
+        options: { [optionName]: String(t.size) },
+        price: p.total,
+        compareAtPrice: p.full > p.total ? p.full : null,
+        compareAtPercent: p.percent > 0 ? p.percent : null,
+        availableForSale: canBuy,
+        sku: variant.sku,
+        image: variant.image,
+        units: t.size,
+        savings: null,
+        perUnit: Math.round((p.total / t.size) * 100) / 100,
+        label: `${t.size} Pack`,
+      };
+    });
+    const option = {
+      name: optionName,
+      label: "Choose your pack",
+      values: tiers.map((t) => ({
+        value: String(t.size),
+        label: `${t.size} Pack`,
+      })),
+    };
+    return { option, view: { ...view, options: [option], variants: rows } };
+  }, [tiers, variant, localizedVariant, canBuy, view]);
 
   // Every variant's price is needed up front — the pack cards show all of
   // them, not just the selected one.
@@ -924,9 +1017,21 @@ export function PurchasePanel({
     });
   };
 
+  const chooseQty = (size: number) => {
+    setQty(size);
+    setAdded(false);
+    if (!variant) return;
+    trackSelectVariant({
+      id: variant.id,
+      name: view.name,
+      variant: `${size} Pack`,
+      price: variant.price,
+    });
+  };
+
   const onAdd = () => {
     if (!variant || !canBuy) return;
-    add(variant.id, 1);
+    add(variant.id, tiers ? qty : 1);
     setAdded(true);
     window.setTimeout(() => setAdded(false), 2000);
   };
@@ -974,6 +1079,20 @@ export function PurchasePanel({
   return (
     <div>
       <div className="space-y-7">
+        {tierView && (
+          <PackCards
+            option={tierView.option}
+            selection={{ [tierView.option.name]: String(qty) }}
+            view={tierView.view}
+            onChoose={(_, value) => chooseQty(Number(value))}
+            optionAvailable={() => canBuy}
+            localizedVariantFor={(v) => ({
+              ...v,
+              currency: localizedVariant.currency,
+            })}
+            perSetPrice={perSetPrice}
+          />
+        )}
         {view.options.map((option) => {
           const isPack = option.name === view.packOptionName;
 
@@ -1098,11 +1217,16 @@ export function PurchasePanel({
         <div className="flex items-center gap-3">
           <div className="min-w-0 flex-1">
             <p className="truncate font-serif text-heading-3">
-              {variant?.label ?? view.name}
+              {tiers ? `${qty} Pack` : (variant?.label ?? view.name)}
             </p>
             <p className="font-numeral text-body-sm font-medium text-ink-soft tabular-nums">
               {variant
-                ? formatMoney(localizedVariant.price, localizedVariant.currency)
+                ? formatMoney(
+                    tiers
+                      ? tierPrice(localizedVariant.price, qty, tiers).total
+                      : localizedVariant.price,
+                    localizedVariant.currency,
+                  )
                 : ""}
             </p>
           </div>

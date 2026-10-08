@@ -91,13 +91,27 @@ export const collections: CollectionContent[] = [
     ],
   },
   {
+    slug: "body-adhesive",
+    title: "Body Adhesive",
+    seoTitle: "Body Adhesive — Directions and Safety, Plainly",
+    description:
+      "Liquid body adhesive for clothes, dancewear and tape, with the directions, ingredients and safety guidance spelled out on the product page.",
+    intro:
+      "Each body adhesive page says what the manufacturer lists, how to apply and remove it, and where not to use it, and is clear about what we don't yet know.",
+    categories: ["body-adhesive"],
+    related: [
+      { label: "How to patch test", href: "/guides/how-to-patch-test" },
+      { label: "Ingredients", href: "/ingredients" },
+    ],
+  },
+  {
     slug: "all",
     title: "Shop all",
     seoTitle: "Shop All Beauty & Wellness",
     description:
-      "Everything Belurae sells today — body care, skincare and fragrance for simpler everyday routines.",
+      "Everything Belurae sells today — body care, skincare, fragrance and body adhesive for simpler everyday routines.",
     intro:
-      "Belurae is a deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal, facial skincare and fragrance.",
+      "Belurae is a deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal, facial skincare, fragrance and body adhesive.",
     categories: "*",
     related: [
       { label: "Our standards", href: "/pages/standards" },

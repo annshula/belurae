@@ -462,8 +462,33 @@
     background: linear-gradient(180deg, var(--color-sage-500) -40%, var(--color-sage-600) 60%);
     color: var(--color-ivory);
   }
-  .btn-primary:hover {
+  /* A gradient can't transition into a flat colour, so swapping `background`
+     on hover made the button flash. The darker shade is instead a layer that
+     fades in over the gradient (behind the label), and a press gives a small
+     shrink. */
+  .btn-primary {
+    isolation: isolate;
+  }
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
     background: var(--color-sage-700);
+    opacity: 0;
+    transition: opacity 240ms var(--ease-out-soft);
+    pointer-events: none;
+  }
+  .btn-primary:hover::before {
+    opacity: 1;
+  }
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+  .btn-primary:disabled::before,
+  .btn-primary[aria-disabled="true"]::before {
+    display: none;
   }
   .btn-primary:disabled,
   .btn-primary[aria-disabled="true"] {

@@ -31,6 +31,7 @@ export async function getBagCatalog(): Promise<BagCatalog> {
         href: `${view.href}?variant=${v.id.split("/").pop()}`,
         available: v.availableForSale,
         hasPackOption: view.packOptionName !== null,
+        tiers: view.packTiers,
       };
     }
   }
