@@ -372,11 +372,6 @@ export default async function ProductPage({ params }: Props) {
               />
             </div>
 
-            {/* What customers say — right under the CTA and payment icons. */}
-            {feedbackReviews && feedbackReviews.length > 0 && (
-              <PurchaseFeedback reviews={feedbackReviews} className="mt-6" />
-            )}
-
             <ProductAccordion
               items={[
                 {
@@ -466,6 +461,11 @@ export default async function ProductPage({ params }: Props) {
                   </a>
                 </p>
               </aside>
+            )}
+
+            {/* What customers say — right after the patch-test notice. */}
+            {feedbackReviews && feedbackReviews.length > 0 && (
+              <PurchaseFeedback reviews={feedbackReviews} className="mt-5" />
             )}
           </div>
         </div>
