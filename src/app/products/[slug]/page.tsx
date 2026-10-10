@@ -292,8 +292,10 @@ export default async function ProductPage({ params }: Props) {
                 reviews. */}
             {(() => {
               const hasRating = Boolean(ratingLine && ratingLine.count > 0);
-              const sold = content.pdp.sold;
-              if (!hasRating && !sold) return null;
+              // Sold count hidden for now (data stays in products.ts).
+              // const sold = content.pdp.sold;
+              // if (!hasRating && !sold) return null;
+              if (!hasRating) return null;
               return (
                 <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-ui text-body-sm">
                   {ratingLine && ratingLine.count > 0 && (
@@ -311,7 +313,7 @@ export default async function ProductPage({ params }: Props) {
                       </span>
                     </a>
                   )}
-                  {sold && (
+                  {/* {sold && (
                     <span className="inline-flex items-center gap-x-2.5 text-ink-soft">
                       {hasRating && (
                         <span aria-hidden="true" className="text-ink-faint">
@@ -325,7 +327,7 @@ export default async function ProductPage({ params }: Props) {
                         sold in the last {sold.months} months
                       </span>
                     </span>
-                  )}
+                  )} */}
                 </p>
               );
             })()}

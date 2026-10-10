@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-09T05:14:12.829Z",
+  "syncedAt": "2026-10-10T04:36:52.047Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-09T00:32:47Z",
+      "updatedAt": "2026-10-10T04:36:37Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -334,7 +334,7 @@
         "35% Less Chemical Ingredients",
         "Cruelty-Free & Plant-Based"
       ],
-      "saleEndsAt": "2026-10-10T03:00:00.000Z"
+      "saleEndsAt": "2026-10-12T03:00:00.000Z"
     },
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
@@ -932,7 +932,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-09T05:14:07Z",
+      "updatedAt": "2026-10-10T04:36:17Z",
       "seo": {
         "title": "Body Adhesive · 20 ml Liquid Tube",
         "description": "A 20 ml liquid body adhesive for clothes, dancewear and tape. Sweat and water resistant, latex-free, washes off with water. Directions and safety guidance."
@@ -1259,7 +1259,7 @@
         "Latex-Free Formula",
         "Confidence and security"
       ],
-      "saleEndsAt": "2026-10-10T03:00:00.000Z"
+      "saleEndsAt": "2026-10-12T03:00:00.000Z"
     }
   }
 }
