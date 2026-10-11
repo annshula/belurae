@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-10T16:30:31.775Z",
+  "syncedAt": "2026-10-11T01:26:25.606Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-10T16:29:32Z",
+      "updatedAt": "2026-10-11T01:20:51Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -36,8 +36,8 @@
           "title": "1PC",
           "sku": "CJPF253602701AZ",
           "barcode": null,
-          "price": 24.99,
-          "compareAtPrice": 29.99,
+          "price": 29.99,
+          "compareAtPrice": null,
           "availableForSale": true,
           "options": {
             "Quantity": "1PC"
@@ -50,7 +50,7 @@
           "title": "2PCS",
           "sku": "CJPF253602702BY",
           "barcode": null,
-          "price": 47.99,
+          "price": 49.99,
           "compareAtPrice": 59.98,
           "availableForSale": true,
           "options": {
