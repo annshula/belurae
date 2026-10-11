@@ -342,11 +342,11 @@ export const products: ProductContent[] = [
       },
       {
         q: "Where can I use it?",
-        a: "On the body: legs, arms, underarms, back, chest, face, eyebrows and the bikini line. Don't use it near your eyes, on the genitals or other mucous membranes, or on broken or irritated skin.",
+        a: "On the body: legs, arms, underarms, back, chest, face, eyebrows and the bikini line. Don't use it near your eyes or on other mucous membranes, or on broken or irritated skin.",
       },
       {
         q: "Can I use it on the bikini line?",
-        a: "Yes, following the directions on the pack. It is not for use on the genitals or mucous membranes. Patch test first, and keep to the 3–5 minute window.",
+        a: "Yes, following the directions on the pack. It is not for use on mucous membranes. Patch test first, and keep to the 3–5 minute window.",
       },
       {
         q: "How do I remove it?",
@@ -459,7 +459,7 @@ export const products: ProductContent[] = [
       showHairRemovalComparison: true,
       notice: {
         lead: "Patch test 24 hours before first use.",
-        text: "Not for the eyes, genitals or mucous membranes.",
+        text: "Not for the eyes or mucous membranes.",
       },
     },
     contentGaps: [
