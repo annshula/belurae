@@ -411,6 +411,19 @@ function PackCards({
       : null;
   };
 
+  /* "Buy 2 Get 1 Free" is only said when the 3 Pack really costs two of
+     something: the same as two singles, or the same as the 2 Pack. Derived
+     from the live prices, so a pack with a smaller discount keeps "3 Pack". */
+  const singlePrice = rows.find((r) => r.combo?.units === 1)?.combo?.price;
+  const isBuy2Get1 = (c: LocalizedVariant | undefined) => {
+    if (c?.units !== 3) return false;
+    const priceOf2 = rows.find((r) => r.combo?.units === 2)?.combo?.price;
+    return (
+      (singlePrice != null && Math.abs(c.price - 2 * singlePrice) < 0.02) ||
+      (priceOf2 != null && Math.abs(c.price - priceOf2) < 0.02)
+    );
+  };
+
   const photoOf = (c: LocalizedVariant | undefined) =>
     c?.image ?? view.cardImage?.url ?? null;
   const sharedPhoto = rows.every(
@@ -421,6 +434,7 @@ function PackCards({
     const exists = Boolean(combo);
     const deal = freeFor(combo);
     const offer = deal !== null;
+    const buy2get1 = isBuy2Get1(combo);
     /* Each card shows its own pack's real price and compare-at price, as set
        in Shopify. The per-set price is a small note beside them. */
     /* Pack price ÷ sets, cut (not rounded) to the cent: 49.99 ÷ 2 → 24.99. */
@@ -441,14 +455,20 @@ function PackCards({
       saved,
       checked: selection[name] === value.value,
       available: optionAvailable(name, value.value),
-      label: combo ? `${combo.units} Pack` : value.label,
+      label: buy2get1
+        ? "Buy 2 Get 1 Free"
+        : combo
+          ? `${combo.units} Pack`
+          : value.label,
       tag:
         combo?.units === 2
           ? "Most popular"
           : combo?.units === 3
             ? "Limited time offer"
             : null,
-      offerLine: deal ? `Buy ${deal.of}, get ${deal.free} free` : null,
+      /* The label already says it, so the offer line would repeat it. */
+      offerLine:
+        deal && !buy2get1 ? `Buy ${deal.of}, get ${deal.free} free` : null,
       unitPrice,
       img: combo?.image ?? view.cardImage?.url ?? null,
       units: combo?.units ?? 1,
@@ -814,13 +834,13 @@ export function PurchasePanel({
   const baseVariant =
     view.variants.find((v) => v.id === view.defaultVariantId) ??
     view.variants[0]!;
-  /* The 2 Pack ("Most popular") opens preselected, keeping the default's other
-     options (colour, scent…). A shared ?variant= link still overrides it. */
+  /* The 3 Pack opens preselected, keeping the default's other options (colour,
+     scent…). A shared ?variant= link still overrides it. */
   const initial =
     (cardsMode
       ? view.variants.find(
           (v) =>
-            v.units === 2 &&
+            v.units === 3 &&
             v.availableForSale &&
             Object.entries(v.options).every(
               ([k, val]) =>
@@ -835,9 +855,7 @@ export function PurchasePanel({
   /* Quantity-break products: the chosen pack is the quantity added to the bag. */
   const tiers =
     view.packTiers && view.packTiers.length > 1 ? view.packTiers : null;
-  const [qty, setQty] = useState(
-    cardsMode && tiers?.some((t) => t.size === 2) ? 2 : 1,
-  );
+  const [qty, setQty] = useState(tiers?.some((t) => t.size === 3) ? 3 : 1);
   const [, startTransition] = useTransition();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [showSticky, setShowSticky] = useState(false);
