@@ -395,9 +395,7 @@ function PackCards({
       const raw = findVariant(view, { ...selection, [name]: value.value });
       return { value, combo: raw ? localizedVariantFor(raw) : undefined };
     })
-    .sort(
-      (a, b) => (a.combo?.units ?? Infinity) - (b.combo?.units ?? Infinity),
-    );
+    .sort((a, b) => (b.combo?.units ?? 0) - (a.combo?.units ?? 0));
   /* A bigger pack priced the same as a smaller one is a real "get N free"
      deal — derived from the two prices, never typed by hand. */
   const freeFor = (c: LocalizedVariant | undefined) => {
@@ -429,14 +427,18 @@ function PackCards({
     const unitPrice = combo
       ? Math.floor((combo.price / combo.units) * 100 + 1e-6) / 100
       : null;
-    const pct = combo?.compareAtPercent ?? null;
+    /* The saving as an amount: compare-at less the pack's own price. */
+    const saved =
+      combo?.compareAtPrice != null && combo.compareAtPrice > combo.price
+        ? Math.round((combo.compareAtPrice - combo.price) * 100) / 100
+        : null;
     return {
       value,
       combo,
       exists,
       deal,
       offer,
-      pct,
+      saved,
       checked: selection[name] === value.value,
       available: optionAvailable(name, value.value),
       label: combo ? `${combo.units} Pack` : value.label,
@@ -451,40 +453,30 @@ function PackCards({
       img: combo?.image ?? view.cardImage?.url ?? null,
       units: combo?.units ?? 1,
       fan: sharedPhoto,
-      /* The biggest pack is tinted in the page's primary colour. */
-      featured: combo?.units === 3,
     };
   });
 
-  /* With a free-set deal on one card, every card shows its own price and
-     compare-at (the deal speaks for itself); otherwise the "each" price leads
-     when the product asks for it. */
+  /* Every card leads with its own price and compare-at, as set in Shopify.
+     The per-set ("each") price is only a small note beneath, and is left off
+     when a free-set deal on one card already tells the story. */
   const showEach = perSetPrice && !cards.some((c) => c.deal);
 
-  /* "Save N%" badge: one colour on every card. Solid, so it stays visible on
-     the sage-tinted featured card too. */
+  /* "Save N%" badge: one colour on every card. */
   const SAVE_BADGE = "bg-sage-800 text-ivory";
 
   /* Flat cards — no drop shadows; selection is a 2px border. */
   const surface = (c: (typeof cards)[number]) =>
-    c.featured
+    c.offer
       ? cn(
-          "bg-sage-100",
+          "bg-white",
           c.checked
-            ? "border-sage-600"
-            : "border-sage-300 hover:border-sage-600",
+            ? "border-clay-600"
+            : "border-clay-600/50 hover:border-clay-600",
         )
-      : c.offer
-        ? cn(
-            "bg-white",
-            c.checked
-              ? "border-clay-600"
-              : "border-clay-600/50 hover:border-clay-600",
-          )
-        : cn(
-            "bg-transparent",
-            c.checked ? "border-sage-800" : "border-sand hover:border-sage-300",
-          );
+      : cn(
+          "bg-transparent",
+          c.checked ? "border-sage-800" : "border-sand hover:border-sage-300",
+        );
 
   return (
     <fieldset className="min-w-0">
@@ -583,14 +575,14 @@ function PackCards({
                     {c.offerLine}
                   </span>
                 )}
-                {c.pct != null && c.pct > 0 && (
+                {c.saved != null && c.combo && (
                   <span
                     className={cn(
                       "mt-1 rounded-tag px-1.5 py-0.5 font-numeral text-[0.68rem] leading-none font-medium tabular-nums",
                       SAVE_BADGE,
                     )}
                   >
-                    Save {c.pct}%
+                    Save {formatMoney(c.saved, c.combo.currency)}
                   </span>
                 )}
                 {c.exists && !c.available && (
@@ -602,49 +594,18 @@ function PackCards({
 
               {c.combo && (
                 <span className="flex shrink-0 flex-col items-end">
-                  {showEach && c.units > 1 && c.unitPrice != null ? (
-                    <>
-                      <span
-                        className={cn(
-                          "font-numeral leading-none font-semibold tracking-tight tabular-nums",
-                          c.offer
-                            ? "text-[1.3rem] text-clay-600"
-                            : "text-[1.15rem] text-ink",
-                        )}
-                      >
-                        {formatMoney(c.unitPrice, c.combo.currency)}
-                        <span className="ml-1 text-[0.7rem] font-medium tracking-normal text-ink-soft">
-                          each
-                        </span>
-                      </span>
-                      <span className="mt-1 flex items-baseline gap-1.5 font-numeral text-[0.68rem] leading-none text-ink-soft tabular-nums">
-                        {c.combo.compareAtPrice != null && (
-                          <span className="line-through decoration-1">
-                            {formatMoney(
-                              c.combo.compareAtPrice,
-                              c.combo.currency,
-                            )}
-                          </span>
-                        )}
-                        <span>
-                          {formatMoney(c.combo.price, c.combo.currency)} total
-                        </span>
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      {c.combo.compareAtPrice != null && (
-                        <span className="font-numeral text-[0.7rem] text-ink-faint tabular-nums line-through decoration-1">
-                          {formatMoney(
-                            c.combo.compareAtPrice,
-                            c.combo.currency,
-                          )}
-                        </span>
-                      )}
-                      <span className="font-numeral text-[1.15rem] leading-none font-semibold tracking-tight text-ink tabular-nums">
-                        {formatMoney(c.combo.price, c.combo.currency)}
-                      </span>
-                    </>
+                  {c.combo.compareAtPrice != null && (
+                    <span className="font-numeral text-[0.7rem] text-ink-faint tabular-nums line-through decoration-1">
+                      {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                    </span>
+                  )}
+                  <span className="font-numeral text-[1.15rem] leading-none font-semibold tracking-tight text-ink tabular-nums">
+                    {formatMoney(c.combo.price, c.combo.currency)}
+                  </span>
+                  {showEach && c.units > 1 && c.unitPrice != null && (
+                    <span className="mt-1 font-numeral text-[0.66rem] leading-none text-ink-soft tabular-nums">
+                      {formatMoney(c.unitPrice, c.combo.currency)} each
+                    </span>
                   )}
                 </span>
               )}
@@ -728,55 +689,29 @@ function PackCards({
             )}
             {c.combo && (
               <span className="mt-1 flex flex-col items-center">
-                {showEach && c.units > 1 && c.unitPrice != null ? (
-                  <>
-                    <span
-                      className={cn(
-                        "font-numeral text-heading-3 leading-tight font-semibold tabular-nums",
-                        c.offer && "text-clay-600",
-                      )}
-                    >
-                      {formatMoney(c.unitPrice, c.combo.currency)}
-                      <span className="ml-1 text-[0.75rem] font-medium text-ink-soft">
-                        each
-                      </span>
-                    </span>
-                    <span className="mt-0.5 flex items-baseline gap-1.5 font-numeral text-[0.72rem] text-ink-soft tabular-nums">
-                      {c.combo.compareAtPrice != null && (
-                        <span className="line-through">
-                          {formatMoney(
-                            c.combo.compareAtPrice,
-                            c.combo.currency,
-                          )}
-                        </span>
-                      )}
-                      <span>
-                        {formatMoney(c.combo.price, c.combo.currency)} total
-                      </span>
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    {c.combo.compareAtPrice != null && (
-                      <span className="font-numeral text-[0.72rem] text-ink-soft tabular-nums line-through">
-                        {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
-                      </span>
-                    )}
-                    <span className="font-numeral text-body-lg font-semibold tabular-nums">
-                      {formatMoney(c.combo.price, c.combo.currency)}
-                    </span>
-                  </>
+                {c.combo.compareAtPrice != null && (
+                  <span className="font-numeral text-[0.72rem] text-ink-soft tabular-nums line-through">
+                    {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
+                  </span>
+                )}
+                <span className="font-numeral text-body-lg font-semibold tabular-nums">
+                  {formatMoney(c.combo.price, c.combo.currency)}
+                </span>
+                {showEach && c.units > 1 && c.unitPrice != null && (
+                  <span className="mt-0.5 font-numeral text-[0.68rem] text-ink-soft tabular-nums">
+                    {formatMoney(c.unitPrice, c.combo.currency)} each
+                  </span>
                 )}
               </span>
             )}
-            {c.pct != null && c.pct > 0 && (
+            {c.saved != null && c.combo && (
               <span
                 className={cn(
                   "mt-1.5 rounded-tag px-2 py-0.5 font-numeral text-[0.7rem] font-medium tabular-nums",
                   SAVE_BADGE,
                 )}
               >
-                Save {c.pct}%
+                Save {formatMoney(c.saved, c.combo.currency)}
               </span>
             )}
             {c.exists && !c.available && (
@@ -876,9 +811,23 @@ export function PurchasePanel({
   const cardsMode = packs === "cards";
   const { add, open, payments } = useCart();
   const { localizedPriceFor, requestPrices } = useLocalization();
-  const initial =
+  const baseVariant =
     view.variants.find((v) => v.id === view.defaultVariantId) ??
     view.variants[0]!;
+  /* The 2 Pack ("Most popular") opens preselected, keeping the default's other
+     options (colour, scent…). A shared ?variant= link still overrides it. */
+  const initial =
+    (cardsMode
+      ? view.variants.find(
+          (v) =>
+            v.units === 2 &&
+            v.availableForSale &&
+            Object.entries(v.options).every(
+              ([k, val]) =>
+                k === view.packOptionName || baseVariant.options[k] === val,
+            ),
+        )
+      : undefined) ?? baseVariant;
   const [selection, setSelection] = useState<Record<string, string>>(
     initial.options,
   );
@@ -886,7 +835,9 @@ export function PurchasePanel({
   /* Quantity-break products: the chosen pack is the quantity added to the bag. */
   const tiers =
     view.packTiers && view.packTiers.length > 1 ? view.packTiers : null;
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(
+    cardsMode && tiers?.some((t) => t.size === 2) ? 2 : 1,
+  );
   const [, startTransition] = useTransition();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [showSticky, setShowSticky] = useState(false);
