@@ -395,7 +395,7 @@ function PackCards({
       const raw = findVariant(view, { ...selection, [name]: value.value });
       return { value, combo: raw ? localizedVariantFor(raw) : undefined };
     })
-    .sort((a, b) => (b.combo?.units ?? 0) - (a.combo?.units ?? 0));
+    .sort((a, b) => (a.combo?.units ?? 0) - (b.combo?.units ?? 0));
   /* A bigger pack priced the same as a smaller one is a real "get N free"
      deal — derived from the two prices, never typed by hand. */
   const freeFor = (c: LocalizedVariant | undefined) => {
