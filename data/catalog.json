@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-12T12:43:13.366Z",
+  "syncedAt": "2026-10-13T07:50:43.637Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -10,11 +10,11 @@
     "bikini-pain-free-hair-removal-spray": {
       "id": "gid://shopify/Product/15395256467683",
       "handle": "bikini-pain-free-hair-removal-spray",
-      "title": "Bikini Pain-Free Hair Removal Mousse for Sensitive Skin, Citrus Scent, Aloe for Anti-bacterial, Moisturizing, and Soothing Care, Unisex",
+      "title": "Bikini and Full Body Pain-Free Hair Removal Mousse for Sensitive Skin, Citrus Scent, Aloe for Anti-bacterial, Moisturizing, and Soothing Care, Unisex",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-12T12:42:36Z",
+      "updatedAt": "2026-10-13T07:50:17Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -34,7 +34,7 @@
         {
           "id": "gid://shopify/ProductVariant/67582703501539",
           "title": "1PC",
-          "sku": "CJPF253602701AZ",
+          "sku": "CJPF312855101AZ",
           "barcode": null,
           "price": 29.99,
           "compareAtPrice": null,
@@ -48,7 +48,7 @@
         {
           "id": "gid://shopify/ProductVariant/67582703534307",
           "title": "2PCS",
-          "sku": "CJPF253602702BY",
+          "sku": "CJPF312855101AZ",
           "barcode": null,
           "price": 49.99,
           "compareAtPrice": 59.98,
@@ -62,7 +62,7 @@
         {
           "id": "gid://shopify/ProductVariant/67582703829219",
           "title": "3PCS",
-          "sku": "CJPF253602710JQ",
+          "sku": "CJPF312855101AZ",
           "barcode": null,
           "price": 59.98,
           "compareAtPrice": 89.97,
@@ -78,6 +78,14 @@
         {
           "type": "image",
           "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Img1.png?v=1790508379",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Lavender_Skincare_Botanical_Advertisement.png?v=1791877695",
           "width": 1254,
           "height": 1254,
           "alt": null,
