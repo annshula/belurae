@@ -31,7 +31,11 @@ function couponCode(units: number, percent: number) {
 }
 
 /** Quantity-break lines read "2 Pack", like the product page cards; everything else keeps its variant label. */
-function packLabel(line: { tiers: unknown; quantity: number; variantLabel: string }) {
+function packLabel(line: {
+  tiers: unknown;
+  quantity: number;
+  variantLabel: string;
+}) {
   return line.tiers ? `${line.quantity} Pack` : line.variantLabel;
 }
 
@@ -45,7 +49,7 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
     subtotal,
     discount,
     currency,
-    protectionValue,
+    shippingValue,
     setQuantity,
     remove,
     checkout,
@@ -96,7 +100,9 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
       ? couponCode(l.tiers ? l.quantity : l.units, l.savedPercent)
       : null,
   );
-  const appliedCodes = [...new Set(codes.filter((c): c is string => c !== null))];
+  const appliedCodes = [
+    ...new Set(codes.filter((c): c is string => c !== null)),
+  ];
   const discountTag = appliedCodes.join(" · ");
   const couponCount = appliedCodes.length;
 
@@ -201,7 +207,10 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
                     </div>
                     <div className="flex items-center justify-between gap-2">
                       <p className="flex items-center gap-1 text-[0.7rem] text-ink-soft">
-                        <Icon name="tag" className="size-3 shrink-0 text-clay-600" />
+                        <Icon
+                          name="tag"
+                          className="size-3 shrink-0 text-clay-600"
+                        />
                         <span className="font-numeral font-semibold tracking-wide text-clay-600">
                           {codes[i]}
                         </span>
@@ -261,27 +270,25 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
       </ul>
 
       <div className="m-3 mt-3 rounded-[20px] bg-porcelain px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-float">
-        {/* Shipping protection — included free on every order. */}
+        {/* Free shipping on every order. */}
         <div className="flex items-center gap-3">
           <span
             aria-hidden="true"
             className="grid size-9 shrink-0 place-items-center rounded-xl bg-sage-100 text-sage-600"
           >
-            <Icon name="shield" className="size-5" />
+            <Icon name="truck" className="size-5" />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-[0.8125rem] font-semibold">
-              Shipping protection
-            </p>
+            <p className="text-[0.8125rem] font-semibold">Free shipping</p>
             <p className="text-[0.72rem] leading-snug text-ink-soft">
-              Protect your order from being lost or damaged.
+              Tracked delivery on every order.
             </p>
           </div>
           <div className="flex shrink-0 flex-col items-end gap-1">
             <p className="flex items-baseline gap-1.5 font-numeral text-[0.8125rem] tabular-nums">
-              {protectionValue != null && (
+              {shippingValue != null && (
                 <span className="text-[0.72rem] text-ink-faint line-through">
-                  {formatMoney(protectionValue, currency)}
+                  {formatMoney(shippingValue, currency)}
                 </span>
               )}
               <span className="font-semibold text-sage-600">FREE</span>

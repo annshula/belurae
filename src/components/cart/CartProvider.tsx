@@ -65,8 +65,8 @@ export type ResolvedLine = BagLine &
 
 const STORAGE_KEY = "belurae.bag.v1";
 const MAX_QTY = 10;
-/** What shipping protection is worth, in the catalog's base currency (USD). */
-const PROTECTION_VALUE_USD = 2.29;
+/** The delivery price shown struck through beside "FREE", in the catalog's base currency (USD). */
+const SHIPPING_VALUE_USD = 4.99;
 
 function readCookie(name: string): string | null {
   const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
@@ -80,8 +80,8 @@ type CartContextValue = {
   /** Total saved against compare-at prices (0 when nothing in the bag has one). */
   discount: number;
   currency: string;
-  /** Worth of the free shipping protection in `currency`, or null when it can't be stated. */
-  protectionValue: number | null;
+  /** Delivery price shown struck through beside FREE, in `currency`, or null when it can't be stated. */
+  shippingValue: number | null;
   /** Payment methods checkout accepts, for the logo row under the button. */
   payments: PaymentMethod[];
   isOpen: boolean;
@@ -218,18 +218,18 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
           .find((c): c is string => Boolean(c))
       : undefined) ?? catalog.currency;
 
-  // What the shipping-protection line is "worth" (shown struck through next to
-  // FREE), in the bag's currency: the USD figure scaled by the same rate
-  // Shopify applied to the first line. Null when there is no USD base to scale.
-  const protectionValue = (() => {
+  // The delivery price shown struck through beside FREE, in the bag's
+  // currency: the USD figure scaled by the same rate Shopify applied to the
+  // first line. Null when there is no USD base to scale.
+  const shippingValue = (() => {
     if (catalog.currency !== "USD") return null;
-    if (!localized) return PROTECTION_VALUE_USD;
+    if (!localized) return SHIPPING_VALUE_USD;
     const first = lines[0];
     const live = first ? localizedPriceFor(first.variantId) : null;
     const base = first ? catalog.variants[first.variantId]?.price : null;
     const rate = live && base ? Number.parseFloat(live.amount) / base : NaN;
     return Number.isFinite(rate) && rate > 0
-      ? Math.round(PROTECTION_VALUE_USD * rate * 100) / 100
+      ? Math.round(SHIPPING_VALUE_USD * rate * 100) / 100
       : null;
   })();
 
@@ -322,7 +322,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       subtotal,
       discount,
       currency,
-      protectionValue,
+      shippingValue,
       payments: catalog.payments,
       isOpen,
       hydrated,
@@ -334,7 +334,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       checkout,
       announcement,
     }),
-    [lines, count, subtotal, discount, currency, protectionValue, catalog.payments, isOpen, hydrated, add, setQuantity, remove, checkout, announcement],
+    [lines, count, subtotal, discount, currency, shippingValue, catalog.payments, isOpen, hydrated, add, setQuantity, remove, checkout, announcement],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
