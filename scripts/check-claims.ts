@@ -17,6 +17,8 @@ const BANNED = [
   /\bsafe for (all|everyone|every skin)\b/i,
   /\bpermanent(ly)?\b/i,
   /\bminimi[sz]es ingrown\b/i,
+  /\b(prevents?|stops?|eliminates?|treats?) ingrown\b/i,
+  /\bheals? (the )?(skin|irritation|redness|burns?)\b/i,
   /\b24 ?hrs? hydration\b/i,
   /\bmiracle\b/i,
   /\bonly \d+ left\b/i,

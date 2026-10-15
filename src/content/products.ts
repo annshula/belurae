@@ -153,6 +153,13 @@ export type ProductContent = {
      * single bottle.
      */
     perSetPrice?: boolean;
+    /**
+     * Cards only. The pack size to push buyers toward: it gets the "Most
+     * popular" tag and a larger, highlighted card that leads with its "each"
+     * price, and any bigger pack is tagged "Household or gift". Unset keeps
+     * the default tags (2 Pack "Most popular", 3 Pack "Limited time offer").
+     */
+    featuredPack?: number;
     /** "Your daily step" band and the key-ingredients band under it (EditorialBands). */
     dailyStep?: {
       eyebrow: string;
@@ -412,6 +419,7 @@ export const products: ProductContent[] = [
         "Aloe Barbadensis Leaf Water, Glycerin, Hyaluronic Acid, Panax Ginseng Root Extract and Portulaca Oleracea Extract — the key ingredients in this formula, in INCI form. The complete INCI declaration is printed on every pack.",
       packs: "cards",
       perSetPrice: true,
+      featuredPack: 3,
       galleryFit: "flush",
       perksOneColumn: true,
       /* Lavender, from the bottle cap and label. */

@@ -96,7 +96,8 @@ export function ReviewsSection({
 
   if (!summary) return <NoReviewsYet />;
 
-  const from = current.total === 0 ? 0 : (current.page - 1) * FEED_PAGE_SIZE + 1;
+  const from =
+    current.total === 0 ? 0 : (current.page - 1) * FEED_PAGE_SIZE + 1;
   const to = Math.min(current.page * FEED_PAGE_SIZE, current.total);
   const recommendPercent = summary.count
     ? Math.round(
@@ -171,7 +172,7 @@ export function ReviewsSection({
           <strong className="font-numeral font-semibold text-ink tabular-nums">
             {recommendPercent}%
           </strong>{" "}
-          rated it 4 or 5 stars.
+          rated it 5 stars.
         </p>
 
         <ul className="mt-6 flex flex-col gap-0.5">
