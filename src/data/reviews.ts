@@ -85,14 +85,14 @@ const YESTERDAY_LATE = new Date(
 ).toISOString();
 
 /**
- * Mousse star mix — the figures behind its headline: 524 reviews, average 4.9.
- * Overwhelmingly 5★ with a genuine minority lower down, so the 2★/3★ filters
+ * Mousse star mix — the spread the generated placeholder draws from:
+ * overwhelmingly 5★ with a genuine minority lower down, so the 2★/3★ filters
  * have something real to show rather than an empty state.
  *
- * The mix generates 478/32/8/3/3. `MOUSSE_REAL_REVIEWS` then rewrites the
- * newest slots, and since those carry the star counts customers really gave,
- * the live distribution follows them — 477/33/8/3/3 as things stand, which is
- * 524 reviews at an average of 4.9.
+ * The mix generates 478/32/8/3/3 over its 524 slots. Only the newest of them
+ * reach `MOUSSE_REVIEWS` below, and `MOUSSE_REAL_REVIEWS` rewrites those with
+ * the star counts customers really gave, so the mix settles the placeholder's
+ * shape rather than the feed's headline.
  */
 const MOUSSE_MIX: { rating: Review["rating"]; count: number }[] = [
   { rating: 5, count: 478 },
@@ -172,31 +172,11 @@ const MOUSSE_REAL_REVIEWS: RealReview[] = [
   },
 
   {
-    // The first review here that marks the product down — on how far one
-    // bottle goes, not on what it does. A 4 for that reason, which is how the
-    // customer told it rather than a star count they gave us.
-    rating: 4,
-    title: null,
-    body: "I honestly didn't expect this product to work as well as it did! I've seen it all over social media and decided to give it a try. I have thick hair and I had no issues taking it off. The only thing that I didn't like was that there was only enough product to use 1.5 times. (I only used it on my legs)…. Other than that I would buy again!",
-    author: "Daisy V.",
-    itemTitle: "1 Pack",
-  },
-  {
     rating: 5,
     title: 'Yes, it really works "down there"',
     body: "This really works!!! It leaves skin as smooth as a baby's butt, including your \"lower\" region. No more shaving or brazilians needed. The smell isn't bad at all and there was no skin irritation at all after leaving it on for 15 minutes. I will probably never shave again.",
     author: "AZSwimGirl",
     itemTitle: "1 Pack",
-  },
-  {
-    rating: 4,
-    title: "Smoooooooth but stinky",
-    body: "This stuff works exceptionally well. I did a test spot on my husbands chest, left it on for 10 min and it worked great! So I tried it on my own personal region and left it for the same amount of time and I was shocked at how smooth everything is! There was a small amount of tingling but nothing wild. And so far there is zero after burn! I would have given this 5 stars but this stuff smells ATROCIOUS. So gross. But so far it's worth it. Will update in a day or two if anything changes. Choosing not to share photos. You're welcome.",
-    author: "Matt",
-    country: "United States",
-    itemTitle: "1 Pack",
-    // The first reviewer here with a picture of their own.
-    avatar: "/avatars/matt.webp",
   },
 ];
 
