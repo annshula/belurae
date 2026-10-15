@@ -1,14 +1,16 @@
 import "server-only";
 
 import type { BagCatalog } from "@/components/cart/CartProvider";
-import { getProducts, storeCurrency } from "@/lib/catalog";
+import { getCatalog, getProducts, storeCurrency } from "@/lib/catalog";
+import { UPSELLS } from "@/content/upsells";
 import { buildProductView } from "@/lib/commerce/product-view";
 import { getPaymentMethods } from "@/lib/shopify/payments";
 
 /** The small variant lookup the client bag needs (a few hundred bytes per product). */
 export async function getBagCatalog(): Promise<BagCatalog> {
-  const [products, currency, payments] = await Promise.all([
+  const [products, catalog, currency, payments] = await Promise.all([
     getProducts(),
+    getCatalog(),
     storeCurrency(),
     getPaymentMethods(),
   ]);
@@ -32,8 +34,33 @@ export async function getBagCatalog(): Promise<BagCatalog> {
         available: v.availableForSale,
         hasPackOption: view.packOptionName !== null,
         tiers: view.packTiers,
+        handle: record.handle,
+        upsell: null,
       };
     }
+  }
+  /* Cart upsells: sold from the bag, so they have no product page. */
+  for (const u of UPSELLS) {
+    const record = catalog.products[u.handle];
+    if (!record || record.status !== "ACTIVE") continue;
+    const fallbackImage =
+      record.media.find((m) => m.type === "image")?.url ?? null;
+    const v = record.variants[0];
+    if (!v) continue;
+    variants[v.id] = {
+      productName: u.name,
+      variantLabel: v.title,
+      price: v.price,
+      compareAtPrice: v.compareAtPrice,
+      units: 1,
+      image: v.image ?? fallbackImage,
+      href: "/cart",
+      available: v.availableForSale,
+      hasPackOption: false,
+      tiers: null,
+      handle: record.handle,
+      upsell: { blurb: u.blurb, triggers: [...u.triggers], rating: u.rating },
+    };
   }
   return { currency, variants, payments };
 }

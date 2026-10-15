@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-15T17:42:52.696Z",
+  "syncedAt": "2026-10-15T18:46:33.941Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -1267,6 +1267,170 @@
         "Latex-Free Formula",
         "Confidence and security"
       ],
+      "saleEndsAt": null
+    },
+    "post-hair-removal-care-oil-jojoba-and-almond-blend-soothes-sensitivity-locks-in-hydration-and-supports-daily-skin-comfort": {
+      "id": "gid://shopify/Product/15425423868131",
+      "handle": "post-hair-removal-care-oil-jojoba-and-almond-blend-soothes-sensitivity-locks-in-hydration-and-supports-daily-skin-comfort",
+      "title": "Post-Hair Removal Care Oil – Jojoba and Almond Blend Soothes Sensitivity, Locks in Hydration and Supports Daily Skin Comfort",
+      "vendor": "Belurae",
+      "productType": "",
+      "status": "ACTIVE",
+      "updatedAt": "2026-10-15T18:46:10Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "60ml"
+          ]
+        }
+      ],
+      "availableForSale": true,
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67701313765603",
+          "title": "60ml",
+          "sku": "14:29#60ml",
+          "barcode": null,
+          "price": 14.99,
+          "compareAtPrice": 24.99,
+          "availableForSale": true,
+          "options": {
+            "Color": "60ml"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4eada9e19bf24e75ae0ee06c3ad506ecF.webp?v=1792089132",
+          "description": null
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4eada9e19bf24e75ae0ee06c3ad506ecF.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67701313765603"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S8e0495b9f00840018118aa49e8cf5aa77.webp?v=1792089132",
+          "width": 1328,
+          "height": 1328,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S23e96bd8726a4090812e15978adb8159z.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S9c3e678af2074d82aec4eb856c9f8518L.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sbc85633e4f3a43c7a268ba38c1812039t.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sc6c2c10682c5462fb82bbe4724b95d03w.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S31e24be03a0a4b649f25752984722c4eP.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd8c55a112fda457d82045f56cb74e8f8X.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S89aff582a78b488190ce89e84308d12ai.webp?v=1792089133",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S2b83dba79e9f47febba5407dfdb227aeb.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S728dd812bbae40db8eaa96f6e9a09fc8q.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa925004bef8d409a9a9879c4d4aab90ci.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa832378e70124ff4bbf47b00ad72b20b4.webp?v=1792089132",
+          "width": 1600,
+          "height": 1600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sb9bfd5d89b0b417bac70131d011ed4d6r.webp?v=1792089132",
+          "width": 1600,
+          "height": 1510,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S31ccc6df130c47e2984234a8228854a2R.webp?v=1792089132",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        }
+      ],
+      "specs": [],
+      "featureHighlights": [],
+      "perks": [],
       "saleEndsAt": null
     }
   }

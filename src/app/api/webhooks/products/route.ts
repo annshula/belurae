@@ -4,7 +4,8 @@ import { revalidateCatalog } from "@/lib/catalog/tags";
 import { isAdminConfigured } from "@/lib/shopify/config";
 import { syncProductFromWebhook } from "@/lib/shopify/sync-product";
 import { belongsToBelurae } from "@/lib/catalog/ownership";
-import { BELURAE_HANDLES, productContentByHandle } from "@/content/products";
+import { productContentByHandle } from "@/content/products";
+import { CATALOG_HANDLES } from "@/content/upsells";
 import {
   describeCaller,
   isDuplicateWebhook,
@@ -76,7 +77,7 @@ export async function POST(request: NextRequest) {
     const handle = payload.handle ?? null;
     const ours =
       belongsToBelurae({ productId: payload.id ?? null }) ||
-      (handle !== null && BELURAE_HANDLES.includes(handle));
+      (handle !== null && CATALOG_HANDLES.includes(handle));
     if (!ours) return ack({ topic, matched: false });
 
     if (!isAdminConfigured()) {

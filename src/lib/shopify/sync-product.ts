@@ -6,7 +6,7 @@ import {
   readJsonFile,
   writeJsonFileAtomic,
 } from "@/lib/catalog/storage";
-import { BELURAE_HANDLES } from "@/content/products";
+import { CATALOG_HANDLES } from "@/content/upsells";
 import type {
   CatalogDocument,
   ProductRecord,
@@ -342,7 +342,7 @@ export type SyncResult = {
  * others. Serialised behind the storage lock.
  */
 export async function syncProducts(
-  handles: readonly string[] = BELURAE_HANDLES,
+  handles: readonly string[] = CATALOG_HANDLES,
 ): Promise<SyncResult> {
   const cfg = shopifyConfig();
   if (!cfg.storeDomain) throw new Error("SHOPIFY_STORE_DOMAIN is not set");
@@ -359,9 +359,9 @@ export async function syncProducts(
     const existing = await readJsonFile<CatalogDocument>(CATALOG_PATH);
     const products: Record<string, ProductRecord> = { ...(existing?.products ?? {}) };
     for (const record of fetched) if (record) products[record.handle] = record;
-    // Drop products that are no longer part of the Belurae line.
+    // Drop products that are no longer part of the Belurae line or its upsells.
     for (const key of Object.keys(products)) {
-      if (!BELURAE_HANDLES.includes(key)) delete products[key];
+      if (!CATALOG_HANDLES.includes(key)) delete products[key];
     }
 
     const doc: CatalogDocument = {

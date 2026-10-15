@@ -9,9 +9,9 @@ loadEnv();
 
 async function main(): Promise<void> {
   const { syncProducts } = await import("../src/lib/shopify/sync-product");
-  const { BELURAE_HANDLES } = await import("../src/content/products");
+  const { CATALOG_HANDLES } = await import("../src/content/upsells");
   const handles = process.argv.slice(2);
-  const result = await syncProducts(handles.length ? handles : BELURAE_HANDLES);
+  const result = await syncProducts(handles.length ? handles : CATALOG_HANDLES);
   console.log(`✔ synced: ${result.handles.join(", ") || "(none)"}`);
   if (result.missing.length) console.warn(`⚠ not found in Shopify: ${result.missing.join(", ")}`);
 }

@@ -44,6 +44,14 @@ export type BagVariant = {
   hasPackOption: boolean;
   /** Quantity-break packs on this one variant: the line's quantity picks the discount. Null when the product has none. */
   tiers: PackTier[] | null;
+  /** Shopify handle of the product this variant belongs to. */
+  handle: string;
+  /** Set for a cart upsell: sold from the bag, offered while a trigger product is in it. */
+  upsell: {
+    blurb: string;
+    triggers: string[];
+    rating: { value: number; count: number } | null;
+  } | null;
 };
 
 export type BagCatalog = {
@@ -51,6 +59,11 @@ export type BagCatalog = {
   variants: Record<string, BagVariant>;
   /** What checkout accepts, from Shopify — empty when it couldn't be read. */
   payments: PaymentMethod[];
+};
+
+/** A cart upsell offered right now, priced like a bag line. Once added it is an ordinary bag line. */
+export type UpsellOffer = BagVariant & {
+  variantId: string;
 };
 
 export type BagLine = { variantId: string; quantity: number };
@@ -82,6 +95,8 @@ type CartContextValue = {
   currency: string;
   /** Delivery price shown struck through beside FREE, in `currency`, or null when it can't be stated. */
   shippingValue: number | null;
+  /** Upsells to show in the bag now, in the bag's currency. */
+  upsells: UpsellOffer[];
   /** Payment methods checkout accepts, for the logo row under the button. */
   payments: PaymentMethod[];
   isOpen: boolean;
@@ -152,6 +167,9 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
   useEffect(() => {
     const ids = new Set<string>();
     for (const l of raw) ids.add(l.variantId);
+    for (const [id, v] of Object.entries(catalog.variants)) {
+      if (v.upsell) ids.add(id);
+    }
     requestPrices([...ids]);
   }, [raw, catalog, requestPrices]);
 
@@ -232,6 +250,39 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       ? Math.round(SHIPPING_VALUE_USD * rate * 100) / 100
       : null;
   })();
+
+  // Upsells to offer: a trigger product is in the bag and the upsell is not.
+  // Priced in the bag's currency, so one waits for its live price rather
+  // than showing a base-currency amount next to localized lines.
+  const upsells = useMemo<UpsellOffer[]>(() => {
+    const handlesInBag = new Set(lines.map((l) => l.handle));
+    return Object.entries(catalog.variants).flatMap(([variantId, v]) => {
+      if (!v.upsell || !v.available) return [];
+      if (lines.some((l) => l.variantId === variantId)) return [];
+      if (!v.upsell.triggers.some((h) => handlesInBag.has(h))) return [];
+      const live = localized ? localizedPriceFor(variantId) : null;
+      if (localized && !live) return [];
+      const amount = live ? Number.parseFloat(live.amount) : NaN;
+      const price = Number.isFinite(amount) ? amount : v.price;
+      const liveCompare =
+        live?.compareAtAmount != null
+          ? Number.parseFloat(live.compareAtAmount)
+          : NaN;
+      const compareAt = live
+        ? Number.isFinite(liveCompare)
+          ? liveCompare
+          : null
+        : v.compareAtPrice;
+      return [
+        {
+          ...v,
+          variantId,
+          price,
+          compareAtPrice: compareAt != null && compareAt > price ? compareAt : null,
+        },
+      ];
+    });
+  }, [catalog, lines, localized, localizedPriceFor]);
 
   // Distinct items in the bag, not the sum of their quantities.
   const count = lines.length;
@@ -323,6 +374,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       discount,
       currency,
       shippingValue,
+      upsells,
       payments: catalog.payments,
       isOpen,
       hydrated,
@@ -334,7 +386,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       checkout,
       announcement,
     }),
-    [lines, count, subtotal, discount, currency, shippingValue, catalog.payments, isOpen, hydrated, add, setQuantity, remove, checkout, announcement],
+    [lines, count, subtotal, discount, currency, shippingValue, upsells, catalog.payments, isOpen, hydrated, add, setQuantity, remove, checkout, announcement],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

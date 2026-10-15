@@ -11,6 +11,7 @@ import {
   productContentBySlug,
   type ProductContent,
 } from "@/content/products";
+import { CATALOG_HANDLES, UPSELLS } from "@/content/upsells";
 
 /**
  * Server-side catalog reads.
@@ -33,7 +34,7 @@ const readCatalog = unstable_cache(
            document until the next sync. Fall back to the committed seed for
            those handles, so a listed product never vanishes in the gap. */
         const products = { ...live.products };
-        for (const { handle } of productContent) {
+        for (const handle of CATALOG_HANDLES) {
           const fallback = seedDoc.products[handle];
           if (!products[handle] && fallback) products[handle] = fallback;
         }
@@ -47,7 +48,7 @@ const readCatalog = unstable_cache(
     }
     return seedDoc;
   },
-  ["belurae-catalog-v13"],
+  ["belurae-catalog-v14"],
   { tags: [CACHE_TAGS.catalog], revalidate: 3600 },
 );
 
@@ -92,6 +93,9 @@ export async function beluraeVariantIndex(): Promise<Map<string, string>> {
   for (const content of productContent) {
     const record = catalog.products[content.handle];
     for (const v of record?.variants ?? []) index.set(v.id, content.handle);
+  }
+  for (const { handle } of UPSELLS) {
+    for (const v of catalog.products[handle]?.variants ?? []) index.set(v.id, handle);
   }
   return index;
 }

@@ -1,6 +1,6 @@
 import seed from "../../../data/catalog.json";
 import type { CatalogDocument } from "@/lib/catalog/types";
-import { BELURAE_HANDLES } from "@/content/products";
+import { CATALOG_HANDLES } from "@/content/upsells";
 
 /**
  * Brand identity on a shared Shopify store: the store sells several brands, so
@@ -11,7 +11,7 @@ import { BELURAE_HANDLES } from "@/content/products";
  */
 
 const doc = seed as unknown as CatalogDocument;
-const products = BELURAE_HANDLES.map((h) => doc.products[h]).filter(Boolean);
+const products = CATALOG_HANDLES.map((h) => doc.products[h]).filter(Boolean);
 
 const numericTail = (gid: string) => gid.split("/").pop() ?? gid;
 
