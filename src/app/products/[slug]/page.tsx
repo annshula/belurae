@@ -369,7 +369,6 @@ export default async function ProductPage({ params }: Props) {
                 view={view}
                 packs={content.pdp.packs}
                 perSetPrice={content.pdp.perSetPrice}
-                featuredPack={content.pdp.featuredPack}
               />
             </div>
 

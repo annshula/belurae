@@ -368,12 +368,13 @@ function PackPhoto({
 /**
  * "Cards" pack picker (editorial PDP): one card per pack in a row, largest
  * pack first, each with its own photo, price, per-unit price and saving.
- * Cards are labelled "N Pack". By default the 2 Pack is tagged "Most popular"
- * and the 3 Pack "Limited time offer" (merchandising choices, set by the
- * owner). With `featuredPack` set, that size is the visually dominant card,
- * tagged "Most popular" and leading with its "each" price; any larger pack is
- * tagged "Household or gift" and sits in a full-width row beneath the three.
+ * Cards are labelled "N Pack". The 3 Pack is always the visually dominant
+ * card on every PDP: tagged "Most popular" and leading with its "each" price.
+ * No other pack is tagged; a pack larger than the 3 Pack is tagged "Household
+ * or gift" and sits in a full-width row beneath the three.
  */
+const FEATURED_PACK = 3;
+
 function PackCards({
   option,
   selection,
@@ -382,7 +383,6 @@ function PackCards({
   optionAvailable,
   localizedVariantFor,
   perSetPrice,
-  featuredPack,
 }: {
   option: ProductView["options"][number];
   selection: Record<string, string>;
@@ -392,8 +392,6 @@ function PackCards({
   localizedVariantFor: (v: ViewVariant) => LocalizedVariant;
   /** Show the "each" price on multi-set cards; off shows every card's own price and compare-at, like the single. */
   perSetPrice: boolean;
-  /** The pack size to highlight; unset keeps the default 2 Pack / 3 Pack tags. */
-  featuredPack?: number;
 }) {
   const name = option.name;
   const rows = option.values
@@ -467,21 +465,15 @@ function PackCards({
           ? `${combo.units} Pack`
           : value.label,
       tag:
-        featuredPack != null
-          ? combo?.units === featuredPack
-            ? "Most popular"
-            : combo && combo.units > featuredPack
-              ? "Household or gift"
-              : null
-          : combo?.units === 2
-            ? "Most popular"
-            : combo?.units === 3
-              ? "Limited time offer"
-              : null,
-      featured: featuredPack != null && combo?.units === featuredPack,
+        combo?.units === FEATURED_PACK
+          ? "Most popular"
+          : combo && combo.units > FEATURED_PACK
+            ? "Household or gift"
+            : null,
+      featured: combo?.units === FEATURED_PACK,
       /* A pack bigger than the featured one gets a full-width row on tablet
          and desktop, so a 4th card never squeezes the three above it. */
-      wide: featuredPack != null && (combo?.units ?? 0) > featuredPack,
+      wide: (combo?.units ?? 0) > FEATURED_PACK,
       /* The label already says it, so the offer line would repeat it. */
       offerLine:
         deal && !buy2get1 ? `Buy ${deal.of}, get ${deal.free} free` : null,
@@ -510,16 +502,16 @@ function PackCards({
             : "border-sage-600 hover:border-sage-800",
         )
       : c.offer
-      ? cn(
-          "bg-white",
-          c.checked
-            ? "border-clay-600"
-            : "border-clay-600/50 hover:border-clay-600",
-        )
-      : cn(
-          "bg-transparent",
-          c.checked ? "border-sage-800" : "border-sand hover:border-sage-300",
-        );
+        ? cn(
+            "bg-white",
+            c.checked
+              ? "border-clay-600"
+              : "border-clay-600/50 hover:border-clay-600",
+          )
+        : cn(
+            "bg-transparent",
+            c.checked ? "border-sage-800" : "border-sand hover:border-sage-300",
+          );
 
   return (
     <fieldset className="min-w-0">
@@ -621,7 +613,8 @@ function PackCards({
                 {c.saved != null && c.combo && (
                   <span
                     className={cn(
-                      "mt-1 rounded-tag px-1.5 py-0.5 font-numeral text-[0.68rem] leading-none font-medium tabular-nums",
+                      "mt-1 rounded-tag font-numeral leading-none tabular-nums",
+                      "px-1.5 py-0.5 text-[0.68rem] font-medium",
                       SAVE_BADGE,
                     )}
                   >
@@ -646,14 +639,7 @@ function PackCards({
                     {formatMoney(c.combo.price, c.combo.currency)}
                   </span>
                   {showEach && c.units > 1 && c.unitPrice != null && (
-                    <span
-                      className={cn(
-                        "mt-1 font-numeral leading-none tabular-nums",
-                        c.featured
-                          ? "text-[0.82rem] font-semibold text-sage-800"
-                          : "text-[0.66rem] text-ink-soft",
-                      )}
-                    >
+                    <span className="mt-1 font-numeral text-[0.66rem] leading-none text-ink-soft tabular-nums">
                       {formatMoney(c.unitPrice, c.combo.currency)} each
                     </span>
                   )}
@@ -673,7 +659,6 @@ function PackCards({
             className={cn(
               "relative flex cursor-pointer flex-col items-center rounded-2xl border-2 px-3 pb-3 text-center transition-colors duration-200 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-800",
               c.tag ? "pt-8" : "pt-6",
-              c.featured && "z-10 -my-2 pb-5 shadow-float",
               c.wide && "col-span-3 flex-row justify-center gap-4 pb-4",
               surface(c),
               !c.exists && "cursor-not-allowed opacity-50",
@@ -715,7 +700,7 @@ function PackCards({
             <span
               className={cn(
                 "relative block aspect-square w-full",
-                c.featured ? "max-w-28" : c.wide ? "max-w-16" : "max-w-24",
+                c.wide ? "max-w-16" : "max-w-24",
               )}
             >
               <span className="relative block size-full overflow-hidden rounded-tag">
@@ -738,13 +723,7 @@ function PackCards({
               )}
             </span>
 
-            <span
-              className={cn(
-                "text-body-sm font-medium",
-                !c.wide && "mt-2",
-                c.featured && "font-semibold",
-              )}
-            >
+            <span className={cn("text-body-sm font-medium", !c.wide && "mt-2")}>
               {c.label}
             </span>
             {c.offerLine && (
@@ -752,29 +731,7 @@ function PackCards({
                 {c.offerLine}
               </span>
             )}
-            {c.combo &&
-            c.featured &&
-            showEach &&
-            c.units > 1 &&
-            c.unitPrice != null ? (
-              /* The anchor: what one set costs, large, with the pack total
-                 and its compare-at beneath. */
-              <span className="mt-1 flex flex-col items-center">
-                <span className="font-numeral text-heading-3 leading-tight font-semibold text-sage-800 tabular-nums">
-                  {formatMoney(c.unitPrice, c.combo.currency)} each
-                </span>
-                <span className="mt-0.5 flex items-baseline gap-1.5 font-numeral tabular-nums">
-                  {c.combo.compareAtPrice != null && (
-                    <span className="text-[0.72rem] text-ink-soft line-through">
-                      {formatMoney(c.combo.compareAtPrice, c.combo.currency)}
-                    </span>
-                  )}
-                  <span className="text-body-sm font-medium">
-                    {formatMoney(c.combo.price, c.combo.currency)} total
-                  </span>
-                </span>
-              </span>
-            ) : c.combo ? (
+            {c.combo && (
               <span
                 className={cn(
                   "flex flex-col items-center",
@@ -795,11 +752,12 @@ function PackCards({
                   </span>
                 )}
               </span>
-            ) : null}
+            )}
             {c.saved != null && c.combo && (
               <span
                 className={cn(
-                  "rounded-tag px-2 py-0.5 font-numeral text-[0.7rem] font-medium tabular-nums",
+                  "rounded-tag font-numeral tabular-nums",
+                  "px-2 py-0.5 text-[0.7rem] font-medium",
                   c.wide ? "ml-2" : "mt-1.5",
                   SAVE_BADGE,
                 )}
@@ -894,15 +852,12 @@ export function PurchasePanel({
   view,
   packs = "list",
   perSetPrice = true,
-  featuredPack,
 }: {
   view: ProductView;
   /** "cards": one photo card per pack in a row, instead of the stacked rows. */
   packs?: "list" | "cards";
   /** Cards only: false shows each pack's own price and compare-at instead of an "each" price. */
   perSetPrice?: boolean;
-  /** Cards only: the pack size to highlight as "Most popular" (see products.ts). */
-  featuredPack?: number;
 }) {
   const cardsMode = packs === "cards";
   const { add, open, payments } = useCart();
@@ -1136,7 +1091,6 @@ export function PurchasePanel({
               currency: localizedVariant.currency,
             })}
             perSetPrice={perSetPrice}
-            featuredPack={featuredPack}
           />
         )}
         {view.options.map((option) => {
@@ -1153,7 +1107,6 @@ export function PurchasePanel({
                 optionAvailable={optionAvailable}
                 localizedVariantFor={localizedVariantFor}
                 perSetPrice={perSetPrice}
-                featuredPack={featuredPack}
               />
             );
           }

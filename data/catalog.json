@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-15T15:13:33.182Z",
+  "syncedAt": "2026-10-15T17:42:52.696Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-15T14:55:17Z",
+      "updatedAt": "2026-10-15T15:48:07Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -351,7 +351,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-13T16:27:06Z",
+      "updatedAt": "2026-10-15T17:38:34Z",
       "seo": {
         "title": null,
         "description": null
@@ -374,7 +374,7 @@
           "sku": "14:10#100ml Boxed",
           "barcode": null,
           "price": 29.99,
-          "compareAtPrice": 39.99,
+          "compareAtPrice": null,
           "availableForSale": true,
           "options": {
             "Color": "100ml Boxed"
@@ -387,8 +387,8 @@
           "title": "2 x 100ml Boxed",
           "sku": "14:29#2 x 100ml Boxed",
           "barcode": null,
-          "price": 54.99,
-          "compareAtPrice": 79.98,
+          "price": 49.99,
+          "compareAtPrice": 59.98,
           "availableForSale": true,
           "options": {
             "Color": "2 x 100ml Boxed"
@@ -401,8 +401,8 @@
           "title": "3 x 100ml Boxed",
           "sku": "14:173#3 x 100ml Boxed",
           "barcode": null,
-          "price": 54.99,
-          "compareAtPrice": 119.97,
+          "price": 59.98,
+          "compareAtPrice": 89.97,
           "availableForSale": true,
           "options": {
             "Color": "3 x 100ml Boxed"
@@ -715,7 +715,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-13T16:27:07Z",
+      "updatedAt": "2026-10-15T17:40:08Z",
       "seo": {
         "title": "Middle Eastern Rose Fragrance · 50 ml Spray",
         "description": "A 50 ml rose fragrance spray with a soft, light rose scent. Spray on wrists, neck and behind the ears. Ingredients, directions and safety guidance."
@@ -738,7 +738,7 @@
           "sku": "19494:75366304#50 ml;200009122:-540823#Rose fragrance",
           "barcode": null,
           "price": 49.99,
-          "compareAtPrice": 89.99,
+          "compareAtPrice": null,
           "availableForSale": true,
           "options": {
             "Quantity": "1PC"
@@ -751,8 +751,8 @@
           "title": "2PCS",
           "sku": "ROSE-FRAGRANCE-50ML-2PCS",
           "barcode": null,
-          "price": 59.99,
-          "compareAtPrice": 179.98,
+          "price": 79.99,
+          "compareAtPrice": 99.98,
           "availableForSale": true,
           "options": {
             "Quantity": "2PCS"
@@ -765,8 +765,8 @@
           "title": "3PCS",
           "sku": "ROSE-FRAGRANCE-50ML-3PCS",
           "barcode": null,
-          "price": 69.99,
-          "compareAtPrice": 269.97,
+          "price": 99.98,
+          "compareAtPrice": 149.97,
           "availableForSale": true,
           "options": {
             "Quantity": "3PCS"
