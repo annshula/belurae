@@ -18,6 +18,7 @@ import {
 } from "@/lib/analytics";
 import { useLocalization } from "@/components/localization/LocalizationProvider";
 import { getExternalId } from "@/lib/ad-identity";
+import { getAttribution } from "@/lib/attribution";
 import { tierPrice, type PackTier } from "@/lib/commerce/tiers";
 import type { PaymentMethod } from "@/lib/shopify/payments";
 
@@ -346,12 +347,16 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       const fbc = readCookie("_fbc");
       const fbp = readCookie("_fbp");
       const externalId = getExternalId();
+      // UTM params from the ad click (lib/attribution.ts) — Shopify never sees
+      // the landing URL, so they ride along as cart attributes too.
+      const attribution = getAttribution();
       const res = await fetch("/api/cart/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           lines: lines.map(({ variantId, quantity }) => ({ variantId, quantity })),
           ...(fbc || fbp || externalId ? { meta: { fbc, fbp, externalId } } : {}),
+          ...(attribution ? { attribution } : {}),
         }),
       });
       const data = (await res.json().catch(() => ({}))) as { checkoutUrl?: string; error?: string };

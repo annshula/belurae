@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { sanitizeAttribution } from "@/lib/attribution";
 import { beluraeVariantIndex } from "@/lib/catalog";
 import { resolveEffectiveCountry } from "@/lib/localization/country";
 import { clientIp, rateLimit } from "@/lib/security/rate-limit";
@@ -39,7 +40,7 @@ export async function POST(request: NextRequest) {
   }
 
   const raw = await request.text();
-  if (raw.length > 8_000) return json({ error: "Request too large." }, 413);
+  if (raw.length > 16_000) return json({ error: "Request too large." }, 413);
 
   let body: unknown;
   try {
@@ -92,6 +93,16 @@ export async function POST(request: NextRequest) {
   }
   if (typeof meta?.externalId === "string" && meta.externalId.length > 0 && meta.externalId.length <= 200) {
     attributes.push({ key: "_external_id", value: meta.externalId });
+  }
+
+  // Every query param of the ad landing (utm_*, placement, fbclid, custom…;
+  // see lib/attribution.ts). Keys/values are pattern- and length-bounded by
+  // sanitizeAttribution; underscore-prefixed keys can't pass it, so they can't
+  // clash with _fbc/_fbp/_external_id. Shopify copies cart attributes onto the
+  // order's note_attributes ("Additional details" in admin).
+  const reserved = new Set(attributes.map((a) => a.key));
+  for (const [key, value] of Object.entries(sanitizeAttribution((body as { attribution?: unknown })?.attribution))) {
+    if (!reserved.has(key)) attributes.push({ key, value });
   }
 
   try {

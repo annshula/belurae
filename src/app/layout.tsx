@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import "./globals.css";
 import { logo, numeral, pdpHeading, sans, serif, title, ui } from "./fonts";
 import { Analytics } from "@/components/analytics/Analytics";
+import { AttributionCapture } from "@/components/analytics/AttributionCapture";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { ContentProtection } from "@/components/layout/ContentProtection";
@@ -78,6 +79,7 @@ export default async function RootLayout({
           </CartProvider>
         </LocalizationProvider>
         <Analytics />
+        <AttributionCapture />
         {protect && <ContentProtection />}
         <JsonLd data={graph(organizationSchema(), websiteSchema())} />
       </body>
