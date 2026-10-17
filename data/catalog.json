@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-15T18:46:33.941Z",
+  "syncedAt": "2026-10-17T15:24:49.851Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-15T15:48:07Z",
+      "updatedAt": "2026-10-17T15:22:41Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -342,7 +342,7 @@
         "35% Less Chemical Ingredients",
         "Cruelty-Free & Plant-Based"
       ],
-      "saleEndsAt": "2026-10-16T03:00:00.000Z"
+      "saleEndsAt": "2026-10-18T03:00:00.000Z"
     },
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
@@ -351,7 +351,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-15T17:38:34Z",
+      "updatedAt": "2026-10-15T17:39:13Z",
       "seo": {
         "title": null,
         "description": null
@@ -715,7 +715,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-15T17:40:08Z",
+      "updatedAt": "2026-10-15T17:41:28Z",
       "seo": {
         "title": "Middle Eastern Rose Fragrance · 50 ml Spray",
         "description": "A 50 ml rose fragrance spray with a soft, light rose scent. Spray on wrists, neck and behind the ears. Ingredients, directions and safety guidance."
@@ -1276,7 +1276,7 @@
       "vendor": "Belurae",
       "productType": "",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-15T18:46:10Z",
+      "updatedAt": "2026-10-16T06:32:17Z",
       "seo": {
         "title": null,
         "description": null
