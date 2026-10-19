@@ -115,13 +115,14 @@ export type ProductContent = {
     /** Three icon + text items above the H1. */
     trust?: { icon: PdpIcon; text: string }[];
     /**
-     * Social proof chip above the H1, in place of the delivery tile.
+     * Social proof beside the rating above the H1.
      * `count` is the number of orders we can point to for this product
-     * (Shopify order count for the line item) and `asOf` dates that reading,
-     * so the figure gets refreshed instead of drifting. Rendered as
-     * "25,000+ happy customers".
+     * (Shopify order count for the line item), `months` the window it covers
+     * when the figure is time-bound, and `asOf` dates that reading, so the
+     * figure gets refreshed instead of drifting. Rendered as
+     * "3,000+ buyers in last 3 months".
      */
-    customers?: { count: number; asOf: string };
+    customers?: { count: number; months?: number; asOf: string };
     /**
      * Units sold over the last `months` months, shown right beside the rating
      * above the H1 as "17,841+ sold in the last 3 months". `asOf` dates the
@@ -452,8 +453,8 @@ export const products: ProductContent[] = [
         { icon: "clock", text: "3–5 minutes on skin" },
         { icon: "droplet", text: "Hydrates Skin Up to 24hrs" },
       ],
-      /* Orders shipped for this product — Shopify count, read 2026-10-02. */
-      customers: { count: 22000, asOf: "2026-10-02" },
+      /* Orders shipped for this product — Shopify count, read 2026-10-19. */
+      customers: { count: 3000, months: 3, asOf: "2026-10-19" },
       /* Supplied by the merchant on 2026-10-07. */
       sold: { count: 17841, months: 3, asOf: "2026-10-07" },
       showHairRemovalComparison: true,

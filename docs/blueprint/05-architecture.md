@@ -64,16 +64,16 @@ lib/shopify/
 
 ### Shopify data model (store configuration)
 
-| Object | Fields / metafields (`belurae.*` namespace) |
-|---|---|
-| Product | title, handle, description (short), SEO title/desc, images/videos (alt set), product taxonomy category, vendor |
-| Product metafields | `benefit_line` (single line), `format`, `size`, `scent`, `time_on_skin`, `inci_full` (multi-line), `key_ingredients` (list → `ingredient` metaobject refs), `directions` (rich text, R2), `warnings` (rich text, R2 verbatim), `patch_test` (rich text), `areas_allowed` (list), `areas_not_allowed` (list), `in_the_box` (list), `documents` (list of file refs, R5), `faq` (list → `faq_item` metaobject refs), `pairs_with` (list product refs), `routine_step` (single select), `gtin` (R12), `manufacturer` (text, D1) |
-| Variant options | `Set` (Mousse / Mousse + Serum / Mousse + Cream) × `Pack` (1 / 2 / 3) |
-| Metaobject `ingredient` | name, inci_name, slug, function, description, why_included, image |
-| Metaobject `faq_item` | question, answer (rich text), source |
-| Collections | handle, description (intro), SEO, image, metafields: `education` (rich text), `faq` (refs) |
-| Menus | `main-menu`, `footer` (fetched via Storefront `menu`) |
-| Policies | shipping, refund, privacy, terms (Storefront `shop { shippingPolicy … }`) |
+| Object                  | Fields / metafields (`belurae.*` namespace)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Product                 | title, handle, description (short), SEO title/desc, images/videos (alt set), product taxonomy category, vendor                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Product metafields      | `benefit_line` (single line), `format`, `size`, `scent`, `time_on_skin`, `inci_full` (multi-line), `key_ingredients` (list → `ingredient` metaobject refs), `directions` (rich text, R2), `warnings` (rich text, R2 verbatim), `patch_test` (rich text), `areas_allowed` (list), `areas_not_allowed` (list), `in_the_box` (list), `documents` (list of file refs, R5), `faq` (list → `faq_item` metaobject refs), `pairs_with` (list product refs), `routine_step` (single select), `gtin` (R12), `manufacturer` (text, D1); `custom.rating_count` (number) and `custom.rating_average` (decimal) — the aggregate shown above the H1 |
+| Variant options         | `Set` (Mousse / Mousse + Serum / Mousse + Cream) × `Pack` (1 / 2 / 3)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Metaobject `ingredient` | name, inci_name, slug, function, description, why_included, image                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Metaobject `faq_item`   | question, answer (rich text), source                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Collections             | handle, description (intro), SEO, image, metafields: `education` (rich text), `faq` (refs)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Menus                   | `main-menu`, `footer` (fetched via Storefront `menu`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Policies                | shipping, refund, privacy, terms (Storefront `shop { shippingPolicy … }`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 Rich-text metafields are rendered by our own serializer to React elements (no `dangerouslySetInnerHTML`). Product `descriptionHtml` is sanitised server-side (allowlist) if ever used.
 
@@ -81,16 +81,16 @@ Rich-text metafields are rendered by our own serializer to React elements (no `d
 
 ## 23. API architecture
 
-| Endpoint | Kind | Auth | Purpose | Cache |
-|---|---|---|---|---|
-| `cartAdd / cartUpdate / cartRemove` | Server Actions | Cart cookie (httpOnly); Next origin check | Cart mutations | none |
-| `subscribeNewsletter` | Server Action | Rate limit + honeypot + (Turnstile only if abuse appears) | Admin `customerCreate`/`customerEmailMarketingConsentUpdate` with confirmed opt-in | none |
-| `GET /api/search/suggest?q=` | Route Handler | Public, rate-limited | Predictive search | `s-maxage=60` per normalised q |
-| `POST /api/webhooks/shopify` | Route Handler | HMAC | Revalidation (§26) | none |
-| `GET /account/authorize`, `/account/callback`, `/account/logout` | Route Handlers | OAuth state + PKCE | Customer login (ported) | none |
-| `POST /api/revalidate` | Route Handler | Bearer secret (timing-safe) | Manual/CI revalidation | none |
-| `POST /api/csp-report` | Route Handler | Public, rate-limited, body ≤ 8 KB | CSP violation intake → log drain | none |
-| `POST /api/reviews` | Route Handler/Action | Verified buyer token from Judge.me flow | Only if on-site review form is built | none |
+| Endpoint                                                         | Kind                 | Auth                                                      | Purpose                                                                            | Cache                          |
+| ---------------------------------------------------------------- | -------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------ |
+| `cartAdd / cartUpdate / cartRemove`                              | Server Actions       | Cart cookie (httpOnly); Next origin check                 | Cart mutations                                                                     | none                           |
+| `subscribeNewsletter`                                            | Server Action        | Rate limit + honeypot + (Turnstile only if abuse appears) | Admin `customerCreate`/`customerEmailMarketingConsentUpdate` with confirmed opt-in | none                           |
+| `GET /api/search/suggest?q=`                                     | Route Handler        | Public, rate-limited                                      | Predictive search                                                                  | `s-maxage=60` per normalised q |
+| `POST /api/webhooks/shopify`                                     | Route Handler        | HMAC                                                      | Revalidation (§26)                                                                 | none                           |
+| `GET /account/authorize`, `/account/callback`, `/account/logout` | Route Handlers       | OAuth state + PKCE                                        | Customer login (ported)                                                            | none                           |
+| `POST /api/revalidate`                                           | Route Handler        | Bearer secret (timing-safe)                               | Manual/CI revalidation                                                             | none                           |
+| `POST /api/csp-report`                                           | Route Handler        | Public, rate-limited, body ≤ 8 KB                         | CSP violation intake → log drain                                                   | none                           |
+| `POST /api/reviews`                                              | Route Handler/Action | Verified buyer token from Judge.me flow                   | Only if on-site review form is built                                               | none                           |
 
 No public REST endpoint exposes cart, prices or customer data. Prices are **never** accepted from the client — the client sends `variantId` + `quantity`; Shopify prices the cart.
 
@@ -98,17 +98,17 @@ No public REST endpoint exposes cart, prices or customer data. Prices are **neve
 
 ## 24. Rendering strategy
 
-| Page | Strategy | Why | Dynamic parts |
-|---|---|---|---|
-| Home | **Static** (prerendered at build) + tag revalidation | Mostly brand content; featured product data is cached and tag-invalidated | Cart count (client island reads cookie-derived count via small action after hydration) |
-| Brand pages (`/pages/*`), guides, ingredients, journal | **Static** (MDX / metaobjects at build) | Evergreen | none |
-| Collections | **ISR** (`generateStaticParams` for known handles, others on-demand) | Changes when products change | Filtered views render dynamically (`searchParams`), `noindex` |
-| PDP | **ISR** static shell with streamed sections | Price/availability/content change via webhooks | Reviews in `<Suspense>` (cached separately, tag `reviews:*`); variant selection is client state over static data |
-| Journal hub | ISR, 1-day fallback | New posts | none |
-| Search | **Dynamic** | Query-dependent | all |
-| Cart page | **Dynamic** | Per user | all |
-| Account | **Dynamic**, auth required | Per user | all |
-| Checkout | Shopify | — | — |
+| Page                                                   | Strategy                                                             | Why                                                                       | Dynamic parts                                                                                                    |
+| ------------------------------------------------------ | -------------------------------------------------------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Home                                                   | **Static** (prerendered at build) + tag revalidation                 | Mostly brand content; featured product data is cached and tag-invalidated | Cart count (client island reads cookie-derived count via small action after hydration)                           |
+| Brand pages (`/pages/*`), guides, ingredients, journal | **Static** (MDX / metaobjects at build)                              | Evergreen                                                                 | none                                                                                                             |
+| Collections                                            | **ISR** (`generateStaticParams` for known handles, others on-demand) | Changes when products change                                              | Filtered views render dynamically (`searchParams`), `noindex`                                                    |
+| PDP                                                    | **ISR** static shell with streamed sections                          | Price/availability/content change via webhooks                            | Reviews in `<Suspense>` (cached separately, tag `reviews:*`); variant selection is client state over static data |
+| Journal hub                                            | ISR, 1-day fallback                                                  | New posts                                                                 | none                                                                                                             |
+| Search                                                 | **Dynamic**                                                          | Query-dependent                                                           | all                                                                                                              |
+| Cart page                                              | **Dynamic**                                                          | Per user                                                                  | all                                                                                                              |
+| Account                                                | **Dynamic**, auth required                                           | Per user                                                                  | all                                                                                                              |
+| Checkout                                               | Shopify                                                              | —                                                                         | —                                                                                                                |
 
 Per-user data never enters a cached render: cart and customer are read only in dynamic routes, Server Actions, or client islands.
 
@@ -128,18 +128,18 @@ Per-user data never enters a cached render: cart and customer are read only in d
 
 ### Tags and lifetimes
 
-| Data | Function | Tags | `cacheLife` (stale / revalidate / expire) | Invalidated by |
-|---|---|---|---|---|
-| Product detail | `getProduct(handle)` | `products`, `product:{handle}` | 5 min / 1 h / 1 day | `products/update`, `products/delete`, inventory flip |
-| Product card | `getProductCard(id)` | `products`, `product:{handle}` | same | same |
-| Collection | `getCollection(handle, page)` | `collections`, `collection:{handle}` | 5 min / 1 h / 1 day | `collections/update`, `collections/delete`, `products/*` for member products |
-| Reviews | `getReviews(productId)` | `reviews:{handle}` | 10 min / 6 h / 7 days | Judge.me webhook (review published) or time |
-| Recommendations | `getRecommendations(handle)` | `recs:{handle}`, `products` | 1 h / 1 day / 7 days | product webhooks |
-| Menus, shop, policies | `getMenu`, `getShop` | `menus`, `shop` | 1 h / 1 day / 30 days | `shop/update`, manual |
-| Ingredients/FAQ metaobjects | `getIngredient(slug)` | `ingredient:{slug}`, `metaobjects` | 1 day / 7 days / 30 days | `metaobjects/update` (if available on the API version) or manual |
-| Redirect map | `getRedirects()` | `redirects` | 1 h / 1 day / 7 days | manual/CI |
-| Search suggest | route handler | — | CDN `s-maxage=60, stale-while-revalidate=300` | time |
-| Cart, customer | — | — | **never cached** (`no-store`) | — |
+| Data                        | Function                      | Tags                                 | `cacheLife` (stale / revalidate / expire)     | Invalidated by                                                               |
+| --------------------------- | ----------------------------- | ------------------------------------ | --------------------------------------------- | ---------------------------------------------------------------------------- |
+| Product detail              | `getProduct(handle)`          | `products`, `product:{handle}`       | 5 min / 1 h / 1 day                           | `products/update`, `products/delete`, inventory flip                         |
+| Product card                | `getProductCard(id)`          | `products`, `product:{handle}`       | same                                          | same                                                                         |
+| Collection                  | `getCollection(handle, page)` | `collections`, `collection:{handle}` | 5 min / 1 h / 1 day                           | `collections/update`, `collections/delete`, `products/*` for member products |
+| Reviews                     | `getReviews(productId)`       | `reviews:{handle}`                   | 10 min / 6 h / 7 days                         | Judge.me webhook (review published) or time                                  |
+| Recommendations             | `getRecommendations(handle)`  | `recs:{handle}`, `products`          | 1 h / 1 day / 7 days                          | product webhooks                                                             |
+| Menus, shop, policies       | `getMenu`, `getShop`          | `menus`, `shop`                      | 1 h / 1 day / 30 days                         | `shop/update`, manual                                                        |
+| Ingredients/FAQ metaobjects | `getIngredient(slug)`         | `ingredient:{slug}`, `metaobjects`   | 1 day / 7 days / 30 days                      | `metaobjects/update` (if available on the API version) or manual             |
+| Redirect map                | `getRedirects()`              | `redirects`                          | 1 h / 1 day / 7 days                          | manual/CI                                                                    |
+| Search suggest              | route handler                 | —                                    | CDN `s-maxage=60, stale-while-revalidate=300` | time                                                                         |
+| Cart, customer              | —                             | —                                    | **never cached** (`no-store`)                 | —                                                                            |
 
 ### Behaviour on change
 
@@ -156,15 +156,15 @@ Per-user data never enters a cached render: cart and customer are read only in d
 
 ### Topics
 
-| Topic | Action |
-|---|---|
-| `products/create` | `revalidateTag('products')`, sitemap tag |
-| `products/update` | `product:{handle}`, `recs:{handle}`, and `collection:{h}` for each collection the product belongs to (from payload/Admin lookup); if handle changed → add redirect old→new |
-| `products/delete` | `product:{handle}` (page returns 404/410 → or redirect to collection if configured), `products`, sitemap |
-| `inventory_levels/update` | Look up variant → product (Admin, cached). Revalidate `product:{handle}` **only if variant availability flips** (in stock ↔ out); last-known state in Redis. Prevents revalidation storms on every sale. |
-| `collections/update`, `collections/delete` | `collection:{handle}`, `collections` |
-| `shop/update` | `shop` |
-| `app/uninstalled` | alert |
+| Topic                                      | Action                                                                                                                                                                                                   |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `products/create`                          | `revalidateTag('products')`, sitemap tag                                                                                                                                                                 |
+| `products/update`                          | `product:{handle}`, `recs:{handle}`, and `collection:{h}` for each collection the product belongs to (from payload/Admin lookup); if handle changed → add redirect old→new                               |
+| `products/delete`                          | `product:{handle}` (page returns 404/410 → or redirect to collection if configured), `products`, sitemap                                                                                                 |
+| `inventory_levels/update`                  | Look up variant → product (Admin, cached). Revalidate `product:{handle}` **only if variant availability flips** (in stock ↔ out); last-known state in Redis. Prevents revalidation storms on every sale. |
+| `collections/update`, `collections/delete` | `collection:{handle}`, `collections`                                                                                                                                                                     |
+| `shop/update`                              | `shop`                                                                                                                                                                                                   |
+| `app/uninstalled`                          | alert                                                                                                                                                                                                    |
 
 ### Handler contract (`app/api/webhooks/shopify/route.ts`)
 
@@ -195,12 +195,12 @@ Registration via `scripts/register-webhooks.ts` (ported), idempotent, API versio
 
 ## 28. Video architecture
 
-| Use | Source | Format | Size target | Loading | Controls |
-|---|---|---|---|---|---|
-| Home hero loop | Shopify-hosted video | MP4 H.264 720p mobile / 1080p desktop (Shopify renditions), 6–8 s, no audio track | ≤ 1.5 MB mobile, ≤ 3 MB desktop | Poster is LCP; `<video preload="none">` gets `src` after `load` + in viewport + no Save-Data + no reduced motion | Visible pause button (WCAG 2.2.2), `muted playsInline loop` |
-| PDP demo (gallery) | Shopify | MP4 720p, 15–30 s | ≤ 4 MB | Click-to-play, `preload="none"`, poster | Native controls, captions |
-| How-to video | Shopify | MP4 1080p/720p via `<source media>`, or HLS (native Safari; hls.js only lazy-loaded on non-Safari if HLS chosen) | — | Click-to-play | Captions (WebVTT, required), transcript in HTML |
-| Product card hover | Shopify | MP4 480p, 3–4 s | ≤ 400 KB | Fetched on `pointerenter` (fine pointers only) | none (decorative) |
+| Use                | Source               | Format                                                                                                           | Size target                     | Loading                                                                                                          | Controls                                                    |
+| ------------------ | -------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Home hero loop     | Shopify-hosted video | MP4 H.264 720p mobile / 1080p desktop (Shopify renditions), 6–8 s, no audio track                                | ≤ 1.5 MB mobile, ≤ 3 MB desktop | Poster is LCP; `<video preload="none">` gets `src` after `load` + in viewport + no Save-Data + no reduced motion | Visible pause button (WCAG 2.2.2), `muted playsInline loop` |
+| PDP demo (gallery) | Shopify              | MP4 720p, 15–30 s                                                                                                | ≤ 4 MB                          | Click-to-play, `preload="none"`, poster                                                                          | Native controls, captions                                   |
+| How-to video       | Shopify              | MP4 1080p/720p via `<source media>`, or HLS (native Safari; hls.js only lazy-loaded on non-Safari if HLS chosen) | —                               | Click-to-play                                                                                                    | Captions (WebVTT, required), transcript in HTML             |
+| Product card hover | Shopify              | MP4 480p, 3–4 s                                                                                                  | ≤ 400 KB                        | Fetched on `pointerenter` (fine pointers only)                                                                   | none (decorative)                                           |
 
 Rules: every video has a poster, captions where speech/text exists, and the same information available as text on the page. No third-party video embeds (YouTube) on commerce pages — use a click-to-load facade on journal pages if ever needed.
 
@@ -210,22 +210,22 @@ Rules: every video has a poster, captions where speech/text exists, and the same
 
 ### Targets (p75, field data from Vercel Speed Insights / CrUX, mobile)
 
-| Metric | Target | "Good" threshold |
-|---|---|---|
-| LCP | ≤ 2.0 s | 2.5 s |
-| INP | ≤ 150 ms | 200 ms |
-| CLS | ≤ 0.05 | 0.1 |
-| FCP | ≤ 1.5 s | 1.8 s |
-| TTFB | ≤ 0.4 s (CDN hit) | 0.8 s |
+| Metric | Target            | "Good" threshold |
+| ------ | ----------------- | ---------------- |
+| LCP    | ≤ 2.0 s           | 2.5 s            |
+| INP    | ≤ 150 ms          | 200 ms           |
+| CLS    | ≤ 0.05            | 0.1              |
+| FCP    | ≤ 1.5 s           | 1.8 s            |
+| TTFB   | ≤ 0.4 s (CDN hit) | 0.8 s            |
 
 ### LCP element per page
 
-| Page | LCP element | Tactics |
-|---|---|---|
-| Home | Hero poster (mobile 4:5 crop) | `priority`, `fetchPriority=high`, preload via `getImageProps` in `<head>`, ≤ 80 KB AVIF at 828w, no JS dependency, video deferred |
-| Collection | Category image (mobile) / H1 (desktop) | `priority` on category image only |
-| PDP | Gallery image #1 | `priority`, gallery JS doesn't gate first image render (image is plain server HTML; controller hydrates around it) |
-| Guide/Journal | H1 text or lead image | Fonts preloaded (sans); lead image `priority` if above fold |
+| Page          | LCP element                            | Tactics                                                                                                                           |
+| ------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Home          | Hero poster (mobile 4:5 crop)          | `priority`, `fetchPriority=high`, preload via `getImageProps` in `<head>`, ≤ 80 KB AVIF at 828w, no JS dependency, video deferred |
+| Collection    | Category image (mobile) / H1 (desktop) | `priority` on category image only                                                                                                 |
+| PDP           | Gallery image #1                       | `priority`, gallery JS doesn't gate first image render (image is plain server HTML; controller hydrates around it)                |
+| Guide/Journal | H1 text or lead image                  | Fonts preloaded (sans); lead image `priority` if above fold                                                                       |
 
 ### INP
 
@@ -249,19 +249,19 @@ Rules: every video has a poster, captions where speech/text exists, and the same
 
 Enforced in CI (`size-limit` for JS, a Playwright script measuring transferred bytes per route, Lighthouse CI as a smoke test — field data remains the real measure).
 
-| Resource | Budget (compressed, per route) | Reasoning |
-|---|---|---|
-| HTML document (incl. inline RSC payload) | Home ≤ 45 KB · PDP ≤ 70 KB · Collection ≤ 60 KB | PDP carries FAQ, ingredients, reviews in HTML (worth it for SEO/AEO); keep RSC payload lean via minimal island props |
-| CSS | ≤ 22 KB total, inlined in `<head>` (`experimental.inlineCss`) | Tailwind v4 output for this design is ~15–20 KB; inlining removes a render-blocking request |
-| JavaScript — framework baseline | ~100 KB (Next 16 + React 19 runtime, not controllable) | Baseline measured, not budgeted |
-| JavaScript — route-specific | Home ≤ 15 KB · PDP ≤ 35 KB · Collection ≤ 20 KB · Cart drawer lazy chunk ≤ 12 KB | Islands only; drawer code loads on first open or idle |
-| Fonts | ≤ 2 files preloaded-or-early, ≤ 110 KB total | Hanken roman (preload) + Newsreader roman; italic lazy |
-| LCP image | Mobile ≤ 80 KB · Desktop ≤ 180 KB | AVIF at correct width |
-| Above-the-fold total (mobile, first view) | ≤ 350 KB | HTML + CSS + JS + fonts + LCP image |
-| Third-party JS before consent | **0 KB** | Privacy + INP |
-| Third-party JS after consent | ≤ 60 KB, deferred to idle | GA4 (~50 KB) or lighter alternative |
-| Hero video | Loaded after `load`; ≤ 1.5 MB mobile | Never competes with LCP |
-| Requests before LCP | ≤ 8 | HTML, CSS (inlined → 0), 2 fonts, LCP image, framework chunks |
+| Resource                                  | Budget (compressed, per route)                                                   | Reasoning                                                                                                            |
+| ----------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| HTML document (incl. inline RSC payload)  | Home ≤ 45 KB · PDP ≤ 70 KB · Collection ≤ 60 KB                                  | PDP carries FAQ, ingredients, reviews in HTML (worth it for SEO/AEO); keep RSC payload lean via minimal island props |
+| CSS                                       | ≤ 22 KB total, inlined in `<head>` (`experimental.inlineCss`)                    | Tailwind v4 output for this design is ~15–20 KB; inlining removes a render-blocking request                          |
+| JavaScript — framework baseline           | ~100 KB (Next 16 + React 19 runtime, not controllable)                           | Baseline measured, not budgeted                                                                                      |
+| JavaScript — route-specific               | Home ≤ 15 KB · PDP ≤ 35 KB · Collection ≤ 20 KB · Cart drawer lazy chunk ≤ 12 KB | Islands only; drawer code loads on first open or idle                                                                |
+| Fonts                                     | ≤ 2 files preloaded-or-early, ≤ 110 KB total                                     | Hanken roman (preload) + Newsreader roman; italic lazy                                                               |
+| LCP image                                 | Mobile ≤ 80 KB · Desktop ≤ 180 KB                                                | AVIF at correct width                                                                                                |
+| Above-the-fold total (mobile, first view) | ≤ 350 KB                                                                         | HTML + CSS + JS + fonts + LCP image                                                                                  |
+| Third-party JS before consent             | **0 KB**                                                                         | Privacy + INP                                                                                                        |
+| Third-party JS after consent              | ≤ 60 KB, deferred to idle                                                        | GA4 (~50 KB) or lighter alternative                                                                                  |
+| Hero video                                | Loaded after `load`; ≤ 1.5 MB mobile                                             | Never competes with LCP                                                                                              |
+| Requests before LCP                       | ≤ 8                                                                              | HTML, CSS (inlined → 0), 2 fonts, LCP image, framework chunks                                                        |
 
 A PR that exceeds a budget fails CI unless the budget file is changed in the same PR with a written reason.
 
@@ -355,23 +355,23 @@ belurae/
 
 ## 38. Environment variables
 
-| Variable | Public? | Used in | Notes |
-|---|---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | public | canonical, schema | `https://belurae.com` |
-| `SHOPIFY_STORE_DOMAIN` | server | client, webhook domain check | `belurae.myshopify.com` |
-| `SHOPIFY_API_VERSION` | server | config | pinned, e.g. `2026-07` |
-| `SHOPIFY_STOREFRONT_PRIVATE_TOKEN` | **secret** | lib/shopify/client | Headless channel private token; server-only |
-| `SHOPIFY_ADMIN_CLIENT_ID` / `SHOPIFY_ADMIN_CLIENT_SECRET` | **secret** | lib/shopify/admin | Least-privilege scopes: `read_products`, `read_inventory`, `write_customers` (newsletter), `read_online_store_navigation` if needed |
-| `SHOPIFY_WEBHOOK_SECRET` | **secret** | webhook HMAC | |
-| `SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID` | server | OAuth | Public client per Shopify, still kept server-side |
-| `SHOPIFY_CUSTOMER_ACCOUNT_API_URL` / `…_AUTH_URL` | server | OAuth | |
-| `SESSION_SECRET` | **secret** | encrypted session cookie | 32+ random bytes; rotate with dual-key support |
-| `REVALIDATE_SECRET` | **secret** | /api/revalidate | |
-| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | **secret** | rate limit, webhook idempotency | |
-| `JUDGEME_PRIVATE_TOKEN` / `JUDGEME_SHOP_DOMAIN` | **secret** / server | reviews | |
-| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | public | analytics (post-consent) | optional |
-| `NEXT_PUBLIC_SHOPIFY_STOREFRONT_ID` | public | Shopify analytics events | |
-| `CSP_REPORT_URI` | server | proxy.ts | optional external collector |
+| Variable                                                  | Public?             | Used in                         | Notes                                                                                                                               |
+| --------------------------------------------------------- | ------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`                                    | public              | canonical, schema               | `https://belurae.com`                                                                                                               |
+| `SHOPIFY_STORE_DOMAIN`                                    | server              | client, webhook domain check    | `belurae.myshopify.com`                                                                                                             |
+| `SHOPIFY_API_VERSION`                                     | server              | config                          | pinned, e.g. `2026-07`                                                                                                              |
+| `SHOPIFY_STOREFRONT_PRIVATE_TOKEN`                        | **secret**          | lib/shopify/client              | Headless channel private token; server-only                                                                                         |
+| `SHOPIFY_ADMIN_CLIENT_ID` / `SHOPIFY_ADMIN_CLIENT_SECRET` | **secret**          | lib/shopify/admin               | Least-privilege scopes: `read_products`, `read_inventory`, `write_customers` (newsletter), `read_online_store_navigation` if needed |
+| `SHOPIFY_WEBHOOK_SECRET`                                  | **secret**          | webhook HMAC                    |                                                                                                                                     |
+| `SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID`                      | server              | OAuth                           | Public client per Shopify, still kept server-side                                                                                   |
+| `SHOPIFY_CUSTOMER_ACCOUNT_API_URL` / `…_AUTH_URL`         | server              | OAuth                           |                                                                                                                                     |
+| `SESSION_SECRET`                                          | **secret**          | encrypted session cookie        | 32+ random bytes; rotate with dual-key support                                                                                      |
+| `REVALIDATE_SECRET`                                       | **secret**          | /api/revalidate                 |                                                                                                                                     |
+| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN`     | **secret**          | rate limit, webhook idempotency |                                                                                                                                     |
+| `JUDGEME_PRIVATE_TOKEN` / `JUDGEME_SHOP_DOMAIN`           | **secret** / server | reviews                         |                                                                                                                                     |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID`                           | public              | analytics (post-consent)        | optional                                                                                                                            |
+| `NEXT_PUBLIC_SHOPIFY_STOREFRONT_ID`                       | public              | Shopify analytics events        |                                                                                                                                     |
+| `CSP_REPORT_URI`                                          | server              | proxy.ts                        | optional external collector                                                                                                         |
 
 Rules:
 

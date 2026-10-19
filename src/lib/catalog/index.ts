@@ -48,7 +48,7 @@ const readCatalog = unstable_cache(
     }
     return seedDoc;
   },
-  ["belurae-catalog-v14"],
+  ["belurae-catalog-v15"],
   { tags: [CACHE_TAGS.catalog], revalidate: 3600 },
 );
 
@@ -69,7 +69,9 @@ export async function getProducts(): Promise<CatalogProduct[]> {
     );
 }
 
-export async function getProductBySlug(slug: string): Promise<CatalogProduct | null> {
+export async function getProductBySlug(
+  slug: string,
+): Promise<CatalogProduct | null> {
   const content = productContentBySlug(slug);
   if (!content) return null;
   const catalog = await getCatalog();
@@ -78,8 +80,12 @@ export async function getProductBySlug(slug: string): Promise<CatalogProduct | n
   return { record, content };
 }
 
-export async function getProductsInCategory(categorySlug: string): Promise<CatalogProduct[]> {
-  return (await getProducts()).filter((p) => p.content.category.slug === categorySlug);
+export async function getProductsInCategory(
+  categorySlug: string,
+): Promise<CatalogProduct[]> {
+  return (await getProducts()).filter(
+    (p) => p.content.category.slug === categorySlug,
+  );
 }
 
 export async function storeCurrency(): Promise<string> {
@@ -95,7 +101,8 @@ export async function beluraeVariantIndex(): Promise<Map<string, string>> {
     for (const v of record?.variants ?? []) index.set(v.id, content.handle);
   }
   for (const { handle } of UPSELLS) {
-    for (const v of catalog.products[handle]?.variants ?? []) index.set(v.id, handle);
+    for (const v of catalog.products[handle]?.variants ?? [])
+      index.set(v.id, handle);
   }
   return index;
 }

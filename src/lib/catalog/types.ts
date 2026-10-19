@@ -42,10 +42,18 @@ export type VideoRecord = {
 export type MediaRecord = ImageRecord | VideoRecord;
 
 /** A `product_spec` metaobject: a labelled fact row. */
-export type SpecRecord = { label: string; value: string; description: string | null };
+export type SpecRecord = {
+  label: string;
+  value: string;
+  description: string | null;
+};
 
 /** A `feature_highlight` metaobject: a labelled point, optionally with an image. */
-export type FeatureHighlightRecord = { label: string; body: string; image: string | null };
+export type FeatureHighlightRecord = {
+  label: string;
+  body: string;
+  image: string | null;
+};
 
 export type ProductRecord = {
   id: string;
@@ -68,6 +76,17 @@ export type ProductRecord = {
   perks: string[];
   /** From the `custom.sale_ends_at` metafield — an ISO timestamp, or null if unset or already past. */
   saleEndsAt: string | null;
+  /**
+   * From the `custom.rating_count` metafield — the aggregate review total the
+   * merchant wants shown above the H1, e.g. reviews collected across channels.
+   * Null when unset, so the PDP falls back to the review feed's own count.
+   */
+  ratingCount: number | null;
+  /**
+   * From the `custom.rating_average` metafield — the matching star average.
+   * Null when unset, so the PDP falls back to the feed's own average.
+   */
+  ratingAverage: number | null;
 };
 
 export type CatalogDocument = {

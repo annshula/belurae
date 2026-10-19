@@ -78,7 +78,10 @@ const productVideos: ShowcaseVideo[] = [
 const tonerVideos: ShowcaseVideo[] = [
   clip("/videos/toner/toner-new-3.mp4", "Belurae EGF Tox toner video 1"),
   ...[1, 2, 3, 4, 5].map((n) =>
-    clip(`/videos/toner/toner-${n}.mp4`, `Belurae EGF Tox toner video ${n + 1}`),
+    clip(
+      `/videos/toner/toner-${n}.mp4`,
+      `Belurae EGF Tox toner video ${n + 1}`,
+    ),
   ),
 ];
 
@@ -92,6 +95,18 @@ const productVideosBySlug: Record<string, ShowcaseVideo[]> = {
   "egf-tox-toner": tonerVideos,
   "belurae-body-adhesive": glueVideos,
 };
+
+/**
+ * Faces ahead of the rating line, drawn from the avatar set already in
+ * `public/avatars` (TikTok review profiles) so the social proof reads as real
+ * people rather than placeholder circles.
+ */
+const RATING_AVATARS = [
+  "/avatars/ttm-5ee859ea.jpg",
+  "/avatars/ttm-6a1ff88e.jpg",
+  "/avatars/ttm-1f0bffbd.jpg",
+  "/avatars/ttm-9b953e19.jpg",
+] as const;
 
 /**
  * Keyword → icon for the perk list, checked in order against each perk's
@@ -194,6 +209,21 @@ export default async function ProductPage({ params }: Props) {
   const ratingLine = reviewSet?.summary ?? null;
 
   /*
+   * What the rating line above the H1 prints. The merchant's
+   * `custom.rating_count` metafield (e.g. reviews gathered across channels)
+   * wins over the feed's own total; the average comes from the metafield when
+   * set, otherwise from the reviews themselves. The reviews UI keeps using
+   * `reviewSet`, and structured data still gets only `verifiedReviews`.
+   */
+  const displayRating =
+    record.ratingCount != null
+      ? {
+          count: record.ratingCount,
+          average: record.ratingAverage ?? ratingLine?.average ?? 0,
+        }
+      : ratingLine;
+
+  /*
    * The buy-box carousel shows the newest 5★ reviews of the same feed, picked
    * here so five reviews cross the RSC boundary instead of all 524 of the
    * placeholder set.
@@ -201,6 +231,13 @@ export default async function ProductPage({ params }: Props) {
   const feedbackReviews = reviewSet?.reviews
     .filter((r) => r.rating === 5)
     .slice(0, 5);
+
+  /*
+   * Reviews are temporarily off on the hair-removal PDP: only the rating line
+   * above the H1 is shown for now. Drop this flag (or remove the slug check)
+   * to bring the "What customers say" carousel and reviews section back.
+   */
+  const showReviews = content.slug !== "bikini-pain-free-hair-removal-spray";
 
   const perks = view.perks.map((text) => ({ icon: perkIcon(text), text }));
 
@@ -289,29 +326,94 @@ export default async function ProductPage({ params }: Props) {
             )}
 
             {/* Rating line as plain text (no chips). The rating jumps to the
-                reviews. */}
+                reviews, except on the hair-removal PDP where the reviews
+                section is temporarily hidden. */}
             {(() => {
-              const hasRating = Boolean(ratingLine && ratingLine.count > 0);
               // Sold count hidden for now (data stays in products.ts).
               // const sold = content.pdp.sold;
               // if (!hasRating && !sold) return null;
-              if (!hasRating) return null;
+              if (!displayRating || displayRating.count <= 0) return null;
+              const label = `Rated ${displayRating.average.toFixed(1)} out of 5 from ${displayRating.count.toLocaleString("en-US")} reviews`;
+              const rating = (
+                <>
+                  <Stars
+                    value={displayRating.average}
+                    starClassName="size-3.5"
+                  />
+                  <span className="whitespace-nowrap">
+                    <span className="font-numeral font-semibold tabular-nums">
+                      {displayRating.average.toFixed(1)}/5
+                    </span>{" "}
+                    <span className="text-ink-soft">rating</span>
+                  </span>
+                  <span className="text-ink-soft group-hover:underline">
+                    {displayRating.count.toLocaleString("en-US")}
+                    <span className="hidden sm:inline"> reviews</span>
+                  </span>
+                </>
+              );
               return (
-                <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-ui text-body-sm">
-                  {ratingLine && ratingLine.count > 0 && (
+                <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-ui text-[0.75rem] sm:gap-x-2">
+                  {/* Real faces from the existing avatar set; decorative, the
+                      rating text beside them carries the accessible label. */}
+                  <span
+                    aria-hidden="true"
+                    className="flex shrink-0 -space-x-1.5 sm:-space-x-2"
+                  >
+                    {RATING_AVATARS.map((src, i) => (
+                      <Image
+                        key={src}
+                        src={src}
+                        alt=""
+                        width={28}
+                        height={28}
+                        className={cn(
+                          "size-5 rounded-full object-cover ring-2 ring-porcelain",
+                          // Three faces is all a 320px line can hold.
+                          i === RATING_AVATARS.length - 1 && "hidden sm:block",
+                        )}
+                      />
+                    ))}
+                  </span>
+                  {showReviews ? (
                     <a
                       href="#reviews"
                       className="group inline-flex items-center gap-1.5"
-                      aria-label={`Rated ${ratingLine.average.toFixed(1)} out of 5 from ${ratingLine.count.toLocaleString("en-US")} reviews — jump to the reviews`}
+                      aria-label={`${label} — jump to the reviews`}
                     >
-                      <Stars value={ratingLine.average} />
-                      <span className="font-numeral font-semibold tabular-nums">
-                        {ratingLine.average.toFixed(1)}
-                      </span>
-                      <span className="text-ink-soft group-hover:underline">
-                        {ratingLine.count.toLocaleString("en-US")} reviews
-                      </span>
+                      {rating}
                     </a>
+                  ) : (
+                    <span
+                      className="inline-flex items-center gap-1.5"
+                      aria-label={label}
+                    >
+                      {rating}
+                    </span>
+                  )}
+                  {content.pdp.customers && (
+                    <>
+                      <span
+                        aria-hidden="true"
+                        className="hidden text-ink-faint sm:inline"
+                      >
+                        ·
+                      </span>
+                      <span className="whitespace-nowrap text-ink-soft">
+                        <span className="font-numeral font-semibold text-ink tabular-nums">
+                          {content.pdp.customers.count.toLocaleString("en-US")}+
+                        </span>{" "}
+                        buyers
+                        {content.pdp.customers.months && (
+                          /* Hidden on phones, and in the narrow lg buy-box
+                             column where it would force a second line. */
+                          <span className="hidden sm:inline lg:hidden xl:inline">
+                            {" "}
+                            in last {content.pdp.customers.months} months
+                          </span>
+                        )}
+                      </span>
+                    </>
                   )}
                   {/* {sold && (
                     <span className="inline-flex items-center gap-x-2.5 text-ink-soft">
@@ -463,8 +565,9 @@ export default async function ProductPage({ params }: Props) {
               </aside>
             )}
 
-            {/* What customers say — right after the patch-test notice. */}
-            {feedbackReviews && feedbackReviews.length > 0 && (
+            {/* What customers say — right after the patch-test notice. Hidden
+                alongside the reviews section while `showReviews` is false. */}
+            {showReviews && feedbackReviews && feedbackReviews.length > 0 && (
               <PurchaseFeedback reviews={feedbackReviews} className="mt-5" />
             )}
           </div>
@@ -792,26 +895,29 @@ export default async function ProductPage({ params }: Props) {
       </section>
 
       {/* ── Reviews ───────────────────────────────────────────────────── */}
-      <section className="pb-12 lg:pb-16" aria-labelledby="reviews">
-        <div className="container-page">
-          <h2
-            id="reviews"
-            className="mb-6 text-center font-pdp-heading text-heading-1 font-semibold"
-          >
-            Reviews
-          </h2>
-          <ReviewsSection
-            summary={reviewSet?.summary ?? null}
-            photoCount={reviewSet ? photoCount(reviewSet) : 0}
-            initial={
-              reviewSet
-                ? feedPage(reviewSet, "all", 1)
-                : { items: [], total: 0, page: 1, pages: 1 }
-            }
-            handle={view.handle}
-          />
-        </div>
-      </section>
+      {/* Commented out for the hair-removal PDP for now — see `showReviews`. */}
+      {showReviews && (
+        <section className="pb-12 lg:pb-16" aria-labelledby="reviews">
+          <div className="container-page">
+            <h2
+              id="reviews"
+              className="mb-6 text-center font-pdp-heading text-heading-1 font-semibold"
+            >
+              Reviews
+            </h2>
+            <ReviewsSection
+              summary={reviewSet?.summary ?? null}
+              photoCount={reviewSet ? photoCount(reviewSet) : 0}
+              initial={
+                reviewSet
+                  ? feedPage(reviewSet, "all", 1)
+                  : { items: [], total: 0, page: 1, pages: 1 }
+              }
+              handle={view.handle}
+            />
+          </div>
+        </section>
+      )}
 
       {/* ── FAQ ───────────────────────────────────────────────────────── */}
       <section className="px-2 sm:px-3" aria-labelledby="faq">

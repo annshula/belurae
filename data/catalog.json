@@ -22,11 +22,7 @@
       "options": [
         {
           "name": "Quantity",
-          "values": [
-            "1PC",
-            "2PCS",
-            "3PCS"
-          ]
+          "values": ["1PC", "2PCS", "3PCS"]
         }
       ],
       "availableForSale": true,
@@ -342,7 +338,9 @@
         "35% Less Chemical Ingredients",
         "Cruelty-Free & Plant-Based"
       ],
-      "saleEndsAt": "2026-10-20T17:00:00.000Z"
+      "saleEndsAt": "2026-10-20T17:00:00.000Z",
+      "ratingCount": 2243,
+      "ratingAverage": 4.9
     },
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
@@ -359,11 +357,7 @@
       "options": [
         {
           "name": "Color",
-          "values": [
-            "100ml Boxed",
-            "2 x 100ml Boxed",
-            "3 x 100ml Boxed"
-          ]
+          "values": ["100ml Boxed", "2 x 100ml Boxed", "3 x 100ml Boxed"]
         }
       ],
       "availableForSale": true,
@@ -706,7 +700,9 @@
         "Reduces Fine Lines and Wrinkles",
         "Daily Use Recommended"
       ],
-      "saleEndsAt": "2026-10-20T17:00:00.000Z"
+      "saleEndsAt": "2026-10-20T17:00:00.000Z",
+      "ratingCount": null,
+      "ratingAverage": null
     },
     "voyage-nova-middle-eastern-rose-fragrance": {
       "id": "gid://shopify/Product/15407150530787",
@@ -723,11 +719,7 @@
       "options": [
         {
           "name": "Quantity",
-          "values": [
-            "1PC",
-            "2PCS",
-            "3PCS"
-          ]
+          "values": ["1PC", "2PCS", "3PCS"]
         }
       ],
       "availableForSale": true,
@@ -931,7 +923,9 @@
         "Sustainable Product",
         "Extrait De Parfum Concentration"
       ],
-      "saleEndsAt": "2026-10-20T17:00:00.000Z"
+      "saleEndsAt": "2026-10-20T17:00:00.000Z",
+      "ratingCount": null,
+      "ratingAverage": null
     },
     "belurae-body-adhesive": {
       "id": "gid://shopify/Product/15413115486435",
@@ -948,9 +942,7 @@
       "options": [
         {
           "name": "Color",
-          "values": [
-            "20mlX1"
-          ]
+          "values": ["20mlX1"]
         }
       ],
       "availableForSale": true,
@@ -1267,7 +1259,9 @@
         "Latex-Free Formula",
         "Confidence and security"
       ],
-      "saleEndsAt": "2026-10-20T17:00:00.000Z"
+      "saleEndsAt": "2026-10-20T17:00:00.000Z",
+      "ratingCount": null,
+      "ratingAverage": null
     },
     "post-hair-removal-care-oil-jojoba-and-almond-blend-soothes-sensitivity-locks-in-hydration-and-supports-daily-skin-comfort": {
       "id": "gid://shopify/Product/15425423868131",
@@ -1284,9 +1278,7 @@
       "options": [
         {
           "name": "Color",
-          "values": [
-            "60ml"
-          ]
+          "values": ["60ml"]
         }
       ],
       "availableForSale": true,
@@ -1431,7 +1423,9 @@
       "specs": [],
       "featureHighlights": [],
       "perks": [],
-      "saleEndsAt": "2026-10-20T17:00:00.000Z"
+      "saleEndsAt": "2026-10-20T17:00:00.000Z",
+      "ratingCount": null,
+      "ratingAverage": null
     }
   }
 }

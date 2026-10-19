@@ -55,13 +55,19 @@ type MediaNode =
   | {
       __typename: "MediaImage";
       alt: string | null;
-      image: { url: string; width: number | null; height: number | null } | null;
+      image: {
+        url: string;
+        width: number | null;
+        height: number | null;
+      } | null;
     }
   | {
       __typename: "Video";
       alt: string | null;
       sources: VideoSourceNode[];
-      preview: { image: { url: string; width: number; height: number } | null } | null;
+      preview: {
+        image: { url: string; width: number; height: number } | null;
+      } | null;
     }
   | { __typename: string };
 
@@ -92,6 +98,8 @@ type ProductData = {
     featureHighlights: MetaobjectRefsField;
     perks: { value: string } | null;
     saleEndsAt: { value: string } | null;
+    ratingCount: { value: string } | null;
+    ratingAverage: { value: string } | null;
   } | null;
 };
 
@@ -156,6 +164,8 @@ query ProductByHandle($handle: String!) {
     }
     perks: metafield(namespace: "custom", key: "perks") { value }
     saleEndsAt: metafield(namespace: "custom", key: "sale_ends_at") { value }
+    ratingCount: metafield(namespace: "custom", key: "rating_count") { value }
+    ratingAverage: metafield(namespace: "custom", key: "rating_average") { value }
   }
 }`;
 
@@ -190,7 +200,8 @@ function normalizeVariants(nodes: AdminVariantNode[]): VariantRecord[] {
     .filter((v) => v.price != null)
     .map((v) => {
       const price = Number(v.price);
-      const compare = v.compareAtPrice != null ? Number(v.compareAtPrice) : null;
+      const compare =
+        v.compareAtPrice != null ? Number(v.compareAtPrice) : null;
       return {
         id: v.id,
         title: v.title,
@@ -199,7 +210,9 @@ function normalizeVariants(nodes: AdminVariantNode[]): VariantRecord[] {
         price,
         compareAtPrice: compare != null && compare > price ? compare : null,
         availableForSale: v.availableForSale,
-        options: Object.fromEntries(v.selectedOptions.map((o) => [o.name, o.value])),
+        options: Object.fromEntries(
+          v.selectedOptions.map((o) => [o.name, o.value]),
+        ),
         image: v.image?.url ?? null,
         description: v.packDescription?.value?.trim() || null,
       };
@@ -239,7 +252,11 @@ function normalizeMedia(
         poster: node.preview?.image?.url ?? "",
         width: node.preview?.image?.width ?? null,
         height: node.preview?.image?.height ?? null,
-        sources: mp4.map((s) => ({ src: s.url, type: s.mimeType, width: s.width ?? null })),
+        sources: mp4.map((s) => ({
+          src: s.url,
+          type: s.mimeType,
+          width: s.width ?? null,
+        })),
       });
     }
   }
@@ -264,10 +281,17 @@ function normalizeSpecs(field: MetaobjectRefsField): ProductRecord["specs"] {
       value: fieldValue(n.fields, "value"),
       description: fieldValue(n.fields, "description") || null,
     }))
-    .filter((s) => s.label && s.value && !STALE_STYLE_PATTERN.test(`${s.label} ${s.value}`));
+    .filter(
+      (s) =>
+        s.label &&
+        s.value &&
+        !STALE_STYLE_PATTERN.test(`${s.label} ${s.value}`),
+    );
 }
 
-function normalizeFeatureHighlights(field: MetaobjectRefsField): ProductRecord["featureHighlights"] {
+function normalizeFeatureHighlights(
+  field: MetaobjectRefsField,
+): ProductRecord["featureHighlights"] {
   const nodes = field?.references?.nodes ?? [];
   return nodes
     .map((n) => ({
@@ -275,7 +299,10 @@ function normalizeFeatureHighlights(field: MetaobjectRefsField): ProductRecord["
       body: fieldValue(n.fields, "body"),
       image: fieldImage(n.fields, "image"),
     }))
-    .filter((h) => h.label && h.body && !STALE_STYLE_PATTERN.test(`${h.label} ${h.body}`));
+    .filter(
+      (h) =>
+        h.label && h.body && !STALE_STYLE_PATTERN.test(`${h.label} ${h.body}`),
+    );
 }
 
 function normalizePerks(field: { value: string } | null): string[] {
@@ -298,6 +325,20 @@ function normalizeSaleEndsAt(field: { value: string } | null): string | null {
   const time = Date.parse(raw);
   if (Number.isNaN(time) || time <= Date.now()) return null;
   return new Date(time).toISOString();
+}
+
+/** A non-negative number metafield, or null when unset/unparseable. */
+function normalizeCount(field: { value: string } | null): number | null {
+  const raw = field?.value?.trim();
+  if (!raw) return null;
+  const value = Number(raw);
+  return Number.isFinite(value) && value >= 0 ? value : null;
+}
+
+/** A 0–5 star average metafield, or null when unset/out of range. */
+function normalizeAverage(field: { value: string } | null): number | null {
+  const value = normalizeCount(field);
+  return value != null && value <= 5 ? value : null;
 }
 
 async function fetchProduct(handle: string): Promise<ProductRecord | null> {
@@ -327,6 +368,8 @@ async function fetchProduct(handle: string): Promise<ProductRecord | null> {
     featureHighlights: normalizeFeatureHighlights(product.featureHighlights),
     perks: normalizePerks(product.perks),
     saleEndsAt: normalizeSaleEndsAt(product.saleEndsAt),
+    ratingCount: normalizeCount(product.ratingCount),
+    ratingAverage: normalizeAverage(product.ratingAverage),
   };
 }
 
@@ -357,7 +400,9 @@ export async function syncProducts(
   const lock = await acquireLock();
   try {
     const existing = await readJsonFile<CatalogDocument>(CATALOG_PATH);
-    const products: Record<string, ProductRecord> = { ...(existing?.products ?? {}) };
+    const products: Record<string, ProductRecord> = {
+      ...(existing?.products ?? {}),
+    };
     for (const record of fetched) if (record) products[record.handle] = record;
     // Drop products that are no longer part of the Belurae line or its upsells.
     for (const key of Object.keys(products)) {
@@ -387,6 +432,8 @@ export async function syncProducts(
 }
 
 /** Webhook entry point: re-sync just the product that changed, if it is ours. */
-export async function syncProductFromWebhook(handle: string): Promise<SyncResult> {
+export async function syncProductFromWebhook(
+  handle: string,
+): Promise<SyncResult> {
   return syncProducts([handle]);
 }
