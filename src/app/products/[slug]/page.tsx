@@ -518,17 +518,45 @@ export default async function ProductPage({ params }: Props) {
               ]}
             />
 
-            <ul className="mt-6 space-y-3.5 rounded-card bg-cream/80 p-5 text-body-sm md:p-6">
-              <li className="flex gap-3">
-                <Icon name="truck" className="size-5 shrink-0" />
+            <div className="mt-6 rounded-card border border-dashed border-sage-300 bg-sage-50 p-4 text-sage-800 md:p-5">
+              <p className="flex items-center justify-center gap-2 font-ui text-body-sm font-semibold">
+                <Icon name="truck" className="size-5 shrink-0 text-sage-600" />
                 <span>
-                  Tracked delivery in {site.delivery.minDays}–
-                  {site.delivery.maxDays} days.{" "}
-                  <Link href="/pages/shipping" className="link-underline">
-                    Shipping details
-                  </Link>
+                  Delivered to your door in {site.delivery.minDays}–
+                  {site.delivery.maxDays} days
                 </span>
-              </li>
+              </p>
+              <ol
+                className="mt-3.5 flex items-start"
+                aria-label="Delivery journey"
+              >
+                {[
+                  { icon: "bag", label: "Order placed" },
+                  { icon: "package", label: "Packed & shipped" },
+                  { icon: "check", label: "At your door" },
+                ].map((step, i) => (
+                  <li
+                    key={step.label}
+                    className="relative flex flex-1 flex-col items-center gap-1.5 text-center"
+                  >
+                    {i > 0 && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute top-4 right-1/2 left-[-50%] border-t-2 border-dashed border-sage-300"
+                      />
+                    )}
+                    <span className="relative z-10 grid size-8 place-items-center rounded-full border-2 border-sage-300 bg-ivory text-sage-600">
+                      <Icon name={step.icon as IconName} className="size-4" />
+                    </span>
+                    <span className="text-[0.72rem] leading-tight text-ink-soft">
+                      {step.label}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <ul className="mt-3 space-y-3.5 rounded-card bg-cream/80 p-5 text-body-sm md:p-6">
               <li className="flex gap-3">
                 <Icon name="shield" className="size-5 shrink-0" />
                 <span>Secure checkout by Shopify.</span>
