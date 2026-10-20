@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-20T18:17:23.027Z",
+  "syncedAt": "2026-10-20T18:50:32.091Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -1460,7 +1460,7 @@
       "vendor": "Belurae",
       "productType": "",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-20T18:17:16Z",
+      "updatedAt": "2026-10-20T18:50:25Z",
       "seo": {
         "title": "MISSHA M Perfect Cover BB Cream, 35 ml | Belurae",
         "description": "A 35 ml concealing, moisturizing BB cream in 3 shades with 10 probiotics and Bifida Ferment Lysate, as listed. Lightweight, sheer finish."
@@ -1469,8 +1469,8 @@
         {
           "name": "Color",
           "values": [
-            "Natural Beige",
             "Warm Beige",
+            "Natural Beige",
             "Bee Beige"
           ]
         },
@@ -1485,51 +1485,6 @@
       ],
       "availableForSale": true,
       "variants": [
-        {
-          "id": "gid://shopify/ProductVariant/67751451164899",
-          "title": "Natural Beige / 1 Pack",
-          "sku": "200001176:200004889#No. 23 natural beige",
-          "barcode": null,
-          "price": 29.99,
-          "compareAtPrice": 39.99,
-          "availableForSale": true,
-          "options": {
-            "Color": "Natural Beige",
-            "Pack": "1 Pack"
-          },
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S27134e1f784a4b3aa39fdd65b716e64fv.webp?v=1792491704",
-          "description": "BB Cream"
-        },
-        {
-          "id": "gid://shopify/ProductVariant/67752197193955",
-          "title": "Natural Beige / 2 Pack",
-          "sku": "200001176:200004889#No. 23 natural beige|2PK cream+primer",
-          "barcode": null,
-          "price": 49.99,
-          "compareAtPrice": 59.99,
-          "availableForSale": true,
-          "options": {
-            "Color": "Natural Beige",
-            "Pack": "2 Pack"
-          },
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/bb-cream-pack-2-natural-beige.webp?v=1792496127",
-          "description": "BB Cream + Gel Face Primer"
-        },
-        {
-          "id": "gid://shopify/ProductVariant/67752197226723",
-          "title": "Natural Beige / 3 Pack",
-          "sku": "200001176:200004889#No. 23 natural beige|3PK cream+primer+spray",
-          "barcode": null,
-          "price": 69.99,
-          "compareAtPrice": 84.99,
-          "availableForSale": true,
-          "options": {
-            "Color": "Natural Beige",
-            "Pack": "3 Pack"
-          },
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/bb-cream-pack-3-natural-beige.webp?v=1792496127",
-          "description": "BB Cream + Gel Face Primer + Setting Spray"
-        },
         {
           "id": "gid://shopify/ProductVariant/67751451197667",
           "title": "Warm Beige / 1 Pack",
@@ -1573,6 +1528,51 @@
             "Pack": "3 Pack"
           },
           "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/bb-cream-pack-3-warm-beige.webp?v=1792496127",
+          "description": "BB Cream + Gel Face Primer + Setting Spray"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67751451164899",
+          "title": "Natural Beige / 1 Pack",
+          "sku": "200001176:200004889#No. 23 natural beige",
+          "barcode": null,
+          "price": 29.99,
+          "compareAtPrice": 39.99,
+          "availableForSale": true,
+          "options": {
+            "Color": "Natural Beige",
+            "Pack": "1 Pack"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S27134e1f784a4b3aa39fdd65b716e64fv.webp?v=1792491704",
+          "description": "BB Cream"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752197193955",
+          "title": "Natural Beige / 2 Pack",
+          "sku": "200001176:200004889#No. 23 natural beige|2PK cream+primer",
+          "barcode": null,
+          "price": 49.99,
+          "compareAtPrice": 59.99,
+          "availableForSale": true,
+          "options": {
+            "Color": "Natural Beige",
+            "Pack": "2 Pack"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/bb-cream-pack-2-natural-beige.webp?v=1792496127",
+          "description": "BB Cream + Gel Face Primer"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752197226723",
+          "title": "Natural Beige / 3 Pack",
+          "sku": "200001176:200004889#No. 23 natural beige|3PK cream+primer+spray",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": 84.99,
+          "availableForSale": true,
+          "options": {
+            "Color": "Natural Beige",
+            "Pack": "3 Pack"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/bb-cream-pack-3-natural-beige.webp?v=1792496127",
           "description": "BB Cream + Gel Face Primer + Setting Spray"
         },
         {
