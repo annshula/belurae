@@ -337,45 +337,43 @@ export default async function ProductPage({ params }: Props) {
               const label = `Rated ${displayRating.average.toFixed(1)} out of 5 from ${displayRating.count.toLocaleString("en-US")} reviews`;
               const rating = (
                 <>
-                  <Stars
-                    value={displayRating.average}
-                    starClassName="size-3.5"
-                  />
+                  <Stars value={displayRating.average} starClassName="size-4" />
                   <span className="whitespace-nowrap">
-                    <span className="font-numeral font-semibold tabular-nums">
+                    <span className="font-numeral text-[0.9375rem] font-bold tabular-nums">
                       {displayRating.average.toFixed(1)}
                     </span>{" "}
                     <span className="text-ink-soft">rating</span>
                   </span>
                   <span className="text-ink-soft group-hover:underline">
-                    {displayRating.count.toLocaleString("en-US")}
-                    <span className="hidden sm:inline"> reviews</span>
+                    ({displayRating.count.toLocaleString("en-US")})
                   </span>
                 </>
               );
+              /* Real faces from the existing avatar set; decorative, the
+                 text beside them carries the accessible label. They sit with
+                 the buyers count (who bought), or lead the line when the
+                 product has no buyers figure. */
+              const faces = (
+                <span aria-hidden="true" className="flex shrink-0 -space-x-2">
+                  {RATING_AVATARS.map((src, i) => (
+                    <Image
+                      key={src}
+                      src={src}
+                      alt=""
+                      width={32}
+                      height={32}
+                      className={cn(
+                        "size-6 rounded-full object-cover ring-2 ring-porcelain",
+                        // Three faces is all a 320px line can hold.
+                        i === RATING_AVATARS.length - 1 && "hidden sm:block",
+                      )}
+                    />
+                  ))}
+                </span>
+              );
               return (
-                <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-ui text-[0.75rem] sm:gap-x-2">
-                  {/* Real faces from the existing avatar set; decorative, the
-                      rating text beside them carries the accessible label. */}
-                  <span
-                    aria-hidden="true"
-                    className="flex shrink-0 -space-x-1.5 sm:-space-x-2"
-                  >
-                    {RATING_AVATARS.map((src, i) => (
-                      <Image
-                        key={src}
-                        src={src}
-                        alt=""
-                        width={28}
-                        height={28}
-                        className={cn(
-                          "size-5 rounded-full object-cover ring-2 ring-porcelain",
-                          // Three faces is all a 320px line can hold.
-                          i === RATING_AVATARS.length - 1 && "hidden sm:block",
-                        )}
-                      />
-                    ))}
-                  </span>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-ui text-[0.8125rem]">
+                  {!content.pdp.customers && faces}
                   {showReviews ? (
                     <a
                       href="#reviews"
@@ -398,21 +396,27 @@ export default async function ProductPage({ params }: Props) {
                         aria-hidden="true"
                         className="hidden text-ink-faint sm:inline"
                       >
-                        ·
+                        |
                       </span>
-                      <span className="whitespace-nowrap text-ink-soft">
-                        <span className="font-numeral font-semibold text-ink tabular-nums">
-                          {content.pdp.customers.count.toLocaleString("en-US")}+
-                        </span>{" "}
-                        buyers
-                        {content.pdp.customers.months && (
-                          /* Hidden on phones, and in the narrow lg buy-box
-                             column where it would force a second line. */
-                          <span className="hidden sm:inline lg:hidden xl:inline">
-                            {" "}
-                            in last {content.pdp.customers.months} months
-                          </span>
-                        )}
+                      <span className="inline-flex items-center gap-2 whitespace-nowrap text-ink-soft">
+                        {faces}
+                        <span>
+                          <span className="font-numeral text-[0.9375rem] font-bold text-ink tabular-nums">
+                            {content.pdp.customers.count.toLocaleString(
+                              "en-US",
+                            )}
+                            +
+                          </span>{" "}
+                          buyers
+                          {content.pdp.customers.months && (
+                            /* Hidden on phones, and in the narrow lg buy-box
+                               column where it would force a second line. */
+                            <span className="hidden sm:inline lg:hidden xl:inline">
+                              {" "}
+                              in last {content.pdp.customers.months} months
+                            </span>
+                          )}
+                        </span>
                       </span>
                     </>
                   )}
@@ -431,7 +435,7 @@ export default async function ProductPage({ params }: Props) {
                       </span>
                     </span>
                   )} */}
-                </p>
+                </div>
               );
             })()}
 
