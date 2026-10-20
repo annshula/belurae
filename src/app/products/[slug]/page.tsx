@@ -115,6 +115,20 @@ const RATING_AVATARS = [
 ] as const;
 
 /**
+ * Per-product faces, so two pages never show the same four people. Each set
+ * is made of avatars that appear nowhere else on the site (no review, no other
+ * product's rating line); products without an entry use RATING_AVATARS.
+ */
+const RATING_AVATARS_BY_SLUG: Record<string, readonly string[]> = {
+  "missha-perfect-cover-bb-cream": [
+    "/avatars/ttm-1de4783b.jpg",
+    "/avatars/ttm-17615e74.jpg",
+    "/avatars/ttm-1e86d00c.jpg",
+    "/avatars/ttm-2f8002d6.jpg",
+  ],
+};
+
+/**
  * Keyword → icon for the perk list, checked in order against each perk's
  * text (case-insensitive) — first match wins. Perks come from the live
  * Shopify sync (`catalog.json`), so this can't be a fixed per-index mapping;
@@ -221,6 +235,18 @@ export default async function ProductPage({ params }: Props) {
    * set, otherwise from the reviews themselves. The reviews UI keeps using
    * `reviewSet`, and structured data still gets only `verifiedReviews`.
    */
+  const ratingAvatars = RATING_AVATARS_BY_SLUG[content.slug] ?? RATING_AVATARS;
+
+  /* "N+ buyers" beside the rating: the `custom.customers_count` (and
+     `customers_months`) metafields win over the figure in content/products.ts. */
+  const customers =
+    record.customersCount != null
+      ? {
+          count: record.customersCount,
+          months: record.customersMonths ?? undefined,
+        }
+      : content.pdp.customers;
+
   const displayRating =
     record.ratingCount != null
       ? {
@@ -239,11 +265,15 @@ export default async function ProductPage({ params }: Props) {
     .slice(0, 5);
 
   /*
-   * Reviews are temporarily off on the hair-removal PDP: only the rating line
-   * above the H1 is shown for now. Drop this flag (or remove the slug check)
-   * to bring the "What customers say" carousel and reviews section back.
+   * Reviews are temporarily off on the hair-removal and BB cream PDPs: only
+   * the rating line above the H1 is shown, as plain text (no link to a reviews
+   * section). Remove a slug from this list to bring the "What customers say"
+   * carousel, the reviews section and the rating link back.
    */
-  const showReviews = content.slug !== "bikini-pain-free-hair-removal-spray";
+  const showReviews = ![
+    "bikini-pain-free-hair-removal-spray",
+    "missha-perfect-cover-bb-cream",
+  ].includes(content.slug);
   const showPatchNotice = false;
 
   const perks = view.perks.map((text) => ({ icon: perkIcon(text), text }));
@@ -361,7 +391,7 @@ export default async function ProductPage({ params }: Props) {
                  product has no buyers figure. */
               const faces = (
                 <span aria-hidden="true" className="flex shrink-0 -space-x-2">
-                  {RATING_AVATARS.map((src, i) => (
+                  {ratingAvatars.map((src, i) => (
                     <Image
                       key={src}
                       src={src}
@@ -371,7 +401,7 @@ export default async function ProductPage({ params }: Props) {
                       className={cn(
                         "size-6 rounded-full object-cover ring-2 ring-porcelain",
                         // Three faces is all a 320px line can hold.
-                        i === RATING_AVATARS.length - 1 && "hidden sm:block",
+                        i === ratingAvatars.length - 1 && "hidden sm:block",
                       )}
                     />
                   ))}
@@ -379,7 +409,7 @@ export default async function ProductPage({ params }: Props) {
               );
               return (
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-ui text-[0.8125rem]">
-                  {!content.pdp.customers && faces}
+                  {!customers && faces}
                   {showReviews ? (
                     <a
                       href="#reviews"
@@ -396,7 +426,7 @@ export default async function ProductPage({ params }: Props) {
                       {rating}
                     </span>
                   )}
-                  {content.pdp.customers && (
+                  {customers && (
                     <>
                       <span
                         aria-hidden="true"
@@ -408,18 +438,18 @@ export default async function ProductPage({ params }: Props) {
                         {faces}
                         <span>
                           <span className="font-numeral text-[0.9375rem] font-bold text-ink tabular-nums">
-                            {content.pdp.customers.count.toLocaleString(
+                            {customers.count.toLocaleString(
                               "en-US",
                             )}
                             +
                           </span>{" "}
                           buyers
-                          {content.pdp.customers.months && (
+                          {customers.months && (
                             /* Hidden on phones, and in the narrow lg buy-box
                                column where it would force a second line. */
                             <span className="hidden sm:inline lg:hidden xl:inline">
                               {" "}
-                              in last {content.pdp.customers.months} months
+                              in last {customers.months} months
                             </span>
                           )}
                         </span>

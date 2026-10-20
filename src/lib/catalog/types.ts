@@ -87,6 +87,14 @@ export type ProductRecord = {
    * Null when unset, so the PDP falls back to the feed's own average.
    */
   ratingAverage: number | null;
+  /**
+   * From the `custom.customers_count` metafield — orders shipped, shown as
+   * "N+ buyers" beside the rating. Null when unset, so the PDP falls back to
+   * the figure in `content/products.ts` (or shows none).
+   */
+  customersCount: number | null;
+  /** From the `custom.customers_months` metafield — the window that count covers, in months. */
+  customersMonths: number | null;
 };
 
 export type CatalogDocument = {

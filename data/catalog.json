@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-20T17:40:26.702Z",
+  "syncedAt": "2026-10-20T18:17:23.027Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-20T13:46:47Z",
+      "updatedAt": "2026-10-20T17:53:31Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -344,7 +344,9 @@
       ],
       "saleEndsAt": "2026-10-21T04:00:00.000Z",
       "ratingCount": 1736,
-      "ratingAverage": 5
+      "ratingAverage": 5,
+      "customersCount": null,
+      "customersMonths": null
     },
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
@@ -710,7 +712,9 @@
       ],
       "saleEndsAt": null,
       "ratingCount": null,
-      "ratingAverage": null
+      "ratingAverage": null,
+      "customersCount": null,
+      "customersMonths": null
     },
     "voyage-nova-middle-eastern-rose-fragrance": {
       "id": "gid://shopify/Product/15407150530787",
@@ -937,7 +941,9 @@
       ],
       "saleEndsAt": null,
       "ratingCount": null,
-      "ratingAverage": null
+      "ratingAverage": null,
+      "customersCount": null,
+      "customersMonths": null
     },
     "belurae-body-adhesive": {
       "id": "gid://shopify/Product/15413115486435",
@@ -1275,7 +1281,9 @@
       ],
       "saleEndsAt": null,
       "ratingCount": null,
-      "ratingAverage": null
+      "ratingAverage": null,
+      "customersCount": null,
+      "customersMonths": null
     },
     "post-hair-removal-care-oil-jojoba-and-almond-blend-soothes-sensitivity-locks-in-hydration-and-supports-daily-skin-comfort": {
       "id": "gid://shopify/Product/15425423868131",
@@ -1441,7 +1449,9 @@
       "perks": [],
       "saleEndsAt": null,
       "ratingCount": null,
-      "ratingAverage": null
+      "ratingAverage": null,
+      "customersCount": null,
+      "customersMonths": null
     },
     "missha-perfect-cover-bb-cream": {
       "id": "gid://shopify/Product/15435198529763",
@@ -1450,7 +1460,7 @@
       "vendor": "Belurae",
       "productType": "",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-20T11:35:43Z",
+      "updatedAt": "2026-10-20T18:17:16Z",
       "seo": {
         "title": "MISSHA M Perfect Cover BB Cream, 35 ml | Belurae",
         "description": "A 35 ml concealing, moisturizing BB cream in 3 shades with 10 probiotics and Bifida Ferment Lysate, as listed. Lightweight, sheer finish."
@@ -1931,8 +1941,10 @@
         "Clean formula: no high-concern chemicals listed"
       ],
       "saleEndsAt": "2026-10-22T04:00:00.000Z",
-      "ratingCount": null,
-      "ratingAverage": null
+      "ratingCount": 639,
+      "ratingAverage": 5,
+      "customersCount": 3197,
+      "customersMonths": 3
     },
     "makeup-egg-beauty-egg-blender-cosmetic-puff-makeup-sponge-beauty-tool-for-women": {
       "id": "gid://shopify/Product/15435297161443",
@@ -1941,7 +1953,7 @@
       "vendor": "Belurae",
       "productType": "",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-20T17:32:00Z",
+      "updatedAt": "2026-10-20T17:43:44Z",
       "seo": {
         "title": null,
         "description": null
@@ -2373,7 +2385,9 @@
       "perks": [],
       "saleEndsAt": null,
       "ratingCount": null,
-      "ratingAverage": null
+      "ratingAverage": null,
+      "customersCount": null,
+      "customersMonths": null
     }
   }
 }

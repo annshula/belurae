@@ -100,6 +100,8 @@ type ProductData = {
     saleEndsAt: { value: string } | null;
     ratingCount: { value: string } | null;
     ratingAverage: { value: string } | null;
+    customersCount: { value: string } | null;
+    customersMonths: { value: string } | null;
   } | null;
 };
 
@@ -166,6 +168,8 @@ query ProductByHandle($handle: String!) {
     saleEndsAt: metafield(namespace: "custom", key: "sale_ends_at") { value }
     ratingCount: metafield(namespace: "custom", key: "rating_count") { value }
     ratingAverage: metafield(namespace: "custom", key: "rating_average") { value }
+    customersCount: metafield(namespace: "custom", key: "customers_count") { value }
+    customersMonths: metafield(namespace: "custom", key: "customers_months") { value }
   }
 }`;
 
@@ -370,6 +374,8 @@ async function fetchProduct(handle: string): Promise<ProductRecord | null> {
     saleEndsAt: normalizeSaleEndsAt(product.saleEndsAt),
     ratingCount: normalizeCount(product.ratingCount),
     ratingAverage: normalizeAverage(product.ratingAverage),
+    customersCount: normalizeCount(product.customersCount),
+    customersMonths: normalizeCount(product.customersMonths),
   };
 }
 
