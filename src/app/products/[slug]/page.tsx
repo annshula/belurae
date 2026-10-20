@@ -90,10 +90,17 @@ const glueVideos: ShowcaseVideo[] = [1, 2, 3, 4, 5].map((n) =>
   clip(`/videos/glue/glue-${n}.mp4`, `Belurae body adhesive video ${n}`),
 );
 
+/** BB cream clips — served from `public/videos/bb-cream` (720p, ~1 Mbps, still frame beside each). */
+const bbCreamVideos: ShowcaseVideo[] = [1, 2, 3, 4, 5].map((n) =>
+  clip(`/videos/bb-cream/bb-cream-${n}.mp4`, `BB cream video ${n}`),
+);
+
 /** Per-product clip sets; products without an entry use the mousse clips. */
 const productVideosBySlug: Record<string, ShowcaseVideo[]> = {
   "egf-tox-toner": tonerVideos,
   "belurae-body-adhesive": glueVideos,
+  "missha-m-perfect-cover-bb-cream-35ml-whitening-concealer-moisturizing-foundation-strengthen-skin-barrier-natural-lasting-wear":
+    bbCreamVideos,
 };
 
 /**

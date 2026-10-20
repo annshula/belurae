@@ -259,6 +259,44 @@ export const ingredients: Ingredient[] = [
       "The manufacturer gives a shelf life of 3 years.",
     ],
   },
+  {
+    slug: "probiotics",
+    name: "Probiotics",
+    inci: "Varies (ferments and lysates of beneficial bacteria)",
+    icon: "leaf",
+    summary:
+      "In skin care, “probiotics” usually means ingredients made from beneficial bacteria, most often ferments or lysates, rather than live cultures.",
+    whatItIs: [
+      "A cosmetic can't keep live bacteria stable in a cream, so probiotic ingredients are normally the fermented or broken-down (lysate) form of bacteria such as Lactobacillus or Bifidobacterium.",
+      "On a pack they appear under their own INCI names, for example “Lactobacillus Ferment” or “Bifida Ferment Lysate”, so the word “probiotic” rarely appears in the declaration itself.",
+    ],
+    whyUsed: [
+      "Formulators add them as skin-conditioning ingredients, and brands use the word to describe the ferment-based part of a formula.",
+    ],
+    goodToKnow: [
+      "The listing for this BB cream says it contains 10 probiotics but doesn't name them. The exact ingredients are in the declaration printed on the pack.",
+      "As with any ingredient, ferment-based ones can still irritate some skins, so patch test first.",
+    ],
+  },
+  {
+    slug: "bifida-ferment-lysate",
+    name: "Bifida ferment lysate",
+    inci: "Bifida Ferment Lysate",
+    icon: "sparkles",
+    summary:
+      "Bifida Ferment Lysate is a skin-conditioning ingredient made from a fermented culture of Bifidobacterium, then broken down into a lysate.",
+    whatItIs: [
+      "Bifidobacteria are a family of bacteria. For cosmetics, a culture is fermented and the cells are broken down, and the resulting liquid is the lysate.",
+      "It is a long-standing ingredient name in skin care, often found in serums, creams and BB creams.",
+    ],
+    whyUsed: [
+      "Formulators use it as a skin-conditioning ingredient. The listing for this BB cream names it among the formula's ingredients.",
+    ],
+    goodToKnow: [
+      "Where it sits on the declaration gives a rough idea of how much is present: ingredients are listed in descending order down to 1%.",
+      "Patch test any new leave-on product 24 hours before first use.",
+    ],
+  },
 ];
 
 export function ingredientBySlug(slug: string): Ingredient | undefined {

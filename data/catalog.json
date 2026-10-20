@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-20T07:40:57.453Z",
+  "syncedAt": "2026-10-20T11:25:31.175Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-20T07:06:15Z",
+      "updatedAt": "2026-10-20T10:01:14Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -353,7 +353,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-18T16:50:11Z",
+      "updatedAt": "2026-10-20T10:01:12Z",
       "seo": {
         "title": null,
         "description": null
@@ -719,7 +719,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-18T16:50:08Z",
+      "updatedAt": "2026-10-20T10:01:09Z",
       "seo": {
         "title": "Middle Eastern Rose Fragrance · 50 ml Spray",
         "description": "A 50 ml rose fragrance spray with a soft, light rose scent. Spray on wrists, neck and behind the ears. Ingredients, directions and safety guidance."
@@ -946,7 +946,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-18T16:50:11Z",
+      "updatedAt": "2026-10-20T10:01:09Z",
       "seo": {
         "title": "Body Adhesive · 20 ml Liquid Tube",
         "description": "A 20 ml liquid body adhesive for clothes, dancewear and tape. Sweat and water resistant, latex-free, washes off with water. Directions and safety guidance."
@@ -1284,7 +1284,7 @@
       "vendor": "Belurae",
       "productType": "",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-18T16:50:12Z",
+      "updatedAt": "2026-10-20T10:01:07Z",
       "seo": {
         "title": null,
         "description": null
@@ -1440,6 +1440,449 @@
       "featureHighlights": [],
       "perks": [],
       "saleEndsAt": "2026-10-20T17:00:00.000Z",
+      "ratingCount": null,
+      "ratingAverage": null
+    },
+    "missha-m-perfect-cover-bb-cream-35ml-whitening-concealer-moisturizing-foundation-strengthen-skin-barrier-natural-lasting-wear": {
+      "id": "gid://shopify/Product/15435198529763",
+      "handle": "missha-m-perfect-cover-bb-cream-35ml-whitening-concealer-moisturizing-foundation-strengthen-skin-barrier-natural-lasting-wear",
+      "title": "[Cardi B's PICK] M Perfect Cover Serum BB Cream (35ml) - Bifida Ferment Lysate Serum-Infused BB Cream for Anti-Aging Skin Rejuvenation, Skin Tint, Tinted Moisturizer, Skin Care Foundation Makeup,Superfood Complex,Glass Skin CardiBB OGBB PurpleBB",
+      "vendor": "Belurae",
+      "productType": "",
+      "status": "ACTIVE",
+      "updatedAt": "2026-10-20T11:22:54Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
+      "options": [
+        {
+          "name": "Pack",
+          "values": [
+            "1 Pack",
+            "2 Pack",
+            "3 Pack"
+          ]
+        },
+        {
+          "name": "Color",
+          "values": [
+            "Natural Beige",
+            "Warm Beige",
+            "Bee Beige"
+          ]
+        }
+      ],
+      "availableForSale": true,
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67751451164899",
+          "title": "1 Pack / Natural Beige",
+          "sku": "200001176:200004889#No. 23 natural beige",
+          "barcode": null,
+          "price": 24.99,
+          "compareAtPrice": 39.99,
+          "availableForSale": true,
+          "options": {
+            "Pack": "1 Pack",
+            "Color": "Natural Beige"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S27134e1f784a4b3aa39fdd65b716e64fv.webp?v=1792491704",
+          "description": "BB Cream"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67751451197667",
+          "title": "1 Pack / Warm Beige",
+          "sku": "200001176:1254#No. 25 warm beige",
+          "barcode": null,
+          "price": 24.99,
+          "compareAtPrice": 39.99,
+          "availableForSale": true,
+          "options": {
+            "Pack": "1 Pack",
+            "Color": "Warm Beige"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa3078c97ab644299a8b27daa3cb64195B.webp?v=1792491704",
+          "description": "BB Cream"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67751451230435",
+          "title": "1 Pack / Bee Beige",
+          "sku": "200001176:200000195#No. 27 bee beige",
+          "barcode": null,
+          "price": 24.99,
+          "compareAtPrice": 39.99,
+          "availableForSale": true,
+          "options": {
+            "Pack": "1 Pack",
+            "Color": "Bee Beige"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sce783d3a390e42c39e3dcd6419b37ef3H.webp?v=1792491704",
+          "description": "BB Cream"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752197193955",
+          "title": "2 Pack / Natural Beige",
+          "sku": "200001176:200004889#No. 23 natural beige|2PK cream+primer",
+          "barcode": null,
+          "price": 39.99,
+          "compareAtPrice": 49.99,
+          "availableForSale": true,
+          "options": {
+            "Pack": "2 Pack",
+            "Color": "Natural Beige"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S27134e1f784a4b3aa39fdd65b716e64fv.webp?v=1792491704",
+          "description": "BB Cream + Gel Face Primer"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752197226723",
+          "title": "3 Pack / Natural Beige",
+          "sku": "200001176:200004889#No. 23 natural beige|3PK cream+primer+spray",
+          "barcode": null,
+          "price": 49.99,
+          "compareAtPrice": 74.99,
+          "availableForSale": true,
+          "options": {
+            "Pack": "3 Pack",
+            "Color": "Natural Beige"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S27134e1f784a4b3aa39fdd65b716e64fv.webp?v=1792491704",
+          "description": "BB Cream + Gel Face Primer + Setting Spray"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752197259491",
+          "title": "2 Pack / Warm Beige",
+          "sku": "200001176:1254#No. 25 warm beige|2PK cream+primer",
+          "barcode": null,
+          "price": 39.99,
+          "compareAtPrice": 49.99,
+          "availableForSale": true,
+          "options": {
+            "Pack": "2 Pack",
+            "Color": "Warm Beige"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa3078c97ab644299a8b27daa3cb64195B.webp?v=1792491704",
+          "description": "BB Cream + Gel Face Primer"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752197292259",
+          "title": "3 Pack / Warm Beige",
+          "sku": "200001176:1254#No. 25 warm beige|3PK cream+primer+spray",
+          "barcode": null,
+          "price": 49.99,
+          "compareAtPrice": 74.99,
+          "availableForSale": true,
+          "options": {
+            "Pack": "3 Pack",
+            "Color": "Warm Beige"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa3078c97ab644299a8b27daa3cb64195B.webp?v=1792491704",
+          "description": "BB Cream + Gel Face Primer + Setting Spray"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752197325027",
+          "title": "2 Pack / Bee Beige",
+          "sku": "200001176:200000195#No. 27 bee beige|2PK cream+primer",
+          "barcode": null,
+          "price": 39.99,
+          "compareAtPrice": 49.99,
+          "availableForSale": true,
+          "options": {
+            "Pack": "2 Pack",
+            "Color": "Bee Beige"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sce783d3a390e42c39e3dcd6419b37ef3H.webp?v=1792491704",
+          "description": "BB Cream + Gel Face Primer"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752197357795",
+          "title": "3 Pack / Bee Beige",
+          "sku": "200001176:200000195#No. 27 bee beige|3PK cream+primer+spray",
+          "barcode": null,
+          "price": 49.99,
+          "compareAtPrice": 74.99,
+          "availableForSale": true,
+          "options": {
+            "Pack": "3 Pack",
+            "Color": "Bee Beige"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sce783d3a390e42c39e3dcd6419b37ef3H.webp?v=1792491704",
+          "description": "BB Cream + Gel Face Primer + Setting Spray"
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Se30de780bc134828aeea86ae8b38d752i.webp?v=1792491704",
+          "width": 1290,
+          "height": 1267,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/MISSHA_Purple_BB_Cream_Beauty_Ad.png?v=1792492960",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Cardi_B_s_Missha_BB_Transformation.png?v=1792492894",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Missha_Purple_BB_Cream_Benefits.png?v=1792492895",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S545258059a8e42feb588f4f41f7a7020j.png?v=1792492233",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S8135090fa2e04d9e813df71d25e1a954N.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/MISSHA_BB_Cream__Old_vs_New_Design.png?v=1792495217",
+          "width": 1254,
+          "height": 1254,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sc6d1b71dffd9464c8280fea5842c31e3i.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S0c1c672889924aeea8686910b5ff6984z.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa60944419e124ddfa54feb22c4f4b1d3Q.webp?v=1792491704",
+          "width": 1289,
+          "height": 1287,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd292e702bac24226bbaeb98425b2adc7r.webp?v=1792491704",
+          "width": 1290,
+          "height": 1409,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sb3dff1f8ecdf47d1a16744cdea4e6b13h.webp?v=1792491704",
+          "width": 1290,
+          "height": 1316,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sf834ec888e9f4214b263567c0ea89f21e.webp?v=1792491704",
+          "width": 1290,
+          "height": 1277,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S17a4676f60284f7d98df79bd6b02d348h.webp?v=1792491704",
+          "width": 1289,
+          "height": 1265,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S951f64d0ed92418893a5a17f5890facf0.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Saa036da73f004fa8b5d34b98a22dffa6x.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S2686526b7a8f4e7f8b736b65b4175d528.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S2ed4741690bb458ebc32b9bf7615d312X.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S03c69bc213b341bb987b6796e28b2589j.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa298f5e487b54927a9c6d01d3d479cc8R.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sce783d3a390e42c39e3dcd6419b37ef3H.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752197357795"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S27134e1f784a4b3aa39fdd65b716e64fv.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752197226723"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa3078c97ab644299a8b27daa3cb64195B.webp?v=1792491704",
+          "width": 1001,
+          "height": 1001,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752197292259"
+        }
+      ],
+      "specs": [
+        {
+          "label": "Brand",
+          "value": "MISSHA",
+          "description": null
+        },
+        {
+          "label": "Format",
+          "value": "BB cream, 35 ml",
+          "description": null
+        },
+        {
+          "label": "Shades",
+          "value": "Natural Beige, Warm Beige, Bee Beige",
+          "description": null
+        },
+        {
+          "label": "Formulation",
+          "value": "Cream",
+          "description": null
+        },
+        {
+          "label": "Benefit",
+          "value": "Concealing and moisturizing",
+          "description": null
+        },
+        {
+          "label": "Key ingredients",
+          "value": "10 probiotics + Bifida Ferment Lysate, as listed",
+          "description": null
+        },
+        {
+          "label": "Skin types",
+          "value": "All skin types, per the manufacturer",
+          "description": null
+        },
+        {
+          "label": "Use on",
+          "value": "Face, avoiding the eye area",
+          "description": null
+        },
+        {
+          "label": "High-concern chemicals",
+          "value": "None listed",
+          "description": null
+        },
+        {
+          "label": "Origin",
+          "value": "Mainland China, as listed",
+          "description": null
+        },
+        {
+          "label": "Package includes",
+          "value": "1 x BB cream",
+          "description": null
+        }
+      ],
+      "featureHighlights": [
+        {
+          "label": "Conceals and moisturizes in one step",
+          "body": "The manufacturer describes a 2-in-1 BB cream that covers dullness and fine lines while it moisturizes, with long-lasting hydration and no caking.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S8135090fa2e04d9e813df71d25e1a954N.webp?v=1792491704"
+        },
+        {
+          "label": "Lightweight, sheer texture",
+          "body": "Described as adhering well and not easy to smudge, so skin can look natural under makeup. Suited to all skin types, says the manufacturer.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Se30de780bc134828aeea86ae8b38d752i.webp?v=1792491704"
+        },
+        {
+          "label": "10 probiotics + Bifida Ferment Lysate",
+          "body": "The ingredients the listing names in the formula. The full declaration is printed on the pack. Patch test a small area 24 hours before first use.",
+          "image": null
+        },
+        {
+          "label": "Three shades to choose from",
+          "body": "Natural Beige, Warm Beige and Bee Beige. Screens differ, so the photos may not match the real colour exactly.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sd292e702bac24226bbaeb98425b2adc7r.webp?v=1792491704"
+        }
+      ],
+      "perks": [
+        "2-in-1 concealer + moisturizing BB cream",
+        "10 probiotics + Bifida Ferment Lysate",
+        "Natural, luxurious glow, up to 24h",
+        "Clean formula: no high-concern chemicals listed"
+      ],
+      "saleEndsAt": "2026-10-22T04:00:00.000Z",
       "ratingCount": null,
       "ratingAverage": null
     }

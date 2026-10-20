@@ -430,9 +430,12 @@ function PackCards({
 
   const photoOf = (c: LocalizedVariant | undefined) =>
     c?.image ?? view.cardImage?.url ?? null;
-  const sharedPhoto = rows.every(
-    (r) => photoOf(r.combo) === photoOf(rows[0]?.combo),
-  );
+  /* Packs of different things ("BB Cream + Primer") name their contents, and
+     never fan one product's photo into N copies. */
+  const hasContents = rows.some((r) => r.combo?.contents);
+  const sharedPhoto =
+    !hasContents &&
+    rows.every((r) => photoOf(r.combo) === photoOf(rows[0]?.combo));
 
   const cards = rows.map(({ value, combo }) => {
     const exists = Boolean(combo);
@@ -598,6 +601,11 @@ function PackCards({
                 <span className="font-ui text-[0.92rem] leading-tight font-semibold text-ink">
                   {c.label}
                 </span>
+                {c.combo?.contents && (
+                  <span className="mt-0.5 text-[0.74rem] leading-snug text-ink-soft">
+                    {c.combo.contents}
+                  </span>
+                )}
                 {c.offerLine && (
                   <span className="text-[0.74rem] font-medium text-clay-600">
                     {c.offerLine}
@@ -719,6 +727,11 @@ function PackCards({
             <span className={cn("text-body-sm font-medium", !c.wide && "mt-2")}>
               {c.label}
             </span>
+            {c.combo?.contents && (
+              <span className="mt-0.5 text-[0.72rem] leading-snug text-ink-soft">
+                {c.combo.contents}
+              </span>
+            )}
             {c.offerLine && (
               <span className="text-[0.78rem] font-semibold text-clay-600">
                 {c.offerLine}
@@ -930,6 +943,7 @@ export function PurchasePanel({
         savings: null,
         perUnit: Math.round((p.total / t.size) * 100) / 100,
         label: `${t.size} Pack`,
+        contents: null,
       };
     });
     const option = {
@@ -1154,7 +1168,14 @@ export function PurchasePanel({
                             : undefined
                         }
                       />
-                      <span className="text-body-sm font-medium">
+                      <span className="flex items-center gap-2.5 text-body-sm font-medium">
+                        {value.swatch && (
+                          <span
+                            aria-hidden="true"
+                            className="size-6 shrink-0 rounded-full ring-1 ring-ink/15"
+                            style={{ backgroundColor: value.swatch }}
+                          />
+                        )}
                         {value.label}
                       </span>
                       {!available && (

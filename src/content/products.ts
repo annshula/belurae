@@ -77,7 +77,12 @@ export type ProductContent = {
   /** Shopify option name → display label, and value → display label. */
   optionLabels: Record<
     string,
-    { label: string; values: Record<string, string> }
+    {
+      label: string;
+      values: Record<string, string>;
+      /** Option value → CSS colour; shown as a dot beside the value (shades). */
+      swatches?: Record<string, string>;
+    }
   >;
   /** Option whose values are pack sizes, mapped to unit counts. */
   packOption?: { name: string; units: Record<string, number> };
@@ -1332,6 +1337,264 @@ export const products: ProductContent[] = [
       "Exact wording of the packaging warnings",
       "Whether it is suitable near the face or hairline (the listing mentions lace front wigs but gives no warnings)",
       "Manufacturer's name (the listing says no brand; the pack reads Body Glue)",
+      "GTIN / barcode",
+    ],
+  },
+  {
+    handle:
+      "missha-m-perfect-cover-bb-cream-35ml-whitening-concealer-moisturizing-foundation-strengthen-skin-barrier-natural-lasting-wear",
+    slug: "missha-m-perfect-cover-bb-cream-35ml-whitening-concealer-moisturizing-foundation-strengthen-skin-barrier-natural-lasting-wear",
+    legacySlugs: ["missha-bb-cream"],
+    name: "MISSHA M Perfect Cover BB Cream",
+    format: "BB cream · 35 ml",
+    category: { slug: "makeup", name: "Makeup" },
+    benefitLine:
+      "A 2-in-1 concealing and moisturizing BB cream, 35 ml, in three shades. Base makeup and skincare in one step, for a natural, lightweight finish.",
+    manufacturer: "MISSHA",
+    seo: {
+      title: "MISSHA M Perfect Cover BB Cream · 35 ml",
+      description:
+        "A 35 ml concealing, moisturizing BB cream in three shades, with 10 probiotics and Bifida Ferment Lysate as listed. Lightweight, sheer texture. Directions and safety guidance.",
+    },
+    optionLabels: {
+      Pack: { label: "Choose your pack", values: {} },
+      Color: {
+        label: "Shade",
+        values: {},
+        /* Sampled from the swatch smear in each shade's own photo. */
+        swatches: {
+          "Natural Beige": "#debb9f",
+          "Warm Beige": "#efb883",
+          "Bee Beige": "#f8cca1",
+        },
+      },
+    },
+    /* Packs of different products, not quantities: what each one holds is the
+       variant's `belurae.pack_description` in Shopify, and the prices are the
+       variants' own. "units" only orders and labels the cards. */
+    packOption: {
+      name: "Pack",
+      units: { "1 Pack": 1, "2 Pack": 2, "3 Pack": 3 },
+    },
+    story: {
+      heading: "Base makeup and skincare, in one step.",
+      body: [
+        "This is a 35 ml BB cream that conceals and moisturizes at once. You smooth it on in place of a separate moisturizer and foundation, for a natural, nude-makeup look with a lightweight, sheer feel.",
+        "The listing names 10 probiotics and Bifida Ferment Lysate in the formula, and describes a natural, luxurious glow. It comes in three shades. Every skin is different, so we ask everyone to patch test first, and the safety notes below say where not to use it.",
+      ],
+    },
+    highlights: [
+      {
+        title: "Conceals and moisturizes",
+        body: "The manufacturer describes a 2-in-1 formula that covers dullness and fine lines while it moisturizes.",
+      },
+      {
+        title: "Lightweight, sheer texture",
+        body: "Described as adhering well, not easy to smudge, and not caking, so skin can look natural under makeup.",
+      },
+      {
+        title: "10 probiotics + Bifida Ferment Lysate",
+        body: "Named in the listing's formula description. The full ingredient declaration is on the pack.",
+      },
+      {
+        title: "Three shades",
+        body: "Natural Beige, Warm Beige and Bee Beige. Screens vary, so shade photos are a guide only.",
+      },
+    ],
+    steps: [
+      {
+        title: "Prepare",
+        body: "Start with clean skin. If it's your first time, patch test a small area 24 hours before.",
+      },
+      {
+        title: "Dot on",
+        body: "Place a small amount on the face, avoiding the eye area.",
+      },
+      {
+        title: "Blend",
+        body: "Smooth it out with clean fingers, a sponge or a brush until it looks even.",
+      },
+      {
+        title: "Build",
+        body: "Add a little more only where you want extra coverage.",
+      },
+    ],
+    keyIngredients: [
+      {
+        slug: "probiotics",
+        name: "10 probiotics",
+        role: "Named in the listing's formula description. The pack's declaration gives the exact ingredients.",
+        icon: "leaf",
+      },
+      {
+        slug: "bifida-ferment-lysate",
+        name: "Bifida Ferment Lysate",
+        role: "A skin-conditioning ferment ingredient, as the listing names it.",
+        icon: "sparkles",
+      },
+    ],
+    specs: [
+      { label: "Format", value: "BB cream, 35 ml" },
+      {
+        label: "Shades",
+        value: "Natural Beige, Warm Beige, Bee Beige",
+      },
+      { label: "Use on", value: "Face, avoiding the eye area" },
+      { label: "Origin", value: "Mainland China, as listed" },
+      { label: "Brand on the pack", value: "MISSHA" },
+    ],
+    inTheBox: [
+      { item: "BB cream", detail: "35 ml tube in your chosen shade" },
+      {
+        item: "Gel face primer",
+        detail: "In the 2 Pack and the 3 Pack",
+      },
+      {
+        item: "Makeup setting spray",
+        detail: "110 ml, in the 3 Pack",
+      },
+    ],
+    safety: {
+      patchTest:
+        "Patch test before first use: apply a small amount to a small area of skin and wait 24 hours. Don't use the product if you notice redness, burning, itching or swelling.",
+      note: "The manufacturer's listing gives no warnings, so we follow the standard precautions for leave-on makeup and skin care below. Read any warnings printed on the pack.",
+      use: ["Clean skin on the face"],
+      avoid: [
+        "The eyes and the area right around them",
+        "Broken, sunburnt or irritated skin",
+        "Skin that has reacted to a similar product before",
+      ],
+      ifIrritation:
+        "If your skin feels irritated, remove the product with a gentle cleanser and plenty of cool water and stop using it. If it gets in your eyes, rinse them with water. If irritation continues, contact a doctor or pharmacist.",
+    },
+    faqs: [
+      {
+        q: "What is this product?",
+        a: "A 35 ml BB cream that conceals and moisturizes in one step, in three shades.",
+      },
+      {
+        q: "How do I use it?",
+        a: "On clean skin, dot a small amount on the face, avoiding the eye area, and blend it out with clean fingers, a sponge or a brush. Add a little more only where you want extra coverage.",
+      },
+      {
+        q: "What's in each pack?",
+        a: "The 1 Pack is the BB cream on its own. The 2 Pack adds a gel face primer, and the 3 Pack adds the primer and a 110 ml makeup setting spray. The BB cream comes in your chosen shade in every pack.",
+      },
+      {
+        q: "Which shade should I choose?",
+        a: "There are three: Natural Beige, Warm Beige and Bee Beige. Screens differ, so the photos may not match the real colour exactly. If you're between two, test on your jawline in daylight before a full application.",
+      },
+      {
+        q: "Is it suitable for all skin types?",
+        a: "The manufacturer describes it as suitable for all skin types, but no product suits every skin. Patch test a small area 24 hours before your first full use.",
+      },
+      {
+        q: "Does it contain sunscreen?",
+        a: "The listing doesn't state a sun protection factor, so don't rely on this product as sunscreen. Use a separate sunscreen if you need one.",
+      },
+      {
+        q: "What are the key ingredients?",
+        a: "The listing names 10 probiotics and Bifida Ferment Lysate. The complete ingredient declaration is printed on the pack. Ask us if you have a known sensitivity.",
+      },
+      {
+        q: "Where is it made?",
+        a: "The manufacturer's listing gives Mainland China as the origin. Please confirm on the packaging.",
+      },
+      {
+        q: "Can I return it?",
+        a: "Personal-care products can't be returned once received, unless they arrive damaged, defective or incorrect — contact us and we'll put it right. EU customers also have a 14-day right to cancel. See the refund policy for details.",
+      },
+    ],
+    googleCategory:
+      "Health & Beauty > Personal Care > Cosmetics > Makeup > Face Makeup > Foundations & Concealers",
+    pdp: {
+      videosIntro: "Short clips of the BB cream, so you can see it before you buy.",
+      galleryFit: "flush",
+      packs: "cards",
+      perSetPrice: false,
+      perksOneColumn: true,
+      /* Violet, from the purple tube. */
+      theme: {
+        primary: {
+          "50": "#f6f1fb",
+          "100": "#ebe0f6",
+          "200": "#d9c5ee",
+          "300": "#bf9ee0",
+          "400": "#a074cf",
+          "500": "#8350b8",
+          "600": "#6a3a9c",
+          "700": "#562f80",
+          "800": "#432566",
+          "900": "#301a4a",
+        },
+        accent: {
+          "50": "#f8f2fb",
+          "100": "#efe2f6",
+          "200": "#dfc5ec",
+          "300": "#c79ddb",
+          "600": "#7a3a94",
+        },
+        surface: {
+          ivory: "#ffffff",
+          porcelain: "#ffffff",
+          cream: "#f5f0fa",
+          sand: "#e9e0f3",
+          linen: "#dccfe9",
+          line: "#cfc0e0",
+          ink: "#1f1829",
+          "ink-soft": "#574d66",
+          "ink-faint": "#675d76",
+        },
+      },
+      trust: [
+        { icon: "droplet", text: "2-in-1 conceal + moisturize" },
+        { icon: "feather", text: "Lightweight, sheer texture" },
+        { icon: "star", text: "Natural, luxurious glow" },
+      ],
+      dailyStep: {
+        eyebrow: "Your base, in one step",
+        heading: "Conceal. Moisturize. Done.",
+        body: "Smooth it on in place of a separate moisturizer and foundation. The manufacturer describes a lightweight, sheer texture that adheres well, doesn't cake and leaves a natural, luxurious glow.",
+        mediaFile: "S8135090fa2e04d9e813df71d25e1a954N",
+        imagePosition: "top",
+        benefits: [
+          {
+            icon: "droplet",
+            title: "Moisturizing",
+            body: "Described as long-lasting hydration without caking.",
+          },
+          {
+            icon: "feather",
+            title: "Lightweight and sheer",
+            body: "Adheres well and isn't easy to smudge, as listed.",
+          },
+          {
+            icon: "star",
+            title: "Evens the look of skin",
+            body: "Covers dullness and fine lines, according to the manufacturer.",
+          },
+        ],
+      },
+      howTo: {
+        heading: "Four simple steps.",
+        intro:
+          "The short version: start with clean skin, dot on a little, blend, and build only where you want more coverage.",
+      },
+      ingredientsNote:
+        "10 probiotics and Bifida Ferment Lysate: the ingredients the listing names. The complete declaration is printed on every pack. Ask us if you have a sensitivity.",
+      showHairRemovalComparison: false,
+      notice: {
+        lead: "Patch test 24 hours before first use.",
+        text: "Avoid the eye area.",
+      },
+    },
+    contentGaps: [
+      "Full INCI ingredient list, including the 10 named probiotics",
+      "Manufacturer's own directions and the exact wording of the packaging warnings",
+      "Whether the product has an SPF (the photos show SPF50+, the listing says nothing)",
+      "Tube size: the gallery shows both 20 ml and 35 ml tubes, the listing says 35 ml",
+      "Authorisation to sell MISSHA-branded product (the listing's brand field reads a different name)",
+      "Substantiation for the 24-hour glow and for 'clean formula' wording",
       "GTIN / barcode",
     ],
   },

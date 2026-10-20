@@ -34,6 +34,11 @@ export const primaryNav: NavGroup[] = [
         description: "Facial toner, in plain words",
       },
       {
+        label: "Makeup",
+        href: "/collections/makeup",
+        description: "A BB cream, in plain words",
+      },
+      {
         label: "Fragrance",
         href: "/collections/fragrance",
         description: "A rose fragrance spray, in plain words",
@@ -111,6 +116,7 @@ export const footerNav: NavGroup[] = [
     links: [
       { label: "Hair Removal", href: "/collections/hair-removal" },
       { label: "Skincare", href: "/collections/skincare" },
+      { label: "Makeup", href: "/collections/makeup" },
       { label: "Fragrance", href: "/collections/fragrance" },
       { label: "Body Adhesive", href: "/collections/body-adhesive" },
       { label: "Shop all", href: "/collections/all" },

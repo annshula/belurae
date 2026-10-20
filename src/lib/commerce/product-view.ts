@@ -52,12 +52,14 @@ export type ViewVariant = {
   perUnit: number;
   /** "Mousse + Cream · Trio set" */
   label: string;
+  /** What the pack holds ("BB Cream + Gel Face Primer"), from the variant's `belurae.pack_description`. */
+  contents: string | null;
 };
 
 export type ViewOption = {
   name: string;
   label: string;
-  values: { value: string; label: string }[];
+  values: { value: string; label: string; swatch?: string }[];
 };
 
 export type ProductView = {
@@ -199,6 +201,7 @@ export function buildProductView(
       label: record.options
         .map((o) => labelFor(o.name, v.options[o.name] ?? ""))
         .join(" · "),
+      contents: v.description,
     };
   });
 
@@ -210,6 +213,7 @@ export function buildProductView(
       values: o.values.map((value) => ({
         value,
         label: labelFor(o.name, value),
+        swatch: content.optionLabels[o.name]?.swatches?.[value],
       })),
     }));
 

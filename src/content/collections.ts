@@ -77,6 +77,20 @@ export const collections: CollectionContent[] = [
     ],
   },
   {
+    slug: "makeup",
+    title: "Makeup",
+    seoTitle: "Makeup — Shades, Ingredients and Directions, Plainly",
+    description:
+      "Face makeup with the shades, key ingredients, directions and safety guidance spelled out on every product page.",
+    intro:
+      "Each makeup page says what the manufacturer lists, which shades there are, how to apply it and where not to, and is clear about what we don't yet know.",
+    categories: ["makeup"],
+    related: [
+      { label: "How to patch test", href: "/guides/how-to-patch-test" },
+      { label: "Ingredients", href: "/ingredients" },
+    ],
+  },
+  {
     slug: "fragrance",
     title: "Fragrance",
     seoTitle: "Fragrance — Ingredients and Directions, Plainly",
@@ -109,9 +123,9 @@ export const collections: CollectionContent[] = [
     title: "Shop all",
     seoTitle: "Shop All Beauty & Wellness",
     description:
-      "Everything Belurae sells today — body care, skincare, fragrance and body adhesive for simpler everyday routines.",
+      "Everything Belurae sells today — body care, skincare, makeup, fragrance and body adhesive for simpler everyday routines.",
     intro:
-      "Belurae is a deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal, facial skincare, fragrance and body adhesive.",
+      "Belurae is a deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal, facial skincare, makeup, fragrance and body adhesive.",
     categories: "*",
     related: [
       { label: "Our standards", href: "/pages/standards" },
