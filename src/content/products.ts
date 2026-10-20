@@ -454,7 +454,7 @@ export const products: ProductContent[] = [
         { icon: "droplet", text: "Hydrates Skin Up to 24hrs" },
       ],
       /* Orders shipped for this product — Shopify count, read 2026-10-19. */
-      customers: { count: 3000, months: 3, asOf: "2026-10-19" },
+      customers: { count: 7841, months: 3, asOf: "2026-10-19" },
       /* Supplied by the merchant on 2026-10-07. */
       sold: { count: 17841, months: 3, asOf: "2026-10-07" },
       showHairRemovalComparison: true,
