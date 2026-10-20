@@ -69,7 +69,7 @@ const productVideos: ShowcaseVideo[] = [
       { mobileFirst: n === 2 },
     ),
   ),
-  ...[1, 2, 3, 4, 5, 6, 7, 8].map((n) =>
+  ...[2, 3].map((n) =>
     clip(`/videos/product-${n}.mp4`, `Belurae product video ${n}`),
   ),
 ];
