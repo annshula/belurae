@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-20T11:28:30.310Z",
+  "syncedAt": "2026-10-20T11:32:11.184Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -1443,17 +1443,17 @@
       "ratingCount": null,
       "ratingAverage": null
     },
-    "missha-m-perfect-cover-bb-cream-35ml-whitening-concealer-moisturizing-foundation-strengthen-skin-barrier-natural-lasting-wear": {
+    "missha-perfect-cover-bb-cream": {
       "id": "gid://shopify/Product/15435198529763",
-      "handle": "missha-m-perfect-cover-bb-cream-35ml-whitening-concealer-moisturizing-foundation-strengthen-skin-barrier-natural-lasting-wear",
+      "handle": "missha-perfect-cover-bb-cream",
       "title": "[Cardi B's PICK] M Perfect Cover Serum BB Cream (35ml) - Bifida Ferment Lysate Serum-Infused BB Cream for Anti-Aging Skin Rejuvenation, Skin Tint, Tinted Moisturizer, Skin Care Foundation Makeup,Superfood Complex,Glass Skin CardiBB OGBB PurpleBB",
       "vendor": "Belurae",
       "productType": "",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-20T11:22:54Z",
+      "updatedAt": "2026-10-20T11:31:33Z",
       "seo": {
-        "title": null,
-        "description": null
+        "title": "MISSHA M Perfect Cover BB Cream, 35 ml | Belurae",
+        "description": "A 35 ml concealing, moisturizing BB cream in 3 shades with 10 probiotics and Bifida Ferment Lysate, as listed. Lightweight, sheer finish."
       },
       "options": [
         {
@@ -1883,6 +1883,447 @@
         "Clean formula: no high-concern chemicals listed"
       ],
       "saleEndsAt": "2026-10-22T04:00:00.000Z",
+      "ratingCount": null,
+      "ratingAverage": null
+    },
+    "makeup-egg-beauty-egg-blender-cosmetic-puff-makeup-sponge-beauty-tool-for-women": {
+      "id": "gid://shopify/Product/15435297161443",
+      "handle": "makeup-egg-beauty-egg-blender-cosmetic-puff-makeup-sponge-beauty-tool-for-women",
+      "title": "Makeup Egg Beauty Egg Blender Cosmetic Puff Makeup Sponge Beauty Tool For Women",
+      "vendor": "Belurae",
+      "productType": "",
+      "status": "ACTIVE",
+      "updatedAt": "2026-10-20T11:06:59Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "style4-1pc",
+            "yellow-1pc",
+            "pink-3pcs",
+            "blue-3pcs",
+            "yellow-3pcs",
+            "style2-1pc",
+            "style2-3pcs",
+            "style3-1pc",
+            "style3-3pcs",
+            "pink-1pc",
+            "style1-3pcs",
+            "blue-1pc",
+            "style1-1pc",
+            "style4-1pc 1"
+          ]
+        }
+      ],
+      "availableForSale": true,
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67752124776675",
+          "title": "style4-1pc",
+          "sku": "14:94#style4-1pc",
+          "barcode": null,
+          "price": 1.78,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "style4-1pc"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S6186238cb69644169fcb6ea4ae863a2dM.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124448995",
+          "title": "yellow-1pc",
+          "sku": "14:1052#yellow-1pc",
+          "barcode": null,
+          "price": 5.29,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "yellow-1pc"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Scef482437b20417d9fbb267222933482J.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124481763",
+          "title": "pink-3pcs",
+          "sku": "14:173#pink-3pcs",
+          "barcode": null,
+          "price": 2.33,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "pink-3pcs"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S63fd4fa7b70a48caa4647b497fddca53K.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124514531",
+          "title": "blue-3pcs",
+          "sku": "14:175#blue-3pcs",
+          "barcode": null,
+          "price": 6.95,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "blue-3pcs"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S8b1b14f2a3df46f7bee5a059ab9c6fd3w.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124547299",
+          "title": "yellow-3pcs",
+          "sku": "14:496#yellow-3pcs",
+          "barcode": null,
+          "price": 2.26,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "yellow-3pcs"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sc9c3b61a6da744ddb4699c41c44dc384h.webp?v=1792493805",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124580067",
+          "title": "style2-1pc",
+          "sku": "14:2198#style2-1pc",
+          "barcode": null,
+          "price": 1.76,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "style2-1pc"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sb71f845ad4ee4443a72617376d3764e9J.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124612835",
+          "title": "style2-3pcs",
+          "sku": "14:200211869#style2-3pcs",
+          "barcode": null,
+          "price": 2.25,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "style2-3pcs"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S0a8d4027547a40dd9b051925394e9a52i.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124645603",
+          "title": "style3-1pc",
+          "sku": "14:10#style3-1pc",
+          "barcode": null,
+          "price": 5.45,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "style3-1pc"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa9a05d16290c47a0a82cbd37b24f9627w.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124678371",
+          "title": "style3-3pcs",
+          "sku": "14:350853#style3-3pcs",
+          "barcode": null,
+          "price": 2.3,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "style3-3pcs"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4fe56553cb374cae9b2ebca52d770608e.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124711139",
+          "title": "pink-1pc",
+          "sku": "14:29#pink-1pc",
+          "barcode": null,
+          "price": 1.78,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "pink-1pc"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S789c0796a9f34fb4b60f70682a66f6509.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124743907",
+          "title": "style1-3pcs",
+          "sku": "14:193#style1-3pcs",
+          "barcode": null,
+          "price": 2.23,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "style1-3pcs"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sed81bac361b240cc9123d25efb75c6c2s.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124809443",
+          "title": "blue-1pc",
+          "sku": "14:366#blue-1pc",
+          "barcode": null,
+          "price": 5.45,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "blue-1pc"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Se43ced2d1c6542b09a6945df132836a5X.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124842211",
+          "title": "style1-1pc",
+          "sku": "14:350852#style1-1pc",
+          "barcode": null,
+          "price": 5.33,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "style1-1pc"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S264cba1219494edc9e0277e84346e3ceV.webp?v=1792493804",
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/67752124874979",
+          "title": "style4-1pc 1",
+          "sku": "14:201335404#style4-1pc",
+          "barcode": null,
+          "price": 2.25,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Color": "style4-1pc 1"
+          },
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S039cca059fab43d19d84f25104a2f46bg.webp?v=1792493804",
+          "description": null
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S6186238cb69644169fcb6ea4ae863a2dM.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124776675"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S5beeb3a4233b4db9aafba179f4d2d427H.webp?v=1792493805",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S334958bfd5c3450ca0132a6589130c71D.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Scde5781f48e54b55a5731d7075844e62b.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa2a930dba2964ff0bbe2f00e948808ed7.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S8e12938016774578b4197dd21e712fadw.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4be463c338454791ab072287ce8d41c35.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S64e810d6a1fa44a2bd0caeac125a9b5e3.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S415d6897e8eb415d99641a8f84f3d7c89.webp?v=1792493805",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa3b7467a07a24b80b85db62dd4f6374bI.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S55d98980ea0f4771bcbf407b840e8d0fX.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sabe616e265a843e5ac0334d0188515b7B.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S789c0796a9f34fb4b60f70682a66f6509.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124711139"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Se43ced2d1c6542b09a6945df132836a5X.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124809443"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S264cba1219494edc9e0277e84346e3ceV.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124842211"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S039cca059fab43d19d84f25104a2f46bg.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124874979"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Scef482437b20417d9fbb267222933482J.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124448995"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S63fd4fa7b70a48caa4647b497fddca53K.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124481763"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S8b1b14f2a3df46f7bee5a059ab9c6fd3w.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124514531"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sc9c3b61a6da744ddb4699c41c44dc384h.webp?v=1792493805",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124547299"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sb71f845ad4ee4443a72617376d3764e9J.webp?v=1792493804",
+          "width": 1024,
+          "height": 1024,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124580067"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S4fe56553cb374cae9b2ebca52d770608e.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124678371"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sed81bac361b240cc9123d25efb75c6c2s.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124743907"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/S0a8d4027547a40dd9b051925394e9a52i.webp?v=1792493804",
+          "width": 1024,
+          "height": 1024,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124612835"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/Sa9a05d16290c47a0a82cbd37b24f9627w.webp?v=1792493804",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": "gid://shopify/ProductVariant/67752124645603"
+        }
+      ],
+      "specs": [],
+      "featureHighlights": [],
+      "perks": [],
+      "saleEndsAt": null,
       "ratingCount": null,
       "ratingAverage": null
     }

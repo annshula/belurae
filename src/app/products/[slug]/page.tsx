@@ -99,8 +99,7 @@ const bbCreamVideos: ShowcaseVideo[] = [1, 2, 3, 4, 5].map((n) =>
 const productVideosBySlug: Record<string, ShowcaseVideo[]> = {
   "egf-tox-toner": tonerVideos,
   "belurae-body-adhesive": glueVideos,
-  "missha-m-perfect-cover-bb-cream-35ml-whitening-concealer-moisturizing-foundation-strengthen-skin-barrier-natural-lasting-wear":
-    bbCreamVideos,
+  "missha-perfect-cover-bb-cream": bbCreamVideos,
 };
 
 /**

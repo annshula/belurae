@@ -1341,10 +1341,12 @@ export const products: ProductContent[] = [
     ],
   },
   {
-    handle:
+    handle: "missha-perfect-cover-bb-cream",
+    slug: "missha-perfect-cover-bb-cream",
+    legacySlugs: [
+      "missha-bb-cream",
       "missha-m-perfect-cover-bb-cream-35ml-whitening-concealer-moisturizing-foundation-strengthen-skin-barrier-natural-lasting-wear",
-    slug: "missha-m-perfect-cover-bb-cream-35ml-whitening-concealer-moisturizing-foundation-strengthen-skin-barrier-natural-lasting-wear",
-    legacySlugs: ["missha-bb-cream"],
+    ],
     name: "MISSHA M Perfect Cover BB Cream",
     format: "BB cream · 35 ml",
     category: { slug: "makeup", name: "Makeup" },
@@ -1354,7 +1356,7 @@ export const products: ProductContent[] = [
     seo: {
       title: "MISSHA M Perfect Cover BB Cream · 35 ml",
       description:
-        "A 35 ml concealing, moisturizing BB cream in three shades, with 10 probiotics and Bifida Ferment Lysate as listed. Lightweight, sheer texture. Directions and safety guidance.",
+        "A 35 ml concealing, moisturizing BB cream in 3 shades with 10 probiotics and Bifida Ferment Lysate, as listed. Lightweight, sheer finish.",
     },
     optionLabels: {
       Pack: { label: "Choose your pack", values: {} },

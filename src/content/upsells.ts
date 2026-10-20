@@ -37,6 +37,14 @@ export const UPSELLS: readonly Upsell[] = [
     triggers: ["bikini-pain-free-hair-removal-spray"],
     rating: { value: 5, count: 439 },
   },
+  {
+    handle:
+      "makeup-egg-beauty-egg-blender-cosmetic-puff-makeup-sponge-beauty-tool-for-women",
+    name: "Makeup Blending Sponge",
+    blurb: "Soft egg-shaped sponge · for foundation and concealer",
+    triggers: ["missha-perfect-cover-bb-cream"],
+    rating: null,
+  },
 ];
 
 export const UPSELL_HANDLES: readonly string[] = UPSELLS.map((u) => u.handle);
