@@ -238,6 +238,7 @@ export default async function ProductPage({ params }: Props) {
    * to bring the "What customers say" carousel and reviews section back.
    */
   const showReviews = content.slug !== "bikini-pain-free-hair-removal-spray";
+  const showPatchNotice = false;
 
   const perks = view.perks.map((text) => ({ icon: perkIcon(text), text }));
 
@@ -556,10 +557,10 @@ export default async function ProductPage({ params }: Props) {
               </ol>
             </div>
 
-            <ul className="mt-3 space-y-3.5 rounded-card bg-cream/80 p-5 text-body-sm md:p-6">
+            {/* <ul className="mt-3 space-y-3.5 rounded-card bg-cream/80 p-5 text-body-sm md:p-6">
               <li className="flex gap-3">
                 <Icon name="shield" className="size-5 shrink-0" />
-                <span>Secure checkout by Shopify.</span>
+                <span>Secure checkout</span>
               </li>
               <li className="flex gap-3">
                 <Icon name="refresh" className="size-5 shrink-0" />
@@ -570,9 +571,12 @@ export default async function ProductPage({ params }: Props) {
                   </Link>
                 </span>
               </li>
-            </ul>
+            </ul> */}
 
-            {content.pdp.notice && (
+            {/* Patch-test panel hidden from the buy box for now — the same
+                guidance stays in the #safety section. Flip `showPatchNotice`
+                to bring it back. */}
+            {showPatchNotice && content.pdp.notice && (
               <aside
                 className="mt-3 flex gap-3 rounded-card bg-clay-100 p-5 text-body-sm"
                 aria-label="Patch test"
