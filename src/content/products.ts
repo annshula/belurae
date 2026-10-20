@@ -85,7 +85,12 @@ export type ProductContent = {
     }
   >;
   /** Option whose values are pack sizes, mapped to unit counts. */
-  packOption?: { name: string; units: Record<string, number> };
+  packOption?: {
+    name: string;
+    units: Record<string, number>;
+    /** Pack cards show each pack's `optionLabels` name instead of "N Pack" (named bundles). */
+    named?: boolean;
+  };
   /**
    * Quantity-break packs on ONE variant (one SKU): a "2 Pack" is quantity 2 of
    * the same variant. The percentages must match the Shopify automatic
@@ -1359,7 +1364,14 @@ export const products: ProductContent[] = [
         "A 35 ml concealing, moisturizing BB cream in 3 shades with 10 probiotics and Bifida Ferment Lysate, as listed. Lightweight, sheer finish.",
     },
     optionLabels: {
-      Pack: { label: "Choose your pack", values: {} },
+      Pack: {
+        label: "Choose your set",
+        values: {
+          "1 Pack": "The Essential",
+          "2 Pack": "Prep & Cover",
+          "3 Pack": "The Complete Look",
+        },
+      },
       Color: {
         label: "Shade",
         values: {},
@@ -1377,6 +1389,7 @@ export const products: ProductContent[] = [
     packOption: {
       name: "Pack",
       units: { "1 Pack": 1, "2 Pack": 2, "3 Pack": 3 },
+      named: true,
     },
     story: {
       heading: "Base makeup and skincare, in one step.",
@@ -1449,11 +1462,11 @@ export const products: ProductContent[] = [
       { item: "BB cream", detail: "35 ml tube in your chosen shade" },
       {
         item: "Gel face primer",
-        detail: "In the 2 Pack and the 3 Pack",
+        detail: "In Prep & Cover and The Complete Look",
       },
       {
         item: "Makeup setting spray",
-        detail: "110 ml, in the 3 Pack",
+        detail: "110 ml, in The Complete Look",
       },
     ],
     safety: {
@@ -1479,8 +1492,8 @@ export const products: ProductContent[] = [
         a: "On clean skin, dot a small amount on the face, avoiding the eye area, and blend it out with clean fingers, a sponge or a brush. Add a little more only where you want extra coverage.",
       },
       {
-        q: "What's in each pack?",
-        a: "The 1 Pack is the BB cream on its own. The 2 Pack adds a gel face primer, and the 3 Pack adds the primer and a 110 ml makeup setting spray. The BB cream comes in your chosen shade in every pack.",
+        q: "What's in each set?",
+        a: "The Essential is the BB cream on its own. Prep & Cover adds a gel face primer, and The Complete Look adds the primer and a 110 ml makeup setting spray. The BB cream comes in your chosen shade in every set.",
       },
       {
         q: "Which shade should I choose?",

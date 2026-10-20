@@ -462,11 +462,13 @@ function PackCards({
       saved,
       checked: selection[name] === value.value,
       available: optionAvailable(name, value.value),
-      label: buy2get1
-        ? "Buy 2 Get 1 Free"
-        : combo
-          ? `${combo.units} Pack`
-          : value.label,
+      label: view.packNamed
+        ? value.label
+        : buy2get1
+          ? "Buy 2 Get 1 Free"
+          : combo
+            ? `${combo.units} Pack`
+            : value.label,
       tag:
         combo?.units === FEATURED_PACK
           ? "Most popular"

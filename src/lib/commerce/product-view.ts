@@ -79,6 +79,8 @@ export type ProductView = {
   cardImage: ViewImage | null;
   cardImageAlt: ViewImage | null;
   packOptionName: string | null;
+  /** Pack cards use the content's pack names instead of "N Pack". */
+  packNamed: boolean;
   /** Quantity-break packs on the single variant (1 / 2 / 3 Pack), or null when packs are separate variants. */
   packTiers: PackTier[] | null;
   /** Shopify `custom.specs` metaobjects — the merchant's own spec sheet. */
@@ -250,6 +252,7 @@ export function buildProductView(
     cardImage: images[0] ?? null,
     cardImageAlt: images[1] ?? null,
     packOptionName: packName,
+    packNamed: content.packOption?.named ?? false,
     packTiers: content.packTiers ?? null,
     specs: record.specs,
     featureHighlights: record.featureHighlights,
