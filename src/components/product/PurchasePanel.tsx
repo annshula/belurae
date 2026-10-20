@@ -470,7 +470,6 @@ function PackCards({
           : combo && combo.units > FEATURED_PACK
             ? "Household or gift"
             : null,
-      featured: combo?.units === FEATURED_PACK,
       /* A pack bigger than the featured one gets a full-width row on tablet
          and desktop, so a 4th card never squeezes the three above it. */
       wide: (combo?.units ?? 0) > FEATURED_PACK,
@@ -494,24 +493,17 @@ function PackCards({
 
   /* Flat cards — no drop shadows; selection is a 2px border. */
   const surface = (c: (typeof cards)[number]) =>
-    c.featured
+    c.offer
       ? cn(
-          "bg-sage-50",
+          "bg-white",
           c.checked
-            ? "border-sage-800"
-            : "border-sage-600 hover:border-sage-800",
+            ? "border-clay-600"
+            : "border-clay-600/50 hover:border-clay-600",
         )
-      : c.offer
-        ? cn(
-            "bg-white",
-            c.checked
-              ? "border-clay-600"
-              : "border-clay-600/50 hover:border-clay-600",
-          )
-        : cn(
-            "bg-transparent",
-            c.checked ? "border-sage-800" : "border-sand hover:border-sage-300",
-          );
+      : cn(
+          "bg-transparent",
+          c.checked ? "border-sage-800" : "border-sand hover:border-sage-300",
+        );
 
   return (
     <fieldset className="min-w-0">
