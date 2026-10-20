@@ -343,7 +343,7 @@ export default async function ProductPage({ params }: Props) {
                   />
                   <span className="whitespace-nowrap">
                     <span className="font-numeral font-semibold tabular-nums">
-                      {displayRating.average.toFixed(1)}/5
+                      {displayRating.average.toFixed(1)}
                     </span>{" "}
                     <span className="text-ink-soft">rating</span>
                   </span>
