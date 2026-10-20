@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-18T16:50:25.463Z",
+  "syncedAt": "2026-10-20T05:48:17.862Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-18T16:50:09Z",
+      "updatedAt": "2026-10-20T05:48:13Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -22,7 +22,11 @@
       "options": [
         {
           "name": "Quantity",
-          "values": ["1PC", "2PCS", "3PCS"]
+          "values": [
+            "1PC",
+            "2PCS",
+            "3PCS"
+          ]
         }
       ],
       "availableForSale": true,
@@ -338,9 +342,9 @@
         "35% Less Chemical Ingredients",
         "Cruelty-Free & Plant-Based"
       ],
-      "saleEndsAt": "2026-10-20T17:00:00.000Z",
-      "ratingCount": 2243,
-      "ratingAverage": 4.9
+      "saleEndsAt": "2026-10-21T04:00:00.000Z",
+      "ratingCount": null,
+      "ratingAverage": null
     },
     "egf-tox-toner": {
       "id": "gid://shopify/Product/15400113897699",
@@ -357,7 +361,11 @@
       "options": [
         {
           "name": "Color",
-          "values": ["100ml Boxed", "2 x 100ml Boxed", "3 x 100ml Boxed"]
+          "values": [
+            "100ml Boxed",
+            "2 x 100ml Boxed",
+            "3 x 100ml Boxed"
+          ]
         }
       ],
       "availableForSale": true,
@@ -719,7 +727,11 @@
       "options": [
         {
           "name": "Quantity",
-          "values": ["1PC", "2PCS", "3PCS"]
+          "values": [
+            "1PC",
+            "2PCS",
+            "3PCS"
+          ]
         }
       ],
       "availableForSale": true,
@@ -942,7 +954,9 @@
       "options": [
         {
           "name": "Color",
-          "values": ["20mlX1"]
+          "values": [
+            "20mlX1"
+          ]
         }
       ],
       "availableForSale": true,
@@ -1278,7 +1292,9 @@
       "options": [
         {
           "name": "Color",
-          "values": ["60ml"]
+          "values": [
+            "60ml"
+          ]
         }
       ],
       "availableForSale": true,
