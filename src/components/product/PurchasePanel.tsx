@@ -501,8 +501,9 @@ function PackCards({
             : "border-clay-600/50 hover:border-clay-600",
         )
       : cn(
-          "bg-transparent",
-          c.checked ? "border-sage-800" : "border-sand hover:border-sage-300",
+          c.checked
+            ? "border-sage-800 bg-sage-50"
+            : "border-sand bg-transparent hover:border-sage-300",
         );
 
   return (
