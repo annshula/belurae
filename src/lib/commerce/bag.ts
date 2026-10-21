@@ -2,7 +2,7 @@ import "server-only";
 
 import type { BagCatalog } from "@/components/cart/CartProvider";
 import { getCatalog, getProducts, storeCurrency } from "@/lib/catalog";
-import { UPSELLS } from "@/content/upsells";
+import { CROSS_SELLS, UPSELLS } from "@/content/upsells";
 import { buildProductView } from "@/lib/commerce/product-view";
 import { getPaymentMethods } from "@/lib/shopify/payments";
 
@@ -18,6 +18,11 @@ export async function getBagCatalog(): Promise<BagCatalog> {
   for (const { record, content } of products) {
     const view = buildProductView(record, content, currency);
     const fallbackImage = view.cardImage?.url ?? null;
+    const cross = CROSS_SELLS.find((c) => c.handle === record.handle);
+    const rating =
+      record.ratingAverage != null && record.ratingCount
+        ? { value: record.ratingAverage, count: record.ratingCount }
+        : null;
     for (const v of view.variants) {
       variants[v.id] = {
         productName: view.name,
@@ -36,6 +41,11 @@ export async function getBagCatalog(): Promise<BagCatalog> {
         tiers: view.packTiers,
         handle: record.handle,
         upsell: null,
+        /* Only the first variant is offered, like a cart upsell's. */
+        crossSell:
+          cross && v === view.variants[0]
+            ? { blurb: cross.blurb, triggers: [...cross.triggers], rating }
+            : null,
       };
     }
   }
@@ -60,6 +70,7 @@ export async function getBagCatalog(): Promise<BagCatalog> {
       tiers: null,
       handle: record.handle,
       upsell: { blurb: u.blurb, triggers: [...u.triggers], rating: u.rating },
+      crossSell: null,
     };
   }
   return { currency, variants, payments };

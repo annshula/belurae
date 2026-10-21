@@ -53,6 +53,12 @@ export type BagVariant = {
     triggers: string[];
     rating: { value: number; count: number } | null;
   } | null;
+  /** Set on a product that has its own page but is also offered in the bag. Unlike an upsell, it stays an ordinary line once added. */
+  crossSell: {
+    blurb: string;
+    triggers: string[];
+    rating: { value: number; count: number } | null;
+  } | null;
 };
 
 export type BagCatalog = {
@@ -169,7 +175,7 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
     const ids = new Set<string>();
     for (const l of raw) ids.add(l.variantId);
     for (const [id, v] of Object.entries(catalog.variants)) {
-      if (v.upsell) ids.add(id);
+      if (v.upsell || v.crossSell) ids.add(id);
     }
     requestPrices([...ids]);
   }, [raw, catalog, requestPrices]);
@@ -258,9 +264,12 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
   const upsells = useMemo<UpsellOffer[]>(() => {
     const handlesInBag = new Set(lines.map((l) => l.handle));
     return Object.entries(catalog.variants).flatMap(([variantId, v]) => {
-      if (!v.upsell || !v.available) return [];
+      const offer = v.upsell ?? v.crossSell;
+      if (!offer || !v.available) return [];
       if (lines.some((l) => l.variantId === variantId)) return [];
-      if (!v.upsell.triggers.some((h) => handlesInBag.has(h))) return [];
+      /* Any pack of a cross-sold product in the bag counts as already added. */
+      if (handlesInBag.has(v.handle)) return [];
+      if (!offer.triggers.some((h) => handlesInBag.has(h))) return [];
       const live = localized ? localizedPriceFor(variantId) : null;
       if (localized && !live) return [];
       const amount = live ? Number.parseFloat(live.amount) : NaN;
@@ -277,6 +286,8 @@ export function CartProvider({ catalog, children }: { catalog: BagCatalog; child
       return [
         {
           ...v,
+          /* The card reads its blurb and rating from `upsell`. */
+          upsell: offer,
           variantId,
           price,
           compareAtPrice: compareAt != null && compareAt > price ? compareAt : null,

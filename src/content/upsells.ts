@@ -42,8 +42,33 @@ export const UPSELLS: readonly Upsell[] = [
       "makeup-egg-beauty-egg-blender-cosmetic-puff-makeup-sponge-beauty-tool-for-women",
     name: "Makeup Blending Sponge",
     blurb: "Soft egg-shaped sponge · for foundation and concealer",
-    triggers: ["missha-perfect-cover-bb-cream"],
+    // Hidden for now: no triggers, so the bag never offers it. Restore
+    // ["missha-perfect-cover-bb-cream"] to show it again.
+    triggers: [],
     rating: null,
+  },
+];
+
+/**
+ * Cross-sells: products that do have their own page (and a collection card)
+ * but are also offered in the bag. Once added they are ordinary bag lines, with
+ * the product-page link, pack picker and stepper. The first variant is the one
+ * offered, and the rating shown is the product's own from the catalog.
+ */
+export type CrossSell = {
+  /** Shopify handle of the product. */
+  handle: string;
+  /** One line under the name. Cosmetic wording only (no medical claims). */
+  blurb: string;
+  /** Offered while one of these products is in the bag. */
+  triggers: readonly string[];
+};
+
+export const CROSS_SELLS: readonly CrossSell[] = [
+  {
+    handle: "bikini-pain-free-hair-removal-spray",
+    blurb: "Spray-on body hair removal mousse · no blade, no wax strips",
+    triggers: ["missha-perfect-cover-bb-cream"],
   },
 ];
 
