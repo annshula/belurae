@@ -26,6 +26,15 @@ const MONTHS = [
   "DEC",
 ];
 
+/** Shortcuts under the empty bag. Mirrors content/collections.ts, kept here so that file stays out of the client bundle. */
+const EMPTY_BAG_CATEGORIES = [
+  { label: "Hair removal", href: "/collections/hair-removal" },
+  { label: "Skincare", href: "/collections/skincare" },
+  { label: "Makeup", href: "/collections/makeup" },
+  { label: "Fragrance", href: "/collections/fragrance" },
+  { label: "Body adhesive", href: "/collections/body-adhesive" },
+];
+
 /** Month + pack + saved %, e.g. 3 Pack saving 47% in October → OCTP347. */
 function couponCode(units: number, percent: number) {
   return `${MONTHS[new Date().getMonth()]}P${units}${percent}`;
@@ -73,27 +82,44 @@ export function BagContents({ onNavigate }: { onNavigate?: () => void }) {
 
   if (lines.length === 0) {
     return (
-      <div className="flex flex-1 flex-col items-start gap-5 p-6">
-        <p className="font-serif text-heading-2">Your bag is empty.</p>
-        <p className="text-body-sm text-ink-soft">
-          Start with our hair removal mousse, or read how it works first.
+      <div className="flex flex-1 flex-col items-center justify-center px-6 py-10 text-center">
+        <span className="grid size-16 place-items-center rounded-full bg-sage-100 text-sage-800">
+          <Icon name="bag" className="size-7" />
+        </span>
+        <p className="mt-5 font-serif text-heading-2">Your bag is empty</p>
+        <p className="mt-2 max-w-xs text-body-sm text-ink-soft">
+          Pick something you love and it will wait for you here.
         </p>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/collections/hair-removal"
-            className="btn-primary"
-            onClick={onNavigate}
-          >
-            Shop hair removal
-          </Link>
-          <Link
-            href="/guides/how-to-use-hair-removal-mousse"
-            className="btn-quiet"
-            onClick={onNavigate}
-          >
-            How it works
-          </Link>
-        </div>
+        <Link
+          href="/collections/all"
+          className="btn-primary mt-6 w-full max-w-xs"
+          onClick={onNavigate}
+        >
+          Shop all
+        </Link>
+        <p className="mt-8 font-ui text-[0.68rem] font-semibold tracking-[0.08em] text-ink-soft uppercase">
+          Or browse by category
+        </p>
+        <ul className="mt-3 flex flex-wrap justify-center gap-2">
+          {EMPTY_BAG_CATEGORIES.map((c) => (
+            <li key={c.href}>
+              <Link
+                href={c.href}
+                onClick={onNavigate}
+                className="inline-flex min-h-10 items-center rounded-full bg-sand/70 px-4 text-[0.8125rem] hover:bg-sand"
+              >
+                {c.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link
+          href="/guides"
+          className="mt-6 text-[0.8125rem] text-ink-soft underline underline-offset-4 hover:text-ink"
+          onClick={onNavigate}
+        >
+          Read our guides
+        </Link>
       </div>
     );
   }
