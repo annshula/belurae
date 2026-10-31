@@ -271,7 +271,7 @@ function PackFieldset({
                     id={`${name}-${value.value}-na`}
                     className="mt-1 block text-[0.75rem] text-ink-soft sm:mt-0.5"
                   >
-                    Sold out
+                    Out of stock
                   </span>
                 )}
               </span>
@@ -626,7 +626,7 @@ function PackCards({
                 )}
                 {c.exists && !c.available && (
                   <span className="mt-1 text-[0.7rem] text-ink-soft">
-                    Sold out
+                    Out of stock
                   </span>
                 )}
               </span>
@@ -775,7 +775,7 @@ function PackCards({
             )}
             {c.exists && !c.available && (
               <span className="mt-1 text-[0.72rem] text-ink-soft">
-                Sold out
+                Out of stock
               </span>
             )}
           </label>
@@ -939,7 +939,6 @@ export function PurchasePanel({
         compareAtPrice: p.full > p.total ? p.full : null,
         compareAtPercent: p.percent > 0 ? p.percent : null,
         availableForSale: canBuy,
-        inStock: variant.inStock,
         sku: variant.sku,
         image: t.image ?? variant.image,
         units: t.size,
@@ -1186,7 +1185,7 @@ export function PurchasePanel({
                           id={`${option.name}-${value.value}-na`}
                           className="text-[0.75rem] text-ink-soft"
                         >
-                          Sold out
+                          Out of stock
                         </span>
                       )}
                     </label>
@@ -1200,11 +1199,6 @@ export function PurchasePanel({
 
       <div className="mt-9">
         {priceLine}
-        {variant && canBuy && !variant.inStock && (
-          <p className="mt-3 text-body-sm font-semibold text-ink">
-            Out of stock
-          </p>
-        )}
         <button
           ref={buttonRef}
           type="button"
@@ -1215,7 +1209,7 @@ export function PurchasePanel({
           {!variant ? (
             "Choose your options"
           ) : !canBuy ? (
-            "Sold out"
+            "Out of stock"
           ) : added ? (
             <>
               <Icon name="check" className="size-4" /> Added to bag

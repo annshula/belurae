@@ -50,9 +50,9 @@ export function ProductCard({
             className="hidden object-cover opacity-0 transition-opacity duration-500 [@media(hover:hover)]:block group-hover:opacity-100"
           />
         )}
-        {(!product.availableForSale || !product.inStock) && (
+        {!product.availableForSale && (
           <span className="glass absolute top-3 left-3 rounded-tag px-2.5 py-1 font-headline text-[0.68rem] tracking-widest uppercase">
-            {product.availableForSale ? "Out of stock" : "Sold out"}
+            Out of stock
           </span>
         )}
       </div>

@@ -39,8 +39,6 @@ type AdminVariantNode = {
   price: string | null;
   compareAtPrice: string | null;
   availableForSale: boolean;
-  inventoryQuantity: number | null;
-  inventoryItem: { tracked: boolean } | null;
   selectedOptions: { name: string; value: string }[];
   image: { url: string } | null;
   packDescription: { value: string } | null;
@@ -124,8 +122,6 @@ query ProductByHandle($handle: String!) {
     variants(first: 100) {
       nodes {
         id title sku barcode price compareAtPrice availableForSale
-        inventoryQuantity
-        inventoryItem { tracked }
         selectedOptions { name value }
         image { url }
         packDescription: metafield(namespace: "belurae", key: "pack_description") { value }
@@ -218,8 +214,6 @@ function normalizeVariants(nodes: AdminVariantNode[]): VariantRecord[] {
         price,
         compareAtPrice: compare != null && compare > price ? compare : null,
         availableForSale: v.availableForSale,
-        // Untracked inventory is never "out"; tracked stock at 0 or below is.
-        inStock: !v.inventoryItem?.tracked || (v.inventoryQuantity ?? 0) > 0,
         options: Object.fromEntries(
           v.selectedOptions.map((o) => [o.name, o.value]),
         ),
