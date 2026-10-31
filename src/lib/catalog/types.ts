@@ -13,6 +13,12 @@ export type VariantRecord = {
   /** Only kept when greater than price (Shopify allows nonsense values). */
   compareAtPrice: number | null;
   availableForSale: boolean;
+  /**
+   * Physical stock on hand. `availableForSale` stays true when Shopify's
+   * "Continue selling when out of stock" is on, so this is what drives the
+   * "Out of stock" label. Absent in older catalog files — treat as in stock.
+   */
+  inStock?: boolean;
   /** Option name → value, e.g. { Style: "Spray", Pack: "2PCS" }. */
   options: Record<string, string>;
   image: string | null;

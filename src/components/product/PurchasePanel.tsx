@@ -939,6 +939,7 @@ export function PurchasePanel({
         compareAtPrice: p.full > p.total ? p.full : null,
         compareAtPercent: p.percent > 0 ? p.percent : null,
         availableForSale: canBuy,
+        inStock: variant.inStock,
         sku: variant.sku,
         image: t.image ?? variant.image,
         units: t.size,
@@ -1199,6 +1200,11 @@ export function PurchasePanel({
 
       <div className="mt-9">
         {priceLine}
+        {variant && canBuy && !variant.inStock && (
+          <p className="mt-3 text-body-sm font-semibold text-ink">
+            Out of stock
+          </p>
+        )}
         <button
           ref={buttonRef}
           type="button"

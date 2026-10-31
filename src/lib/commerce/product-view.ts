@@ -44,6 +44,8 @@ export type ViewVariant = {
   /** Percent off compareAtPrice, when compareAtPrice exists. */
   compareAtPercent: number | null;
   availableForSale: boolean;
+  /** False when stock is 0 but Shopify still allows the sale (continue selling). */
+  inStock: boolean;
   sku: string | null;
   image: string | null;
   units: number;
@@ -75,6 +77,8 @@ export type ProductView = {
   defaultVariantId: string;
   fromPrice: number;
   availableForSale: boolean;
+  /** True when at least one variant has stock on hand. */
+  inStock: boolean;
   gallery: ViewMedia[];
   cardImage: ViewImage | null;
   cardImageAlt: ViewImage | null;
@@ -195,6 +199,7 @@ export function buildProductView(
       compareAtPrice: v.compareAtPrice,
       compareAtPercent,
       availableForSale: v.availableForSale,
+      inStock: v.inStock !== false,
       sku: v.sku,
       image: v.image,
       units,
@@ -248,6 +253,7 @@ export function buildProductView(
     defaultVariantId: defaultVariant?.id ?? "",
     fromPrice,
     availableForSale: record.availableForSale,
+    inStock: variants.some((v) => v.inStock),
     gallery,
     cardImage: images[0] ?? null,
     cardImageAlt: images[1] ?? null,

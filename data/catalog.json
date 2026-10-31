@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-20T18:50:32.091Z",
+  "syncedAt": "2026-10-31T10:33:50.925Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-20T17:53:31Z",
+      "updatedAt": "2026-10-31T10:28:16Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -38,7 +38,7 @@
           "barcode": null,
           "price": 29.99,
           "compareAtPrice": null,
-          "availableForSale": true,
+          "availableForSale": false,
           "options": {
             "Quantity": "1PC"
           },
@@ -52,7 +52,7 @@
           "barcode": null,
           "price": 49.99,
           "compareAtPrice": 59.98,
-          "availableForSale": true,
+          "availableForSale": false,
           "options": {
             "Quantity": "2PCS"
           },
@@ -342,7 +342,7 @@
         "35% Less Chemical Ingredients",
         "Cruelty-Free & Plant-Based"
       ],
-      "saleEndsAt": "2026-10-21T04:00:00.000Z",
+      "saleEndsAt": null,
       "ratingCount": 1736,
       "ratingAverage": 5,
       "customersCount": null,
@@ -1292,7 +1292,7 @@
       "vendor": "Belurae",
       "productType": "",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-20T10:01:07Z",
+      "updatedAt": "2026-10-27T00:58:56Z",
       "seo": {
         "title": null,
         "description": null
@@ -1460,7 +1460,7 @@
       "vendor": "Belurae",
       "productType": "",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-20T18:50:25Z",
+      "updatedAt": "2026-10-21T07:40:25Z",
       "seo": {
         "title": "MISSHA M Perfect Cover BB Cream, 35 ml | Belurae",
         "description": "A 35 ml concealing, moisturizing BB cream in 3 shades with 10 probiotics and Bifida Ferment Lysate, as listed. Lightweight, sheer finish."
@@ -1940,7 +1940,7 @@
         "Natural, luxurious glow, up to 24h",
         "Clean formula: no high-concern chemicals listed"
       ],
-      "saleEndsAt": "2026-10-22T04:00:00.000Z",
+      "saleEndsAt": null,
       "ratingCount": 639,
       "ratingAverage": 5,
       "customersCount": 3197,
@@ -1953,7 +1953,7 @@
       "vendor": "Belurae",
       "productType": "",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-20T17:43:44Z",
+      "updatedAt": "2026-10-28T04:43:46Z",
       "seo": {
         "title": null,
         "description": null
