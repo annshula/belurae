@@ -4,11 +4,12 @@ import Link from "next/link";
 import { PageHero } from "@/components/content/PageHero";
 import { Icon } from "@/components/ui/Icon";
 import { ingredients } from "@/content/ingredients";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Ingredients — What's In Our Products and Why",
   description:
-    "Plain-language explanations of the key ingredients in Belurae products: what each ingredient is and why formulators use it.",
+    `Plain-language explanations of the key ingredients in ${site.name} products: what each ingredient is and why formulators use it.`,
   alternates: { canonical: "/ingredients" },
 };
 

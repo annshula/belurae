@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { SearchTracker } from "@/components/content/SearchTracker";
 import { search } from "@/lib/search";
+import { site } from "@/lib/site";
 
 /** Search — dynamic, noindex (also X-Robots-Tag in next.config). */
 export const metadata: Metadata = {
@@ -38,7 +39,7 @@ export default async function SearchPage({ searchParams }: Props) {
         className="mt-8 flex gap-2"
       >
         <label htmlFor="q" className="sr-only">
-          Search Belurae
+          Search {site.name}
         </label>
         <input
           id="q"

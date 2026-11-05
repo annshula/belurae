@@ -454,7 +454,7 @@ function NoReviewsYet() {
       <div>
         <p className="font-serif text-heading-1 font-light">No reviews yet.</p>
         <p className="mt-4 max-w-xl text-ink-soft">
-          Belurae shows reviews from verified Belurae orders — we don&apos;t
+          {site.name} shows reviews from verified {site.name} orders — we don&apos;t
           import reviews from marketplaces or other sellers. After your order
           arrives you&apos;ll get an email inviting you to share how it went.
         </p>

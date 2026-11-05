@@ -6,13 +6,20 @@
 const rawUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000";
 
+/**
+ * The brand name shown everywhere (header, footer, titles, copy, schema).
+ * Set NEXT_PUBLIC_SITE_NAME to rename the site; it falls back to "Belurae".
+ * It is public (inlined into the client bundle), so rebuild after changing it.
+ */
+const brand = process.env.NEXT_PUBLIC_SITE_NAME?.trim() || "Belurae";
+
 export const site = {
-  name: "Belurae",
+  name: brand,
   url: rawUrl.replace(/\/+$/, ""),
   tagline: "Beauty, made simpler.",
   descriptor: "Thoughtful care for everyday rituals.",
   description:
-    "Belurae is a beauty and wellness store for simpler everyday body-care routines — starting with at-home hair removal, sold with full ingredient information, clear directions and honest limitations.",
+    `${brand} is a beauty and wellness store for simpler everyday body-care routines — starting with at-home hair removal, sold with full ingredient information, clear directions and honest limitations.`,
   /** Where customers reach a human. */
   supportEmail:
     process.env.NEXT_PUBLIC_SUPPORT_EMAIL?.trim() || "support@shoptrackify.com",

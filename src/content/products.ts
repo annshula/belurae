@@ -14,6 +14,13 @@
 import type { IconName } from "@/components/ui/Icon";
 import type { PackTier } from "@/lib/commerce/tiers";
 
+/* next.config.ts imports this file and cannot resolve the "@/" alias, so the
+   brand name is read from the env here instead of importing `site` (keep in
+   step with src/lib/site.ts). */
+const site = {
+  name: process.env.NEXT_PUBLIC_SITE_NAME?.trim() || "Belurae",
+};
+
 export type ProductFaq = { q: string; a: string };
 
 /** The neutrals a theme can re-tint (globals.css: --color-<name>). */
@@ -516,7 +523,7 @@ export const products: ProductContent[] = [
     legacySlugs: [
       "hydrating-smoothing-toner-even-skin-tone-brightening-skin-refines-skin-texture-fast-absorbing-non-greasy-refreshing-facial-toner",
     ],
-    name: "Belurae EGF Tox Toner",
+    name: `${site.name} EGF Tox Toner`,
     format: "Facial toner · 100 ml",
     category: { slug: "skincare", name: "Skincare" },
     benefitLine:
@@ -1014,7 +1021,7 @@ export const products: ProductContent[] = [
       },
       {
         q: "Why does the box say Voyage Novus?",
-        a: "That is the name printed on the manufacturer's box and bottle. Belurae is the seller.",
+        a: `That is the name printed on the manufacturer's box and bottle. ${site.name} is the seller.`,
       },
       {
         q: "Can I return it?",
@@ -1651,7 +1658,7 @@ export const products: ProductContent[] = [
     category: { slug: "hair-styling", name: "Hair Styling" },
     benefitLine:
       "A one-touch automatic hair curler with negative ion technology, a ceramic tourmaline barrel and 15 temperature levels.",
-    manufacturer: "Belurae",
+    manufacturer: site.name,
     seo: {
       title: "Automatic Hair Curler · Negative Ion, 15 Heat Levels",
       description:

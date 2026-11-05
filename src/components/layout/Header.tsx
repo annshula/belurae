@@ -118,7 +118,7 @@ export async function Header() {
           className="justify-self-center pl-[0.2em] font-logo text-[1.35rem] leading-none tracking-[0.2em] sm:pl-[0.26em] sm:text-[1.7rem] sm:tracking-[0.26em] lg:pl-[0.3em] lg:text-[1.85rem] lg:tracking-[0.3em]"
           aria-label={`${site.name} — home`}
         >
-          BELURAE
+          {site.name.toUpperCase()}
         </Link>
 
         <div className="flex items-center justify-end gap-1">

@@ -8,6 +8,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { useCart } from "@/components/cart/CartProvider";
 import { Icon } from "@/components/ui/Icon";
 import type { NavGroup } from "@/content/navigation";
+import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /**
@@ -409,7 +410,7 @@ export function MobileMenu({ groups }: { groups: NavGroup[] }) {
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between px-5 pt-4 pb-2">
             <span className="font-logo text-[1.35rem] leading-none tracking-[0.3em]">
-              BELURAE
+              {site.name.toUpperCase()}
             </span>
             <button
               type="button"

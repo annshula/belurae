@@ -1,3 +1,4 @@
+import { site } from "@/lib/site";
 /**
  * Collection pages. A collection is published only when it has real products
  * and real introductory content (no thin category pages).
@@ -134,9 +135,9 @@ export const collections: CollectionContent[] = [
     title: "Shop all",
     seoTitle: "Shop All Beauty & Wellness",
     description:
-      "Everything Belurae sells today — body care, skincare, makeup, fragrance and body adhesive for simpler everyday routines.",
+      `Everything ${site.name} sells today — body care, skincare, makeup, fragrance and body adhesive for simpler everyday routines.`,
     intro:
-      "Belurae is a deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal, facial skincare, makeup, fragrance and body adhesive.",
+      `${site.name} is a deliberate range. We add products only when we can explain exactly what they are, how to use them and who they're for. Today that means at-home hair removal, facial skincare, makeup, fragrance and body adhesive.`,
     categories: "*",
     related: [
       { label: "Our standards", href: "/pages/standards" },

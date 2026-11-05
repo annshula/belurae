@@ -29,8 +29,8 @@ export const metadata: Metadata = {
 
 const homeFaqs = [
   {
-    q: "What is Belurae?",
-    a: "Belurae is a beauty and wellness store built around simpler everyday body-care routines. We start with at-home hair removal and publish the key ingredients, directions and limitations of everything we sell.",
+    q: `What is ${site.name}?`,
+    a: `${site.name} is a beauty and wellness store built around simpler everyday body-care routines. We start with at-home hair removal and publish the key ingredients, directions and limitations of everything we sell.`,
   },
   {
     q: "How does the hair removal mousse work?",
@@ -130,7 +130,7 @@ export default async function HomePage() {
                 <em className="font-normal text-sage-700">made simpler.</em>
               </h1>
               <p className="mx-auto mt-5 max-w-md text-body-lg text-ink-soft lg:mx-0">
-                Belurae is a beauty and wellness house for simpler everyday
+                {site.name} is a beauty and wellness house for simpler everyday
                 rituals — considered products, clear ingredients and honest
                 guidance, one category at a time.
               </p>
@@ -140,7 +140,7 @@ export default async function HomePage() {
                   <Icon name="arrow-right" className="size-4" />
                 </Link>
                 <Link href="/pages/philosophy" className="btn-quiet">
-                  Discover Belurae
+                  Discover {site.name}
                 </Link>
               </div>
             </div>
@@ -256,7 +256,7 @@ export default async function HomePage() {
                 inline-flex pill, so it follows the wrapper's text alignment.
                 The pillar cards below stay left-aligned. */}
             <div className="text-center lg:text-left">
-              <p className="eyebrow eyebrow-dot text-sage-200">Why Belurae</p>
+              <p className="eyebrow eyebrow-dot text-sage-200">Why {site.name}</p>
               <h2
                 id="why"
                 className="mx-auto mt-6 max-w-3xl font-serif text-display font-light lg:mx-0"

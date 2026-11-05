@@ -64,30 +64,30 @@ const productVideos: ShowcaseVideo[] = [
   ...[1, 2, 3, 4, 5, 6].map((n) =>
     clip(
       `/videos/hair-removal/hair-removal-${n}.mp4`,
-      `Belurae hair removal video ${n}`,
+      `${site.name} hair removal video ${n}`,
       // Mobile leads with the 2nd clip; desktop keeps the numbered order.
       { mobileFirst: n === 2 },
     ),
   ),
   ...[2, 3].map((n) =>
-    clip(`/videos/product-${n}.mp4`, `Belurae product video ${n}`),
+    clip(`/videos/product-${n}.mp4`, `${site.name} product video ${n}`),
   ),
 ];
 
 /** Toner clips — served from `public/videos/toner` (compressed from `toner_video/`). */
 const tonerVideos: ShowcaseVideo[] = [
-  clip("/videos/toner/toner-new-3.mp4", "Belurae EGF Tox toner video 1"),
+  clip("/videos/toner/toner-new-3.mp4", `${site.name} EGF Tox toner video 1`),
   ...[1, 2, 3, 4, 5].map((n) =>
     clip(
       `/videos/toner/toner-${n}.mp4`,
-      `Belurae EGF Tox toner video ${n + 1}`,
+      `${site.name} EGF Tox toner video ${n + 1}`,
     ),
   ),
 ];
 
 /** Body adhesive clips — served from `public/videos/glue` (720p, ~1 Mbps, still frame beside each). */
 const glueVideos: ShowcaseVideo[] = [1, 2, 3, 4, 5].map((n) =>
-  clip(`/videos/glue/glue-${n}.mp4`, `Belurae body adhesive video ${n}`),
+  clip(`/videos/glue/glue-${n}.mp4`, `${site.name} body adhesive video ${n}`),
 );
 
 /** BB cream clips — served from `public/videos/bb-cream` (720p, ~1 Mbps, still frame beside each). */

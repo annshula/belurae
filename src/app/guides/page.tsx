@@ -5,12 +5,12 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/content/PageHero";
 import { guides } from "@/content/guides";
 import { breadcrumbSchema, graph } from "@/lib/seo/schema";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Guides — Hair Removal, Sensitive Skin & Aftercare",
   description:
-    "Practical, honest guides to at-home hair removal, patch testing and aftercare from the Belurae editorial team.",
+    `Practical, honest guides to at-home hair removal, patch testing and aftercare from the ${site.name} editorial team.`,
   alternates: { canonical: "/guides" },
 };
 
@@ -22,7 +22,7 @@ export default function GuidesIndex() {
         data={graph(
           {
             "@type": "CollectionPage",
-            name: "Belurae Guides",
+            name: `${site.name} Guides`,
             url: absoluteUrl("/guides"),
             mainEntity: {
               "@type": "ItemList",

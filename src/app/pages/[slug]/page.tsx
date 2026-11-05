@@ -49,7 +49,7 @@ const faqGroups = [
       },
       {
         q: "Do you show real reviews?",
-        a: "We only show reviews from verified Belurae orders. We don't import reviews from marketplaces or other sellers.",
+        a: `We only show reviews from verified ${site.name} orders. We don't import reviews from marketplaces or other sellers.`,
       },
     ],
   },
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: "FAQs — Products, Delivery and Returns",
       description:
-        "Answers to common questions about Belurae products, how to use them, delivery and returns.",
+        `Answers to common questions about ${site.name} products, how to use them, delivery and returns.`,
       alternates: { canonical },
     };
   }

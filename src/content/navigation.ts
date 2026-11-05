@@ -1,3 +1,4 @@
+import { site } from "@/lib/site";
 /**
  * Site navigation. Only destinations that exist are listed — categories are
  * added here as real products launch (docs/blueprint/02-experience.md §6).
@@ -56,12 +57,12 @@ export const primaryNav: NavGroup[] = [
       {
         label: "Shop all",
         href: "/collections/all",
-        description: "Everything Belurae sells today",
+        description: `Everything ${site.name} sells today`,
       },
     ],
   },
   {
-    label: "Why Belurae",
+    label: `Why ${site.name}`,
     links: [
       {
         label: "Our philosophy",
@@ -137,7 +138,7 @@ export const footerNav: NavGroup[] = [
     ],
   },
   {
-    label: "Why Belurae",
+    label: `Why ${site.name}`,
     links: [
       { label: "Our philosophy", href: "/pages/philosophy" },
       { label: "Our standards", href: "/pages/standards" },

@@ -25,18 +25,18 @@ const mousse = products[0];
 export const contentPages: ContentPage[] = [
   {
     slug: "about",
-    title: "About Belurae",
+    title: `About ${site.name}`,
     eyebrow: "Our story",
     description:
-      "Belurae is a beauty and wellness store for simpler everyday body-care routines, starting with at-home hair removal — sold with key ingredients, clear directions and honest limitations.",
+      `${site.name} is a beauty and wellness store for simpler everyday body-care routines, starting with at-home hair removal — sold with key ingredients, clear directions and honest limitations.`,
     schemaType: "AboutPage",
     intro:
-      "Everyday personal care is often sold with more noise than information: big promises, tiny print, and very little about how to use a product well. Belurae is built to do the opposite.",
+      `Everyday personal care is often sold with more noise than information: big promises, tiny print, and very little about how to use a product well. ${site.name} is built to do the opposite.`,
     body: (
       <>
-        <h2>What Belurae is</h2>
+        <h2>What {site.name} is</h2>
         <p>
-          Belurae is a beauty and wellness store built around simpler everyday
+          {site.name} is a beauty and wellness store built around simpler everyday
           body-care routines. We begin with at-home hair removal — a{" "}
           {mousse?.format.toLowerCase()} you spray on, leave for 3–5 minutes
           and wipe away — and will grow into body care and aftercare, one
@@ -51,7 +51,7 @@ export const contentPages: ContentPage[] = [
         </p>
         <h2>Who makes our products</h2>
         <p>
-          Belurae is the brand. The manufacturer behind each formula is named on
+          {site.name} is the brand. The manufacturer behind each formula is named on
           the product page — we don&apos;t present another company&apos;s
           product as our own invention. We choose what we sell, publish the key
           ingredients and directions you read here, and look after you from
@@ -74,9 +74,9 @@ export const contentPages: ContentPage[] = [
   {
     slug: "philosophy",
     title: "Our philosophy",
-    eyebrow: "Why Belurae",
+    eyebrow: `Why ${site.name}`,
     description:
-      "Beauty, made simpler: why Belurae believes clarity — not hype — is what makes personal care feel premium.",
+      `Beauty, made simpler: why ${site.name} believes clarity — not hype — is what makes personal care feel premium.`,
     schemaType: "WebPage",
     intro:
       "Beauty, made simpler. Not because care should be minimal, but because it should be understandable.",
@@ -121,9 +121,9 @@ export const contentPages: ContentPage[] = [
   {
     slug: "standards",
     title: "Our standards",
-    eyebrow: "Why Belurae",
+    eyebrow: `Why ${site.name}`,
     description:
-      "How Belurae writes product claims, lists ingredients, collects reviews and prices bundles — the rules we hold ourselves to.",
+      `How ${site.name} writes product claims, lists ingredients, collects reviews and prices bundles — the rules we hold ourselves to.`,
     schemaType: "WebPage",
     intro:
       "The rules behind every product page — written down so you can hold us to them.",
@@ -151,7 +151,7 @@ export const contentPages: ContentPage[] = [
         </p>
         <h2>Reviews</h2>
         <p>
-          We only show reviews from verified Belurae orders. We don&apos;t
+          We only show reviews from verified {site.name} orders. We don&apos;t
           import reviews from marketplaces or other sellers, and we don&apos;t
           hide critical ones. When a product has no reviews yet, we say that.
         </p>
@@ -175,7 +175,7 @@ export const contentPages: ContentPage[] = [
     title: "Contact us",
     eyebrow: "Customer care",
     description:
-      "Contact Belurae customer care about orders, delivery, products or returns.",
+      `Contact ${site.name} customer care about orders, delivery, products or returns.`,
     schemaType: "ContactPage",
     intro:
       "Questions about an order, a delivery or how to use a product? Write to us and a member of the team will reply.",
@@ -206,7 +206,7 @@ export const contentPages: ContentPage[] = [
     slug: "shipping",
     title: "Shipping & delivery",
     eyebrow: "Customer care",
-    description: `Belurae orders ship with tracking and usually arrive in ${site.delivery.minDays}–${site.delivery.maxDays} days. Shipping costs and options are shown at checkout.`,
+    description: `${site.name} orders ship with tracking and usually arrive in ${site.delivery.minDays}–${site.delivery.maxDays} days. Shipping costs and options are shown at checkout.`,
     schemaType: "WebPage",
     intro: `Every order ships with tracking and usually arrives in ${site.delivery.minDays}–${site.delivery.maxDays} days.`,
     body: (
@@ -243,10 +243,10 @@ export const contentPages: ContentPage[] = [
     title: "Accessibility",
     eyebrow: "Our commitment",
     description:
-      "Belurae's accessibility statement: our target of WCAG 2.2 AA and how to report a barrier.",
+      `${site.name}'s accessibility statement: our target of WCAG 2.2 AA and how to report a barrier.`,
     schemaType: "WebPage",
     intro:
-      "We want everyone to be able to shop and learn at Belurae comfortably.",
+      `We want everyone to be able to shop and learn at ${site.name} comfortably.`,
     body: (
       <>
         <h2>Our target</h2>
