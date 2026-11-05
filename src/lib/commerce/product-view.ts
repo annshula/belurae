@@ -59,7 +59,7 @@ export type ViewVariant = {
 export type ViewOption = {
   name: string;
   label: string;
-  values: { value: string; label: string; swatch?: string }[];
+  values: { value: string; label: string; swatch?: string; note?: string }[];
   /** Swatches render as round dots with no names. */
   dotsOnly?: boolean;
   /** Values are mains plugs: drawn as pin-layout cards. */
@@ -175,24 +175,32 @@ function splitOptions(
   const unchanged = { options: record.options, variants: record.variants };
   if (!split) return unchanged;
   const re = new RegExp(split.pattern);
-  const parts = record.variants.map(
-    (v) => re.exec(v.options[split.option] ?? "")?.groups ?? null,
-  );
-  if (parts.some((g) => g === null)) return unchanged;
-  /* Only the parts named in `order` become options. Parts left out (the model)
-     are not offered, so variants that differ only by them collapse to the
-     first one in Shopify's order. */
+  const parsed = record.variants.map((v) => {
+    const groups = re.exec(v.options[split.option] ?? "")?.groups;
+    return groups ? { ...split.fill, ...stripUndefined(groups) } : null;
+  });
+  if (parsed.some((g) => g === null) && !split.dropUnmatched) return unchanged;
+  /* Only the parts named in `order` become options. Parts left out are not
+     offered, so variants that differ only by them collapse to the first one in
+     Shopify's order. */
   const seen = new Set<string>();
-  const kept: { variant: ProductRecord["variants"][number]; picked: Record<string, string> }[] = [];
+  const kept: {
+    variant: ProductRecord["variants"][number];
+    picked: Record<string, string>;
+  }[] = [];
   record.variants.forEach((v, i) => {
+    const groups = parsed[i];
+    if (!groups) return;
     const picked = Object.fromEntries(
-      split.order.map((name) => [name, parts[i]![name]!]),
+      split.order.map((name) => [name, groups[name] ?? ""]),
     );
+    if (Object.values(picked).some((value) => !value)) return;
     const key = JSON.stringify(picked);
     if (seen.has(key)) return;
     seen.add(key);
     kept.push({ variant: v, picked });
   });
+  if (kept.length === 0) return unchanged;
   const variants = kept.map(({ variant, picked }) => {
     const rest = { ...variant.options };
     delete rest[split.option];
@@ -206,6 +214,12 @@ function splitOptions(
     })),
   ];
   return { options, variants };
+}
+
+function stripUndefined(groups: Record<string, string | undefined>) {
+  return Object.fromEntries(
+    Object.entries(groups).filter(([, value]) => value !== undefined),
+  ) as Record<string, string>;
 }
 
 export function buildProductView(
@@ -271,13 +285,20 @@ export function buildProductView(
         value,
         label: labelFor(o.name, value),
         swatch: content.optionLabels[o.name]?.swatches?.[value],
+        note: content.optionLabels[o.name]?.notes?.[value],
       })),
       dotsOnly: content.optionLabels[o.name]?.dotsOnly,
       plugGlyphs: content.optionLabels[o.name]?.plugGlyphs,
     }));
 
   const available = variants.filter((v) => v.availableForSale);
+  const wanted = content.optionSplit?.defaultOptions;
   const defaultVariant =
+    (wanted
+      ? available.find((v) =>
+          Object.entries(wanted).every(([k, val]) => v.options[k] === val),
+        )
+      : undefined) ??
     available.find((v) => v.units === 1) ??
     available[0] ??
     variants[0];

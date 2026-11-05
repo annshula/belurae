@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-11-05T16:57:58.953Z",
+  "syncedAt": "2026-11-05T17:53:29.768Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -2390,286 +2390,211 @@
       "customersMonths": null
     },
     "fully-automatic-hair-curler": {
-      "id": "gid://shopify/Product/15471288156387",
+      "id": "gid://shopify/Product/15471466971363",
       "handle": "fully-automatic-hair-curler",
-      "title": "Fully Automatic Electric Curling Iron",
+      "title": "Hair Curling Iron",
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-11-05T16:47:25Z",
+      "updatedAt": "2026-11-05T17:50:42Z",
       "seo": {
-        "title": "Automatic Hair Curler | Belurae",
-        "description": "An automatic electric hair curler with negative ion technology, a ceramic tourmaline barrel and 15 temperature levels. Specifications and what is in the box."
+        "title": "Hair Curling Iron | Belurae",
+        "description": "An automatic hair curler with two-way ten-hole negative ions, a 28 mm ceramic barrel and 3 temperature levels. Specifications and what is in the box."
       },
       "options": [
         {
           "name": "Power",
           "values": [
-            "889 Beep Beige US Plug",
-            "889 Beep Pink US Plug",
-            "889 Beep Purple US Plug",
-            "889 Beep Beige EU Plug",
-            "889 Beep Pink EU Plug",
-            "889 Beep Purple EU Plug",
-            "889 Beep Beige UK Plug",
-            "889 Beep Pink UK Plug",
-            "889 Beep Purple UK Plug",
-            "889 Beep Beige AU Plug",
-            "889 Beep Pink AU Plug",
-            "889 Beep Purple AU Plug",
-            "888 Beige US Plug",
-            "888 Pink US Plug",
-            "888 Purple US Plug",
-            "899 Blue US Plug",
-            "899 Pink US Plug"
+            "FS-H208",
+            "FS-H208 negative ion",
+            "FS-H208 (American Standard)",
+            "FS-H208 European Standard",
+            "FS-H208 Japanese standard",
+            "FS-H208 Australian Standard",
+            "FS-H208 (British Standard)",
+            "FS-H208 (Negative Ion) American Standard",
+            "FS-H208 (Negative Ion) European Standard",
+            "FS-H208 (Negative Ion) Japanese Label",
+            "FS-H208 (Negative Ion) Australian Standard",
+            "FS-H208 (Negative Ion) British Standard"
           ]
         }
       ],
       "availableForSale": true,
       "variants": [
         {
-          "id": "gid://shopify/ProductVariant/68173189939427",
-          "title": "889 Beep Beige US Plug",
-          "sku": "SU00355340-889 Beep Beige US Plug",
+          "id": "gid://shopify/ProductVariant/68179557515491",
+          "title": "FS-H208",
+          "sku": "SU00059896-FS-H208",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Beige US Plug"
+            "Power": "FS-H208"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/9da2f15e-e546-4c62-b146-8005ef9e5dcf_ff5f0754-52b1-4449-b813-c2e8071d8f9f.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173189972195",
-          "title": "889 Beep Pink US Plug",
-          "sku": "SU00355340-889 Beep Pink US Plug",
+          "id": "gid://shopify/ProductVariant/68179557548259",
+          "title": "FS-H208 negative ion",
+          "sku": "SU00059896-FS-H208 negative ion",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Pink US Plug"
+            "Power": "FS-H208 negative ion"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/4116db16-2945-4f75-bd2a-9bd0f8a36f34.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173190004963",
-          "title": "889 Beep Purple US Plug",
-          "sku": "SU00355340-889 Beep Purple US Plug",
+          "id": "gid://shopify/ProductVariant/68179557581027",
+          "title": "FS-H208 (American Standard)",
+          "sku": "SU00059896-FS-H208 (American Standard)",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Purple US Plug"
+            "Power": "FS-H208 (American Standard)"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173190037731",
-          "title": "889 Beep Beige EU Plug",
-          "sku": "SU00355340-889 Beep Beige EU Plug",
+          "id": "gid://shopify/ProductVariant/68179557613795",
+          "title": "FS-H208 European Standard",
+          "sku": "SU00059896-FS-H208 European Standard",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Beige EU Plug"
+            "Power": "FS-H208 European Standard"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173190070499",
-          "title": "889 Beep Pink EU Plug",
-          "sku": "SU00355340-889 Beep Pink EU Plug",
+          "id": "gid://shopify/ProductVariant/68179557646563",
+          "title": "FS-H208 Japanese standard",
+          "sku": "SU00059896-FS-H208 Japanese standard",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Pink EU Plug"
+            "Power": "FS-H208 Japanese standard"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173190103267",
-          "title": "889 Beep Purple EU Plug",
-          "sku": "SU00355340-889 Beep Purple EU Plug",
+          "id": "gid://shopify/ProductVariant/68179557679331",
+          "title": "FS-H208 Australian Standard",
+          "sku": "SU00059896-FS-H208 Australian Standard",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Purple EU Plug"
+            "Power": "FS-H208 Australian Standard"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173190136035",
-          "title": "889 Beep Beige UK Plug",
-          "sku": "SU00355340-889 Beep Beige UK Plug",
+          "id": "gid://shopify/ProductVariant/68179557712099",
+          "title": "FS-H208 (British Standard)",
+          "sku": "SU00059896-FS-H208 (British Standard)",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Beige UK Plug"
+            "Power": "FS-H208 (British Standard)"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173190168803",
-          "title": "889 Beep Pink UK Plug",
-          "sku": "SU00355340-889 Beep Pink UK Plug",
+          "id": "gid://shopify/ProductVariant/68179557744867",
+          "title": "FS-H208 (Negative Ion) American Standard",
+          "sku": "SU00059896-FS-H208 (Negative Ion) American Standard",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Pink UK Plug"
+            "Power": "FS-H208 (Negative Ion) American Standard"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173190201571",
-          "title": "889 Beep Purple UK Plug",
-          "sku": "SU00355340-889 Beep Purple UK Plug",
+          "id": "gid://shopify/ProductVariant/68179557777635",
+          "title": "FS-H208 (Negative Ion) European Standard",
+          "sku": "SU00059896-FS-H208 (Negative Ion) European Standard",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Purple UK Plug"
+            "Power": "FS-H208 (Negative Ion) European Standard"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173190234339",
-          "title": "889 Beep Beige AU Plug",
-          "sku": "SU00355340-889 Beep Beige AU Plug",
+          "id": "gid://shopify/ProductVariant/68179557810403",
+          "title": "FS-H208 (Negative Ion) Japanese Label",
+          "sku": "SU00059896-FS-H208 (Negative Ion) Japanese Label",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Beige AU Plug"
+            "Power": "FS-H208 (Negative Ion) Japanese Label"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173190267107",
-          "title": "889 Beep Pink AU Plug",
-          "sku": "SU00355340-889 Beep Pink AU Plug",
+          "id": "gid://shopify/ProductVariant/68179557843171",
+          "title": "FS-H208 (Negative Ion) Australian Standard",
+          "sku": "SU00059896-FS-H208 (Negative Ion) Australian Standard",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Pink AU Plug"
+            "Power": "FS-H208 (Negative Ion) Australian Standard"
           },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "description": null
         },
         {
-          "id": "gid://shopify/ProductVariant/68173190299875",
-          "title": "889 Beep Purple AU Plug",
-          "sku": "SU00355340-889 Beep Purple AU Plug",
+          "id": "gid://shopify/ProductVariant/68179557875939",
+          "title": "FS-H208 (Negative Ion) British Standard",
+          "sku": "SU00059896-FS-H208 (Negative Ion) British Standard",
           "barcode": null,
-          "price": 69.88,
+          "price": 79.88,
           "compareAtPrice": null,
           "availableForSale": true,
           "options": {
-            "Power": "889 Beep Purple AU Plug"
+            "Power": "FS-H208 (Negative Ion) British Standard"
           },
-          "image": null,
-          "description": null
-        },
-        {
-          "id": "gid://shopify/ProductVariant/68173190332643",
-          "title": "888 Beige US Plug",
-          "sku": "SU00355340-888 Beige US Plug",
-          "barcode": null,
-          "price": 69.88,
-          "compareAtPrice": null,
-          "availableForSale": true,
-          "options": {
-            "Power": "888 Beige US Plug"
-          },
-          "image": null,
-          "description": null
-        },
-        {
-          "id": "gid://shopify/ProductVariant/68173190365411",
-          "title": "888 Pink US Plug",
-          "sku": "SU00355340-888 Pink US Plug",
-          "barcode": null,
-          "price": 69.88,
-          "compareAtPrice": null,
-          "availableForSale": true,
-          "options": {
-            "Power": "888 Pink US Plug"
-          },
-          "image": null,
-          "description": null
-        },
-        {
-          "id": "gid://shopify/ProductVariant/68173190398179",
-          "title": "888 Purple US Plug",
-          "sku": "SU00355340-888 Purple US Plug",
-          "barcode": null,
-          "price": 69.88,
-          "compareAtPrice": null,
-          "availableForSale": true,
-          "options": {
-            "Power": "888 Purple US Plug"
-          },
-          "image": null,
-          "description": null
-        },
-        {
-          "id": "gid://shopify/ProductVariant/68173190430947",
-          "title": "899 Blue US Plug",
-          "sku": "SU00355340-899 Blue US Plug",
-          "barcode": null,
-          "price": 69.88,
-          "compareAtPrice": null,
-          "availableForSale": true,
-          "options": {
-            "Power": "899 Blue US Plug"
-          },
-          "image": null,
-          "description": null
-        },
-        {
-          "id": "gid://shopify/ProductVariant/68173190463715",
-          "title": "899 Pink US Plug",
-          "sku": "SU00355340-899 Pink US Plug",
-          "barcode": null,
-          "price": 69.88,
-          "compareAtPrice": null,
-          "availableForSale": true,
-          "options": {
-            "Power": "899 Pink US Plug"
-          },
-          "image": null,
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "description": null
         }
       ],
       "media": [
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/63f62c06-531b-4838-a011-916ef7bfcf5f.jpg?v=1793894209",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/f8a64aa3b60a4644a8f4b060a51eccd5_581bd8db-37b6-41fd-b015-269d0343769c.jpg?v=1793900490",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2677,7 +2602,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ff49892ee9be4a808affb8eb995058bf.jpg?v=1793896584",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ff49892ee9be4a808affb8eb995058bf.jpg?v=1793900491",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2685,7 +2610,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/295e9b81db6240239a9437eabeb4ff21.jpg?v=1793896584",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/7c9b8e9e6a3a45deb667bf35f7eda6b6.jpg?v=1793900490",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2693,7 +2618,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/7c9b8e9e6a3a45deb667bf35f7eda6b6.jpg?v=1793896584",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/295e9b81db6240239a9437eabeb4ff21.jpg?v=1793900491",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2701,7 +2626,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/f1e544a3ba5041778c5a2191dad61db0.jpg?v=1793896584",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/300ee67555f043c7a5d1a150cbf23b79.jpg?v=1793900491",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2709,7 +2634,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/300ee67555f043c7a5d1a150cbf23b79.jpg?v=1793896584",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/f1e544a3ba5041778c5a2191dad61db0.jpg?v=1793900491",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2717,15 +2642,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/46c18946-cee7-4b1b-8121-dd1ef2fb594c.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/447831fdf6b64daa91acd5ec544a26ea.jpg?v=1793896584",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/447831fdf6b64daa91acd5ec544a26ea.jpg?v=1793900490",
           "width": 600,
           "height": 600,
           "alt": null,
@@ -2733,7 +2650,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/08f13cb9-79b8-4331-982f-26f562b12656.jpg?v=1793894209",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624.jpg?v=1793898416",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2741,7 +2658,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/4a0d06be-6485-44b6-a8d2-4a611d0c071a.jpg?v=1793894209",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/285dc649-2974-4e36-a999-4b51298ad0f0.jpg?v=1793898416",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2749,7 +2666,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/bc97cc9d-96d0-47c1-9808-975f84bcb951.jpg?v=1793894209",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a5493818-a2c3-44cc-918e-d0f834b6bb38.jpg?v=1793898416",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2757,7 +2674,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/7ab434ac-dabf-45ed-9a1d-dedd3fc9cf2f.jpg?v=1793894209",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/537bf6e9-c793-468e-a40b-059829b77c72.jpg?v=1793898416",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2765,7 +2682,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/da8a66e6-e1bc-4fcc-a627-bcb5b148a012.jpg?v=1793894209",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/9da2f15e-e546-4c62-b146-8005ef9e5dcf.jpg?v=1793898416",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2773,7 +2690,7 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/b879f97d-2e0a-435c-ab6d-2a0f3626b50c.jpg?v=1793894209",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/4116db16-2945-4f75-bd2a-9bd0f8a36f34_a8190171-c1dd-450e-b7a5-4380085b8f73.jpg?v=1793898416",
           "width": 800,
           "height": 800,
           "alt": null,
@@ -2781,240 +2698,145 @@
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a7a93709-05e1-42aa-83d3-264575b8f77c_8115e1b1-c361-44b7-b67d-aadf28152e3d.jpg?v=1793894210",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/9da2f15e-e546-4c62-b146-8005ef9e5dcf_ff5f0754-52b1-4449-b813-c2e8071d8f9f.jpg?v=1793898416",
           "width": 800,
           "height": 800,
           "alt": null,
-          "variantId": null
+          "variantId": "gid://shopify/ProductVariant/68179557515491"
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/2db96264-b5e6-40d6-9d4a-3a4832053c77.jpg?v=1793894209",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/4116db16-2945-4f75-bd2a-9bd0f8a36f34.jpg?v=1793898416",
           "width": 800,
           "height": 800,
           "alt": null,
-          "variantId": null
+          "variantId": "gid://shopify/ProductVariant/68179557548259"
         },
         {
           "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/0c3626a7-0a52-4a9a-b4c3-a5eccbef8c7e.jpg?v=1793894209",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/5bd80f94-a140-4580-b36b-efa5cb702624_5f614d4a-214e-4862-ab96-31aed3e0d61d.jpg?v=1793898416",
           "width": 800,
           "height": 800,
           "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/8ce3dde7-b34a-4331-af18-a3238e4ff14d_aa94546e-0995-4346-b617-38a6998d9bfb.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/d1faa453-c9c3-491b-be22-95d5c7b090ae.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/da8a66e6-e1bc-4fcc-a627-bcb5b148a012_3bfb606e-63e4-4bdd-8444-707255c686d9.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/b879f97d-2e0a-435c-ab6d-2a0f3626b50c_233e2d1b-939d-40e2-9e6d-042f859adefa.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a7a93709-05e1-42aa-83d3-264575b8f77c.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/2db96264-b5e6-40d6-9d4a-3a4832053c77_a3f67582-4628-49d0-916c-05bdc0ed4248.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/0c3626a7-0a52-4a9a-b4c3-a5eccbef8c7e_a138c968-33d3-42da-b152-1a8130ab4aa6.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/8ce3dde7-b34a-4331-af18-a3238e4ff14d.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/d1faa453-c9c3-491b-be22-95d5c7b090ae_1e8a8b31-46e4-4fc0-81c8-7993f023e991.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/d9e4f66a-4d11-4dd6-a2ca-64bfd1c69905.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/9d33d271-4a43-4322-bd8f-50e094f79ffb.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/6315d5ce-84c6-4e92-a409-019d47436420.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/176a1b5f-0497-49f5-983f-3d8c56378cea.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/aa030025-396f-4906-81fb-583acd113636.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
-        },
-        {
-          "type": "image",
-          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/52bc63ec-12eb-4243-b376-93ee73b3ba1e.jpg?v=1793894209",
-          "width": 800,
-          "height": 800,
-          "alt": null,
-          "variantId": null
+          "variantId": "gid://shopify/ProductVariant/68179557875939"
         }
       ],
       "specs": [
         {
           "label": "Type",
-          "value": "Automatic electric hair curler",
+          "value": "Automatic hair curler",
           "description": null
         },
         {
-          "label": "Barrel",
-          "value": "Tourmaline ceramic, 21–30 mm diameter",
+          "label": "Barrel diameter",
+          "value": "28 mm",
           "description": null
         },
         {
-          "label": "Temperature settings",
-          "value": "15 levels",
+          "label": "Heating material",
+          "value": "Tourmaline ceramic",
           "description": null
         },
         {
-          "label": "Hair care technology",
-          "value": "Negative ion",
+          "label": "Heating element",
+          "value": "PTC, holds a constant temperature",
           "description": null
         },
         {
-          "label": "Power",
-          "value": "30 W",
+          "label": "Heat-up time",
+          "value": "About 10 seconds",
           "description": null
         },
         {
-          "label": "Voltage",
-          "value": "110 V, as listed",
+          "label": "Temperature levels",
+          "value": "3: 160 °C, 180 °C and 200 °C",
+          "description": null
+        },
+        {
+          "label": "Negative ions",
+          "value": "Two-way ten-hole",
+          "description": null
+        },
+        {
+          "label": "Power supply",
+          "value": "Wired (AC)",
+          "description": null
+        },
+        {
+          "label": "Rated voltage",
+          "value": "220 V",
+          "description": null
+        },
+        {
+          "label": "Rated power",
+          "value": "29 W",
+          "description": null
+        },
+        {
+          "label": "Auto power-off",
+          "value": "After 60 minutes of no operation",
           "description": null
         },
         {
           "label": "Weight",
-          "value": "560 g",
-          "description": null
-        },
-        {
-          "label": "Dimensions",
-          "value": "30 cm long × 5 cm wide",
-          "description": null
-        },
-        {
-          "label": "Colours",
-          "value": "Beige, Pink, Purple, Blue",
-          "description": null
-        },
-        {
-          "label": "Certifications",
-          "value": "CE, FCC, RoHS, as listed by the manufacturer",
+          "value": "580 g",
           "description": null
         },
         {
           "label": "Package includes",
-          "value": "1 × curling iron, 1 × user manual",
+          "value": "1 × hair curler",
           "description": null
         }
       ],
       "featureHighlights": [
         {
-          "label": "One-touch automatic curling",
-          "body": "The manufacturer describes one-touch operation for effortless styling with consistent results.",
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/63f62c06-531b-4838-a011-916ef7bfcf5f.jpg?v=1793894209"
+          "label": "One-button automatic curling",
+          "body": "The manufacturer describes one-button automatic curling for effortless styling, with temperature adjustment, quick heat, an anti-scald upgrade, scheduled shutdown and a voice reminder.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/bb64de0c-04f5-4e4f-b5ed-2ba4e251a820.jpg?v=1793900885"
         },
         {
-          "label": "Negative ions for smoother-looking hair",
-          "body": "Negative ion technology that, as described by the manufacturer, reduces frizz and enhances shine for healthier-looking hair. Results vary with hair type.",
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/46c18946-cee7-4b1b-8121-dd1ef2fb594c.jpg?v=1793894209"
+          "label": "Two-way ten-hole negative ions",
+          "body": "Described by the manufacturer as caring for hair from top to bottom for a smooth, shiny look and as reducing hair damage. The built-in ion generator may make a slight sound when working. Results vary with hair type.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/7f528e86-ed82-4f23-b742-c5603d07665e.jpg?v=1793900884"
         },
         {
-          "label": "Curls or straight, with 15 heat levels",
-          "body": "Create both curls and straight looks, with 15 adjustable temperature settings so you can set the heat to suit your hair.",
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/da8a66e6-e1bc-4fcc-a627-bcb5b148a012.jpg?v=1793894209"
+          "label": "A 28 mm barrel for big waves",
+          "body": "An extended 28 mm curling barrel that the manufacturer says creates large, voluminous waves.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/9bab1c4f-2e63-4302-bb2b-f420b2baad36.jpg?v=1793900884"
         },
         {
-          "label": "Ceramic tourmaline barrel",
-          "body": "A 21–30 mm tourmaline ceramic barrel, described by the manufacturer as spreading heat evenly and minimizing hair damage.",
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a7a93709-05e1-42aa-83d3-264575b8f77c_8115e1b1-c361-44b7-b67d-aadf28152e3d.jpg?v=1793894210"
+          "label": "Heats up in 10 seconds",
+          "body": "A built-in PTC heating element heats up in about 10 seconds and holds a constant temperature once it gets there, which the manufacturer says reduces high-temperature damage to hair.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/6c2e77af-fab9-4a10-be2d-5d43895bbaed.jpg?v=1793900885"
         },
         {
-          "label": "Heats up in seconds",
-          "body": "Reaches its working temperature in seconds, according to the manufacturer, so a styling session starts quickly.",
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/0c3626a7-0a52-4a9a-b4c3-a5eccbef8c7e.jpg?v=1793894209"
+          "label": "Three heat levels for your hair type",
+          "body": "160 °C for fine and soft hair, 180 °C for normal hair and 200 °C for thick and hard hair, as listed.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/8a6abbf4-eb0a-4aec-b1f4-f599cf0a4aa9.jpg?v=1793900885"
         },
         {
-          "label": "Four colours to choose from",
-          "body": "Beige, Pink, Purple and Blue. Screens differ, so the photos may not match the real colour exactly.",
-          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/bc97cc9d-96d0-47c1-9808-975f84bcb951.jpg?v=1793894209"
+          "label": "A beep to remind you",
+          "body": "Described as a smart timer with an audible reminder: after you release the direction keys for 10 seconds, it beeps to remind you to take the hair out.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/635dd60f-226a-47bd-910d-27f0609c4892.jpg?v=1793900885"
+        },
+        {
+          "label": "Anti-scald shell",
+          "body": "Described by the manufacturer as an anti-scald shell with a top insulation layer, for styling close to the skin. The barrel still gets hot, so keep it away from your skin and scalp.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a6faae2f-58d0-415d-8573-ed00197f710a.jpg?v=1793900884"
+        },
+        {
+          "label": "Ceramic glaze coating",
+          "body": "Described as a plant-based ceramic glaze coating that releases proteins when heated, to reduce damage to the hair surface.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/140d59da-cd25-4acc-b959-5fdd37fde196.jpg?v=1793900884"
+        },
+        {
+          "label": "Switches itself off after an hour",
+          "body": "A built-in smart chip turns it off automatically after 60 minutes of no operation.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/28414a14-120e-4726-81a9-6dae25b953e6.jpg?v=1793900884"
         }
       ],
       "perks": [
-        "Bidirectional moisturizing negative ions",
+        "Bidirectional ten-hole moisturizing negative ions",
         "Fully automatic electric curling stick",
         "Auto-rotating curler and straightener",
         "Anti-burn head design",

@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 
 import { SaleCountdown } from "@/components/product/SaleCountdown";
 import { useCart } from "@/components/cart/CartProvider";
+import { plugRegionForVisitor, plugRegionOfValue } from "@/lib/commerce/plug";
 import { useLocalization } from "@/components/localization/LocalizationProvider";
 import { Icon } from "@/components/ui/Icon";
 import { PaymentIcons } from "@/components/ui/PaymentIcons";
@@ -380,8 +381,12 @@ const FEATURED_PACK = 3;
  * plug choice reads at a glance instead of as a bare "EU". Matched on the
  * option value ("US", "EU", "UK", "AU"); anything else draws no pins.
  */
-function PlugGlyph({ region }: { region: string }) {
+function PlugGlyph({ region: value }: { region: string }) {
   const pin = "fill-current";
+  /* Option values may be the region code or the supplier's name for it. Japan
+     uses the same two flat blades as the US. */
+  const found = plugRegionOfValue(value);
+  const region = found === "JP" ? "US" : (found ?? "");
   return (
     <svg
       viewBox="0 0 48 48"
@@ -953,7 +958,14 @@ export function PurchasePanel({
 }) {
   const cardsMode = packs === "cards";
   const { add, open, payments } = useCart();
-  const { localizedPriceFor, requestPrices } = useLocalization();
+  const {
+    localizedPriceFor,
+    requestPrices,
+    ready: localizationReady,
+    effectiveCountry,
+    defaultCountry,
+    countries,
+  } = useLocalization();
   const baseVariant =
     view.variants.find((v) => v.id === view.defaultVariantId) ??
     view.variants[0]!;
@@ -975,6 +987,9 @@ export function PurchasePanel({
     initial.options,
   );
   const [added, setAdded] = useState(false);
+  /* Set once the visitor picks a plug (or arrives on a shared ?variant= link), so
+     the automatic plug choice below never overrides them. */
+  const plugTouched = useRef(false);
   /* Quantity-break products: the chosen pack is the quantity added to the bag. */
   const tiers =
     view.packTiers && view.packTiers.length > 1 ? view.packTiers : null;
@@ -1056,7 +1071,10 @@ export function PurchasePanel({
     const fromUrl = param
       ? view.variants.find((v) => numericId(v.id) === param)
       : undefined;
-    if (fromUrl) setSelection(fromUrl.options);
+    if (fromUrl) {
+      plugTouched.current = true;
+      setSelection(fromUrl.options);
+    }
     const v = fromUrl ?? initial;
     trackViewItem(
       { id: v.id, name: view.name, variant: v.label, price: v.price },
@@ -1077,7 +1095,34 @@ export function PurchasePanel({
     return () => io.disconnect();
   }, []);
 
+  /* Plug products: preselect the plug for the visitor's country, falling back to
+     their local currency, then US. Runs once localization has resolved, and
+     never after the visitor has chosen a plug themselves. */
+  useEffect(() => {
+    if (!localizationReady || plugTouched.current) return;
+    const plugOption = view.options.find((o) => o.plugGlyphs);
+    if (!plugOption) return;
+    const country = effectiveCountry ?? defaultCountry?.isoCode ?? null;
+    const currency =
+      countries.find((c) => c.isoCode === country)?.currency.isoCode ??
+      defaultCountry?.currency.isoCode ??
+      null;
+    const region = plugRegionForVisitor(country, currency);
+    const value = plugOption.values.find(
+      (v) => plugRegionOfValue(v.value) === region,
+    )?.value;
+    if (!value) return;
+    setSelection((current) => {
+      if (current[plugOption.name] === value) return current;
+      const next = { ...current, [plugOption.name]: value };
+      return findVariant(view, next) ? next : current;
+    });
+  }, [localizationReady, effectiveCountry, defaultCountry, countries, view]);
+
   const choose = (name: string, value: string) => {
+    if (view.options.some((o) => o.name === name && o.plugGlyphs)) {
+      plugTouched.current = true;
+    }
     let next = { ...selection, [name]: value };
     // If the new combination doesn't exist, keep the choice and move the other option to one that does.
     if (!findVariant(view, next)) {
@@ -1224,7 +1269,12 @@ export function PurchasePanel({
                     }
                   </span>
                 </legend>
-                <div className="grid grid-cols-4 gap-2 sm:gap-2.5">
+                <div
+                  className={cn(
+                    "grid gap-2 sm:gap-2.5",
+                    option.values.length === 5 ? "grid-cols-5" : "grid-cols-4",
+                  )}
+                >
                   {option.values.map((value) => {
                     const available = optionAvailable(option.name, value.value);
                     const checked = selection[option.name] === value.value;
@@ -1363,6 +1413,16 @@ export function PurchasePanel({
                   );
                 })}
               </div>
+              )}
+              {/* What the selected value means, when the product explains it. */}
+              {option.values.find((v) => v.value === selection[option.name])
+                ?.note && (
+                <p className="mt-3 rounded-control bg-cream px-3.5 py-2.5 text-[0.8125rem] leading-snug text-ink-soft">
+                  {
+                    option.values.find((v) => v.value === selection[option.name])
+                      ?.note
+                  }
+                </p>
               )}
             </fieldset>
           );

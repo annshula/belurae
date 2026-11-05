@@ -95,11 +95,20 @@ const bbCreamVideos: ShowcaseVideo[] = [1, 2, 3, 4, 5].map((n) =>
   clip(`/videos/bb-cream/bb-cream-${n}.mp4`, `BB cream video ${n}`),
 );
 
+/** Hair curling iron clips — served from `public/videos/hair-curler` (720p, no audio, still frame beside each). */
+const hairCurlerVideos: ShowcaseVideo[] = [1, 2, 3, 4, 5].map((n) =>
+  clip(
+    `/videos/hair-curler/hair-curler-${n}.mp4`,
+    `${site.name} hair curling iron video ${n}`,
+  ),
+);
+
 /** Per-product clip sets; products without an entry use the mousse clips. */
 const productVideosBySlug: Record<string, ShowcaseVideo[]> = {
   "egf-tox-toner": tonerVideos,
   "belurae-body-adhesive": glueVideos,
   "missha-perfect-cover-bb-cream": bbCreamVideos,
+  "fully-automatic-hair-curler": hairCurlerVideos,
 };
 
 /**

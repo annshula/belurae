@@ -89,6 +89,8 @@ export type ProductContent = {
       values: Record<string, string>;
       /** Option value → CSS colour; shown as a dot beside the value (shades). */
       swatches?: Record<string, string>;
+      /** A line shown under the option for the selected value, to explain what it is. */
+      notes?: Record<string, string>;
       /** Show the swatches as round dots alone, with no names; the chosen name is shown above. */
       dotsOnly?: boolean;
       /** Draw each value as a mains plug (values US / EU / UK / AU) instead of a text card. */
@@ -100,7 +102,17 @@ export type ProductContent = {
    * separate options, by a regex with a named group per part. Applies only if
    * every variant matches; otherwise the option is left as Shopify has it.
    */
-  optionSplit?: { option: string; pattern: string; order: string[] };
+  optionSplit?: {
+    option: string;
+    pattern: string;
+    order: string[];
+    /** Value for a named group the pattern did not capture, e.g. { Model: "Smart" }. */
+    fill?: Record<string, string>;
+    /** Variants that do not match are not offered, instead of leaving the option unsplit. */
+    dropUnmatched?: boolean;
+    /** The variant selected on load, by the split option values. */
+    defaultOptions?: Record<string, string>;
+  };
   /** Option whose values are pack sizes, mapped to unit counts. */
   packOption?: {
     name: string;
@@ -1653,111 +1665,80 @@ export const products: ProductContent[] = [
     handle: "fully-automatic-hair-curler",
     slug: "fully-automatic-hair-curler",
     legacySlugs: [],
-    name: "Automatic Hair Curler",
-    format: "Automatic hair curler · 15 heat levels",
+    name: "Hair Curling Iron",
+    format: "Automatic hair curler · 28 mm",
     category: { slug: "hair-styling", name: "Hair Styling" },
     benefitLine:
-      "A one-touch automatic hair curler with negative ion technology, a ceramic tourmaline barrel and 15 temperature levels.",
+      "An automatic hair curler with two-way ten-hole negative ions, a 28 mm ceramic barrel, 3 temperature levels, a beep reminder and an anti-scald shell.",
     manufacturer: site.name,
     seo: {
-      title: "Automatic Hair Curler · Negative Ion, 15 Heat Levels",
+      title: "Hair Curling Iron · 28 mm Barrel, 3 Heat Levels",
       description:
-        "An automatic electric hair curler with negative ion technology, a ceramic tourmaline barrel and 15 temperature levels. Specifications and what is in the box.",
+        "An automatic hair curler with two-way ten-hole negative ions, a 28 mm ceramic barrel and 3 temperature levels. Specifications and what is in the box.",
     },
-    /* Shopify has ONE option, "Power", whose values bundle model, colour and
-       plug ("889 Beep Beige US Plug"). Split it here into three so the page can
-       show colour dots, plug and model as separate choices. The variants and
-       their SKUs in Shopify are untouched. */
+    /* Shopify has ONE option, "Power", whose values bundle model and plug
+       ("FS-H208 (Negative Ion) European Standard"). Only the Negative ion
+       variants are sold on the page, split into one Plug option; the Smart
+       variants (no ions) and the two with no plug named stay in Shopify but
+       are not offered. The variants and their SKUs are untouched. */
     optionSplit: {
       option: "Power",
       pattern:
-        "^(?<Model>\\d+(?: Beep)?) (?<Colour>Beige|Pink|Purple|Blue) (?<Plug>US|EU|UK|AU) Plug$",
-      /* Model is not offered: the listing does not say how 888, 889 Beep and
-         899 differ, and they cost the same. Where a colour and plug exist in
-         more than one model, the first in Shopify's order (889 Beep) is sold. */
-      order: ["Colour", "Plug"],
+        "^FS-H208 \\(Negative Ion\\) (?<Plug>American|European|Japanese|Australian|British) (?:Standard|standard|Label)$",
+      order: ["Plug"],
+      dropUnmatched: true,
+      defaultOptions: { Plug: "American" },
     },
     optionLabels: {
-      Colour: {
-        label: "Colour",
-        values: {},
-        dotsOnly: true,
-        /* Approximate tones, picked by eye from the colour photos. */
-        swatches: {
-          Beige: "#e4d9c6",
-          Pink: "#f0c3c1",
-          Purple: "#b8a2d8",
-          Blue: "#a8cde6",
-        },
-      },
       Plug: {
         label: "Plug type",
         plugGlyphs: true,
-        values: { US: "US plug", EU: "EU plug", UK: "UK plug", AU: "AU plug" },
+        values: {
+          American: "US plug",
+          European: "EU plug",
+          Japanese: "Japan plug",
+          Australian: "AU plug",
+          British: "UK plug",
+        },
       },
     },
-    /* One variant per colour/plug/model; a 2 or 3 Pack is the same curler at
-       quantity 2 or 3. The Shopify automatic discounts "Automatic Hair Curler
-       Pack - Buy 2 Save 10%" and "Buy 2 Get 1 Free" (33.33% off at 3) do the
-       pricing at checkout. Shopify keeps 4 decimals, hence 33.33. */
+    /* One variant per plug; a 2 or 3 Pack is the same curler at
+       quantity 2 or 3. The Shopify automatic discounts "Hair Curling Iron Pack
+       - Buy 2 Save 10%" and "Buy 2 Get 1 Free" (33.33% off at 3) do the pricing
+       at checkout. Shopify keeps 4 decimals, hence 33.33. The pack photos are
+       the curler cut out of the studio shot, in /public/images/hair-curler. */
     packTiers: [
-      {
-        size: 1,
-        discountPercent: 0,
-        images: {
-          Beige: "/images/hair-curler/pack-1-beige.webp",
-          Pink: "/images/hair-curler/pack-1-pink.webp",
-          Purple: "/images/hair-curler/pack-1-purple.webp",
-          Blue: "/images/hair-curler/pack-1-blue.webp",
-        },
-      },
-      /* Pack photos: the curler once, twice or three times in the chosen colour,
-         on a transparent background (recoloured from the beige studio shot,
-         so tones are approximate). */
-      {
-        size: 2,
-        discountPercent: 10,
-        images: {
-          Beige: "/images/hair-curler/pack-2-beige.webp",
-          Pink: "/images/hair-curler/pack-2-pink.webp",
-          Purple: "/images/hair-curler/pack-2-purple.webp",
-          Blue: "/images/hair-curler/pack-2-blue.webp",
-        },
-      },
+      { size: 1, discountPercent: 0, image: "/images/hair-curler/pack-1.webp" },
+      { size: 2, discountPercent: 10, image: "/images/hair-curler/pack-2.webp" },
       {
         size: 3,
         discountPercent: 33.33,
-        images: {
-          Beige: "/images/hair-curler/pack-3-beige.webp",
-          Pink: "/images/hair-curler/pack-3-pink.webp",
-          Purple: "/images/hair-curler/pack-3-purple.webp",
-          Blue: "/images/hair-curler/pack-3-blue.webp",
-        },
+        image: "/images/hair-curler/pack-3.webp",
       },
     ],
     story: {
-      heading: "Curls with one touch.",
+      heading: "Curls with one button.",
       body: [
-        "This is an automatic electric hair curler. The manufacturer describes one-touch operation for effortless styling with consistent results, and a ceramic tourmaline barrel that spreads heat evenly.",
-        "It uses negative ion technology, which the manufacturer says reduces frizz and adds shine, and it has 15 adjustable temperature settings for curls or straight styles. Results vary with hair type, so start on a lower setting and read the user manual in the box.",
+        "This is an automatic hair curler. The manufacturer describes one-button automatic curling for effortless styling, with an extended 28 mm barrel for large, voluminous waves and a ceramic barrel that heats up in about 10 seconds.",
+        "It has two-way ten-hole negative ions, 3 temperature levels, a beep that reminds you to take the hair out, an anti-scald shell and an automatic shut-off after 60 minutes of no operation. Results vary with hair type, so read the user manual before first use.",
       ],
     },
     highlights: [
       {
-        title: "One-touch automatic curling",
-        body: "Described by the manufacturer as effortless styling with consistent results.",
+        title: "One-button automatic curling",
+        body: "Described by the manufacturer as effortless styling with the press of a button.",
       },
       {
-        title: "Negative ion technology",
-        body: "Described as reducing frizz and enhancing shine for healthier-looking hair.",
+        title: "Two-way ten-hole negative ions",
+        body: "Described as caring for hair from top to bottom for a smooth, shiny look.",
       },
       {
-        title: "15 temperature settings",
-        body: "Create curls or straight styles and set the heat to suit your hair.",
+        title: "28 mm barrel",
+        body: "An extended barrel for large, voluminous waves.",
       },
       {
-        title: "Ceramic tourmaline barrel",
-        body: "A 21–30 mm barrel, described as spreading heat evenly and minimizing hair damage.",
+        title: "3 heat levels, 10-second heat-up",
+        body: "160, 180 or 200 °C for fine, normal or thick hair, ready in about 10 seconds.",
       },
     ],
     steps: [
@@ -1767,11 +1748,11 @@ export const products: ProductContent[] = [
       },
       {
         title: "Set the heat",
-        body: "Choose one of the 15 temperature levels. If you are unsure, start low and go up.",
+        body: "Choose a level: 160 °C for fine and soft hair, 180 °C for normal hair or 200 °C for thick and hard hair. If you are unsure, start low.",
       },
       {
         title: "Curl",
-        body: "Use the automatic curling function as shown in the user manual in the box.",
+        body: "Use the one-button automatic curling as shown in the user manual. When it beeps, take the hair out.",
       },
       {
         title: "Cool down",
@@ -1780,26 +1761,29 @@ export const products: ProductContent[] = [
     ],
     keyIngredients: [],
     specs: [
-      { label: "Type", value: "Automatic electric hair curler" },
-      { label: "Barrel", value: "Tourmaline ceramic, 21–30 mm diameter" },
-      { label: "Temperature settings", value: "15 levels" },
-      { label: "Power", value: "30 W" },
-      { label: "Voltage", value: "110 V, as listed" },
-      { label: "Weight", value: "560 g" },
-      { label: "Dimensions", value: "30 cm long × 5 cm wide" },
-      { label: "Colours", value: "Beige, Pink, Purple, Blue" },
+      { label: "Type", value: "Automatic hair curler" },
+      { label: "Barrel diameter", value: "28 mm" },
+      { label: "Heating material", value: "Tourmaline ceramic" },
+      { label: "Heating element", value: "PTC, holds a constant temperature" },
+      { label: "Heat-up time", value: "About 10 seconds" },
+      { label: "Temperature levels", value: "3: 160 °C, 180 °C and 200 °C" },
+      { label: "Negative ions", value: "Two-way ten-hole" },
+      { label: "Power supply", value: "Wired (AC)" },
+      { label: "Rated voltage", value: "220 V" },
+      { label: "Rated power", value: "29 W" },
+      { label: "Auto power-off", value: "After 60 minutes of no operation" },
+      { label: "Weight", value: "580 g" },
     ],
     inTheBox: [
       {
-        item: "Automatic hair curler",
-        detail: "1, in your chosen colour and plug type",
+        item: "Hair curler",
+        detail: "1, with your chosen plug type",
       },
-      { item: "User manual", detail: "1" },
     ],
     safety: {
       kind: "device",
       patchTest:
-        "Read the user manual in the box before your first use and follow it. Keep the barrel away from your skin, scalp and ears while it is hot.",
+        "Read the user manual before your first use and follow it. The shell is described as anti-scald, but the barrel still gets hot: keep it away from your skin, scalp and ears.",
       note: "The manufacturer's listing gives no warnings, so we follow the standard precautions for hot styling tools below. Read any warnings printed in the manual.",
       use: [
         "Clean, completely dry hair",
@@ -1817,35 +1801,35 @@ export const products: ProductContent[] = [
     faqs: [
       {
         q: "What is this product?",
-        a: "An automatic electric hair curler with a ceramic tourmaline barrel, negative ion technology and 15 temperature settings.",
+        a: "An automatic hair curler with a 28 mm tourmaline ceramic barrel, one-button automatic curling, 3 temperature levels, a beep reminder and an auto shut-off.",
       },
       {
         q: "How do I use it?",
-        a: "On clean, completely dry hair, choose a temperature and use the automatic curling function as shown in the user manual in the box. Switch off and unplug it, and let it cool before storing it.",
-      },
-      {
-        q: "How many heat settings does it have?",
-        a: "15 temperature levels, so you can set the heat to suit your hair. If you are unsure, start low.",
+        a: "On clean, completely dry hair, choose a temperature and use the one-button automatic curling as shown in the user manual. When it beeps, take the hair out. Switch off and unplug it, and let it cool before storing it.",
       },
       {
         q: "What do the negative ions do?",
-        a: "The manufacturer says negative ion technology reduces frizz and enhances shine for healthier-looking hair. Results vary with hair type and condition.",
+        a: "The manufacturer says the two-way ten-hole negative ions care for hair from top to bottom for a smooth, shiny look and reduce hair damage. The built-in ion generator may make a slight sound when working. Results vary with hair type and condition.",
+      },
+      {
+        q: "What are the temperature levels?",
+        a: "There are 3: 160 °C for fine and soft hair, 180 °C for normal hair and 200 °C for thick and hard hair.",
       },
       {
         q: "What size are the curls?",
-        a: "The listing gives the heating barrel diameter as 21–30 mm. It does not give curl sizes, and the result also depends on your hair.",
+        a: "The barrel is 28 mm, which the manufacturer says creates large, voluminous waves. The result also depends on your hair.",
       },
       {
-        q: "Which model and colour should I choose?",
-        a: "The options combine a model number (888, 889 Beep or 899), a colour and a plug type. The listing does not explain how the models differ, so email us if you want to know before you order. Screens differ, so the photos may not match the real colour exactly.",
+        q: "Does it switch itself off?",
+        a: "Yes. A built-in smart chip switches it off automatically after 60 minutes of no operation.",
       },
       {
         q: "Which plug and voltage do I need?",
-        a: "Choose the plug for your country (US, EU, UK or AU). The listing gives the voltage as 110 V. If your mains supply is not 110 V, email us before ordering.",
+        a: "Choose the plug for your country (US, EU, UK, Japan or AU). The listing gives the rated voltage as 220 V. If your mains supply is different, email us before ordering.",
       },
       {
         q: "What is in the box?",
-        a: "One automatic hair curler and one user manual.",
+        a: "One hair curler. The listing's packing list does not include anything else.",
       },
       {
         q: "Can I return it?",
@@ -1858,88 +1842,80 @@ export const products: ProductContent[] = [
       galleryFit: "flush",
       perksOneColumn: true,
       trustedBy: true,
+      videosIntro:
+        "Short clips of the hair curling iron, so you can see it before you buy.",
       /* Written from the supplier's product description. */
       accordion: [
         {
           title: "Overview",
           items: [
             {
-              label: "Automatic curling",
-              text: "One-touch operation for effortless styling with consistent results.",
+              label: "Automatic operation",
+              text: "One-button automatic curling for effortless styling.",
             },
             {
               label: "Negative ion technology",
-              text: "Reduces frizz and enhances hair shine for healthier-looking hair.",
+              text: "Two-way ten-hole negative ions, described as reducing hair damage and enhancing shine.",
             },
             {
-              label: "Versatile styling",
-              text: "Creates both curls and straight looks with 15 adjustable temperature settings.",
+              label: "28 mm barrel",
+              text: "An extended barrel for large, voluminous waves.",
             },
             {
-              label: "Fast heating",
-              text: "Reaches its working temperature in seconds, for efficient styling sessions.",
+              label: "Ceramic heating",
+              text: "Tourmaline ceramic for even heat distribution, heating up in about 10 seconds.",
             },
             {
-              label: "Ceramic tourmaline barrel",
-              text: "Ensures even heat distribution and minimizes hair damage.",
+              label: "Safety features",
+              text: "Anti-scald shell with a top insulation layer, and auto shut-off after 60 minutes of no operation.",
             },
           ],
         },
         {
           title: "Specifications",
           items: [
-            { label: "Power", text: "30 W" },
-            { label: "Voltage", text: "110 V, as listed" },
-            { label: "Temperature settings", text: "15 levels" },
-            { label: "Heating barrel", text: "21–30 mm diameter, tourmaline ceramic" },
-            { label: "Weight", text: "560 g" },
-            { label: "Dimensions", text: "30 cm long × 5 cm wide" },
-            { label: "Colours", text: "Beige, Pink, Purple, Blue" },
-            { label: "Certifications", text: "CE, FCC, RoHS, as listed" },
+            { label: "Barrel diameter", text: "28 mm" },
+            { label: "Heating material", text: "Tourmaline ceramic" },
+            { label: "Temperature levels", text: "3: 160 °C, 180 °C and 200 °C" },
+            { label: "Power supply", text: "Wired (AC)" },
+            { label: "Rated voltage", text: "220 V" },
+            { label: "Rated power", text: "29 W" },
+            { label: "Weight", text: "580 g" },
           ],
         },
         {
           title: "What's in the box",
-          items: [
-            { text: "1 × automatic hair curler" },
-            { text: "1 × user manual" },
-          ],
+          items: [{ text: "1 × hair curler" }],
         },
       ],
-      /* Badges above the rating, switched off:
-      trust: [
-        { icon: "droplet", text: "Negative ion technology" },
-        { icon: "feather", text: "One-touch automatic curling" },
-      ],
-      */
       dailyStep: {
         eyebrow: "Your styling step",
-        heading: "One touch. Curls done.",
-        body: "The manufacturer describes one-touch operation that gives consistent results, with a ceramic tourmaline barrel for even heat and 15 temperature settings to match your hair.",
-        mediaFile: "46c18946-cee7-4b1b-8121-dd1ef2fb594c",
+        heading: "One button. Curls done.",
+        body: "The manufacturer describes one-button automatic curling with an extended 28 mm barrel, a 10-second heat-up and a beep to tell you when to take the hair out.",
+        mediaFile: "285dc649-2974-4e36-a999-4b51298ad0f0",
         imagePosition: "center",
         benefits: [
           {
             icon: "droplet",
             title: "Negative ions",
-            body: "Described as reducing frizz and adding shine.",
-          },
-          {
-            icon: "feather",
-            title: "Curls or straight",
-            body: "Both styles, with 15 adjustable temperature settings.",
+            body: "Described as reducing hair damage and adding shine.",
           },
           {
             icon: "clock",
-            title: "Fast heat-up",
-            body: "Reaches its working temperature in seconds, as listed.",
+            title: "Beep reminder",
+            body: "Tells you when to take the hair out, as listed.",
+          },
+          {
+            icon: "shield",
+            title: "Anti-scald shell",
+            body: "Described by the manufacturer. The barrel still gets hot.",
           },
         ],
       },
       howTo: {
         heading: "Four simple steps.",
         intro:
-          "The short version: dry hair, set the heat, curl, then let it cool. The user manual in the box has the full instructions.",
+          "The short version: dry hair, set the heat, curl, then let it cool. The user manual has the full instructions.",
       },
       ingredientsNote: "",
       showHairRemovalComparison: false,
@@ -1950,10 +1926,11 @@ export const products: ProductContent[] = [
     },
     contentGaps: [
       "Manufacturer's own directions and the exact wording of the packaging warnings",
-      "What separates the 888, 889 Beep and 899 models",
-      "Voltage for the EU, UK and AU plug variants (the listing gives 110 V only)",
-      "Warranty terms (the listing says 6 months, not yet confirmed)",
-      "Certification documents (the listing says CE, FCC and RoHS)",
+      "Number of temperature levels: the description text says 15 adjustable settings, the description images and model cards say 3 levels (160, 180, 200 °C), which the page uses",
+      "Packing list: the description lists 1 curler, the photos show 2 hairpins and a comb as well",
+      "Voltage for the US, Japan, UK and AU plug variants (the listing gives 220 V only)",
+      "The Smart variants (no ions) are not sold on the page; they remain in Shopify",
+      "Substantiation for the 'anti-burn' / anti-scald wording and for 'auto-rotating curler and straightener'",
       "Manufacturer's name and GTIN / barcode",
     ],
   },
