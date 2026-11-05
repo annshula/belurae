@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-11-05T16:43:18.264Z",
+  "syncedAt": "2026-11-05T16:47:30.907Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -2396,7 +2396,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-11-05T16:42:52Z",
+      "updatedAt": "2026-11-05T16:47:25Z",
       "seo": {
         "title": "Automatic Hair Curler | Belurae",
         "description": "An automatic electric hair curler with negative ion technology, a ceramic tourmaline barrel and 15 temperature levels. Specifications and what is in the box."
@@ -3016,9 +3016,10 @@
       "perks": [
         "Bidirectional moisturizing negative ions",
         "Fully automatic electric curling stick",
-        "15 adjustable temperature levels",
-        "Ceramic tourmaline barrel for even heat",
-        "Reaches temperature in seconds"
+        "Auto-rotating curler and straightener",
+        "Anti-burn head design",
+        "Automatic mode with voice beep",
+        "Comfortable hair tool for hair care"
       ],
       "saleEndsAt": "2026-11-09T05:00:00.000Z",
       "ratingCount": null,
