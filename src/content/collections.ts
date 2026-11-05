@@ -119,6 +119,17 @@ export const collections: CollectionContent[] = [
     ],
   },
   {
+    slug: "hair-styling",
+    title: "Hair Styling",
+    seoTitle: "Hair Styling Tools — Specs and Directions, Plainly",
+    description:
+      "Hair styling tools with the specifications, directions and safety guidance spelled out on every product page.",
+    intro:
+      "Each hair styling page gives the specifications as the manufacturer lists them, how to use the tool and the precautions for anything that heats up, and is clear about what we don't yet know.",
+    categories: ["hair-styling"],
+    related: [{ label: "All guides", href: "/guides" }],
+  },
+  {
     slug: "all",
     title: "Shop all",
     seoTitle: "Shop All Beauty & Wellness",

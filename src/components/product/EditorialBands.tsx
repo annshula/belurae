@@ -101,7 +101,8 @@ export function EditorialBands({
         </div>
       </section>
 
-      {/* ── Key ingredients ── */}
+      {/* ── Key ingredients (skipped for products without a formula) ── */}
+      {content.keyIngredients.length > 0 && (
       <section
         id="ingredients"
         aria-labelledby="ingredients-title"
@@ -172,6 +173,7 @@ export function EditorialBands({
         </div>
 
       </section>
+      )}
     </div>
   );
 }

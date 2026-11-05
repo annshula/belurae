@@ -375,6 +375,90 @@ function PackPhoto({
  */
 const FEATURED_PACK = 3;
 
+/**
+ * The pin layout of a mains plug, drawn face-on inside a round plate, so the
+ * plug choice reads at a glance instead of as a bare "EU". Matched on the
+ * option value ("US", "EU", "UK", "AU"); anything else draws no pins.
+ */
+function PlugGlyph({ region }: { region: string }) {
+  const pin = "fill-current";
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      aria-hidden="true"
+      className="size-12 text-ink"
+      fill="none"
+    >
+      <circle
+        cx="24"
+        cy="24"
+        r="21"
+        className="fill-cream stroke-current"
+        strokeWidth="1.5"
+        strokeOpacity="0.25"
+      />
+      {region === "US" && (
+        <>
+          <rect x="15" y="14" width="3.4" height="13" rx="0.8" className={pin} />
+          <rect x="29.6" y="14" width="3.4" height="13" rx="0.8" className={pin} />
+        </>
+      )}
+      {region === "EU" && (
+        <>
+          <circle cx="16.5" cy="24" r="3.2" className={pin} />
+          <circle cx="31.5" cy="24" r="3.2" className={pin} />
+        </>
+      )}
+      {region === "UK" && (
+        <>
+          <rect x="22.3" y="11" width="3.4" height="9.5" rx="0.8" className={pin} />
+          <rect
+            x="12.5"
+            y="27"
+            width="9.5"
+            height="3.4"
+            rx="0.8"
+            className={pin}
+            transform="rotate(-22 17.25 28.7)"
+          />
+          <rect
+            x="26"
+            y="27"
+            width="9.5"
+            height="3.4"
+            rx="0.8"
+            className={pin}
+            transform="rotate(22 30.75 28.7)"
+          />
+        </>
+      )}
+      {region === "AU" && (
+        <>
+          <rect
+            x="14"
+            y="13"
+            width="3.4"
+            height="11"
+            rx="0.8"
+            className={pin}
+            transform="rotate(28 15.7 18.5)"
+          />
+          <rect
+            x="30.6"
+            y="13"
+            width="3.4"
+            height="11"
+            rx="0.8"
+            className={pin}
+            transform="rotate(-28 32.3 18.5)"
+          />
+          <rect x="22.3" y="27" width="3.4" height="10" rx="0.8" className={pin} />
+        </>
+      )}
+    </svg>
+  );
+}
+
 function PackCards({
   option,
   selection,
@@ -940,7 +1024,8 @@ export function PurchasePanel({
         compareAtPercent: p.percent > 0 ? p.percent : null,
         availableForSale: canBuy,
         sku: variant.sku,
-        image: t.image ?? variant.image,
+        image:
+          t.images?.[variant.options.Colour ?? ""] ?? t.image ?? variant.image,
         units: t.size,
         savings: null,
         perUnit: Math.round((p.total / t.size) * 100) / 100,
@@ -950,7 +1035,7 @@ export function PurchasePanel({
     });
     const option = {
       name: optionName,
-      label: "Choose your pack",
+      label: "Bundle",
       values: tiers.map((t) => ({
         value: String(t.size),
         label: `${t.size} Pack`,
@@ -1088,20 +1173,6 @@ export function PurchasePanel({
   return (
     <div>
       <div className="space-y-7">
-        {tierView && (
-          <PackCards
-            option={tierView.option}
-            selection={{ [tierView.option.name]: String(qty) }}
-            view={tierView.view}
-            onChoose={(_, value) => chooseQty(Number(value))}
-            optionAvailable={() => canBuy}
-            localizedVariantFor={(v) => ({
-              ...v,
-              currency: localizedVariant.currency,
-            })}
-            perSetPrice={perSetPrice}
-          />
-        )}
         {view.options.map((option) => {
           const isPack = option.name === view.packOptionName;
 
@@ -1134,6 +1205,61 @@ export function PurchasePanel({
             );
           }
 
+          /* Colour options: round dots only. The name is not written beside
+             each dot; the legend shows it for the one that is selected. */
+          const dotsOnly =
+            option.dotsOnly && option.values.every((v) => v.swatch);
+
+          /* Plug options: a card per plug, with its pin layout drawn above the name. */
+          if (option.plugGlyphs) {
+            return (
+              <fieldset key={option.name} className="min-w-0">
+                <legend className="mb-3 flex w-full items-baseline justify-between text-body-sm font-semibold">
+                  {option.label}
+                  <span className="font-normal text-ink-soft">
+                    {
+                      option.values.find(
+                        (v) => v.value === selection[option.name],
+                      )?.label
+                    }
+                  </span>
+                </legend>
+                <div className="grid grid-cols-4 gap-2 sm:gap-2.5">
+                  {option.values.map((value) => {
+                    const available = optionAvailable(option.name, value.value);
+                    const checked = selection[option.name] === value.value;
+                    return (
+                      <label
+                        key={value.value}
+                        data-checked={checked}
+                        data-disabled={!available}
+                        className="option-card flex cursor-pointer flex-col items-center gap-1 px-1 py-3 text-center data-[disabled=true]:cursor-not-allowed has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-600"
+                      >
+                        <input
+                          type="radio"
+                          name={option.name}
+                          value={value.value}
+                          checked={checked}
+                          onChange={() => choose(option.name, value.value)}
+                          className="sr-only"
+                        />
+                        <PlugGlyph region={value.value} />
+                        <span className="text-body-sm font-medium">
+                          {value.label}
+                        </span>
+                        {!available && (
+                          <span className="text-[0.75rem] text-ink-soft">
+                            Out of stock
+                          </span>
+                        )}
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            );
+          }
+
           return (
             <fieldset key={option.name} className="min-w-0">
               <legend className="mb-3 flex w-full items-baseline justify-between text-body-sm font-semibold">
@@ -1146,7 +1272,52 @@ export function PurchasePanel({
                   }
                 </span>
               </legend>
-              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+              {dotsOnly ? (
+                <div className="flex flex-wrap gap-3">
+                  {option.values.map((value) => {
+                    const available = optionAvailable(option.name, value.value);
+                    const checked = selection[option.name] === value.value;
+                    return (
+                      <label
+                        key={value.value}
+                        title={
+                          available
+                            ? value.label
+                            : `${value.label} (out of stock)`
+                        }
+                        data-checked={checked}
+                        data-disabled={!available}
+                        className="grid size-11 cursor-pointer place-items-center rounded-full border-2 border-transparent transition-colors has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-sage-600 data-[checked=true]:border-ink data-[disabled=true]:opacity-40"
+                      >
+                        <input
+                          type="radio"
+                          name={option.name}
+                          value={value.value}
+                          checked={checked}
+                          onChange={() => choose(option.name, value.value)}
+                          className="sr-only"
+                          aria-label={
+                            available
+                              ? value.label
+                              : `${value.label}, out of stock`
+                          }
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="size-8 rounded-full ring-1 ring-ink/15"
+                          style={{ backgroundColor: value.swatch }}
+                        />
+                      </label>
+                    );
+                  })}
+                </div>
+              ) : (
+              <div
+                className={cn(
+                  "grid grid-cols-1 gap-2.5 sm:grid-cols-3",
+                  option.values.length === 4 && "sm:grid-cols-4",
+                )}
+              >
                 {option.values.map((value) => {
                   const available = optionAvailable(option.name, value.value);
                   const checked = selection[option.name] === value.value;
@@ -1192,9 +1363,24 @@ export function PurchasePanel({
                   );
                 })}
               </div>
+              )}
             </fieldset>
           );
         })}
+        {tierView && (
+          <PackCards
+            option={tierView.option}
+            selection={{ [tierView.option.name]: String(qty) }}
+            view={tierView.view}
+            onChoose={(_, value) => chooseQty(Number(value))}
+            optionAvailable={() => canBuy}
+            localizedVariantFor={(v) => ({
+              ...v,
+              currency: localizedVariant.currency,
+            })}
+            perSetPrice={perSetPrice}
+          />
+        )}
       </div>
 
       <div className="mt-9">

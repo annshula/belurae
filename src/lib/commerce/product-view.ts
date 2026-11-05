@@ -60,6 +60,10 @@ export type ViewOption = {
   name: string;
   label: string;
   values: { value: string; label: string; swatch?: string }[];
+  /** Swatches render as round dots with no names. */
+  dotsOnly?: boolean;
+  /** Values are mains plugs: drawn as pin-layout cards. */
+  plugGlyphs?: boolean;
 };
 
 export type ProductView = {
@@ -158,6 +162,52 @@ function curateGallery(record: ProductRecord): ViewMedia[] {
   });
 }
 
+/**
+ * Applies `content.optionSplit`: one Shopify option whose values bundle model,
+ * colour and plug becomes separate options. Values keep their order of first
+ * appearance. If any variant does not match the pattern, nothing changes.
+ */
+function splitOptions(
+  record: ProductRecord,
+  content: ProductContent,
+): { options: ProductRecord["options"]; variants: ProductRecord["variants"] } {
+  const split = content.optionSplit;
+  const unchanged = { options: record.options, variants: record.variants };
+  if (!split) return unchanged;
+  const re = new RegExp(split.pattern);
+  const parts = record.variants.map(
+    (v) => re.exec(v.options[split.option] ?? "")?.groups ?? null,
+  );
+  if (parts.some((g) => g === null)) return unchanged;
+  /* Only the parts named in `order` become options. Parts left out (the model)
+     are not offered, so variants that differ only by them collapse to the
+     first one in Shopify's order. */
+  const seen = new Set<string>();
+  const kept: { variant: ProductRecord["variants"][number]; picked: Record<string, string> }[] = [];
+  record.variants.forEach((v, i) => {
+    const picked = Object.fromEntries(
+      split.order.map((name) => [name, parts[i]![name]!]),
+    );
+    const key = JSON.stringify(picked);
+    if (seen.has(key)) return;
+    seen.add(key);
+    kept.push({ variant: v, picked });
+  });
+  const variants = kept.map(({ variant, picked }) => {
+    const rest = { ...variant.options };
+    delete rest[split.option];
+    return { ...variant, options: { ...rest, ...picked } };
+  });
+  const options = [
+    ...record.options.filter((o) => o.name !== split.option),
+    ...split.order.map((name) => ({
+      name,
+      values: [...new Set(kept.map((k) => k.picked[name]!))],
+    })),
+  ];
+  return { options, variants };
+}
+
 export function buildProductView(
   record: ProductRecord,
   content: ProductContent,
@@ -170,11 +220,16 @@ export function buildProductView(
   const labelFor = (name: string, value: string) =>
     content.optionLabels[name]?.values[value] ?? value;
 
-  const variants: ViewVariant[] = record.variants.map((v) => {
+  const { options: recordOptions, variants: recordVariants } = splitOptions(
+    record,
+    content,
+  );
+
+  const variants: ViewVariant[] = recordVariants.map((v) => {
     const units = unitsFor(v.options);
     const single =
       packName && units > 1
-        ? record.variants.find(
+        ? recordVariants.find(
             (o) =>
               unitsFor(o.options) === 1 &&
               Object.entries(v.options).every(
@@ -200,14 +255,14 @@ export function buildProductView(
       units,
       savings,
       perUnit: Math.round((v.price / units) * 100) / 100,
-      label: record.options
+      label: recordOptions
         .map((o) => labelFor(o.name, v.options[o.name] ?? ""))
         .join(" · "),
       contents: v.description,
     };
   });
 
-  const options: ViewOption[] = record.options
+  const options: ViewOption[] = recordOptions
     .filter((o) => o.values.length > 1)
     .map((o) => ({
       name: o.name,
@@ -217,6 +272,8 @@ export function buildProductView(
         label: labelFor(o.name, value),
         swatch: content.optionLabels[o.name]?.swatches?.[value],
       })),
+      dotsOnly: content.optionLabels[o.name]?.dotsOnly,
+      plugGlyphs: content.optionLabels[o.name]?.plugGlyphs,
     }));
 
   const available = variants.filter((v) => v.availableForSale);

@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "syncedAt": "2026-10-31T10:43:04.010Z",
+  "syncedAt": "2026-11-05T16:43:18.264Z",
   "shop": {
     "domain": "trackify-com.myshopify.com",
     "name": "Trackify",
@@ -14,7 +14,7 @@
       "vendor": "Belurae",
       "productType": "Beauty & Wellness",
       "status": "ACTIVE",
-      "updatedAt": "2026-10-31T10:42:56Z",
+      "updatedAt": "2026-11-05T10:46:48Z",
       "seo": {
         "title": "Bikini Pain-Free Hair Removal Cream | Belurae",
         "description": "Gentle, hypoallergenic hair removal cream with aloe and hyaluronic acid. Fast-acting, citrus-scented, safe for sensitive skin. Shop now at Trackify."
@@ -29,7 +29,7 @@
           ]
         }
       ],
-      "availableForSale": false,
+      "availableForSale": true,
       "variants": [
         {
           "id": "gid://shopify/ProductVariant/67582703501539",
@@ -38,7 +38,7 @@
           "barcode": null,
           "price": 29.99,
           "compareAtPrice": null,
-          "availableForSale": false,
+          "availableForSale": true,
           "options": {
             "Quantity": "1PC"
           },
@@ -2387,6 +2387,643 @@
       "ratingCount": null,
       "ratingAverage": null,
       "customersCount": null,
+      "customersMonths": null
+    },
+    "fully-automatic-hair-curler": {
+      "id": "gid://shopify/Product/15471288156387",
+      "handle": "fully-automatic-hair-curler",
+      "title": "Fully Automatic Electric Curling Iron",
+      "vendor": "Belurae",
+      "productType": "Beauty & Wellness",
+      "status": "ACTIVE",
+      "updatedAt": "2026-11-05T16:42:52Z",
+      "seo": {
+        "title": "Automatic Hair Curler | Belurae",
+        "description": "An automatic electric hair curler with negative ion technology, a ceramic tourmaline barrel and 15 temperature levels. Specifications and what is in the box."
+      },
+      "options": [
+        {
+          "name": "Power",
+          "values": [
+            "889 Beep Beige US Plug",
+            "889 Beep Pink US Plug",
+            "889 Beep Purple US Plug",
+            "889 Beep Beige EU Plug",
+            "889 Beep Pink EU Plug",
+            "889 Beep Purple EU Plug",
+            "889 Beep Beige UK Plug",
+            "889 Beep Pink UK Plug",
+            "889 Beep Purple UK Plug",
+            "889 Beep Beige AU Plug",
+            "889 Beep Pink AU Plug",
+            "889 Beep Purple AU Plug",
+            "888 Beige US Plug",
+            "888 Pink US Plug",
+            "888 Purple US Plug",
+            "899 Blue US Plug",
+            "899 Pink US Plug"
+          ]
+        }
+      ],
+      "availableForSale": true,
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/68173189939427",
+          "title": "889 Beep Beige US Plug",
+          "sku": "SU00355340-889 Beep Beige US Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Beige US Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173189972195",
+          "title": "889 Beep Pink US Plug",
+          "sku": "SU00355340-889 Beep Pink US Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Pink US Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190004963",
+          "title": "889 Beep Purple US Plug",
+          "sku": "SU00355340-889 Beep Purple US Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Purple US Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190037731",
+          "title": "889 Beep Beige EU Plug",
+          "sku": "SU00355340-889 Beep Beige EU Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Beige EU Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190070499",
+          "title": "889 Beep Pink EU Plug",
+          "sku": "SU00355340-889 Beep Pink EU Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Pink EU Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190103267",
+          "title": "889 Beep Purple EU Plug",
+          "sku": "SU00355340-889 Beep Purple EU Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Purple EU Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190136035",
+          "title": "889 Beep Beige UK Plug",
+          "sku": "SU00355340-889 Beep Beige UK Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Beige UK Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190168803",
+          "title": "889 Beep Pink UK Plug",
+          "sku": "SU00355340-889 Beep Pink UK Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Pink UK Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190201571",
+          "title": "889 Beep Purple UK Plug",
+          "sku": "SU00355340-889 Beep Purple UK Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Purple UK Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190234339",
+          "title": "889 Beep Beige AU Plug",
+          "sku": "SU00355340-889 Beep Beige AU Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Beige AU Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190267107",
+          "title": "889 Beep Pink AU Plug",
+          "sku": "SU00355340-889 Beep Pink AU Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Pink AU Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190299875",
+          "title": "889 Beep Purple AU Plug",
+          "sku": "SU00355340-889 Beep Purple AU Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "889 Beep Purple AU Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190332643",
+          "title": "888 Beige US Plug",
+          "sku": "SU00355340-888 Beige US Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "888 Beige US Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190365411",
+          "title": "888 Pink US Plug",
+          "sku": "SU00355340-888 Pink US Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "888 Pink US Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190398179",
+          "title": "888 Purple US Plug",
+          "sku": "SU00355340-888 Purple US Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "888 Purple US Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190430947",
+          "title": "899 Blue US Plug",
+          "sku": "SU00355340-899 Blue US Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "899 Blue US Plug"
+          },
+          "image": null,
+          "description": null
+        },
+        {
+          "id": "gid://shopify/ProductVariant/68173190463715",
+          "title": "899 Pink US Plug",
+          "sku": "SU00355340-899 Pink US Plug",
+          "barcode": null,
+          "price": 69.99,
+          "compareAtPrice": null,
+          "availableForSale": true,
+          "options": {
+            "Power": "899 Pink US Plug"
+          },
+          "image": null,
+          "description": null
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/63f62c06-531b-4838-a011-916ef7bfcf5f.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/ff49892ee9be4a808affb8eb995058bf.jpg?v=1793896584",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/295e9b81db6240239a9437eabeb4ff21.jpg?v=1793896584",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/7c9b8e9e6a3a45deb667bf35f7eda6b6.jpg?v=1793896584",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/f1e544a3ba5041778c5a2191dad61db0.jpg?v=1793896584",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/300ee67555f043c7a5d1a150cbf23b79.jpg?v=1793896584",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/46c18946-cee7-4b1b-8121-dd1ef2fb594c.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/447831fdf6b64daa91acd5ec544a26ea.jpg?v=1793896584",
+          "width": 600,
+          "height": 600,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/08f13cb9-79b8-4331-982f-26f562b12656.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/4a0d06be-6485-44b6-a8d2-4a611d0c071a.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/bc97cc9d-96d0-47c1-9808-975f84bcb951.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/7ab434ac-dabf-45ed-9a1d-dedd3fc9cf2f.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/da8a66e6-e1bc-4fcc-a627-bcb5b148a012.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/b879f97d-2e0a-435c-ab6d-2a0f3626b50c.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a7a93709-05e1-42aa-83d3-264575b8f77c_8115e1b1-c361-44b7-b67d-aadf28152e3d.jpg?v=1793894210",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/2db96264-b5e6-40d6-9d4a-3a4832053c77.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/0c3626a7-0a52-4a9a-b4c3-a5eccbef8c7e.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/8ce3dde7-b34a-4331-af18-a3238e4ff14d_aa94546e-0995-4346-b617-38a6998d9bfb.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/d1faa453-c9c3-491b-be22-95d5c7b090ae.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/da8a66e6-e1bc-4fcc-a627-bcb5b148a012_3bfb606e-63e4-4bdd-8444-707255c686d9.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/b879f97d-2e0a-435c-ab6d-2a0f3626b50c_233e2d1b-939d-40e2-9e6d-042f859adefa.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a7a93709-05e1-42aa-83d3-264575b8f77c.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/2db96264-b5e6-40d6-9d4a-3a4832053c77_a3f67582-4628-49d0-916c-05bdc0ed4248.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/0c3626a7-0a52-4a9a-b4c3-a5eccbef8c7e_a138c968-33d3-42da-b152-1a8130ab4aa6.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/8ce3dde7-b34a-4331-af18-a3238e4ff14d.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/d1faa453-c9c3-491b-be22-95d5c7b090ae_1e8a8b31-46e4-4fc0-81c8-7993f023e991.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/d9e4f66a-4d11-4dd6-a2ca-64bfd1c69905.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/9d33d271-4a43-4322-bd8f-50e094f79ffb.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/6315d5ce-84c6-4e92-a409-019d47436420.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/176a1b5f-0497-49f5-983f-3d8c56378cea.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/aa030025-396f-4906-81fb-583acd113636.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/52bc63ec-12eb-4243-b376-93ee73b3ba1e.jpg?v=1793894209",
+          "width": 800,
+          "height": 800,
+          "alt": null,
+          "variantId": null
+        }
+      ],
+      "specs": [
+        {
+          "label": "Type",
+          "value": "Automatic electric hair curler",
+          "description": null
+        },
+        {
+          "label": "Barrel",
+          "value": "Tourmaline ceramic, 21–30 mm diameter",
+          "description": null
+        },
+        {
+          "label": "Temperature settings",
+          "value": "15 levels",
+          "description": null
+        },
+        {
+          "label": "Hair care technology",
+          "value": "Negative ion",
+          "description": null
+        },
+        {
+          "label": "Power",
+          "value": "30 W",
+          "description": null
+        },
+        {
+          "label": "Voltage",
+          "value": "110 V, as listed",
+          "description": null
+        },
+        {
+          "label": "Weight",
+          "value": "560 g",
+          "description": null
+        },
+        {
+          "label": "Dimensions",
+          "value": "30 cm long × 5 cm wide",
+          "description": null
+        },
+        {
+          "label": "Colours",
+          "value": "Beige, Pink, Purple, Blue",
+          "description": null
+        },
+        {
+          "label": "Certifications",
+          "value": "CE, FCC, RoHS, as listed by the manufacturer",
+          "description": null
+        },
+        {
+          "label": "Package includes",
+          "value": "1 × curling iron, 1 × user manual",
+          "description": null
+        }
+      ],
+      "featureHighlights": [
+        {
+          "label": "One-touch automatic curling",
+          "body": "The manufacturer describes one-touch operation for effortless styling with consistent results.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/63f62c06-531b-4838-a011-916ef7bfcf5f.jpg?v=1793894209"
+        },
+        {
+          "label": "Negative ions for smoother-looking hair",
+          "body": "Negative ion technology that, as described by the manufacturer, reduces frizz and enhances shine for healthier-looking hair. Results vary with hair type.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/46c18946-cee7-4b1b-8121-dd1ef2fb594c.jpg?v=1793894209"
+        },
+        {
+          "label": "Curls or straight, with 15 heat levels",
+          "body": "Create both curls and straight looks, with 15 adjustable temperature settings so you can set the heat to suit your hair.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/da8a66e6-e1bc-4fcc-a627-bcb5b148a012.jpg?v=1793894209"
+        },
+        {
+          "label": "Ceramic tourmaline barrel",
+          "body": "A 21–30 mm tourmaline ceramic barrel, described by the manufacturer as spreading heat evenly and minimizing hair damage.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/a7a93709-05e1-42aa-83d3-264575b8f77c_8115e1b1-c361-44b7-b67d-aadf28152e3d.jpg?v=1793894210"
+        },
+        {
+          "label": "Heats up in seconds",
+          "body": "Reaches its working temperature in seconds, according to the manufacturer, so a styling session starts quickly.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/0c3626a7-0a52-4a9a-b4c3-a5eccbef8c7e.jpg?v=1793894209"
+        },
+        {
+          "label": "Four colours to choose from",
+          "body": "Beige, Pink, Purple and Blue. Screens differ, so the photos may not match the real colour exactly.",
+          "image": "https://cdn.shopify.com/s/files/1/0721/8869/0659/files/bc97cc9d-96d0-47c1-9808-975f84bcb951.jpg?v=1793894209"
+        }
+      ],
+      "perks": [
+        "Bidirectional moisturizing negative ions",
+        "Fully automatic electric curling stick",
+        "15 adjustable temperature levels",
+        "Ceramic tourmaline barrel for even heat",
+        "Reaches temperature in seconds"
+      ],
+      "saleEndsAt": "2026-11-09T05:00:00.000Z",
+      "ratingCount": null,
+      "ratingAverage": null,
+      "customersCount": 517801,
       "customersMonths": null
     }
   }

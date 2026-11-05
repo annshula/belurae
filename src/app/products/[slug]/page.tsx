@@ -276,6 +276,87 @@ export default async function ProductPage({ params }: Props) {
   ].includes(content.slug);
   const showPatchNotice = false;
 
+  /*
+   * Buy-box accordion. A product with `pdp.accordion` shows its own sections
+   * (written from its description) in place of the generic How to use and
+   * Ingredients, and always ends with Safety.
+   */
+  const accordionItems: { title: string; body: React.ReactNode }[] = content.pdp
+    .accordion
+    ? [
+        ...content.pdp.accordion.map((section) => ({
+          title: section.title,
+          body: (
+            <ul className="flex flex-col gap-1.5">
+              {section.items.map((it) => (
+                <li key={it.label ?? it.text}>
+                  {it.label && (
+                    <strong className="font-medium text-ink">
+                      {it.label}:
+                    </strong>
+                  )}{" "}
+                  {it.text}
+                </li>
+              ))}
+            </ul>
+          ),
+        })),
+        {
+          title: "Safety",
+          body: (
+            <>
+              <p>{content.safety.patchTest}</p>
+              <p className="mt-2">{content.safety.ifIrritation}</p>
+            </>
+          ),
+        },
+      ]
+    : [
+        {
+          title: "How to use",
+          body: (
+            <ol className="flex flex-col gap-2">
+              {content.steps.map((step) => (
+                <li key={step.title}>
+                  <strong className="font-medium text-ink">
+                    {step.title}.
+                  </strong>{" "}
+                  {step.body}
+                </li>
+              ))}
+            </ol>
+          ),
+        },
+        ...(content.keyIngredients.length > 0
+          ? [
+              {
+                title: "Ingredients",
+                body: (
+                  <ul className="flex flex-col gap-1.5">
+                    {content.keyIngredients.map((ing) => (
+                      <li key={ing.slug}>
+                        <strong className="font-medium text-ink">
+                          {ing.name}:
+                        </strong>{" "}
+                        {ing.role}
+                      </li>
+                    ))}
+                  </ul>
+                ),
+              },
+            ]
+          : []),
+        {
+          title: "Safety",
+          body: (
+            <>
+              <p>{content.safety.patchTest}</p>
+              <p className="mt-2">{content.safety.ifIrritation}</p>
+            </>
+          ),
+        },
+      ];
+
   const perks = view.perks.map((text) => ({ icon: perkIcon(text), text }));
 
   const crumbs = [
@@ -369,22 +450,6 @@ export default async function ProductPage({ params }: Props) {
               // Sold count hidden for now (data stays in products.ts).
               // const sold = content.pdp.sold;
               // if (!hasRating && !sold) return null;
-              if (!displayRating || displayRating.count <= 0) return null;
-              const label = `Rated ${displayRating.average.toFixed(1)} out of 5 from ${displayRating.count.toLocaleString("en-US")} reviews`;
-              const rating = (
-                <>
-                  <Stars value={displayRating.average} starClassName="size-4" />
-                  <span className="whitespace-nowrap">
-                    <span className="font-numeral text-[0.9375rem] font-bold tabular-nums">
-                      {displayRating.average.toFixed(1)}
-                    </span>{" "}
-                    <span className="text-ink-soft">rating</span>
-                  </span>
-                  <span className="text-ink-soft group-hover:underline">
-                    ({displayRating.count.toLocaleString("en-US")})
-                  </span>
-                </>
-              );
               /* Real faces from the existing avatar set; decorative, the
                  text beside them carries the accessible label. They sit with
                  the buyers count (who bought), or lead the line when the
@@ -406,6 +471,45 @@ export default async function ProductPage({ params }: Props) {
                     />
                   ))}
                 </span>
+              );
+              /* "Trusted by 219.2K+ customers worldwide": the `custom.customers_count`
+                 metafield, for products that opt in with `pdp.trustedBy`. Replaces
+                 the stars line, and shows nothing until the metafield is set. */
+              if (content.pdp.trustedBy) {
+                if (record.customersCount == null || record.customersCount <= 0)
+                  return null;
+                const compact = new Intl.NumberFormat("en-US", {
+                  notation: "compact",
+                  maximumFractionDigits: 1,
+                }).format(record.customersCount);
+                return (
+                  <p className="flex flex-wrap items-center gap-x-3 gap-y-2 font-ui text-body-sm text-ink-soft">
+                    {faces}
+                    <span>
+                      Trusted by{" "}
+                      <strong className="font-numeral text-body-sm font-bold text-ink tabular-nums">
+                        {compact}+
+                      </strong>{" "}
+                      customers worldwide
+                    </span>
+                  </p>
+                );
+              }
+              if (!displayRating || displayRating.count <= 0) return null;
+              const label = `Rated ${displayRating.average.toFixed(1)} out of 5 from ${displayRating.count.toLocaleString("en-US")} reviews`;
+              const rating = (
+                <>
+                  <Stars value={displayRating.average} starClassName="size-4" />
+                  <span className="whitespace-nowrap">
+                    <span className="font-numeral text-[0.9375rem] font-bold tabular-nums">
+                      {displayRating.average.toFixed(1)}
+                    </span>{" "}
+                    <span className="text-ink-soft">rating</span>
+                  </span>
+                  <span className="text-ink-soft group-hover:underline">
+                    ({displayRating.count.toLocaleString("en-US")})
+                  </span>
+                </>
               );
               return (
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-ui text-[0.8125rem]">
@@ -438,10 +542,7 @@ export default async function ProductPage({ params }: Props) {
                         {faces}
                         <span>
                           <span className="font-numeral text-[0.9375rem] font-bold text-ink tabular-nums">
-                            {customers.count.toLocaleString(
-                              "en-US",
-                            )}
-                            +
+                            {customers.count.toLocaleString("en-US")}+
                           </span>{" "}
                           buyers
                           {customers.months && (
@@ -515,50 +616,46 @@ export default async function ProductPage({ params }: Props) {
               />
             </div>
 
-            <ProductAccordion
-              items={[
+            {/* Trust strip: shipping, returns and delivery time at a glance. */}
+            <ul className="mt-6 grid grid-cols-3 gap-2 rounded-card bg-cream px-2 py-4 text-center sm:gap-4 sm:p-5">
+              {[
                 {
-                  title: "How to use",
-                  body: (
-                    <ol className="flex flex-col gap-2">
-                      {content.steps.map((step) => (
-                        <li key={step.title}>
-                          <strong className="font-medium text-ink">
-                            {step.title}.
-                          </strong>{" "}
-                          {step.body}
-                        </li>
-                      ))}
-                    </ol>
-                  ),
+                  icon: "truck",
+                  title: "Free shipping",
+                  text: "On every order",
                 },
                 {
-                  title: "Ingredients",
-                  body: (
-                    <ul className="flex flex-col gap-1.5">
-                      {content.keyIngredients.map((ing) => (
-                        <li key={ing.slug}>
-                          <strong className="font-medium text-ink">
-                            {ing.name}:
-                          </strong>{" "}
-                          {ing.role}
-                        </li>
-                      ))}
-                    </ul>
-                  ),
+                  icon: "shield",
+                  title: `${site.returnWindowDays}-day returns`,
+                  text: "Free replacement or return",
                 },
                 {
-                  title: "Safety",
-                  body: (
-                    <>
-                      <p>{content.safety.patchTest}</p>
-                      <p className="mt-2">{content.safety.ifIrritation}</p>
-                    </>
-                  ),
+                  icon: "clock",
+                  title: `Delivered in ${site.delivery.minDays}–${site.delivery.maxDays} days`,
+                  text: "Tracked from our door to yours",
                 },
-              ]}
-            />
+              ].map((item) => (
+                <li
+                  key={item.title}
+                  className="flex flex-col items-center gap-1"
+                >
+                  <Icon
+                    name={item.icon as IconName}
+                    className="size-4 text-ink sm:size-5"
+                  />
+                  <span className="font-ui text-[0.75rem] leading-tight font-semibold text-balance text-ink sm:text-[0.8125rem]">
+                    {item.title}
+                  </span>
+                  <span className="text-[0.6875rem] leading-snug text-balance text-ink-soft sm:text-[0.75rem]">
+                    {item.text}
+                  </span>
+                </li>
+              ))}
+            </ul>
 
+            <ProductAccordion items={accordionItems} />
+
+            {/* Delivery estimate, replaced by the trust strip above the accordion:
             <div className="mt-6 rounded-card border border-dashed border-sage-300 bg-sage-50 p-4 text-sage-800 md:p-5">
               <p className="flex items-center justify-center gap-2 font-ui text-body-sm font-semibold">
                 <Icon name="truck" className="size-5 shrink-0 text-sage-600" />
@@ -596,6 +693,7 @@ export default async function ProductPage({ params }: Props) {
                 ))}
               </ol>
             </div>
+            */}
 
             {/* <ul className="mt-3 space-y-3.5 rounded-card bg-cream/80 p-5 text-body-sm md:p-6">
               <li className="flex gap-3">
@@ -772,7 +870,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
-      {!content.pdp.dailyStep && (
+      {!content.pdp.dailyStep && content.keyIngredients.length > 0 && (
         <>
           {/* ── Ingredients ───────────────────────────────────────────────── */}
           <section
@@ -856,13 +954,22 @@ export default async function ProductPage({ params }: Props) {
           />
           <div className="mt-8 grid gap-3 lg:grid-cols-3">
             <div className="rounded-media bg-clay-100 p-6 lg:p-7">
-              <h3 className="font-serif text-heading-3">Patch test first</h3>
+              <h3 className="font-serif text-heading-3">
+                {content.safety.kind === "device"
+                  ? "Read the manual first"
+                  : "Patch test first"}
+              </h3>
               <p className="mt-2 text-body-sm text-ink-soft">
                 {content.safety.patchTest}
               </p>
-              <Link href="/guides/how-to-patch-test" className="btn-quiet mt-3">
-                How to patch test
-              </Link>
+              {content.safety.kind !== "device" && (
+                <Link
+                  href="/guides/how-to-patch-test"
+                  className="btn-quiet mt-3"
+                >
+                  How to patch test
+                </Link>
+              )}
             </div>
             <div className="rounded-media bg-porcelain p-6 shadow-soft lg:p-7">
               <h3 className="flex items-center gap-3 font-serif text-heading-3">
@@ -897,7 +1004,11 @@ export default async function ProductPage({ params }: Props) {
               className="mt-0.5 size-5 shrink-0 text-warning"
             />
             <p className="text-body-sm">
-              <strong className="font-semibold">If it stings or burns: </strong>
+              <strong className="font-semibold">
+                {content.safety.kind === "device"
+                  ? "If something goes wrong: "
+                  : "If it stings or burns: "}
+              </strong>
               {content.safety.ifIrritation}
             </p>
           </div>

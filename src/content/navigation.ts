@@ -49,6 +49,11 @@ export const primaryNav: NavGroup[] = [
         description: "Liquid hold for clothes and tape, in plain words",
       },
       {
+        label: "Hair Styling",
+        href: "/collections/hair-styling",
+        description: "An automatic hair curler, in plain words",
+      },
+      {
         label: "Shop all",
         href: "/collections/all",
         description: "Everything Belurae sells today",
@@ -119,6 +124,7 @@ export const footerNav: NavGroup[] = [
       { label: "Makeup", href: "/collections/makeup" },
       { label: "Fragrance", href: "/collections/fragrance" },
       { label: "Body Adhesive", href: "/collections/body-adhesive" },
+      { label: "Hair Styling", href: "/collections/hair-styling" },
       { label: "Shop all", href: "/collections/all" },
     ],
   },

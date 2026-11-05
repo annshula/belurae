@@ -17,6 +17,8 @@ export type PackTier = {
   discountPercent: number;
   /** Photo for this pack's card; falls back to the variant's own image. */
   image?: string;
+  /** Per-colour photos, keyed by the variant's Colour value; wins over `image`. */
+  images?: Record<string, string>;
 };
 
 /** The discount for `quantity`: the highest tier it has reached, so 4+ keeps the 3-pack rate. */
